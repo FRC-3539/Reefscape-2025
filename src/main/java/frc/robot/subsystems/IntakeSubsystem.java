@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.IDConstants;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VoltageOut;
@@ -14,37 +15,37 @@ import com.ctre.phoenix6.signals.InvertedValue;
 
 public class IntakeSubsystem extends SubsystemBase { 
   
-  private TalonFX algaeDeployMotor,algaeIntakeMotor,coralDeployMotor,coralIntakeMotor;
+  private static TalonFX algaeDeployMotor,algaeIntakeMotor,coralDeployMotor,coralIntakeMotor;
  
 
   public IntakeSubsystem() {
 
-    algaeDeployMotor = new TalonFX(1, "rio");
+    algaeDeployMotor = new TalonFX(IDConstants.algaeDeployMotorID, "rio");
     algaeDeployMotor.getConfigurator().apply(new TalonFXConfiguration().MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive));
   
-    algaeIntakeMotor = new TalonFX(2, "rio");
+    algaeIntakeMotor = new TalonFX(IDConstants.algaeIntakeMotorID, "rio");
     algaeIntakeMotor.getConfigurator().apply(new TalonFXConfiguration().MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive));
   
-    coralDeployMotor = new TalonFX(3, "rio");
+    coralDeployMotor = new TalonFX(IDConstants.coralDeployMotorID, "rio");
     coralDeployMotor.getConfigurator().apply(new TalonFXConfiguration().MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive));
   
-    coralIntakeMotor = new TalonFX(4, "rio");
+    coralIntakeMotor = new TalonFX(IDConstants.coralIntakeMotorID, "rio");
     coralIntakeMotor.getConfigurator().apply(new TalonFXConfiguration().MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive));
   }
   
-  public void setAlgaeIntakeMotor(double voltage) {
+  public static void setAlgaeIntakeMotor(double voltage) {
     algaeIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
 
-  public void setAlgaeDeployMotor(double voltage) {
+  public static void setAlgaeDeployMotor(double voltage) {
     algaeDeployMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
 
-  public void setCoralDeployMotor(double voltage) {
+  public static void setCoralDeployMotor(double voltage) {
     coralDeployMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
 
-  public void setCoralIntakeMotor(double voltage) {
+  public static void setCoralIntakeMotor(double voltage) {
     coralIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
 

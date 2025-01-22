@@ -5,31 +5,34 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.constants.IntakeConstants;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.constants.ScoringConstants;
+import frc.robot.subsystems.ScoringSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class CoralIntakeCommand extends Command {
-  /** Creates a new coralIntakeCommand. */
-  public CoralIntakeCommand() {
+public class AlgaeScoringCommand extends Command {
+  /** Creates a new algaeScoringCommand. */
+  public AlgaeScoringCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
+
+    ScoringSubsystem.setAlgaeScoringMotor(ScoringConstants.algaeScoringVoltage);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    IntakeSubsystem.setCoralIntakeMotor(0);
+    ScoringSubsystem.setAlgaeScoringMotor(0);
+
   }
 
   // Returns true when the command should end.
