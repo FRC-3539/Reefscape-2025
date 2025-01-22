@@ -15,4 +15,5 @@ public class IDConstants extends BBConstants {
 	public static int coralDeployMotorID = 5;
 	public static int coralIntakeMotorID = 6;
 	public static int clawServoID = 1;
-}
+	public static int elevatorMotorID = 7;
+}
