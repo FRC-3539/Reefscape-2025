@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.configs.HardwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -18,7 +19,14 @@ public class ElevatorSubsystem extends SubsystemBase {
   private static TalonFX elevatorMotor;
   public  ElevatorSubsystem() {
     elevatorMotor = new TalonFX(IDConstants.algaeDeployMotorID, "rio");
-    elevatorMotor.getConfigurator().apply(new TalonFXConfiguration().MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive));
+    elevatorMotor.getConfigurator().apply(
+      new TalonFXConfiguration().MotorOutput
+        .withInverted(InvertedValue.CounterClockwise_Positive));
+    elevatorMotor.getConfigurator().apply(
+      new HardwareLimitSwitchConfigs()
+        .withReverseLimitEnable(true)
+        .withReverseLimitAutosetPositionEnable(true)
+        .withReverseLimitAutosetPositionValue(0));
   }
 
   public static void setElevatorMotor(double voltage) {
