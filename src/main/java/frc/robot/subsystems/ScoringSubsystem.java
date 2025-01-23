@@ -21,12 +21,14 @@ public class ScoringSubsystem extends SubsystemBase {
 
   public ScoringSubsystem() {
     rotateMotor = new TalonFX(IDConstants.rotateMotorID, "rio");
-    rotateMotor.getConfigurator()
-        .apply(new TalonFXConfiguration().MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive));
+    rotateMotor.getConfigurator().apply(
+      new TalonFXConfiguration().MotorOutput
+        .withInverted(InvertedValue.CounterClockwise_Positive));
 
     algaeScoringMotor = new TalonFX(IDConstants.algaeScoringMotorID, "rio");
-    algaeScoringMotor.getConfigurator()
-        .apply(new TalonFXConfiguration().MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive));
+    algaeScoringMotor.getConfigurator().apply(
+      new TalonFXConfiguration().MotorOutput
+        .withInverted(InvertedValue.CounterClockwise_Positive));
 
     clawServo = new Servo(IDConstants.clawServoID);
 

@@ -21,16 +21,24 @@ public class IntakeSubsystem extends SubsystemBase {
   public IntakeSubsystem() {
 
     algaeDeployMotor = new TalonFX(IDConstants.algaeDeployMotorID, "rio");
-    algaeDeployMotor.getConfigurator().apply(new TalonFXConfiguration().MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive));
+    algaeDeployMotor.getConfigurator().apply(
+      new TalonFXConfiguration().MotorOutput
+        .withInverted(InvertedValue.CounterClockwise_Positive));
   
     algaeIntakeMotor = new TalonFX(IDConstants.algaeIntakeMotorID, "rio");
-    algaeIntakeMotor.getConfigurator().apply(new TalonFXConfiguration().MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive));
+    algaeIntakeMotor.getConfigurator().apply(
+      new TalonFXConfiguration().MotorOutput
+        .withInverted(InvertedValue.CounterClockwise_Positive));
   
     coralDeployMotor = new TalonFX(IDConstants.coralDeployMotorID, "rio");
-    coralDeployMotor.getConfigurator().apply(new TalonFXConfiguration().MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive));
+    coralDeployMotor.getConfigurator().apply(
+      new TalonFXConfiguration().MotorOutput
+        .withInverted(InvertedValue.CounterClockwise_Positive));
   
     coralIntakeMotor = new TalonFX(IDConstants.coralIntakeMotorID, "rio");
-    coralIntakeMotor.getConfigurator().apply(new TalonFXConfiguration().MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive));
+    coralIntakeMotor.getConfigurator().apply(
+      new TalonFXConfiguration().MotorOutput
+        .withInverted(InvertedValue.CounterClockwise_Positive));
   }
   
   public static void setAlgaeIntakeMotor(double voltage) {
