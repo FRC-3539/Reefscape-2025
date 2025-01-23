@@ -6,6 +6,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.AlgaeIntakeCommand;
+import frc.robot.commands.AlgaeScoringCommand;
+import frc.robot.commands.CoralIntakeCommand;
+import frc.robot.commands.CoralScoringCommand;
 import frc.robot.subsystems.*;
 
 /**
@@ -24,7 +28,11 @@ public class RobotContainer {
   public static ElevatorSubsystem ElevatorSubsystem = new ElevatorSubsystem();
   // public static DriveSubsystem DriveSubsystem = new DriveSubsystem();
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  
+	public static CommandXboxController driverController = new CommandXboxController(1);
+	public static CommandXboxController operatorController = new CommandXboxController(0);
+
+
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
@@ -40,7 +48,10 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-   
+    operatorController.leftTrigger().whileTrue(new AlgaeIntakeCommand());
+    operatorController.rightTrigger().whileTrue(new AlgaeScoringCommand());
+    operatorController.leftBumper().whileTrue(new CoralIntakeCommand());
+		operatorController.rightBumper().whileTrue(new CoralScoringCommand());
   }
 
   /**
