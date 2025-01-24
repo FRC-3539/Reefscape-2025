@@ -8,5 +8,11 @@ public class ElevatorConstants extends BBConstants {
 		save();
 	}
 
-	public static double elevatorVoltage = 10;
+	public static double elevatorVoltage = 10.0;
+	public static double elevatorMotorToInches = 10.0;
+	public static double troughHeight = 10.0;
+	public static double lowHeight = 10.0;
+	public static double midHeight = 10.0;
+	public static double highHeight = 10.0;
+	public static double netHeight = 10.0;
 }

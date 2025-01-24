@@ -10,7 +10,10 @@ import frc.robot.commands.AlgaeIntakeCommand;
 import frc.robot.commands.AlgaeScoringCommand;
 import frc.robot.commands.CoralIntakeCommand;
 import frc.robot.commands.CoralScoringCommand;
+import frc.robot.commands.SetElevatorCommand;
 import frc.robot.subsystems.*;
+import frc.robot.constants.*;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -26,6 +29,7 @@ public class RobotContainer {
   public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
   public static ScoringSubsystem ScoringSubsystem = new ScoringSubsystem();
   public static ElevatorSubsystem ElevatorSubsystem = new ElevatorSubsystem();
+  public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
   // public static DriveSubsystem DriveSubsystem = new DriveSubsystem();
 
   
@@ -52,6 +56,17 @@ public class RobotContainer {
     operatorController.rightTrigger().whileTrue(new AlgaeScoringCommand());
     operatorController.leftBumper().whileTrue(new CoralIntakeCommand());
 		operatorController.rightBumper().whileTrue(new CoralScoringCommand());
+
+    operatorController.a().onTrue(new SetElevatorCommand(ElevatorConstants.troughHeight));
+    operatorController.b().onTrue(new SetElevatorCommand(ElevatorConstants.lowHeight));
+    operatorController.y().onTrue(new SetElevatorCommand(ElevatorConstants.midHeight));
+    operatorController.x().onTrue(new SetElevatorCommand(ElevatorConstants.highHeight));
+    operatorController.povUp().onTrue(new SetElevatorCommand(ElevatorConstants.netHeight));
+
+
+
+
+    
   }
 
   /**
