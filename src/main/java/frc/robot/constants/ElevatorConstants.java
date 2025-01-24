@@ -15,4 +15,7 @@ public class ElevatorConstants extends BBConstants {
 	public static double midHeight = 10.0;
 	public static double highHeight = 10.0;
 	public static double netHeight = 10.0;
+	public static double processorHeight = 10.0;
+	public static double reefLowHeight = 10.0;
+	public static double reefHighHeight = 10.0;
 }

@@ -10,7 +10,11 @@ import frc.robot.commands.AlgaeIntakeCommand;
 import frc.robot.commands.AlgaeScoringCommand;
 import frc.robot.commands.CoralIntakeCommand;
 import frc.robot.commands.CoralScoringCommand;
+import frc.robot.commands.SetAlgaePosition;
+import frc.robot.commands.SetCoralPosition;
 import frc.robot.commands.SetElevatorCommand;
+import frc.robot.commands.SetAlgaePosition.AlgaeMode;
+import frc.robot.commands.SetCoralPosition.CoralMode;
 import frc.robot.subsystems.*;
 import frc.robot.constants.*;
 
@@ -57,11 +61,15 @@ public class RobotContainer {
     operatorController.leftBumper().whileTrue(new CoralIntakeCommand());
 		operatorController.rightBumper().whileTrue(new CoralScoringCommand());
 
-    operatorController.a().onTrue(new SetElevatorCommand(ElevatorConstants.troughHeight));
-    operatorController.b().onTrue(new SetElevatorCommand(ElevatorConstants.lowHeight));
-    operatorController.y().onTrue(new SetElevatorCommand(ElevatorConstants.midHeight));
-    operatorController.x().onTrue(new SetElevatorCommand(ElevatorConstants.highHeight));
-    operatorController.povUp().onTrue(new SetElevatorCommand(ElevatorConstants.netHeight));
+    operatorController.a().onTrue(new SetCoralPosition(CoralMode.TROUGH));
+    operatorController.b().onTrue(new SetCoralPosition(CoralMode.LOW));
+    operatorController.y().onTrue(new SetCoralPosition(CoralMode.MID));
+    operatorController.x().onTrue(new SetCoralPosition(CoralMode.HIGH));
+    operatorController.povDown().onTrue(new SetAlgaePosition(AlgaeMode.PROCESSOR));
+    operatorController.povLeft().onTrue(new SetAlgaePosition(AlgaeMode.REEFLOW));
+    operatorController.povUp().onTrue(new SetAlgaePosition(AlgaeMode.REEFHIGH));
+    operatorController.povRight().onTrue(new SetAlgaePosition(AlgaeMode.NET));
+
 
 
 
