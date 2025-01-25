@@ -13,12 +13,17 @@ import frc.robot.subsystems.IntakeSubsystem;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class CoralIntakeCommand extends Command {
 
+
+
   public enum IntakeMode {
 		GROUND, HUMAN;
 	}  
+
+  IntakeMode mode;
   /** Creates a new coralIntakeCommand. */
   public CoralIntakeCommand(IntakeMode mode) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.mode = mode;
   }
 
   // Called when the command is initially scheduled.
@@ -26,11 +31,14 @@ public class CoralIntakeCommand extends Command {
   public void initialize() {
     switch (mode) {
 			case GROUND :
-
-    IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
-    IntakeSubsystem.setCoralDeployAngle(IntakeConstants.endPositionAngle);
-    break;
+        IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
+        IntakeSubsystem.setCoralDeployAngle(IntakeConstants.groundPositionAngle);
+      break;
     
+      case HUMAN :
+        IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
+        IntakeSubsystem.setCoralDeployAngle(IntakeConstants.humanPositionAngle);
+      break;
     }
   }
   
@@ -44,7 +52,7 @@ public class CoralIntakeCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     IntakeSubsystem.setCoralIntakeMotor(0);
-    IntakeSubsystem.setCoralDeployAngle(IntakeConstants.startPositionAngle);
+    IntakeSubsystem.setCoralDeployAngle(IntakeConstants.homePositionAngle);
   }
 
   // Returns true when the command should end.
