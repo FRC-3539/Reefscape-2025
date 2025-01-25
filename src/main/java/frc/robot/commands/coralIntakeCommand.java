@@ -19,7 +19,9 @@ public class CoralIntakeCommand extends Command {
   @Override
   public void initialize() {
     IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
+    IntakeSubsystem.setCoralDeployMotor(IntakeConstants.coralDeployVoltage);
   }
+  
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -30,6 +32,7 @@ public class CoralIntakeCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     IntakeSubsystem.setCoralIntakeMotor(0);
+    IntakeSubsystem.setCoralDeployMotor(-IntakeConstants.coralDeployVoltage);
   }
 
   // Returns true when the command should end.
