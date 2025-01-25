@@ -4,12 +4,17 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.IDConstants;
 
+import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VoltageOut;
+import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 
 
@@ -17,8 +22,11 @@ public class IntakeSubsystem extends SubsystemBase {
   
   private static TalonFX algaeDeployMotor,algaeIntakeMotor,coralDeployMotor,coralIntakeMotor;
  
+  private static CANcoder coralDeployCanCoder;
 
   public IntakeSubsystem() {
+
+    coralDeployCanCoder = new CANcoder(IDConstants.coralDeployCanCoderID, "rio");
 
     algaeDeployMotor = new TalonFX(IDConstants.algaeDeployMotorID, "rio");
     algaeDeployMotor.getConfigurator().apply(
@@ -39,6 +47,16 @@ public class IntakeSubsystem extends SubsystemBase {
     coralIntakeMotor.getConfigurator().apply(
       new TalonFXConfiguration().MotorOutput
         .withInverted(InvertedValue.CounterClockwise_Positive));
+
+    coralDeployMotor.getConfigurator()
+				.apply(new FeedbackConfigs().withFeedbackRemoteSensorID(IDConstants.coralDeployCanCoderID)
+						.withRotorToSensorRatio(IntakeConstants.coralDeployMotorToEncoder).withSensorToMechanismRatio(1)
+						.withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder));
+  }
+    public double getCoralDeployAngle() {
+		return Units.rotationsToDegrees(
+				coralDeployCanCoder.getAbsolutePosition().getValueAsDouble() - IntakeConstants.coralDeployRestingRotations)
+				+ IntakeConstants.restCoralDeployAngle;
   }
   
   public static void setAlgaeIntakeMotor(double voltage) {
