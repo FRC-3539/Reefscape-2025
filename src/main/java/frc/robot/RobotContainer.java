@@ -60,8 +60,8 @@ public class RobotContainer {
   private void configureBindings() {
     operatorController.leftTrigger().whileTrue(new AlgaeIntakeCommand());
     operatorController.rightTrigger().whileTrue(new AlgaeScoringCommand());
-    //operatorController.leftBumper().whileTrue(new CoralIntakeCommand());
 		operatorController.rightBumper().whileTrue(new CoralScoringCommand());
+    operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE));
     operatorController.axisGreaterThan(0, 0.5).whileTrue(
       new SetFunnelPositionCommand(IntakeMode.HUMAN));
     operatorController.axisLessThan(0, -0.5).whileTrue(
