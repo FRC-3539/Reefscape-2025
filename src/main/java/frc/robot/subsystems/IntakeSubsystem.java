@@ -11,6 +11,7 @@ import frc.robot.constants.IDConstants;
 
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -23,6 +24,7 @@ public class IntakeSubsystem extends SubsystemBase {
   private static TalonFX algaeDeployMotor,algaeIntakeMotor,coralDeployMotor,coralIntakeMotor;
  
   private static CANcoder coralDeployCanCoder;
+  private static double requestedCoralDeployPos = 0;
 
   public IntakeSubsystem() {
 
@@ -53,11 +55,19 @@ public class IntakeSubsystem extends SubsystemBase {
 						.withRotorToSensorRatio(IntakeConstants.coralDeployMotorToEncoder).withSensorToMechanismRatio(1)
 						.withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder));
   }
-    public double getCoralDeployAngle() {
+    public static double getCoralDeployAngle() {
 		return Units.rotationsToDegrees(
 				coralDeployCanCoder.getAbsolutePosition().getValueAsDouble() - IntakeConstants.coralDeployRestingRotations)
 				+ IntakeConstants.restCoralDeployAngle;
   }
+
+  public static void setCoralDeployAngle(double angle) {
+		requestedCoralDeployPos = angle;
+	}
+
+  public static void initializCoralDeployAngle() {
+		requestedCoralDeployPos = getCoralDeployAngle();
+	}
   
   public static void setAlgaeIntakeMotor(double voltage) {
     algaeIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
@@ -75,8 +85,14 @@ public class IntakeSubsystem extends SubsystemBase {
     coralIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
 
+  public static double degreesToCoralDeployRotations(double degrees) {
+		return Units.degreesToRotations(degrees - IntakeConstants.restCoralDeployAngle)
+				+ IntakeConstants.coralDeployRestingRotations;
+	}
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    coralDeployMotor.setControl(new MotionMagicVoltage(degreesToCoralDeployRotations(requestedCoralDeployPos)));
   }
 }

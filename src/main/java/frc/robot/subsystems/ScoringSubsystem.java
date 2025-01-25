@@ -5,18 +5,21 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.ScoringConstants;
 import frc.robot.constants.IDConstants;
 
 public class ScoringSubsystem extends SubsystemBase {
   private static TalonFX rotateMotor, algaeScoringMotor;
   private static Servo clawServo;
   private static double clawServoPosition = 0;
+  private static double requestedRotatedPos = 0;
 
 
   public ScoringSubsystem() {
@@ -44,8 +47,21 @@ public class ScoringSubsystem extends SubsystemBase {
   public static void setClawServoPosition(double position) {
 		clawServoPosition = position;
 	}
+  public static double getRotateMotorPosition() {
+		return rotateMotor.getPosition().getValueAsDouble() * ScoringConstants.rotateMotorToInches;
+	}
+  public static void setRotateMotorPosition(double request) {
+		requestedRotatedPos = request;
+	}
+  
+	public static void initializeRotateMotorPosition() {
+		requestedRotatedPos = getRotateMotorPosition();
+	}
   @Override
   public void periodic() {
     clawServo.set(clawServoPosition);
+     rotateMotor.setControl(
+      new MotionMagicVoltage((requestedRotatedPos / ScoringConstants.rotateMotorToInches)));  
+    }
   }
-}
+

@@ -4,9 +4,7 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.subsystems.IntakeSubsystem;
 
@@ -15,31 +13,17 @@ public class CoralIntakeCommand extends Command {
 
 
 
-  public enum IntakeMode {
-		GROUND, HUMAN;
-	}  
-
-  IntakeMode mode;
+  
   /** Creates a new coralIntakeCommand. */
-  public CoralIntakeCommand(IntakeMode mode) {
+  public CoralIntakeCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.mode = mode;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    switch (mode) {
-			case GROUND :
-        IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
-        IntakeSubsystem.setCoralDeployAngle(IntakeConstants.groundPositionAngle);
-      break;
-    
-      case HUMAN :
-        IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
-        IntakeSubsystem.setCoralDeployAngle(IntakeConstants.humanPositionAngle);
-      break;
-    }
+    IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
+
   }
   
 
@@ -52,7 +36,6 @@ public class CoralIntakeCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     IntakeSubsystem.setCoralIntakeMotor(0);
-    IntakeSubsystem.setCoralDeployAngle(IntakeConstants.homePositionAngle);
   }
 
   // Returns true when the command should end.

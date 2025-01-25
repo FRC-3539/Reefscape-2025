@@ -10,11 +10,13 @@ import frc.robot.commands.AlgaeIntakeCommand;
 import frc.robot.commands.AlgaeScoringCommand;
 import frc.robot.commands.CoralIntakeCommand;
 import frc.robot.commands.CoralScoringCommand;
-import frc.robot.commands.SetAlgaePosition;
-import frc.robot.commands.SetCoralPosition;
+import frc.robot.commands.SetAlgaePositionCommand;
+import frc.robot.commands.SetCoralPositionCommand;
 import frc.robot.commands.SetElevatorCommand;
-import frc.robot.commands.SetAlgaePosition.AlgaeMode;
-import frc.robot.commands.SetCoralPosition.CoralMode;
+import frc.robot.commands.SetFunnelPositionCommand;
+import frc.robot.commands.SetAlgaePositionCommand.AlgaeMode;
+import frc.robot.commands.SetCoralPositionCommand.CoralMode;
+import frc.robot.commands.SetFunnelPositionCommand.IntakeMode;
 import frc.robot.subsystems.*;
 import frc.robot.constants.*;
 
@@ -58,17 +60,21 @@ public class RobotContainer {
   private void configureBindings() {
     operatorController.leftTrigger().whileTrue(new AlgaeIntakeCommand());
     operatorController.rightTrigger().whileTrue(new AlgaeScoringCommand());
-    operatorController.leftBumper().whileTrue(new CoralIntakeCommand());
+    //operatorController.leftBumper().whileTrue(new CoralIntakeCommand());
 		operatorController.rightBumper().whileTrue(new CoralScoringCommand());
+    operatorController.axisGreaterThan(0, 0.5).whileTrue(
+      new SetFunnelPositionCommand(IntakeMode.HUMAN));
+    operatorController.axisLessThan(0, -0.5).whileTrue(
+      new SetFunnelPositionCommand(IntakeMode.GROUND));
 
-    operatorController.a().onTrue(new SetCoralPosition(CoralMode.TROUGH));
-    operatorController.b().onTrue(new SetCoralPosition(CoralMode.LOW));
-    operatorController.y().onTrue(new SetCoralPosition(CoralMode.MID));
-    operatorController.x().onTrue(new SetCoralPosition(CoralMode.HIGH));
-    operatorController.povDown().onTrue(new SetAlgaePosition(AlgaeMode.PROCESSOR));
-    operatorController.povLeft().onTrue(new SetAlgaePosition(AlgaeMode.REEFLOW));
-    operatorController.povUp().onTrue(new SetAlgaePosition(AlgaeMode.REEFHIGH));
-    operatorController.povRight().onTrue(new SetAlgaePosition(AlgaeMode.NET));
+    operatorController.a().onTrue(new SetCoralPositionCommand(CoralMode.TROUGH));
+    operatorController.b().onTrue(new SetCoralPositionCommand(CoralMode.LOW));
+    operatorController.y().onTrue(new SetCoralPositionCommand(CoralMode.MID));
+    operatorController.x().onTrue(new SetCoralPositionCommand(CoralMode.HIGH));
+    operatorController.povDown().onTrue(new SetAlgaePositionCommand(AlgaeMode.PROCESSOR));
+    operatorController.povLeft().onTrue(new SetAlgaePositionCommand(AlgaeMode.REEFLOW));
+    operatorController.povUp().onTrue(new SetAlgaePositionCommand(AlgaeMode.REEFHIGH));
+    operatorController.povRight().onTrue(new SetAlgaePositionCommand(AlgaeMode.NET));
 
 
 

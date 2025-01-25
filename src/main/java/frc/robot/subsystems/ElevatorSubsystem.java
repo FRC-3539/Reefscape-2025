@@ -19,7 +19,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   /** Creates a new ElevatorSubsystem. */
 
   private static TalonFX elevatorMotor;
-  private double requestedElevatorPos = 0;
+  private static double requestedElevatorPos = 0;
 
   public  ElevatorSubsystem() {
     elevatorMotor = new TalonFX(IDConstants.algaeDeployMotorID, "rio");
@@ -36,14 +36,14 @@ public class ElevatorSubsystem extends SubsystemBase {
   public static void setElevatorMotor(double voltage) {
     elevatorMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
-  public double getElevatorPosition() {
+  public static double getElevatorPosition() {
 		return elevatorMotor.getPosition().getValueAsDouble() * ElevatorConstants.elevatorMotorToInches;
 	}
-  public void setElevatoPosition(double request) {
+  public static void setElevatorPosition(double request) {
 		requestedElevatorPos = request;
 	}
   
-	public void initializeElevatorPosition() {
+	public static void initializeElevatorPosition() {
 		requestedElevatorPos = getElevatorPosition();
 	}
   @Override

@@ -4,30 +4,41 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.ElevatorSubsystem;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class SetElevatorCommand extends Command {
-  /** Creates a new SetElevatorCommand. */
-  public SetElevatorCommand() {
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
+	/** Creates a new SetElevatorCommand. */
+	double height;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
+	/** Creates a new AngleShooterCommand. */
+	public SetElevatorCommand(double height) {
+		// Use addRequirements() here to declare subsystem dependencies..a
+		this.height = height;
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		ElevatorSubsystem.setElevatorPosition(height);
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+	}
+
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		// System.out.println(height + " " +
+		// RobotContainer.shooterSubsystem.getElevatorPosition());
+		return MathUtil.isNear(height, ElevatorSubsystem.getElevatorPosition(), 0.2);
+	}
 }
