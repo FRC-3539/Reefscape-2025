@@ -8,8 +8,10 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.AlgaeIntakeCommand;
 import frc.robot.commands.AlgaeScoringCommand;
+import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.CoralIntakeCommand;
 import frc.robot.commands.CoralScoringCommand;
+import frc.robot.commands.HomePositionCommand;
 import frc.robot.commands.SetAlgaePositionCommand;
 import frc.robot.commands.SetCoralPositionCommand;
 import frc.robot.commands.SetElevatorCommand;
@@ -75,7 +77,8 @@ public class RobotContainer {
     operatorController.povLeft().onTrue(new SetAlgaePositionCommand(AlgaeMode.REEFLOW));
     operatorController.povUp().onTrue(new SetAlgaePositionCommand(AlgaeMode.REEFHIGH));
     operatorController.povRight().onTrue(new SetAlgaePositionCommand(AlgaeMode.NET));
-
+    operatorController.rightStick().whileTrue(new ClimberCommand());
+    operatorController.start().onTrue(new HomePositionCommand());
 
 
 
