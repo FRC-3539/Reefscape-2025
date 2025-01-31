@@ -11,6 +11,7 @@ import frc.robot.commands.AlgaeScoringCommand;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.CoralIntakeCommand;
 import frc.robot.commands.CoralScoringCommand;
+//import frc.robot.commands.DriveCommand;
 import frc.robot.commands.HomePositionCommand;
 import frc.robot.commands.SetAlgaePositionCommand;
 import frc.robot.commands.SetCoralPositionCommand;
@@ -38,11 +39,13 @@ public class RobotContainer {
   public static ScoringSubsystem ScoringSubsystem = new ScoringSubsystem();
   public static ElevatorSubsystem ElevatorSubsystem = new ElevatorSubsystem();
   public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
-  // public static DriveSubsystem DriveSubsystem = new DriveSubsystem();
-
+  //public static DriveSubsystem DriveSubsystem = TunerConstants.createDrivetrain();
   
 	public static CommandXboxController driverController = new CommandXboxController(1);
 	public static CommandXboxController operatorController = new CommandXboxController(0);
+
+  public static Trigger rightDriverTrigger = driverController.rightTrigger(0.5);
+	public static Trigger rightDriverBumper = driverController.rightBumper();
 
 
   public RobotContainer() {
@@ -60,6 +63,8 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    //DriveSubsystem.setDefaultCommand(new DriveCommand());
+    
     operatorController.leftTrigger().whileTrue(new AlgaeIntakeCommand());
     operatorController.rightTrigger().whileTrue(new AlgaeScoringCommand());
 		operatorController.rightBumper().whileTrue(new CoralScoringCommand());

@@ -10,8 +10,8 @@ public class ScoringConstants extends BBConstants {
 
 	public static double rotateVoltage = 10.0;
 	public static double algaeScoringVoltage = 10.0;
-	public static double clawOpenPosition = 10.0;
-	public static double clawClosedPosition = 0.0;
+	public static double clawOpenPosition = 0.4;
+	public static double clawClosedPosition = 0.1;
 	public static double rotateMotorToInches = 0.0;
 	public static double troughPosition = 0.0;
 	public static double lowPosition = 0.0;
