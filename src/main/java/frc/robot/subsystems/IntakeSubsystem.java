@@ -21,7 +21,7 @@ import com.ctre.phoenix6.signals.InvertedValue;
 
 public class IntakeSubsystem extends SubsystemBase { 
   
-  private static TalonFX algaeDeployMotor,algaeIntakeMotor,coralDeployMotor,coralIntakeMotor;
+  private static TalonFX algaeDeployMotor,algaeIntakeMotor,coralDeployMotor,coralIntakeMotor, funnelMotor;
  
   private static CANcoder coralDeployCanCoder;
   private static double requestedCoralDeployPos = 0;
@@ -49,6 +49,11 @@ public class IntakeSubsystem extends SubsystemBase {
     coralIntakeMotor.getConfigurator().apply(
       new TalonFXConfiguration().MotorOutput
         .withInverted(InvertedValue.CounterClockwise_Positive));
+
+    funnelMotor = new TalonFX(IDConstants.funnelMotorID, "rio");
+    funnelMotor.getConfigurator().apply(
+      new TalonFXConfiguration().MotorOutput
+          .withInverted(InvertedValue.CounterClockwise_Positive));
 
     coralDeployMotor.getConfigurator()
 				.apply(new FeedbackConfigs().withFeedbackRemoteSensorID(IDConstants.coralDeployCanCoderID)

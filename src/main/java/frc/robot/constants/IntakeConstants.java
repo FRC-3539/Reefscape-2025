@@ -18,4 +18,5 @@ public class IntakeConstants extends BBConstants {
 	public static double homePositionAngle = 10;
 	public static double groundPositionAngle = 10;
 	public static double humanPositionAngle = 10;
+	public static double funnelVoltage = 2;
 }

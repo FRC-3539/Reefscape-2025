@@ -29,18 +29,22 @@ public class SetFunnelPositionCommand extends Command {
 			case GROUND :
         IntakeSubsystem.setCoralDeployAngle(IntakeConstants.groundPositionAngle);
         IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
+        IntakeSubsystem.setFunnelMotor(IntakeConstants.funnelVoltage);
 
       break;
     
       case HUMAN :
         IntakeSubsystem.setCoralDeployAngle(IntakeConstants.humanPositionAngle);
         IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
+        IntakeSubsystem.setFunnelMotor(IntakeConstants.funnelVoltage);
 
       break;
 
       case REVERSE :
         IntakeSubsystem.setCoralDeployAngle(IntakeConstants.groundPositionAngle);
         IntakeSubsystem.setCoralIntakeMotor(-IntakeConstants.coralIntakeVoltage);
+        IntakeSubsystem.setFunnelMotor(-IntakeConstants.funnelVoltage);
+
       break;
     }
   }
@@ -54,6 +58,8 @@ public class SetFunnelPositionCommand extends Command {
   public void end(boolean interrupted) {
     IntakeSubsystem.setCoralDeployAngle(IntakeConstants.homePositionAngle);
     IntakeSubsystem.setCoralIntakeMotor(0);
+    IntakeSubsystem.setFunnelMotor(0);
+
 
 
   }
