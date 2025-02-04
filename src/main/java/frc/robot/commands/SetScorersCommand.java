@@ -10,18 +10,18 @@ import frc.robot.subsystems.ScoringSubsystem;
 
 public class SetScorersCommand extends Command {
 	/** Creates a new SetElevatorCommand. */
-	double position;
+	double angle;
 
 	/** Creates a new AngleShooterCommand. */
-	public SetScorersCommand(double position) {
+	public SetScorersCommand(double angle) {
 		// Use addRequirements() here to declare subsystem dependencies..a
-		this.position = position;
+		this.angle = angle;
 	}
 
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		ScoringSubsystem.setRotateMotorPosition(position);
+		ScoringSubsystem.setRotateAngle(angle);
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
@@ -38,6 +38,6 @@ public class SetScorersCommand extends Command {
 	@Override
 	public boolean isFinished() {
 		// System.out.println(height + " " +
-		return MathUtil.isNear(position, ScoringSubsystem.getRotateMotorPosition(), 0.2);
+		return MathUtil.isNear(angle, ScoringSubsystem.getRotateAngle(), 0.2);
 	}
 }

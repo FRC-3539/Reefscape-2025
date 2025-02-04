@@ -89,6 +89,9 @@ public class IntakeSubsystem extends SubsystemBase {
   public static void setCoralIntakeMotor(double voltage) {
     coralIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
+  public static void setFunnelMotor(double voltage) {
+    funnelMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+  }
 
   public static double degreesToCoralDeployRotations(double degrees) {
 		return Units.degreesToRotations(degrees - IntakeConstants.restCoralDeployAngle)

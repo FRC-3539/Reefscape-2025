@@ -34,4 +34,5 @@ public class IDConstants extends BBConstants {
 	public static int FLCanCoderID = 23;
 	public static int TalonFXSID = 8;
 	public static int funnelMotorID = 12;
+	public static int rotateCanCoderID = 14;
 }

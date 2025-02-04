@@ -21,4 +21,7 @@ public class ScoringConstants extends BBConstants {
 	public static double netPosition = 0.0;
 	public static double reefLowPosition = 0.0;
 	public static double reefHighPosition = 0.0;
+	public static double rotateMotorToEncoder = 0.0;
+	public static double rotateRestingRotations = 0.0;
+	public static double restRotateAngle = 0.0;
 }
