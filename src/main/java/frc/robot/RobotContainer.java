@@ -3,11 +3,13 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+import com.pathplanner.lib.auto.AutoBuilder;
+
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.AlgaeIntakeCommand;
-import frc.robot.commands.AlgaeScoringCommand;
 import frc.robot.commands.SetAlgaePositionCommand.AlgaeMode;
 import frc.robot.commands.SetCoralPositionCommand.CoralMode;
 import frc.robot.commands.SetFunnelPositionCommand.IntakeMode;
@@ -39,10 +41,14 @@ public class RobotContainer {
   public static Trigger rightDriverTrigger = driverController.rightTrigger(0.5);
 	public static Trigger rightDriverBumper = driverController.rightBumper();
 
+  public static SendableChooser<Command> chooser = new SendableChooser<Command>();
+
 
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    putAutons();
+
   }
 
   /**
@@ -53,7 +59,13 @@ public class RobotContainer {
    * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
    * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
+   * 
    */
+  public void putAutons()
+  {
+    chooser = AutoBuilder.buildAutoChooser();
+		SmartDashboard.putData(chooser);
+  }
   private void configureBindings() {
     //DriveSubsystem.setDefaultCommand(new DriveCommand());
     
@@ -85,6 +97,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return null;
+    return chooser.getSelected();
   }
 }

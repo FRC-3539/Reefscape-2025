@@ -5,6 +5,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.swerve.*;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.hardware.CANcoder;
@@ -22,8 +26,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
+import frc.robot.constants.DriveConstants;
 import frc.robot.constants.IDConstants;
 import java.util.Arrays;
+
+import org.frcteam3539.Byte_Swerve_Lib.Constants;
 import org.frcteam3539.Byte_Swerve_Lib.control.HolonomicMotionProfiledTrajectoryFollower;
 import org.frcteam3539.Byte_Swerve_Lib.control.PidConstants;
 import org.frcteam3539.Byte_Swerve_Lib.control.Trajectory;
@@ -33,6 +40,9 @@ import org.frcteam3539.Byte_Swerve_Lib.util.HolonomicFeedforward;
 public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder> implements Subsystem {
 	/** Creates a new DrivetrainSubsystem. */
 	private SwerveRequest swerveRequest = new SwerveRequest.Idle();
+
+	private final SwerveRequest.ApplyRobotSpeeds m_pathApplyRobotSpeeds = new SwerveRequest.ApplyRobotSpeeds();
+
 
 	 public double maxVelocity = 0.0;
 	 public double maxRotationalVelocity = 0.0;
@@ -74,6 +84,34 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 
 	public void log() {
 	}
+private void configureAutoBuilder() {
+        try {
+            var config = RobotConfig.fromGUISettings();
+            AutoBuilder.configure(
+                () -> getState().Pose,   // Supplier of current robot pose
+                this::resetPose,         // Consumer for seeding pose against auto
+                () -> getState().Speeds, // Supplier of current robot speeds
+                // Consumer of ChassisSpeeds and feedforwards to drive the robot
+                (speeds, feedforwards) -> setControl(
+                    m_pathApplyRobotSpeeds.withSpeeds(speeds)
+                        .withWheelForceFeedforwardsX(feedforwards.robotRelativeForcesXNewtons())
+                        .withWheelForceFeedforwardsY(feedforwards.robotRelativeForcesYNewtons())
+                ),
+                new PPHolonomicDriveController(
+                    // PID constants for translation
+                    new PIDConstants(DriveConstants.TranslationkP, DriveConstants.TranslationkI, DriveConstants.TranslationkD),
+                    // PID constants for rotation
+                    new PIDConstants(DriveConstants.RotationkP, DriveConstants.RotationkI, DriveConstants.RotationkD)
+                ),
+                config,
+                // Assume the path needs to be flipped for Red vs Blue, this is normally the case
+                () -> DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red,
+                this // Subsystem for requirements
+            );
+        } catch (Exception ex) {
+            DriverStation.reportError("Failed to load PathPlanner config and configure AutoBuilder", ex.getStackTrace());
+        }
+    }
 
 	@Override
 	public void periodic() {
