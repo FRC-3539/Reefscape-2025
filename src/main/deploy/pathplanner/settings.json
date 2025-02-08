@@ -3,8 +3,8 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
+    "Start Paths",
     "Human Player 1 to Reef",
-    "Blue Start Paths",
     "To Human Player 1"
   ],
   "autoFolders": [
