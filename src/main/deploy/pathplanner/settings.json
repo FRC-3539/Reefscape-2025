@@ -2,8 +2,15 @@
   "robotWidth": 0.9,
   "robotLength": 0.9,
   "holonomicMode": true,
-  "pathFolders": [],
-  "autoFolders": [],
+  "pathFolders": [
+    "Human Player 1 to Reef",
+    "Blue Start Paths",
+    "To Human Player 1"
+  ],
+  "autoFolders": [
+    "Blue D start",
+    "Blue F Start"
+  ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,
   "defaultMaxAngVel": 540.0,

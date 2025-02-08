@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "D to Human Player"
+            "pathName": "D to Human Player 1"
           }
         },
         {
@@ -31,13 +31,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Human Player to C"
+            "pathName": "Human Player 1 to C"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "Blue D start",
   "choreoAuto": false
 }

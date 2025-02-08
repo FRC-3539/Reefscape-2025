@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.39115270071198,
-        "y": 0.42944399163427827
+        "x": 7.219431818181818,
+        "y": 1.2229829545454547
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.8758838383838388,
-        "y": 2.530871212121211
+        "x": 5.504318181818181,
+        "y": 2.828409090909091
       },
       "prevControl": {
-        "x": 4.333270202020203,
-        "y": 2.053156565656566
+        "x": 5.961704545454546,
+        "y": 2.350694444444446
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 57.77124256490152
+    "rotation": 121.67546873810917
   },
   "reversed": false,
   "folder": "Blue Start Paths",
