@@ -10,11 +10,11 @@ import frc.robot.constants.*;
 
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class SetCoralPositionCommand extends SequentialCommandGroup {
+public class CoralPositionCommand extends SequentialCommandGroup {
   public enum CoralMode {
 		TROUGH, LOW, MID, HIGH;
 	}   
-  public SetCoralPositionCommand(CoralMode mode) {
+  public CoralPositionCommand(CoralMode mode) {
     switch (mode) {
 			case TROUGH :
 

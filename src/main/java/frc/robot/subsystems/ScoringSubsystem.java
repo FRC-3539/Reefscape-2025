@@ -14,16 +14,13 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ScoringConstants;
 import frc.robot.constants.IDConstants;
 
 public class ScoringSubsystem extends SubsystemBase {
-  private static TalonFX rotateMotor, algaeScoringMotor;
+  private static TalonFX rotateMotor, scoringMotor;
   private static CANcoder rotateCanCoder;
-  private static Servo clawServo;
-  private static double clawServoPosition = 0;
   private static double requestedRotatePos = 0;
 
 
@@ -38,12 +35,11 @@ public class ScoringSubsystem extends SubsystemBase {
 						.withRotorToSensorRatio(ScoringConstants.rotateMotorToEncoder).withSensorToMechanismRatio(1)
 						.withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder));
 
-    algaeScoringMotor = new TalonFX(IDConstants.algaeScoringMotorID, "rio");
-    algaeScoringMotor.getConfigurator().apply(
+    scoringMotor = new TalonFX(IDConstants.scoringMotorID, "rio");
+    scoringMotor.getConfigurator().apply(
       new TalonFXConfiguration().MotorOutput
         .withInverted(InvertedValue.CounterClockwise_Positive));
 
-    clawServo = new Servo(IDConstants.clawServoID);
 
     rotateCanCoder = new CANcoder(IDConstants.rotateCanCoderID, "rio");
   }
@@ -61,7 +57,7 @@ public class ScoringSubsystem extends SubsystemBase {
 		requestedRotatePos = angle;
 	}
 
-  public static void initializRotateAngle() {
+  public static void initializeRotateAngle() {
 		requestedRotatePos = getRotateAngle();
 	}
   
@@ -70,19 +66,19 @@ public class ScoringSubsystem extends SubsystemBase {
 				+ ScoringConstants.rotateRestingRotations;
 	}
   
-  public static void setAlgaeScoringMotor(double voltage){
-    algaeScoringMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+  public static void scoringMotor(double voltage){
+    scoringMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
 
 }
-  public static void setClawServoPosition(double position) {
-		clawServoPosition = position;
-	}
+/**
+ * Servo values range from 0.0 to 1.0 corresponding to the range of full left to full right.
 
-  
+ * @param position value Position from 0.0 to 1.0.
 
+ */
+ 
   @Override
   public void periodic() {
-    clawServo.set(clawServoPosition);
     rotateMotor.setControl(new MotionMagicVoltage(degreesToRotateRotations(requestedRotatePos)));
 
     }

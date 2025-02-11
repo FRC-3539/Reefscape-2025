@@ -9,33 +9,21 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
-import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import frc.robot.constants.DriveConstants;
 import frc.robot.constants.IDConstants;
 import java.util.Arrays;
 
-import org.frcteam3539.Byte_Swerve_Lib.Constants;
-import org.frcteam3539.Byte_Swerve_Lib.control.HolonomicMotionProfiledTrajectoryFollower;
-import org.frcteam3539.Byte_Swerve_Lib.control.PidConstants;
-import org.frcteam3539.Byte_Swerve_Lib.control.Trajectory;
-import org.frcteam3539.Byte_Swerve_Lib.util.DrivetrainFeedforwardConstants;
-import org.frcteam3539.Byte_Swerve_Lib.util.HolonomicFeedforward;
 
 public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder> implements Subsystem {
 	/** Creates a new DrivetrainSubsystem. */
@@ -83,7 +71,9 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 	}
 
 	public void log() {
+		publishPose2d("/DriveTrain/Pose", getPose2d());
 	}
+
 private void configureAutoBuilder() {
         try {
             var config = RobotConfig.fromGUISettings();
@@ -112,6 +102,11 @@ private void configureAutoBuilder() {
             DriverStation.reportError("Failed to load PathPlanner config and configure AutoBuilder", ex.getStackTrace());
         }
     }
+	
+	public static void publishPose2d(String key, Pose2d pose) {
+		SmartDashboard.putNumberArray(key, new double[]{pose.getTranslation().getX(), pose.getTranslation().getY(),
+				pose.getRotation().getRadians()});
+	}
 
 	@Override
 	public void periodic() {

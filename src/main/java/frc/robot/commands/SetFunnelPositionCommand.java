@@ -11,7 +11,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class SetFunnelPositionCommand extends Command {
   public enum IntakeMode {
-		GROUND, HUMAN, REVERSE;
+		GROUND, HUMAN, REVERSE, HOME;
 	}  
 
   IntakeMode mode;
@@ -46,6 +46,12 @@ public class SetFunnelPositionCommand extends Command {
         IntakeSubsystem.setFunnelMotor(-IntakeConstants.funnelVoltage);
 
       break;
+      case HOME :
+      IntakeSubsystem.setCoralDeployAngle(IntakeConstants.homePositionAngle);
+      IntakeSubsystem.setCoralIntakeMotor(0);
+      IntakeSubsystem.setFunnelMotor(0);
+
+    break;
     }
   }
 

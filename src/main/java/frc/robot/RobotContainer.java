@@ -3,17 +3,20 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.SetAlgaePositionCommand.AlgaeMode;
-import frc.robot.commands.SetCoralPositionCommand.CoralMode;
+import frc.robot.commands.AlgaePositionCommand.AlgaeMode;
+import frc.robot.commands.CoralPositionCommand.CoralMode;
 import frc.robot.commands.SetFunnelPositionCommand.IntakeMode;
 import frc.robot.commands.*;
+import frc.robot.commands.ScoringCommand.ScoringMode;
 import frc.robot.subsystems.*;
 //import frc.robot.constants.*;
 
@@ -48,6 +51,26 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     putAutons();
+  
+    //Scoring Commands
+    NamedCommands.registerCommand("AlgaeScoringCommand", new ScoringCommand(ScoringMode.ALGAE));
+    NamedCommands.registerCommand("CoralScoringCommand", new ScoringCommand(ScoringMode.CORAL));
+
+    
+    //Setting positions to score Coral
+    NamedCommands.registerCommand("TroughCommand", new CoralPositionCommand(CoralMode.TROUGH));
+    NamedCommands.registerCommand("CoralLowCommand", new CoralPositionCommand(CoralMode.LOW));
+    NamedCommands.registerCommand("CoralMidCommand", new CoralPositionCommand(CoralMode.MID));
+    NamedCommands.registerCommand("CoralHighCommand", new CoralPositionCommand(CoralMode.HIGH));
+
+    //Setting positions to score Algae
+    NamedCommands.registerCommand("ProcessorCommand", new AlgaePositionCommand(AlgaeMode.PROCESSOR));
+    NamedCommands.registerCommand("AlgaeLowCommand", new AlgaePositionCommand(AlgaeMode.REEFLOW));
+    NamedCommands.registerCommand("AlgaeHighCommand", new AlgaePositionCommand(AlgaeMode.REEFHIGH));
+    NamedCommands.registerCommand("NetCommand", new AlgaePositionCommand(AlgaeMode.NET));
+
+    //Funnel Position Commands
+    NamedCommands.registerCommand("HumanPlayerIntakeCommand", new SetFunnelPositionCommand(IntakeMode.HUMAN));
 
   }
 
@@ -69,23 +92,27 @@ public class RobotContainer {
   private void configureBindings() {
     //DriveSubsystem.setDefaultCommand(new DriveCommand());
     
+    //Algae Commands
     operatorController.leftTrigger().whileTrue(new AlgaeIntakeCommand());
-    operatorController.rightTrigger().whileTrue(new AlgaeScoringCommand());
-		operatorController.rightBumper().whileTrue(new CoralScoringCommand());
+    operatorController.rightTrigger().whileTrue(new ScoringCommand(ScoringMode.ALGAE));
+    operatorController.povDown().onTrue(new AlgaePositionCommand(AlgaeMode.PROCESSOR));
+    operatorController.povRight().onTrue(new AlgaePositionCommand(AlgaeMode.REEFLOW));
+    operatorController.povUp().onTrue(new AlgaePositionCommand(AlgaeMode.REEFHIGH));
+    operatorController.povLeft().onTrue(new AlgaePositionCommand(AlgaeMode.NET));
+
+    //Coral Commands
     operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE));
     operatorController.axisGreaterThan(0, 0.5).whileTrue(
       new SetFunnelPositionCommand(IntakeMode.HUMAN));
     operatorController.axisLessThan(0, -0.5).whileTrue(
       new SetFunnelPositionCommand(IntakeMode.GROUND));
-
-    operatorController.a().onTrue(new SetCoralPositionCommand(CoralMode.TROUGH));
-    operatorController.b().onTrue(new SetCoralPositionCommand(CoralMode.LOW));
-    operatorController.y().onTrue(new SetCoralPositionCommand(CoralMode.MID));
-    operatorController.x().onTrue(new SetCoralPositionCommand(CoralMode.HIGH));
-    operatorController.povDown().onTrue(new SetAlgaePositionCommand(AlgaeMode.PROCESSOR));
-    operatorController.povLeft().onTrue(new SetAlgaePositionCommand(AlgaeMode.REEFLOW));
-    operatorController.povUp().onTrue(new SetAlgaePositionCommand(AlgaeMode.REEFHIGH));
-    operatorController.povRight().onTrue(new SetAlgaePositionCommand(AlgaeMode.NET));
+    operatorController.rightBumper().whileTrue(new ScoringCommand(ScoringMode.CORAL));
+    operatorController.a().onTrue(new CoralPositionCommand(CoralMode.TROUGH));
+    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.LOW));
+    operatorController.y().onTrue(new CoralPositionCommand(CoralMode.MID));
+    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.HIGH));
+   
+    //Climbing Command
     operatorController.rightStick().whileTrue(new ClimberCommand());
     operatorController.start().onTrue(new HomePositionCommand());
     

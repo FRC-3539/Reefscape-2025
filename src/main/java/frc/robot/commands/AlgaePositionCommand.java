@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.constants.*;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class SetAlgaePositionCommand extends SequentialCommandGroup {
+public class AlgaePositionCommand extends SequentialCommandGroup {
   public enum AlgaeMode {
 		PROCESSOR, REEFLOW, REEFHIGH, NET;
 	}  
 
-public SetAlgaePositionCommand(AlgaeMode mode) {
+public AlgaePositionCommand(AlgaeMode mode) {
     switch (mode) {
 			case PROCESSOR :
 
