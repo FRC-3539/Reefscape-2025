@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "To Reef D"
+            "pathName": "Bottom to Reef D"
           }
         },
         {
@@ -31,6 +31,30 @@
         {
           "type": "path",
           "data": {
+            "pathName": "Human Player 1 to C"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "C to Human Player 1"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
             "pathName": "Human Player 1 to B"
           }
         }
@@ -38,6 +62,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "D start",
+  "folder": "D Start",
   "choreoAuto": false
 }

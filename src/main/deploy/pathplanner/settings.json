@@ -3,13 +3,21 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
-    "Start Paths",
+    "Bottom Start Paths",
     "Human Player 1 to Reef",
-    "To Human Player 1"
+    "Human Player 2 to Reef",
+    "Middle Start Paths",
+    "Top Start Paths",
+    "To Human Player 1",
+    "To Human Player 2"
   ],
   "autoFolders": [
-    "D start",
-    " F Start"
+    " F Start",
+    "D Start",
+    "E Start",
+    "G Start",
+    "H Start",
+    "J Start"
   ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,

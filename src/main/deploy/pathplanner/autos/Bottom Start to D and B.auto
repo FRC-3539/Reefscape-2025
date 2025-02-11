@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": " To Reef F"
+            "pathName": "Bottom to Reef D"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "F to Human Player 1"
+            "pathName": "D to Human Player 1"
           }
         },
         {
@@ -31,13 +31,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Human Player 1 to D"
+            "pathName": "Human Player 1 to B"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": " F Start",
+  "folder": "D Start",
   "choreoAuto": false
 }

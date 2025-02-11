@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "To Reef D"
+            "pathName": "Bottom to Reef D"
           }
         },
         {
@@ -38,6 +38,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "D start",
+  "folder": "D Start",
   "choreoAuto": false
 }

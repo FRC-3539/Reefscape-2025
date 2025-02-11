@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": " To Reef F"
+            "pathName": " Bottom to Reef F"
           }
         },
         {
@@ -20,30 +20,6 @@
           "type": "path",
           "data": {
             "pathName": "F to Human Player 1"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Human Player 1 to E"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "E to Human Player 1"
           }
         },
         {
