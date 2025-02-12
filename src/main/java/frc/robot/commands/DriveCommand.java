@@ -2,7 +2,6 @@
 // // Open Source Software; you can modify and/or share it under the terms of
 // // the WPILib BSD license file in the root directory of this project.
 
-
 // package frc.robot.commands;
 
 // import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
@@ -18,6 +17,8 @@
 // import frc.robot.subsystems.DriveSubsystem;
 
 // public class DriveCommand extends Command {
+// 	Translation2d blueSpeakerCoordinate = new Translation2d(0, 5.55);
+// 	Translation2d redSpeakerCoordinate = new Translation2d(0, 2.67);
 // 	/** Creates a new DriveCommand. */
 // 	private PidController rotationController;
 
@@ -35,7 +36,7 @@
 // 			.withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
 
 // 	public DriveCommand() {
-// 		//addRequirements(DriveSubsystem);
+// 		addRequirements(DriveSubsystem);
 
 // 		rotationController = new PidController(new PidConstants(DriveConstants.AlignkP, 0, 0));
 
