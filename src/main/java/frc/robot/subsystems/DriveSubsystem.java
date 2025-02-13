@@ -9,7 +9,9 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -24,21 +26,19 @@ import frc.robot.constants.DriveConstants;
 import frc.robot.constants.IDConstants;
 import java.util.Arrays;
 
-
 public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder> implements Subsystem {
 	/** Creates a new DrivetrainSubsystem. */
 	private SwerveRequest swerveRequest = new SwerveRequest.Idle();
 
 	private final SwerveRequest.ApplyRobotSpeeds m_pathApplyRobotSpeeds = new SwerveRequest.ApplyRobotSpeeds();
 
-
-	 public double maxVelocity = 0.0;
-	 public double maxRotationalVelocity = 0.0;
+	public double maxVelocity = 0.0;
+	public double maxRotationalVelocity = 0.0;
 
 	public Pigeon2 pigeon = new Pigeon2(IDConstants.pigeonID, "rio");
 
-
-	public DriveSubsystem(SwerveDrivetrainConstants driveTrainConstants, SwerveModuleConstants... modules) {
+	public DriveSubsystem(SwerveDrivetrainConstants driveTrainConstants,
+			SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>... modules) {
 		super(TalonFX::new, TalonFX::new, CANcoder::new, driveTrainConstants, modules);
 
 		maxVelocity = modules[0].SpeedAt12Volts;
@@ -48,8 +48,8 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 		for (int i = 0; i < modules.length; i++) {
 			moduleLocations[i] = new Translation2d(modules[i].LocationX, modules[i].LocationY);
 			this.getModule(i).getDriveMotor().getConfigurator()
-				.apply(new CurrentLimitsConfigs().withSupplyCurrentLimit(40)
-                        .withSupplyCurrentLimitEnable(true)
+					.apply(new CurrentLimitsConfigs().withSupplyCurrentLimit(40)
+							.withSupplyCurrentLimitEnable(true)
 							.withStatorCurrentLimit(modules[i].SlipCurrent).withStatorCurrentLimitEnable(true));
 		}
 
@@ -57,9 +57,8 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 		maxRotationalVelocity = (maxVelocity / dtRadius);
 	}
 
-
 	// public void seedFieldRelative(Trajectory trajectory) {
-	// 	this.seedFieldRelative(trajectory.calculate(0).getPathState().getPose2d());
+	// this.seedFieldRelative(trajectory.calculate(0).getPathState().getPose2d());
 	// }
 
 	public Pose2d getPose2d() {
@@ -74,44 +73,46 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 		publishPose2d("/DriveTrain/Pose", getPose2d());
 	}
 
-private void configureAutoBuilder() {
-        try {
-            var config = RobotConfig.fromGUISettings();
-            AutoBuilder.configure(
-                () -> getState().Pose,   // Supplier of current robot pose
-                this::resetPose,         // Consumer for seeding pose against auto
-                () -> getState().Speeds, // Supplier of current robot speeds
-                // Consumer of ChassisSpeeds and feedforwards to drive the robot
-                (speeds, feedforwards) -> setControl(
-                    m_pathApplyRobotSpeeds.withSpeeds(speeds)
-                        .withWheelForceFeedforwardsX(feedforwards.robotRelativeForcesXNewtons())
-                        .withWheelForceFeedforwardsY(feedforwards.robotRelativeForcesYNewtons())
-                ),
-                new PPHolonomicDriveController(
-                    // PID constants for translation
-                    new PIDConstants(DriveConstants.TranslationkP, DriveConstants.TranslationkI, DriveConstants.TranslationkD),
-                    // PID constants for rotation
-                    new PIDConstants(DriveConstants.RotationkP, DriveConstants.RotationkI, DriveConstants.RotationkD)
-                ),
-                config,
-                // Assume the path needs to be flipped for Red vs Blue, this is normally the case
-                () -> DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red,
-                this // Subsystem for requirements
-            );
-        } catch (Exception ex) {
-            DriverStation.reportError("Failed to load PathPlanner config and configure AutoBuilder", ex.getStackTrace());
-        }
-    }
-	
+	private void configureAutoBuilder() {
+		try {
+			var config = RobotConfig.fromGUISettings();
+			AutoBuilder.configure(
+					() -> getState().Pose, // Supplier of current robot pose
+					this::resetPose, // Consumer for seeding pose against auto
+					() -> getState().Speeds, // Supplier of current robot speeds
+					// Consumer of ChassisSpeeds and feedforwards to drive the robot
+					(speeds, feedforwards) -> setControl(
+							m_pathApplyRobotSpeeds.withSpeeds(speeds)
+									.withWheelForceFeedforwardsX(feedforwards.robotRelativeForcesXNewtons())
+									.withWheelForceFeedforwardsY(feedforwards.robotRelativeForcesYNewtons())),
+					new PPHolonomicDriveController(
+							// PID constants for translation
+							new PIDConstants(DriveConstants.TranslationkP, DriveConstants.TranslationkI,
+									DriveConstants.TranslationkD),
+							// PID constants for rotation
+							new PIDConstants(DriveConstants.RotationkP, DriveConstants.RotationkI,
+									DriveConstants.RotationkD)),
+					config,
+					// Assume the path needs to be flipped for Red vs Blue, this is normally the
+					// case
+					() -> DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red,
+					this // Subsystem for requirements
+			);
+		} catch (Exception ex) {
+			DriverStation.reportError("Failed to load PathPlanner config and configure AutoBuilder",
+					ex.getStackTrace());
+		}
+	}
+
 	public static void publishPose2d(String key, Pose2d pose) {
-		SmartDashboard.putNumberArray(key, new double[]{pose.getTranslation().getX(), pose.getTranslation().getY(),
-				pose.getRotation().getRadians()});
+		SmartDashboard.putNumberArray(key, new double[] { pose.getTranslation().getX(), pose.getTranslation().getY(),
+				pose.getRotation().getRadians() });
 	}
 
 	@Override
 	public void periodic() {
 		SwerveRequest request = new SwerveRequest.Idle();
-			request = swerveRequest;
+		request = swerveRequest;
 
 		this.setControl(request);
 		// This method will be called once per scheduler run
