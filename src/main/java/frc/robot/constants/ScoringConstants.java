@@ -8,9 +8,9 @@ public class ScoringConstants extends BBConstants {
 		save();
 	}
 
-	public static double algaeScoringVoltage = 10.0;
-	public static double coralScoringVoltage = 10.0;
-	public static double rotateVoltage = 10.0;
+	public static double algaeScoringVoltage = 2;
+	public static double coralScoringVoltage = 2;
+	public static double rotateVoltage = 2;
 	public static double rotatekP = 0.0;
 	public static double rotatekI = 0.0;
 	public static double rotatekD = 0.0;

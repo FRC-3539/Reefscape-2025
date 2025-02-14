@@ -8,10 +8,10 @@ public class ClimberConstants extends BBConstants {
 		save();
 	}
 
-	public static double climberMotorToEncoder = 10.0;
-	public static double climberRestingRotations = 10.0;
-	public static double restClimberAngle = 10.0;
-	public static double climberVoltage = 0.0;
+	public static double climberVoltage = 2;
+	public static double climberMotorToEncoder = 0;
+	public static double climberRestingRotations = 0;
+	public static double restClimberAngle = 0;
 	public static double climberkP = 0.0;
 	public static double climberkI = 0.0;
 	public static double climberkD = 0.0;

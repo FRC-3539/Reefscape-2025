@@ -8,16 +8,16 @@ public class ElevatorConstants extends BBConstants {
 		save();
 	}
 
-	public static double elevatorVoltage = 10.0;
-	public static double elevatorMotorToInches = 10.0;
-	public static double troughHeight = 10.0;
-	public static double coralLowHeight = 10.0;
-	public static double coralMidHeight = 10.0;
-	public static double coralHighHeight = 10.0;
-	public static double netHeight = 10.0;
-	public static double processorHeight = 10.0;
-	public static double algaeLowHeight = 10.0;
-	public static double algaeHighHeight = 10.0;
+	public static double elevatorVoltage = 2;
+	public static double elevatorMotorToInches = 0;
+	public static double troughHeight = 0;
+	public static double coralLowHeight = 0;
+	public static double coralMidHeight = 0;
+	public static double coralHighHeight = 0;
+	public static double netHeight = 0;
+	public static double processorHeight = 0;
+	public static double algaeLowHeight = 0;
+	public static double algaeHighHeight = 0;
 	public static double elevatorkP = 0.0;
 	public static double elevatorkI = 0.0;
 	public static double elevatorkD = 0.0;
