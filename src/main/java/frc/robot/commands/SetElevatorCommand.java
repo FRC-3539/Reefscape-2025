@@ -11,11 +11,13 @@ import frc.robot.subsystems.ElevatorSubsystem;
 public class SetElevatorCommand extends Command {
 	/** Creates a new SetElevatorCommand. */
 	double height;
+	boolean wait;
 
 	/** Creates a new AngleShooterCommand. */
-	public SetElevatorCommand(double height) {
+	public SetElevatorCommand(double height, boolean wait) {
 		// Use addRequirements() here to declare subsystem dependencies..a
 		this.height = height;
+		this.wait = wait;
 	}
 
 	// Called when the command is initially scheduled.
@@ -37,8 +39,15 @@ public class SetElevatorCommand extends Command {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
+		if(!wait)
+		{
+			return true;
+		}
+		else
+		{
+			return MathUtil.isNear(height, ElevatorSubsystem.getElevatorPosition(), 0.2);
+		}
 		// System.out.println(height + " " +
 		// RobotContainer.shooterSubsystem.getElevatorPosition());
-		return MathUtil.isNear(height, ElevatorSubsystem.getElevatorPosition(), 0.2);
 	}
 }

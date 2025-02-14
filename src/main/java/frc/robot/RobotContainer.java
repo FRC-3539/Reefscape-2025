@@ -58,16 +58,16 @@ public class RobotContainer {
 
     
     //Setting positions to score Coral
-    NamedCommands.registerCommand("TroughCommand", new CoralPositionCommand(CoralMode.TROUGH));
-    NamedCommands.registerCommand("CoralLowCommand", new CoralPositionCommand(CoralMode.LOW));
-    NamedCommands.registerCommand("CoralMidCommand", new CoralPositionCommand(CoralMode.MID));
-    NamedCommands.registerCommand("CoralHighCommand", new CoralPositionCommand(CoralMode.HIGH));
+    NamedCommands.registerCommand("TroughCommand", new CoralPositionCommand(CoralMode.TROUGH, false));
+    NamedCommands.registerCommand("CoralLowCommand", new CoralPositionCommand(CoralMode.LOW, false));
+    NamedCommands.registerCommand("CoralMidCommand", new CoralPositionCommand(CoralMode.MID, false));
+    NamedCommands.registerCommand("CoralHighCommand", new CoralPositionCommand(CoralMode.HIGH, false));
 
     //Setting positions to score Algae
-    NamedCommands.registerCommand("ProcessorCommand", new AlgaePositionCommand(AlgaeMode.PROCESSOR));
-    NamedCommands.registerCommand("AlgaeLowCommand", new AlgaePositionCommand(AlgaeMode.REEFLOW));
-    NamedCommands.registerCommand("AlgaeHighCommand", new AlgaePositionCommand(AlgaeMode.REEFHIGH));
-    NamedCommands.registerCommand("NetCommand", new AlgaePositionCommand(AlgaeMode.NET));
+    NamedCommands.registerCommand("ProcessorCommand", new AlgaePositionCommand(AlgaeMode.PROCESSOR, false));
+    NamedCommands.registerCommand("AlgaeLowCommand", new AlgaePositionCommand(AlgaeMode.REEFLOW, false));
+    NamedCommands.registerCommand("AlgaeHighCommand", new AlgaePositionCommand(AlgaeMode.REEFHIGH, false));
+    NamedCommands.registerCommand("NetCommand", new AlgaePositionCommand(AlgaeMode.NET, false));
 
     //Funnel Position Commands
     NamedCommands.registerCommand("HumanPlayerIntakeCommand", new SetFunnelPositionCommand(IntakeMode.HUMAN));
@@ -95,10 +95,10 @@ public class RobotContainer {
     //Algae Commands
     operatorController.leftTrigger().whileTrue(new AlgaeIntakeCommand());
     operatorController.rightTrigger().whileTrue(new ScoringCommand(ScoringMode.ALGAE));
-    operatorController.povDown().onTrue(new AlgaePositionCommand(AlgaeMode.PROCESSOR));
-    operatorController.povRight().onTrue(new AlgaePositionCommand(AlgaeMode.REEFLOW));
-    operatorController.povUp().onTrue(new AlgaePositionCommand(AlgaeMode.REEFHIGH));
-    operatorController.povLeft().onTrue(new AlgaePositionCommand(AlgaeMode.NET));
+    operatorController.povDown().onTrue(new AlgaePositionCommand(AlgaeMode.PROCESSOR, true));
+    operatorController.povRight().onTrue(new AlgaePositionCommand(AlgaeMode.REEFLOW, true));
+    operatorController.povUp().onTrue(new AlgaePositionCommand(AlgaeMode.REEFHIGH, true));
+    operatorController.povLeft().onTrue(new AlgaePositionCommand(AlgaeMode.NET, true));
 
     //Coral Commands
     operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE));
@@ -107,10 +107,10 @@ public class RobotContainer {
     operatorController.axisLessThan(0, -0.5).whileTrue(
       new SetFunnelPositionCommand(IntakeMode.GROUND));
     operatorController.rightBumper().whileTrue(new ScoringCommand(ScoringMode.CORAL));
-    operatorController.a().onTrue(new CoralPositionCommand(CoralMode.TROUGH));
-    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.LOW));
-    operatorController.y().onTrue(new CoralPositionCommand(CoralMode.MID));
-    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.HIGH));
+    operatorController.a().onTrue(new CoralPositionCommand(CoralMode.TROUGH, true));
+    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.LOW, true));
+    operatorController.y().onTrue(new CoralPositionCommand(CoralMode.MID, true));
+    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.HIGH, true));
    
     //Climbing Command
     operatorController.rightStick().whileTrue(new ClimberCommand());

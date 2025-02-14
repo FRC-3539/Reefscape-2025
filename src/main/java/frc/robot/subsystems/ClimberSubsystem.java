@@ -5,6 +5,9 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.FeedbackConfigs;
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.SlotConfigs;
+import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.CANcoder;
@@ -30,10 +33,25 @@ public class ClimberSubsystem extends SubsystemBase {
       new TalonFXConfiguration().MotorOutput
         .withInverted(InvertedValue.CounterClockwise_Positive));
 
+  climberMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
+				.withForwardSoftLimitThreshold(ClimberConstants.climberSoftMax).withReverseSoftLimitEnable(true)
+				.withReverseSoftLimitThreshold(ClimberConstants.climberSoftMin));
+
     climberMotor.getConfigurator()
 				.apply(new FeedbackConfigs().withFeedbackRemoteSensorID(IDConstants.climberCanCoderID)
 						.withRotorToSensorRatio(ClimberConstants.climberMotorToEncoder).withSensorToMechanismRatio(1)
 						.withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder));
+
+    climberMotor.getConfigurator()
+				.apply(new SlotConfigs().withKP(ClimberConstants.climberkP).withKI(ClimberConstants.climberkI)
+						.withKD(ClimberConstants.climberkD).withKV(ClimberConstants.climberkV)
+						.withKG(ClimberConstants.climberkG));
+            
+    climberMotor.getConfigurator()
+				.apply(new MotionMagicConfigs()
+        .withMotionMagicAcceleration(ClimberConstants.climberAcceleration)
+        .withMotionMagicCruiseVelocity(ClimberConstants.climberCruiseVelocity));
+      
   }
   public static void setClimberMotor(double voltage) {
     climberMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));

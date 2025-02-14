@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class HomePositionCommand extends SequentialCommandGroup {
   private Command[] commands = {new ParallelCommandGroup(
-    new SetElevatorCommand(0), new SetScorersCommand(0)
+    new SetElevatorCommand(0, true), new SetScorersCommand(0, true)
   )};  /** Creates a new HomePositionCommand. */
   public HomePositionCommand() {
     // Add your commands in the addCommands() call, e.g.

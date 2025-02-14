@@ -27,29 +27,29 @@ public class SetFunnelPositionCommand extends Command {
   public void initialize() {
      switch (mode) {
 			case GROUND :
-        IntakeSubsystem.setCoralDeployAngle(IntakeConstants.groundPositionAngle);
+        IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.groundFunnelDeployAngle);
         IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
-        IntakeSubsystem.setFunnelMotor(IntakeConstants.funnelVoltage);
+        IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
 
       break;
     
       case HUMAN :
-        IntakeSubsystem.setCoralDeployAngle(IntakeConstants.humanPositionAngle);
+        IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.humanFunnelDeployAngle);
         IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
-        IntakeSubsystem.setFunnelMotor(IntakeConstants.funnelVoltage);
+        IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
 
       break;
 
       case REVERSE :
-        IntakeSubsystem.setCoralDeployAngle(IntakeConstants.groundPositionAngle);
+        IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.groundFunnelDeployAngle);
         IntakeSubsystem.setCoralIntakeMotor(-IntakeConstants.coralIntakeVoltage);
-        IntakeSubsystem.setFunnelMotor(-IntakeConstants.funnelVoltage);
+        IntakeSubsystem.setFunnelIntakeMotor(-IntakeConstants.funnelIntakeVoltage);
 
       break;
       case HOME :
-      IntakeSubsystem.setCoralDeployAngle(IntakeConstants.homePositionAngle);
+      IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.homeFunnelDeployAngle);
       IntakeSubsystem.setCoralIntakeMotor(0);
-      IntakeSubsystem.setFunnelMotor(0);
+      IntakeSubsystem.setFunnelIntakeMotor(0);
 
     break;
     }
@@ -62,11 +62,9 @@ public class SetFunnelPositionCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    IntakeSubsystem.setCoralDeployAngle(IntakeConstants.homePositionAngle);
+    IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.homeFunnelDeployAngle);
     IntakeSubsystem.setCoralIntakeMotor(0);
-    IntakeSubsystem.setFunnelMotor(0);
-
-
+    IntakeSubsystem.setFunnelIntakeMotor(0);
 
   }
 

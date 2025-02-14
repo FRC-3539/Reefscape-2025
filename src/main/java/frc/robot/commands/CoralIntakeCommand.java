@@ -23,7 +23,7 @@ public class CoralIntakeCommand extends Command {
   @Override
   public void initialize() {
     IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
-    IntakeSubsystem.setFunnelMotor(IntakeConstants.funnelVoltage);
+    IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
 
   }
   
@@ -37,7 +37,7 @@ public class CoralIntakeCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     IntakeSubsystem.setCoralIntakeMotor(0);
-    IntakeSubsystem.setFunnelMotor(0);
+    IntakeSubsystem.setFunnelIntakeMotor(0);
   }
 
   // Returns true when the command should end.

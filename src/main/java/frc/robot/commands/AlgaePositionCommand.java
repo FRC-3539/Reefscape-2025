@@ -10,39 +10,41 @@ import frc.robot.constants.*;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class AlgaePositionCommand extends SequentialCommandGroup {
+  boolean auton;
   public enum AlgaeMode {
 		PROCESSOR, REEFLOW, REEFHIGH, NET;
 	}  
 
-public AlgaePositionCommand(AlgaeMode mode) {
+public AlgaePositionCommand(AlgaeMode mode, boolean auton) {
+  this.auton = auton;
     switch (mode) {
 			case PROCESSOR :
 
       addCommands(
         new ParallelCommandGroup(
-          new SetElevatorCommand(ElevatorConstants.processorHeight), 
-          new SetScorersCommand(ScoringConstants.processorPosition)));
+          new SetElevatorCommand(ElevatorConstants.processorHeight, auton), 
+          new SetScorersCommand(ScoringConstants.processorPosition, auton)));
       break;
 
 			case REEFLOW :
 			addCommands(
         new ParallelCommandGroup(
-          new SetElevatorCommand(ElevatorConstants.reefLowHeight), 
-          new SetScorersCommand(ScoringConstants.reefLowPosition)));
+          new SetElevatorCommand(ElevatorConstants.algaeLowHeight, auton), 
+          new SetScorersCommand(ScoringConstants.algaeLowPosition, auton)));
       break;
 
 			case REEFHIGH :
       addCommands(
         new ParallelCommandGroup(
-          new SetElevatorCommand(ElevatorConstants.reefHighHeight), 
-          new SetScorersCommand(ScoringConstants.reefHighPosition)));
+          new SetElevatorCommand(ElevatorConstants.algaeHighHeight, auton), 
+          new SetScorersCommand(ScoringConstants.algaeHighPosition, auton)));
 				break;
 
       case NET: 
       addCommands(
         new ParallelCommandGroup(
-          new SetElevatorCommand(ElevatorConstants.netHeight), 
-          new SetScorersCommand(ScoringConstants.netPosition)));
+          new SetElevatorCommand(ElevatorConstants.netHeight, auton), 
+          new SetScorersCommand(ScoringConstants.netPosition,auton)));
       break;  
     }
   }

@@ -5,10 +5,14 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.HardwareLimitSwitchConfigs;
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.SlotConfigs;
+import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
@@ -28,11 +32,25 @@ public class ElevatorSubsystem extends SubsystemBase {
       new TalonFXConfiguration().MotorOutput
         .withInverted(InvertedValue.CounterClockwise_Positive));
     elevatorMotor.setNeutralMode(NeutralModeValue.Brake);
+
+    elevatorMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
+				.withForwardSoftLimitThreshold(ElevatorConstants.elevatorSoftMax).withReverseSoftLimitEnable(true)
+				.withReverseSoftLimitThreshold(ElevatorConstants.elevatorSoftMin));
+
     elevatorMotor.getConfigurator().apply(
       new HardwareLimitSwitchConfigs()
         .withReverseLimitEnable(true)
         .withReverseLimitAutosetPositionEnable(true)
         .withReverseLimitAutosetPositionValue(0));
+
+    elevatorMotor.getConfigurator()
+				.apply(new SlotConfigs().withKP(ElevatorConstants.elevatorkP).withKI(ElevatorConstants.elevatorkI)
+						.withKD(ElevatorConstants.elevatorkD).withKV(ElevatorConstants.elevatorkV)
+						.withKG(ElevatorConstants.elevatorkG).withGravityType(GravityTypeValue.Elevator_Static));
+    elevatorMotor.getConfigurator()
+				.apply(new MotionMagicConfigs()
+        .withMotionMagicAcceleration(ElevatorConstants.elevatorAcceleration)
+        .withMotionMagicCruiseVelocity(ElevatorConstants.elevatorCruiseVelocity));
   }
 
   public static void setElevatorMotor(double voltage) {

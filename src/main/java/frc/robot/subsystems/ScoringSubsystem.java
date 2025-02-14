@@ -5,6 +5,9 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.FeedbackConfigs;
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.SlotConfigs;
+import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
@@ -25,20 +28,36 @@ public class ScoringSubsystem extends SubsystemBase {
 
 
   public ScoringSubsystem() {
-    rotateMotor = new TalonFX(IDConstants.rotateMotorID, "rio");
-    rotateMotor.getConfigurator().apply(
-      new TalonFXConfiguration().MotorOutput
-        .withInverted(InvertedValue.CounterClockwise_Positive));
-
-     rotateMotor.getConfigurator()
-				.apply(new FeedbackConfigs().withFeedbackRemoteSensorID(IDConstants.rotateCanCoderID)
-						.withRotorToSensorRatio(ScoringConstants.rotateMotorToEncoder).withSensorToMechanismRatio(1)
-						.withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder));
-
     scoringMotor = new TalonFX(IDConstants.scoringMotorID, "rio");
     scoringMotor.getConfigurator().apply(
       new TalonFXConfiguration().MotorOutput
         .withInverted(InvertedValue.CounterClockwise_Positive));
+
+    rotateMotor = new TalonFX(IDConstants.rotateMotorID, "rio");
+    rotateMotor.getConfigurator().apply(
+      new TalonFXConfiguration().MotorOutput
+            .withInverted(InvertedValue.CounterClockwise_Positive));
+    
+    
+    rotateMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
+				.withForwardSoftLimitThreshold(ScoringConstants.rotateSoftMax).withReverseSoftLimitEnable(true)
+				.withReverseSoftLimitThreshold(ScoringConstants.rotateSoftMin));
+
+    rotateMotor.getConfigurator()
+        .apply(new FeedbackConfigs().withFeedbackRemoteSensorID(IDConstants.rotateCanCoderID)
+            .withRotorToSensorRatio(ScoringConstants.rotateMotorToEncoder).withSensorToMechanismRatio(1)
+            .withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder)); 
+
+    rotateMotor.getConfigurator()
+				.apply(new SlotConfigs().withKP(ScoringConstants.rotatekP).withKI(ScoringConstants.rotatekI)
+						.withKD(ScoringConstants.rotatekD).withKV(ScoringConstants.rotatekV)
+						.withKG(ScoringConstants.rotatekG));
+
+    rotateMotor.getConfigurator()
+				.apply(new MotionMagicConfigs()
+        .withMotionMagicAcceleration(ScoringConstants.rotateAcceleration)
+        .withMotionMagicCruiseVelocity(ScoringConstants.rotateCruiseVelocity));
+        
 
 
     rotateCanCoder = new CANcoder(IDConstants.rotateCanCoderID, "rio");

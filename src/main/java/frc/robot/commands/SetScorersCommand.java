@@ -11,11 +11,13 @@ import frc.robot.subsystems.ScoringSubsystem;
 public class SetScorersCommand extends Command {
 	/** Creates a new SetElevatorCommand. */
 	double angle;
+	boolean wait;
 
 	/** Creates a new AngleShooterCommand. */
-	public SetScorersCommand(double angle) {
+	public SetScorersCommand(double angle, boolean wait) {
 		// Use addRequirements() here to declare subsystem dependencies..a
 		this.angle = angle;
+		this.wait = wait;
 	}
 
 	// Called when the command is initially scheduled.
@@ -38,6 +40,13 @@ public class SetScorersCommand extends Command {
 	@Override
 	public boolean isFinished() {
 		// System.out.println(height + " " +
-		return MathUtil.isNear(angle, ScoringSubsystem.getRotateAngle(), 0.2);
+		if(!wait)
+		{
+			return true;
+		}
+		else
+		{
+			return MathUtil.isNear(angle, ScoringSubsystem.getRotateAngle(), 0.2);
+		}
 	}
 }
