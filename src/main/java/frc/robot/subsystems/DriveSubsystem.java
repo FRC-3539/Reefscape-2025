@@ -55,6 +55,8 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 
 		double dtRadius = new Translation2d().nearest(Arrays.asList(moduleLocations)).getDistance(new Translation2d());
 		maxRotationalVelocity = (maxVelocity / dtRadius);
+
+		configureAutoBuilder();
 	}
 
 	// public void seedFieldRelative(Trajectory trajectory) {
