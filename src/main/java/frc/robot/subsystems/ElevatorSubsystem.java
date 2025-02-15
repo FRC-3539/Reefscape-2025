@@ -16,6 +16,7 @@ import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.IDConstants;
@@ -66,6 +67,11 @@ public class ElevatorSubsystem extends SubsystemBase {
 	public static void initializeElevatorPosition() {
 		requestedElevatorPos = getElevatorPosition();
 	}
+  public void log()
+  {
+    SmartDashboard.putNumber("/Elevator/ElevatorPosition", getElevatorPosition());
+		SmartDashboard.putNumber("/Elevator/TargetElevatorPosition", requestedElevatorPos);
+  }
   @Override
   public void periodic() {
     elevatorMotor.setControl(

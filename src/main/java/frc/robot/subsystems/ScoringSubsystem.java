@@ -17,6 +17,7 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ScoringConstants;
 import frc.robot.constants.IDConstants;
@@ -89,6 +90,12 @@ public class ScoringSubsystem extends SubsystemBase {
     scoringMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
 
 }
+
+  public void log()
+  {
+    SmartDashboard.putNumber("/Scoring/RotateAngle", getRotateAngle());
+		SmartDashboard.putNumber("/Scoring/TargetRotateAngle", requestedRotatePos);
+  }
 /**
  * Servo values range from 0.0 to 1.0 corresponding to the range of full left to full right.
 

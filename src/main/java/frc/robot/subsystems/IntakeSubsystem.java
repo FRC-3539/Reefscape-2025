@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.IDConstants;
@@ -129,6 +130,11 @@ public class IntakeSubsystem extends SubsystemBase {
 		return Units.degreesToRotations(degrees - IntakeConstants.homeFunnelDeployAngle)
 				+ IntakeConstants.funnelDeployRestingRotations;
 	}
+  public void log()
+  {
+    SmartDashboard.putNumber("/Intake/FunnelAngle", getFunnelDeployAngle());
+		SmartDashboard.putNumber("/Intake/TargetFunnelAngle", requestedFunnelDeployPos);
+  }
 
   @Override
   public void periodic() {

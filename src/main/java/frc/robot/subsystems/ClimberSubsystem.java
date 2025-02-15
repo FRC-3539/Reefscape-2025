@@ -16,6 +16,7 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ClimberConstants;
 import frc.robot.constants.IDConstants;
@@ -46,7 +47,7 @@ public class ClimberSubsystem extends SubsystemBase {
 				.apply(new SlotConfigs().withKP(ClimberConstants.climberkP).withKI(ClimberConstants.climberkI)
 						.withKD(ClimberConstants.climberkD).withKV(ClimberConstants.climberkV)
 						.withKG(ClimberConstants.climberkG));
-            
+
     climberMotor.getConfigurator()
 				.apply(new MotionMagicConfigs()
         .withMotionMagicAcceleration(ClimberConstants.climberAcceleration)
@@ -61,6 +62,10 @@ public class ClimberSubsystem extends SubsystemBase {
 				climberCanCoder.getAbsolutePosition().getValueAsDouble() - ClimberConstants.climberRestingRotations)
 				+ ClimberConstants.restClimberAngle;
 	}
+  public void log()
+  {
+    SmartDashboard.putNumber("/Climber/ClimberAngle", getClimberAngle());
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
