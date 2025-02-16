@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.AlgaePositionCommand.AlgaeMode;
 import frc.robot.commands.CoralPositionCommand.CoralMode;
 import frc.robot.commands.SetFunnelPositionCommand.IntakeMode;
+import frc.robot.Generated.TunerConstants;
 import frc.robot.commands.*;
 import frc.robot.commands.ScoringCommand.ScoringMode;
 import frc.robot.subsystems.*;
@@ -32,11 +33,11 @@ public class RobotContainer {
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
-  public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
-  public static ScoringSubsystem ScoringSubsystem = new ScoringSubsystem();
-  public static ElevatorSubsystem ElevatorSubsystem = new ElevatorSubsystem();
-  public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
-  //public static DriveSubsystem DriveSubsystem = TunerConstants.createDrivetrain();
+  public static IntakeSubsystem IntakeSubsystem;// = new IntakeSubsystem();
+  public static ScoringSubsystem ScoringSubsystem;// = new ScoringSubsystem();
+  public static ElevatorSubsystem ElevatorSubsystem;// = new ElevatorSubsystem();
+  public static ClimberSubsystem ClimberSubsystem; //new ClimberSubsystem();
+  public static DriveSubsystem DriveSubsystem = TunerConstants.createDrivetrain();
   
 	public static CommandXboxController driverController = new CommandXboxController(1);
 	public static CommandXboxController operatorController = new CommandXboxController(0);
@@ -90,7 +91,9 @@ public class RobotContainer {
 		SmartDashboard.putData(chooser);
   }
   private void configureBindings() {
-    //DriveSubsystem.setDefaultCommand(new DriveCommand());
+    DriveSubsystem.setDefaultCommand(new DriveCommand());
+    driverController.start().whileTrue(new ZeroGyroCommand());
+
     
     //Algae Commands
     operatorController.leftTrigger().whileTrue(new AlgaeIntakeCommand());

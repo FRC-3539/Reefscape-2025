@@ -108,22 +108,22 @@ public class IntakeSubsystem extends SubsystemBase {
 	}
   
   public static void setAlgaeIntakeMotor(double voltage) {
-    algaeIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+    // algaeIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
 
   public static void setAlgaeDeployMotor(double voltage) {
-    algaeDeployMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+    // algaeDeployMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
 
   public static void setfunnelDeployMotor(double voltage) {
-    funnelDeployMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+    // funnelDeployMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
 
   public static void setCoralIntakeMotor(double voltage) {
-    coralIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+    // coralIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
   public static void setFunnelIntakeMotor(double voltage) {
-    funnelIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+    // funnelIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
 
   public static double degreesToFunnelDeployRotations(double degrees) {
@@ -139,6 +139,6 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    funnelDeployMotor.setControl(new MotionMagicVoltage(degreesToFunnelDeployRotations(requestedFunnelDeployPos)));
+    // funnelDeployMotor.setControl(new MotionMagicVoltage(degreesToFunnelDeployRotations(requestedFunnelDeployPos)));
   }
 }

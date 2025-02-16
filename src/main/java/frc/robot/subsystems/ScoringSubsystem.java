@@ -87,7 +87,7 @@ public class ScoringSubsystem extends SubsystemBase {
 	}
   
   public static void scoringMotor(double voltage){
-    scoringMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+    // scoringMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
 
 }
 
@@ -105,7 +105,7 @@ public class ScoringSubsystem extends SubsystemBase {
  
   @Override
   public void periodic() {
-    rotateMotor.setControl(new MotionMagicVoltage(degreesToRotateRotations(requestedRotatePos)));
+    // rotateMotor.setControl(new MotionMagicVoltage(degreesToRotateRotations(requestedRotatePos)));
 
     }
   }

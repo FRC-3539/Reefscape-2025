@@ -55,7 +55,7 @@ public class ClimberSubsystem extends SubsystemBase {
       
   }
   public static void setClimberMotor(double voltage) {
-    climberMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+    // climberMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
   public static double getClimberAngle() {
 		return Units.rotationsToDegrees(

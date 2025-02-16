@@ -55,7 +55,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public static void setElevatorMotor(double voltage) {
-    elevatorMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+    // elevatorMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
   public static double getElevatorPosition() {
 		return elevatorMotor.getPosition().getValueAsDouble() * ElevatorConstants.elevatorMotorToInches;
@@ -74,7 +74,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
   @Override
   public void periodic() {
-    elevatorMotor.setControl(
-      new MotionMagicVoltage((requestedElevatorPos / ElevatorConstants.elevatorMotorToInches)));  
-    }
+    // elevatorMotor.setControl(
+    //   new MotionMagicVoltage((requestedElevatorPos / ElevatorConstants.elevatorMotorToInches)));  
+     }
 }
