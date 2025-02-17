@@ -24,10 +24,10 @@ import frc.robot.constants.IDConstants;
 public class ClimberSubsystem extends SubsystemBase {
   /** Creates a new ClimberSubsystem. */
   private static TalonFX climberMotor;
-  private static  CANcoder climberCanCoder;
+  //private static  CANcoder climberCanCoder;
 
   public ClimberSubsystem() {
-    climberCanCoder = new CANcoder(IDConstants.climberCanCoderID, "rio");
+   // climberCanCoder = new CANcoder(IDConstants.climberCanCoderID, "rio");
 
     climberMotor = new TalonFX(IDConstants.climberMotorID, "rio");
     climberMotor.getConfigurator().apply(
@@ -38,10 +38,10 @@ public class ClimberSubsystem extends SubsystemBase {
 				.withForwardSoftLimitThreshold(ClimberConstants.climberSoftMax).withReverseSoftLimitEnable(true)
 				.withReverseSoftLimitThreshold(ClimberConstants.climberSoftMin));
 
-    climberMotor.getConfigurator()
-				.apply(new FeedbackConfigs().withFeedbackRemoteSensorID(IDConstants.climberCanCoderID)
-						.withRotorToSensorRatio(ClimberConstants.climberMotorToEncoder).withSensorToMechanismRatio(1)
-						.withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder));
+    // climberMotor.getConfigurator()
+		// 		.apply(new FeedbackConfigs().withFeedbackRemoteSensorID(IDConstants.climberCanCoderID)
+		// 				.withRotorToSensorRatio(ClimberConstants.climberMotorToEncoder).withSensorToMechanismRatio(1)
+		// 				.withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder));
 
     climberMotor.getConfigurator()
 				.apply(new SlotConfigs().withKP(ClimberConstants.climberkP).withKI(ClimberConstants.climberkI)
@@ -57,14 +57,14 @@ public class ClimberSubsystem extends SubsystemBase {
   public static void setClimberMotor(double voltage) {
     // climberMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
-  public static double getClimberAngle() {
-		return Units.rotationsToDegrees(
-				climberCanCoder.getAbsolutePosition().getValueAsDouble() - ClimberConstants.climberRestingRotations)
-				+ ClimberConstants.restClimberAngle;
-	}
+  // public static double getClimberAngle() {
+	// 	return Units.rotationsToDegrees(
+	// 			climberCanCoder.getAbsolutePosition().getValueAsDouble() - ClimberConstants.climberRestingRotations)
+	// 			+ ClimberConstants.restClimberAngle;
+	// }
   public void log()
   {
-    SmartDashboard.putNumber("/Climber/ClimberAngle", getClimberAngle());
+    //SmartDashboard.putNumber("/Climber/ClimberAngle", getClimberAngle());
   }
   @Override
   public void periodic() {
