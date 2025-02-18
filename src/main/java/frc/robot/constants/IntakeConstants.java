@@ -23,6 +23,7 @@ public class IntakeConstants extends BBConstants {
 	public static double funnelDeploySoftMax = 0.0;
 	public static double funnelDeployMotorToEncoder = 0;
 	public static double funnelDeployRestingRotations = 0;
+	public static double funnelDeployOffset = 0.0;
 	public static double homeFunnelDeployAngle = 0;
 	public static double humanFunnelDeployAngle = 0;
 	public static double groundFunnelDeployAngle = 0;
