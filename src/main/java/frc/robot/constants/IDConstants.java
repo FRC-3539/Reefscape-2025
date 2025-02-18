@@ -18,7 +18,7 @@ public class IDConstants extends BBConstants {
 	public static int FLSteeringID = 7;
 	public static int funnelDeployMotorID = 9;
 	public static int funnelIntakeMotorID = 10;
-	public static int coralIntakeMotorID = 11;
+	public static int coralIntakeMotorID = 8;
 	public static int algaeDeployMotorID = 12;
 	public static int algaeIntakeMotorID = 13;
 	public static int rotateMotorID = 14;
@@ -31,7 +31,8 @@ public class IDConstants extends BBConstants {
 	public static int FLCanCoderID = 23;
 	public static int funnelDeployCanCoderID = 24;
 	public static int rotateCanCoderID = 25;
-	public static int climberCanCoderID = 26;
 	public static int pigeonID = 11;
-	public static int TalonFXSID = 8;
+	public static int coralRange = 18;
+	public static int funnelRange = 19;
+	public static int algaeRange = 26;
 }
