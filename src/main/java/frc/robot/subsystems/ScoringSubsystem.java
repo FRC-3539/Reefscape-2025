@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
 
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.FovParamsConfigs;
+import com.ctre.phoenix6.configs.MagnetSensorConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.SlotConfigs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
@@ -19,6 +20,7 @@ import com.ctre.phoenix6.hardware.CANrange;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -68,6 +70,11 @@ public class ScoringSubsystem extends SubsystemBase {
 
 
     rotateCanCoder = new CANcoder(IDConstants.rotateCanCoderID, "rio");
+    
+    rotateCanCoder.getConfigurator()
+				.apply(new MagnetSensorConfigs().withAbsoluteSensorDiscontinuityPoint(ScoringConstants.rotateDiscontPoint)
+						.withSensorDirection(SensorDirectionValue.CounterClockwise_Positive)
+						.withMagnetOffset(ScoringConstants.rotateOffset));
 
     coralRange = new CANrange(IDConstants.funnelRangeID, "rio");
 

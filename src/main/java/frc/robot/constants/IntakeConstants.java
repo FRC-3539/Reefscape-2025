@@ -37,4 +37,5 @@ public class IntakeConstants extends BBConstants {
 	public static double algaeDeployCruiseVelocity = 0.0;
 	public static double algaeDeploySoftMin = 0.0;
 	public static double algaeDeploySoftMax = 0.0;
+	public static double funnelDeployDiscontPoint = 1;
 }

@@ -4,18 +4,44 @@
 
 package frc.robot.commands;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.path.GoalEndState;
+import com.pathplanner.lib.path.PathConstraints;
+import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.path.Waypoint;
+
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.DriveSubsystem.AlignMode;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class AutoAlignCommand extends Command {
+ 
+    
+  AlignMode mode;
+  Command alignCommand;
+
   /** Creates a new AutoAlignCommand. */
-  public AutoAlignCommand() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public AutoAlignCommand(AlignMode targetPoint) {
+    mode = targetPoint;
+    
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    // Create a list of waypoints from poses. Each pose represents one waypoint.
+// The rotation component of the pose should be the direction of travel. Do not use holonomic rotation.
+alignCommand = RobotContainer.DriveSubsystem.generateAlignCommand(mode);
+alignCommand.addRequirements(RobotContainer.DriveSubsystem);
+alignCommand.schedule();
+}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -23,7 +49,9 @@ public class AutoAlignCommand extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    alignCommand.cancel();
+  }
 
   // Returns true when the command should end.
   @Override

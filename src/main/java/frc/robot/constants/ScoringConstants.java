@@ -33,4 +33,5 @@ public class ScoringConstants extends BBConstants {
 	public static double netPosition = 0.0;
 	public static double algaeLowPosition = 0.0;
 	public static double algaeHighPosition = 0.0;
+	public static double rotateDiscontPoint = 1;
 }

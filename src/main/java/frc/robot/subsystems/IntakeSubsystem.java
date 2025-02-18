@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.FovParamsConfigs;
+import com.ctre.phoenix6.configs.MagnetSensorConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.SlotConfigs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
@@ -26,6 +27,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 
 public class IntakeSubsystem extends SubsystemBase { 
@@ -41,6 +43,11 @@ public class IntakeSubsystem extends SubsystemBase {
   public IntakeSubsystem() {
 
     funnelDeployCanCoder = new CANcoder(IDConstants.funnelDeployCanCoderID, "rio");
+
+    funnelDeployCanCoder.getConfigurator()
+				.apply(new MagnetSensorConfigs().withAbsoluteSensorDiscontinuityPoint(IntakeConstants.funnelDeployDiscontPoint)
+						.withSensorDirection(SensorDirectionValue.CounterClockwise_Positive)
+						.withMagnetOffset(IntakeConstants.funnelDeployOffset));
 
     algaeDeployMotor = new TalonFX(IDConstants.algaeDeployMotorID, "rio");
     algaeDeployMotor.getConfigurator().apply(
