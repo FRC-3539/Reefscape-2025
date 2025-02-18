@@ -4,7 +4,10 @@
 
 package frc.robot.subsystems;
 
+import java.text.DecimalFormat;
+
 import com.ctre.phoenix6.configs.FeedbackConfigs;
+import com.ctre.phoenix6.configs.FovParamsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.SlotConfigs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
@@ -12,6 +15,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.CANcoder;
+import com.ctre.phoenix6.hardware.CANrange;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
@@ -25,7 +29,9 @@ import frc.robot.constants.IDConstants;
 public class ScoringSubsystem extends SubsystemBase {
   private static TalonFX rotateMotor, scoringMotor;
   private static CANcoder rotateCanCoder;
+  private static CANrange algaeRange, coralRange;
   private static double requestedRotatePos = 0;
+  DecimalFormat df = new DecimalFormat("#.00000");
 
 
   public ScoringSubsystem() {
@@ -62,6 +68,22 @@ public class ScoringSubsystem extends SubsystemBase {
 
 
     rotateCanCoder = new CANcoder(IDConstants.rotateCanCoderID, "rio");
+
+    coralRange = new CANrange(IDConstants.funnelRangeID, "rio");
+
+		coralRange.getConfigurator().apply(new FovParamsConfigs()
+		.withFOVCenterX(0)
+		.withFOVCenterY(0)
+		.withFOVRangeX(6.75)
+		.withFOVRangeY(6.75));
+
+    algaeRange = new CANrange(IDConstants.funnelRangeID, "rio");
+
+		algaeRange.getConfigurator().apply(new FovParamsConfigs()
+		.withFOVCenterX(0)
+		.withFOVCenterY(0)
+		.withFOVRangeX(6.75)
+		.withFOVRangeY(6.75));
   }
   public static void setRotateMotor(double voltage){
         rotateMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
@@ -90,11 +112,20 @@ public class ScoringSubsystem extends SubsystemBase {
     // scoringMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
 
 }
+public double getCoralDistance() {
+  return coralRange.getDistance().getValueAsDouble();
+}
+public double getAlgaeDistance() {
+  return algaeRange.getDistance().getValueAsDouble();
+}
 
   public void log()
   {
     SmartDashboard.putNumber("/Scoring/RotateAngle", getRotateAngle());
 		SmartDashboard.putNumber("/Scoring/TargetRotateAngle", requestedRotatePos);
+    SmartDashboard.putString("/Scoring/CoralDistance", df.format(getCoralDistance()));
+    SmartDashboard.putString("/Scoring/AlgaeDistance", df.format(getAlgaeDistance()));
+
   }
 /**
  * Servo values range from 0.0 to 1.0 corresponding to the range of full left to full right.

@@ -32,7 +32,7 @@ public class IDConstants extends BBConstants {
 	public static int funnelDeployCanCoderID = 24;
 	public static int rotateCanCoderID = 25;
 	public static int pigeonID = 11;
-	public static int coralRange = 18;
-	public static int funnelRange = 19;
-	public static int algaeRange = 26;
+	public static int coralRangeID = 18;
+	public static int funnelRangeID = 19;
+	public static int algaeRangeID = 26;
 }

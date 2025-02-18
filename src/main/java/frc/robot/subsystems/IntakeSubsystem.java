@@ -10,7 +10,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.IDConstants;
 
+import java.text.DecimalFormat;
+
 import com.ctre.phoenix6.configs.FeedbackConfigs;
+import com.ctre.phoenix6.configs.FovParamsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.SlotConfigs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
@@ -18,6 +21,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.CANcoder;
+import com.ctre.phoenix6.hardware.CANrange;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.GravityTypeValue;
@@ -29,7 +33,10 @@ public class IntakeSubsystem extends SubsystemBase {
   private static TalonFX algaeDeployMotor,algaeIntakeMotor,funnelDeployMotor, funnelIntakeMotor, coralIntakeMotor;
  
   private static CANcoder funnelDeployCanCoder;
+  private static CANrange funnelRange;
   private static double requestedFunnelDeployPos = 0;
+  DecimalFormat df = new DecimalFormat("#.00000");
+
 
   public IntakeSubsystem() {
 
@@ -92,6 +99,14 @@ public class IntakeSubsystem extends SubsystemBase {
             .apply(new MotionMagicConfigs()
             .withMotionMagicAcceleration(IntakeConstants.funnelDeployAcceleration)
             .withMotionMagicCruiseVelocity(IntakeConstants.funnelDeployCruiseVelocity));
+    funnelRange = new CANrange(IDConstants.funnelRangeID, "rio");
+
+		funnelRange.getConfigurator().apply(new FovParamsConfigs()
+		.withFOVCenterX(0)
+		.withFOVCenterY(0)
+		.withFOVRangeX(6.75)
+		.withFOVRangeY(6.75)
+		);
   }
     public static double getFunnelDeployAngle() {
 		return Units.rotationsToDegrees(
@@ -130,10 +145,15 @@ public class IntakeSubsystem extends SubsystemBase {
 		return Units.degreesToRotations(degrees - IntakeConstants.homeFunnelDeployAngle)
 				+ IntakeConstants.funnelDeployRestingRotations;
 	}
+  public double getFunnelDistance() {
+		return funnelRange.getDistance().getValueAsDouble();
+	}
   public void log()
   {
     SmartDashboard.putNumber("/Intake/FunnelAngle", getFunnelDeployAngle());
 		SmartDashboard.putNumber("/Intake/TargetFunnelAngle", requestedFunnelDeployPos);
+    SmartDashboard.putString("/Intake/FunnelDistance", df.format(getFunnelDistance()));
+
   }
 
   @Override
