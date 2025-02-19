@@ -34,8 +34,8 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
   public static IntakeSubsystem IntakeSubsystem;// = new IntakeSubsystem();
-  public static ScoringSubsystem ScoringSubsystem;// = new ScoringSubsystem();
-  public static ElevatorSubsystem ElevatorSubsystem;// = new ElevatorSubsystem();
+  public static ScoringSubsystem ScoringSubsystem = new ScoringSubsystem();
+  public static ElevatorSubsystem ElevatorSubsystem = new ElevatorSubsystem();
   public static ClimberSubsystem ClimberSubsystem; //new ClimberSubsystem();
   public static DriveSubsystem DriveSubsystem = TunerConstants.createDrivetrain();
   
@@ -52,6 +52,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     putAutons();
+    putCommands();
   
     //Scoring Commands
     NamedCommands.registerCommand("AlgaeScoringCommand", new ScoringCommand(ScoringMode.ALGAE));
@@ -90,6 +91,10 @@ public class RobotContainer {
     chooser = AutoBuilder.buildAutoChooser();
 		SmartDashboard.putData(chooser);
   }
+  public void putCommands() {
+		SmartDashboard.putData(new DisableElevatorBreakModeCommand().ignoringDisable(true));
+	}
+
   private void configureBindings() {
     DriveSubsystem.setDefaultCommand(new DriveCommand());
     driverController.start().whileTrue(new ZeroGyroCommand());

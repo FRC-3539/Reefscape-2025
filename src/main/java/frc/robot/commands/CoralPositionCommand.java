@@ -8,45 +8,46 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.constants.*;
 
-
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class CoralPositionCommand extends SequentialCommandGroup {
   boolean auton;
+
   public enum CoralMode {
-		TROUGH, LOW, MID, HIGH;
-	}   
+    TROUGH, LOW, MID, HIGH;
+  }
+
   public CoralPositionCommand(CoralMode mode, boolean auton) {
     this.auton = auton;
     switch (mode) {
-			case TROUGH :
+      case TROUGH:
 
-      addCommands(
-        new ParallelCommandGroup(
-          new SetElevatorCommand(ElevatorConstants.troughHeight, auton), 
-          new SetScorersCommand(ScoringConstants.troughPosition, auton)));
-      break;
+        addCommands(
+            new ParallelCommandGroup(
+                new SetElevatorCommand(ElevatorConstants.troughHeight, auton),
+                new SetScorersCommand(ScoringConstants.troughPosition, auton)));
+        break;
 
-			case LOW :
-			addCommands(
-        new ParallelCommandGroup(
-          new SetElevatorCommand(ElevatorConstants.coralLowHeight, auton), 
-          new SetScorersCommand(ScoringConstants.coralLowPosition, auton)));
-      break;
+      case LOW:
+        addCommands(
+            new ParallelCommandGroup(
+                new SetElevatorCommand(ElevatorConstants.coralLowHeight, auton),
+                new SetScorersCommand(ScoringConstants.coralLowPosition, auton)));
+        break;
 
-			case MID :
-      addCommands(
-        new ParallelCommandGroup(
-          new SetElevatorCommand(ElevatorConstants.coralMidHeight, auton), 
-          new SetScorersCommand(ScoringConstants.coralMidPosition, auton)));
-				break;
+      case MID:
+        addCommands(
+            new ParallelCommandGroup(
+                new SetElevatorCommand(ElevatorConstants.coralMidHeight, auton),
+                new SetScorersCommand(ScoringConstants.coralMidPosition, auton)));
+        break;
 
-      case HIGH: 
-      addCommands(
-        new ParallelCommandGroup(
-          new SetElevatorCommand(ElevatorConstants.coralHighHeight, auton), 
-          new SetScorersCommand(ScoringConstants.coralHighPosition, auton)));
-      break;
-		}
+      case HIGH:
+        addCommands(
+            new ParallelCommandGroup(
+                new SetElevatorCommand(ElevatorConstants.coralHighHeight, auton),
+                new SetScorersCommand(ScoringConstants.coralHighPosition, auton)));
+        break;
+    }
   }
 
 }

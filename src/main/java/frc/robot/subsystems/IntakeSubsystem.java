@@ -165,6 +165,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    log();
     // This method will be called once per scheduler run
     // funnelDeployMotor.setControl(new MotionMagicVoltage(degreesToFunnelDeployRotations(requestedFunnelDeployPos)));
   }

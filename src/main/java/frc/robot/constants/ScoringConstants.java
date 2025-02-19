@@ -8,30 +8,30 @@ public class ScoringConstants extends BBConstants {
 		save();
 	}
 
-	public static double algaeScoringVoltage = 2;
+	public static double algaeScoringVoltage = -2;
 	public static double coralScoringVoltage = 2;
 	public static double rotateVoltage = 2;
-	public static double rotatekP = 0.0;
+	public static double rotatekP = 60;
 	public static double rotatekI = 0.0;
 	public static double rotatekD = 0.0;
 	public static double rotatekG = 0.0;
 	public static double rotatekV = 0.0;
-	public static double rotateAcceleration = 0.0;
-	public static double rotateCruiseVelocity = 0.0;
+	public static double rotateAcceleration = 1;
+	public static double rotateCruiseVelocity = 0.1;
 	public static double rotateMotorToInches = 0.0;
-	public static double restRotateAngle = 0.0;
+	public static double restRotateAngle = -135;
 	public static double rotateRestingRotations = 0.0;
-	public static double rotateMotorToEncoder = 0.0;
-	public static double rotateSoftMin = 0.0;
-	public static double rotateSoftMax = 0.0;
-	public static double rotateOffset = 0.0;
-	public static double troughPosition = 0.0;
-	public static double coralLowPosition = 0.0;
-	public static double coralMidPosition = 0.0;
-	public static double coralHighPosition = 0.0;
-	public static double processorPosition = 0.0;
-	public static double netPosition = 0.0;
-	public static double algaeLowPosition = 0.0;
-	public static double algaeHighPosition = 0.0;
-	public static double rotateDiscontPoint = 1;
+	public static double rotateMotorToEncoder = 162;
+	public static double rotateSoftMin = -0.038;
+	public static double rotateSoftMax = 0.14;
+	public static double rotateOffset = -0.542;
+	public static double troughPosition = 70;
+	public static double coralLowPosition = 40;
+	public static double coralMidPosition = 40;
+	public static double coralHighPosition = 15;
+	public static double processorPosition = 80;
+	public static double netPosition = 80;
+	public static double algaeLowPosition = 45;
+	public static double algaeHighPosition = 45;
+	public static double rotateDiscontPoint = 0.3;
 }

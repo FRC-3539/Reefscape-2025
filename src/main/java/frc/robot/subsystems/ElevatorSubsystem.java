@@ -28,21 +28,21 @@ public class ElevatorSubsystem extends SubsystemBase {
   private static double requestedElevatorPos = 0;
 
   public  ElevatorSubsystem() {
-    elevatorMotor = new TalonFX(IDConstants.algaeDeployMotorID, "rio");
+    elevatorMotor = new TalonFX(IDConstants.elevatorMotorID, "Default Name");
     elevatorMotor.getConfigurator().apply(
       new TalonFXConfiguration().MotorOutput
         .withInverted(InvertedValue.CounterClockwise_Positive));
     elevatorMotor.setNeutralMode(NeutralModeValue.Brake);
 
     elevatorMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
-				.withForwardSoftLimitThreshold(ElevatorConstants.elevatorSoftMax).withReverseSoftLimitEnable(true)
-				.withReverseSoftLimitThreshold(ElevatorConstants.elevatorSoftMin));
+				.withForwardSoftLimitThreshold((ElevatorConstants.elevatorSoftMax - ElevatorConstants.elevatorHomePositionOffset) / ElevatorConstants.elevatorInchesPerRotation).withReverseSoftLimitEnable(true)
+				.withReverseSoftLimitThreshold((ElevatorConstants.elevatorSoftMin - ElevatorConstants.elevatorHomePositionOffset) / ElevatorConstants.elevatorInchesPerRotation));
 
-    elevatorMotor.getConfigurator().apply(
-      new HardwareLimitSwitchConfigs()
-        .withReverseLimitEnable(true)
-        .withReverseLimitAutosetPositionEnable(true)
-        .withReverseLimitAutosetPositionValue(0));
+    // elevatorMotor.getConfigurator().apply(
+    //   new HardwareLimitSwitchConfigs()
+    //     .withReverseLimitEnable(true)
+    //     .withReverseLimitAutosetPositionEnable(true)
+    //     .withReverseLimitAutosetPositionValue(0));
 
     elevatorMotor.getConfigurator()
 				.apply(new SlotConfigs().withKP(ElevatorConstants.elevatorkP).withKI(ElevatorConstants.elevatorkI)
@@ -58,7 +58,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     // elevatorMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
   public static double getElevatorPosition() {
-		return elevatorMotor.getPosition().getValueAsDouble() * ElevatorConstants.elevatorMotorToInches;
+		return elevatorMotor.getPosition().getValueAsDouble() *
+     ElevatorConstants.elevatorInchesPerRotation + ElevatorConstants.elevatorHomePositionOffset;
 	}
   public static void setElevatorPosition(double request) {
 		requestedElevatorPos = request;
@@ -67,6 +68,13 @@ public class ElevatorSubsystem extends SubsystemBase {
 	public static void initializeElevatorPosition() {
 		requestedElevatorPos = getElevatorPosition();
 	}
+  public static void setElevatorBreakMode(boolean enabled) {
+		if (enabled) {
+			elevatorMotor.setNeutralMode(NeutralModeValue.Brake);
+		} else {
+			elevatorMotor.setNeutralMode(NeutralModeValue.Coast);
+		}
+	}
   public void log()
   {
     SmartDashboard.putNumber("/Elevator/ElevatorPosition", getElevatorPosition());
@@ -74,7 +82,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
   @Override
   public void periodic() {
-    // elevatorMotor.setControl(
-    //   new MotionMagicVoltage((requestedElevatorPos / ElevatorConstants.elevatorMotorToInches)));  
+    log();
+    elevatorMotor.setControl(
+      new MotionMagicVoltage(((requestedElevatorPos - ElevatorConstants.elevatorHomePositionOffset) / ElevatorConstants.elevatorInchesPerRotation)));  
      }
 }

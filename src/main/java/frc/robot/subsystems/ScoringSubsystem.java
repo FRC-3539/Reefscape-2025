@@ -45,7 +45,7 @@ public class ScoringSubsystem extends SubsystemBase {
     rotateMotor = new TalonFX(IDConstants.rotateMotorID, "rio");
     rotateMotor.getConfigurator().apply(
       new TalonFXConfiguration().MotorOutput
-            .withInverted(InvertedValue.CounterClockwise_Positive));
+            .withInverted(InvertedValue.Clockwise_Positive));
     
     
     rotateMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
@@ -67,14 +67,14 @@ public class ScoringSubsystem extends SubsystemBase {
         .withMotionMagicAcceleration(ScoringConstants.rotateAcceleration)
         .withMotionMagicCruiseVelocity(ScoringConstants.rotateCruiseVelocity));
         
-
-
     rotateCanCoder = new CANcoder(IDConstants.rotateCanCoderID, "rio");
     
     rotateCanCoder.getConfigurator()
 				.apply(new MagnetSensorConfigs().withAbsoluteSensorDiscontinuityPoint(ScoringConstants.rotateDiscontPoint)
 						.withSensorDirection(SensorDirectionValue.CounterClockwise_Positive)
 						.withMagnetOffset(ScoringConstants.rotateOffset));
+
+    rotateCanCoder.setPosition(rotateCanCoder.getAbsolutePosition().getValue());
 
     coralRange = new CANrange(IDConstants.funnelRangeID, "rio");
 
@@ -98,8 +98,7 @@ public class ScoringSubsystem extends SubsystemBase {
   }
   public static double getRotateAngle() {
 		return Units.rotationsToDegrees(
-				rotateCanCoder.getAbsolutePosition().getValueAsDouble() - ScoringConstants.rotateRestingRotations)
-				+ ScoringConstants.restRotateAngle;
+				rotateCanCoder.getAbsolutePosition().getValueAsDouble());
   }
 
   public static void setRotateAngle(double angle) {
@@ -111,12 +110,11 @@ public class ScoringSubsystem extends SubsystemBase {
 	}
   
   public static double degreesToRotateRotations(double degrees) {
-		return Units.degreesToRotations(degrees - ScoringConstants.restRotateAngle)
-				+ ScoringConstants.rotateRestingRotations;
+		return Units.degreesToRotations(degrees);
 	}
   
   public static void scoringMotor(double voltage){
-    // scoringMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+    scoringMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
 
 }
 public double getCoralDistance() {
@@ -143,8 +141,8 @@ public double getAlgaeDistance() {
  
   @Override
   public void periodic() {
-    // rotateMotor.setControl(new MotionMagicVoltage(degreesToRotateRotations(requestedRotatePos)));
-
+    rotateMotor.setControl(new MotionMagicVoltage(degreesToRotateRotations(requestedRotatePos)));
+      log();
     }
   }
 
