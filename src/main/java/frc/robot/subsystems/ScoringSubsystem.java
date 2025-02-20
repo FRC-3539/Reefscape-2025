@@ -76,7 +76,7 @@ public class ScoringSubsystem extends SubsystemBase {
 
     rotateCanCoder.setPosition(rotateCanCoder.getAbsolutePosition().getValue());
 
-    coralRange = new CANrange(IDConstants.funnelRangeID, "rio");
+    coralRange = new CANrange(IDConstants.coralRangeID, "rio");
 
 		coralRange.getConfigurator().apply(new FovParamsConfigs()
 		.withFOVCenterX(0)
@@ -84,7 +84,7 @@ public class ScoringSubsystem extends SubsystemBase {
 		.withFOVRangeX(6.75)
 		.withFOVRangeY(6.75));
 
-    algaeRange = new CANrange(IDConstants.funnelRangeID, "rio");
+    algaeRange = new CANrange(IDConstants.algaeRangeID, "rio");
 
 		algaeRange.getConfigurator().apply(new FovParamsConfigs()
 		.withFOVCenterX(0)

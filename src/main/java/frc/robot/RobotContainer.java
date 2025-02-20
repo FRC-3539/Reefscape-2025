@@ -33,7 +33,7 @@ public class RobotContainer {
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
-  public static IntakeSubsystem IntakeSubsystem;// = new IntakeSubsystem();
+  public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
   public static ScoringSubsystem ScoringSubsystem = new ScoringSubsystem();
   public static ElevatorSubsystem ElevatorSubsystem = new ElevatorSubsystem();
   public static ClimberSubsystem ClimberSubsystem; //new ClimberSubsystem();
@@ -93,6 +93,8 @@ public class RobotContainer {
   }
   public void putCommands() {
 		SmartDashboard.putData(new DisableElevatorBreakModeCommand().ignoringDisable(true));
+    SmartDashboard.putData(new DisableFunnelBreakModeCommand().ignoringDisable(true));
+
 	}
 
   private void configureBindings() {
@@ -103,22 +105,22 @@ public class RobotContainer {
     //Algae Commands
     operatorController.leftTrigger().whileTrue(new AlgaeIntakeCommand());
     operatorController.rightTrigger().whileTrue(new ScoringCommand(ScoringMode.ALGAE));
-    operatorController.povDown().onTrue(new AlgaePositionCommand(AlgaeMode.PROCESSOR, true));
-    operatorController.povRight().onTrue(new AlgaePositionCommand(AlgaeMode.REEFLOW, true));
-    operatorController.povUp().onTrue(new AlgaePositionCommand(AlgaeMode.REEFHIGH, true));
-    operatorController.povLeft().onTrue(new AlgaePositionCommand(AlgaeMode.NET, true));
+    operatorController.povDown().onTrue(new AlgaePositionCommand(AlgaeMode.PROCESSOR, false));
+    operatorController.povRight().onTrue(new AlgaePositionCommand(AlgaeMode.REEFLOW, false));
+    operatorController.povUp().onTrue(new AlgaePositionCommand(AlgaeMode.REEFHIGH, false));
+    operatorController.povLeft().onTrue(new AlgaePositionCommand(AlgaeMode.NET, false));
 
     //Coral Commands
     operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE));
-    operatorController.axisGreaterThan(0, 0.5).whileTrue(
+    operatorController.axisGreaterThan(1, 0.5).whileTrue(
       new SetFunnelPositionCommand(IntakeMode.HUMAN));
-    operatorController.axisLessThan(0, -0.5).whileTrue(
+    operatorController.axisLessThan(1, -0.5).whileTrue(
       new SetFunnelPositionCommand(IntakeMode.GROUND));
     operatorController.rightBumper().whileTrue(new ScoringCommand(ScoringMode.CORAL));
-    operatorController.a().onTrue(new CoralPositionCommand(CoralMode.TROUGH, true));
-    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.LOW, true));
-    operatorController.y().onTrue(new CoralPositionCommand(CoralMode.MID, true));
-    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.HIGH, true));
+    operatorController.a().onTrue(new CoralPositionCommand(CoralMode.TROUGH, false));
+    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.LOW, false));
+    operatorController.y().onTrue(new CoralPositionCommand(CoralMode.MID, false));
+    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.HIGH, false));
    
     //Climbing Command
     operatorController.rightStick().whileTrue(new ClimberCommand());

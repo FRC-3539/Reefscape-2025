@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 public class SetElevatorCommand extends Command {
@@ -16,6 +17,7 @@ public class SetElevatorCommand extends Command {
 	/** Creates a new AngleShooterCommand. */
 	public SetElevatorCommand(double height, boolean wait) {
 		// Use addRequirements() here to declare subsystem dependencies..a
+		addRequirements(RobotContainer.ElevatorSubsystem);
 		this.height = height;
 		this.wait = wait;
 	}
@@ -24,11 +26,13 @@ public class SetElevatorCommand extends Command {
 	@Override
 	public void initialize() {
 		ElevatorSubsystem.setElevatorPosition(height);
+
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+
 	}
 
 	// Called once the command ends or is interrupted.
