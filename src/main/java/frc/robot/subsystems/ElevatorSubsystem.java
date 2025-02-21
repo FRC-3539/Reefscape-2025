@@ -26,6 +26,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   private static TalonFX elevatorMotor;
   private static double requestedElevatorPos = 0;
+  private static boolean enforcedMinimumHeight, enforcedMaxHandOffHeight = false;
 
   public  ElevatorSubsystem() {
     elevatorMotor = new TalonFX(IDConstants.elevatorMotorID, "Default Name");
@@ -75,6 +76,14 @@ public class ElevatorSubsystem extends SubsystemBase {
 			elevatorMotor.setNeutralMode(NeutralModeValue.Coast);
 		}
 	}
+  public static void setEnforcedMinimumHeight(boolean enforce)
+  {
+    enforcedMinimumHeight = enforce;
+  }
+  public static void setEnforcedMaxHandOffHeight(boolean enforce)
+  {
+    enforcedMaxHandOffHeight = enforce;
+  }
   public void log()
   {
     SmartDashboard.putNumber("/Elevator/ElevatorPosition", getElevatorPosition());
@@ -82,8 +91,20 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
   @Override
   public void periodic() {
-    log();
+    double setElevatorPosition = requestedElevatorPos;
+
+    if(enforcedMinimumHeight)
+    {
+      setElevatorPosition = Math.max(setElevatorPosition, 21);
+    }
+    if(enforcedMaxHandOffHeight)
+    {
+      setElevatorPosition = Math.min(setElevatorPosition, 35);
+    }
+
     elevatorMotor.setControl(
-      new MotionMagicVoltage(((requestedElevatorPos - ElevatorConstants.elevatorHomePositionOffset) / ElevatorConstants.elevatorInchesPerRotation)));  
-     }
+      new MotionMagicVoltage(((setElevatorPosition - ElevatorConstants.elevatorHomePositionOffset) / ElevatorConstants.elevatorInchesPerRotation)));
+
+    log();
+  }
 }

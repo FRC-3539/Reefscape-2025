@@ -141,8 +141,46 @@ public double getAlgaeDistance() {
  
   @Override
   public void periodic() {
-    rotateMotor.setControl(new MotionMagicVoltage(degreesToRotateRotations(requestedRotatePos)));
-      log();
+    // Minimum elevator height needed for handoff
+    if(getRotateAngle() < 20 || requestedRotatePos < 45)
+    {
+      ElevatorSubsystem.setEnforcedMinimumHeight(true);
     }
+    else
+    {
+      ElevatorSubsystem.setEnforcedMinimumHeight(false);
+    }
+
+    // Maximum elevator height needed for handoff
+    if(getRotateAngle() < -70 || requestedRotatePos < -70)
+    {
+      ElevatorSubsystem.setEnforcedMaxHandOffHeight(true);
+    }
+    else
+    {
+      ElevatorSubsystem.setEnforcedMaxHandOffHeight(false);
+    }
+
+    double setRotatePosition = requestedRotatePos;
+
+    // Prevent movement while elevator is under the handoff minimum
+    if(ElevatorSubsystem.getElevatorPosition() < 20)
+    {
+      if(getRotateAngle() > -80)
+      {
+        setRotatePosition = Math.max(setRotatePosition, 45);
+      }
+    }
+
+    // Prevent movement while elevator is over the handoff maximum
+    if(ElevatorSubsystem.getElevatorPosition() > 35)
+    {
+      setRotatePosition = Math.max(setRotatePosition, -50);
+    }
+
+    rotateMotor.setControl(new MotionMagicVoltage(degreesToRotateRotations(setRotatePosition)));
+
+    log();
   }
+}
 

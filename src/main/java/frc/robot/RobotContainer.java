@@ -108,7 +108,9 @@ public class RobotContainer {
     operatorController.povDown().onTrue(new AlgaePositionCommand(AlgaeMode.PROCESSOR, false));
     operatorController.povRight().onTrue(new AlgaePositionCommand(AlgaeMode.REEFLOW, false));
     operatorController.povUp().onTrue(new AlgaePositionCommand(AlgaeMode.REEFHIGH, false));
-    operatorController.povLeft().onTrue(new AlgaePositionCommand(AlgaeMode.NET, false));
+    //operatorController.povLeft().onTrue(new AlgaePositionCommand(AlgaeMode.NET, false));
+
+    operatorController.povLeft().onTrue(new HandOffCommand(false));
 
     //Coral Commands
     operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE));
