@@ -12,7 +12,7 @@ import frc.robot.constants.*;
 public class AlgaePositionCommand extends SequentialCommandGroup {
   boolean auton;
   public enum AlgaeMode {
-		PROCESSOR, REEFLOW, REEFHIGH, NET;
+		PROCESSOR, REEFLOW, REEFHIGH, NET, GROUND;
 	}  
 
 public AlgaePositionCommand(AlgaeMode mode, boolean auton) {
@@ -45,7 +45,14 @@ public AlgaePositionCommand(AlgaeMode mode, boolean auton) {
         new ParallelCommandGroup(
           new SetElevatorCommand(ElevatorConstants.netHeight, auton), 
           new SetScorersCommand(ScoringConstants.netPosition,auton)));
-      break;  
+      break;
+
+      case GROUND: 
+      addCommands(
+        new ParallelCommandGroup(
+          new SetElevatorCommand(ElevatorConstants.groundHeight, auton), 
+          new SetScorersCommand(ScoringConstants.groundPosition,auton)));
+      break;
     }
   }
 }

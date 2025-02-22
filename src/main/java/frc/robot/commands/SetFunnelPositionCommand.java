@@ -66,14 +66,28 @@ public class SetFunnelPositionCommand extends Command {
   @Override
   public void execute() {
   
-    if(MathUtil.isNear(ScoringConstants.handOffPosition, ScoringSubsystem.getRotateAngle(), 3))
+    if(MathUtil.isNear(ScoringConstants.handOffPosition, ScoringSubsystem.getRotateAngle(), 5))
     {
-      IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
-      ScoringSubsystem.scoringMotor(ScoringConstants.algaeScoringVoltage);    
+      if(ScoringSubsystem.getCoralDistance() < 0.15)
+      {
+        IntakeSubsystem.setFunnelIntakeMotor(0);
+        ScoringSubsystem.scoringMotor(0); 
+        IntakeSubsystem.setCoralIntakeMotor(0);
+      }
+      else
+      {
+        IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
+        ScoringSubsystem.scoringMotor(ScoringConstants.algaeScoringVoltage);
+        IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
+      }
+        
     }
     else
     {
       IntakeSubsystem.setFunnelIntakeMotor(0);
+      ScoringSubsystem.scoringMotor(0);    
+      IntakeSubsystem.setCoralIntakeMotor(0);
+
     }
   
   }
@@ -84,6 +98,8 @@ public class SetFunnelPositionCommand extends Command {
     //IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.homeFunnelDeployAngle);
     IntakeSubsystem.setCoralIntakeMotor(0);
     IntakeSubsystem.setFunnelIntakeMotor(0);
+    ScoringSubsystem.scoringMotor(0);    
+
 
   }
 

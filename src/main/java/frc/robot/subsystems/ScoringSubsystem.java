@@ -34,6 +34,7 @@ public class ScoringSubsystem extends SubsystemBase {
   private static CANrange algaeRange, coralRange;
   private static double requestedRotatePos = 0;
   DecimalFormat df = new DecimalFormat("#.00000");
+  private static double scoringRestrictedMin = 35;
 
 
   public ScoringSubsystem() {
@@ -117,7 +118,7 @@ public class ScoringSubsystem extends SubsystemBase {
     scoringMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
 
 }
-public double getCoralDistance() {
+public static double getCoralDistance() {
   return coralRange.getDistance().getValueAsDouble();
 }
 public double getAlgaeDistance() {
@@ -142,7 +143,7 @@ public double getAlgaeDistance() {
   @Override
   public void periodic() {
     // Minimum elevator height needed for handoff
-    if(getRotateAngle() < 20 || requestedRotatePos < 45)
+    if(getRotateAngle() < scoringRestrictedMin || requestedRotatePos < scoringRestrictedMin)
     {
       ElevatorSubsystem.setEnforcedMinimumHeight(true);
     }
@@ -168,8 +169,13 @@ public double getAlgaeDistance() {
     {
       if(getRotateAngle() > -80)
       {
-        setRotatePosition = Math.max(setRotatePosition, 45);
+        setRotatePosition = Math.max(setRotatePosition, scoringRestrictedMin);
       }
+    }
+    if(getAlgaeDistance() < 0.25)
+    {
+      setRotatePosition = Math.max(setRotatePosition, 70);
+
     }
 
     // Prevent movement while elevator is over the handoff maximum
