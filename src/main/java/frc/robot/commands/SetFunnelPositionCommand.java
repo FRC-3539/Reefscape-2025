@@ -69,6 +69,7 @@ public class SetFunnelPositionCommand extends Command {
     if(MathUtil.isNear(ScoringConstants.handOffPosition, ScoringSubsystem.getRotateAngle(), 3))
     {
       IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
+      ScoringSubsystem.scoringMotor(ScoringConstants.algaeScoringVoltage);    
     }
     else
     {
