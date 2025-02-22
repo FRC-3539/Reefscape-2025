@@ -57,10 +57,10 @@ public class IntakeSubsystem extends SubsystemBase {
 
     funnelDeployCanCoder.setPosition(funnelDeployCanCoder.getAbsolutePosition().getValueAsDouble());
 
-    algaeDeployMotor = new TalonFX(IDConstants.algaeDeployMotorID, "rio");
+    algaeDeployMotor = new TalonFX(IDConstants.algaeDeployMotorID, "Default Name");
     algaeDeployMotor.getConfigurator().apply(
       new TalonFXConfiguration().MotorOutput
-        .withInverted(InvertedValue.CounterClockwise_Positive));
+        .withInverted(InvertedValue.Clockwise_Positive));
   
     algaeIntakeMotor = new TalonFX(IDConstants.algaeIntakeMotorID, "rio");
     algaeIntakeMotor.getConfigurator().apply(
@@ -150,6 +150,9 @@ public class IntakeSubsystem extends SubsystemBase {
   public static void setAlgaeDeployMotor(double voltage) {
      algaeDeployMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
+  public static double getAlgaeDeployPosition() {
+    return algaeDeployMotor.getPosition().getValueAsDouble();
+  }
 
   public static void setCoralIntakeMotor(double voltage) {
     coralIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
@@ -161,7 +164,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public static double degreesToFunnelDeployRotations(double degrees) {
 		return Units.degreesToRotations(degrees);
 	}
-  public double getFunnelDistance() {
+  public static double getFunnelDistance() {
 		return funnelRange.getDistance().getValueAsDouble();
 	}
    public static void setFunnelBreakMode(boolean enabled) {
@@ -176,6 +179,8 @@ public class IntakeSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("/Intake/FunnelAngle", getFunnelDeployAngle());
 		SmartDashboard.putNumber("/Intake/TargetFunnelAngle", requestedFunnelDeployPos);
     SmartDashboard.putString("/Intake/FunnelDistance", df.format(getFunnelDistance()));
+    SmartDashboard.putNumber("/Intake/AlgaeDeployPosition", getAlgaeDeployPosition());
+
 
   }
 

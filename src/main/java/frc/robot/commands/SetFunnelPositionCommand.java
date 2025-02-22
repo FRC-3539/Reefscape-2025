@@ -4,9 +4,12 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.IntakeConstants;
+import frc.robot.constants.ScoringConstants;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ScoringSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class SetFunnelPositionCommand extends Command {
@@ -29,14 +32,14 @@ public class SetFunnelPositionCommand extends Command {
 			case GROUND :
         IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.groundFunnelDeployAngle);
         IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
-        IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
+        IntakeSubsystem.setFunnelIntakeMotor(0);
 
       break;
     
       case HUMAN :
         IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.humanFunnelDeployAngle);
         IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
-        IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
+        IntakeSubsystem.setFunnelIntakeMotor(0);
 
       break;
 
@@ -61,7 +64,18 @@ public class SetFunnelPositionCommand extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+  
+    if(MathUtil.isNear(ScoringConstants.handOffPosition, ScoringSubsystem.getRotateAngle(), 3))
+    {
+      IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
+    }
+    else
+    {
+      IntakeSubsystem.setFunnelIntakeMotor(0);
+    }
+  
+  }
 
   // Called once the command ends or is interrupted.
   @Override

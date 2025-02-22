@@ -21,8 +21,8 @@ public class DriveConstants extends BBConstants {
 	public static double FRSteerOffset = 0;
 	public static double BLSteerOffset = 0;
 	public static double BRSteerOffset = 0;
-	public static double speedMultiplier = 0.1;
-	public static double rotationSpeedMultiplier = 0.1;
+	public static double speedMultiplier = 0.25;
+	public static double rotationSpeedMultiplier = 0.15;
 	public static double turboSpeedMultiplier = 0.4;
 	public static double turboRotationSpeedMultiplier = 0.3;
 	public static double AlignkP = 2;

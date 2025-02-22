@@ -13,17 +13,24 @@ public class ClimberCommand extends Command {
   /** Creates a new ClimberCommand. */
   public ClimberCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.ClimberSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ClimberSubsystem
-				.setClimberMotor(1 * RobotContainer.operatorController.getRightY());}
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if (RobotContainer.operatorController.getRightY() < -0.2 || RobotContainer.operatorController.getRightY() > 0.2) {
+      ClimberSubsystem
+          .setClimberMotor(12 * RobotContainer.operatorController.getRightY());
+    } else {
+      ClimberSubsystem.setClimberMotor(0);
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override

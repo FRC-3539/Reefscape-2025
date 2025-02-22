@@ -36,7 +36,7 @@ public class RobotContainer {
   public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
   public static ScoringSubsystem ScoringSubsystem = new ScoringSubsystem();
   public static ElevatorSubsystem ElevatorSubsystem = new ElevatorSubsystem();
-  public static ClimberSubsystem ClimberSubsystem; //new ClimberSubsystem();
+  public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
   public static DriveSubsystem DriveSubsystem = TunerConstants.createDrivetrain();
   
 	public static CommandXboxController driverController = new CommandXboxController(1);
@@ -94,11 +94,14 @@ public class RobotContainer {
   public void putCommands() {
 		SmartDashboard.putData(new DisableElevatorBreakModeCommand().ignoringDisable(true));
     SmartDashboard.putData(new DisableFunnelBreakModeCommand().ignoringDisable(true));
+    SmartDashboard.putData(new DisableClimberBreakModeCommand().ignoringDisable(true));
+
 
 	}
 
   private void configureBindings() {
     DriveSubsystem.setDefaultCommand(new DriveCommand());
+    ClimberSubsystem.setDefaultCommand(new ClimberCommand());
     driverController.start().whileTrue(new ZeroGyroCommand());
 
     
@@ -125,7 +128,6 @@ public class RobotContainer {
     operatorController.x().onTrue(new CoralPositionCommand(CoralMode.HIGH, false));
    
     //Climbing Command
-    operatorController.rightStick().whileTrue(new ClimberCommand());
     operatorController.start().onTrue(new HomePositionCommand());
     
   }
