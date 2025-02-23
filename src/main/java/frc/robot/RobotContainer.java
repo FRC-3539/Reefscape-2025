@@ -15,6 +15,12 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.AlgaePositionCommand.AlgaeMode;
 import frc.robot.commands.CoralPositionCommand.CoralMode;
 import frc.robot.commands.SetFunnelPositionCommand.IntakeMode;
+import frc.robot.constants.ClimberConstants;
+import frc.robot.constants.DriveConstants;
+import frc.robot.constants.ElevatorConstants;
+import frc.robot.constants.IDConstants;
+import frc.robot.constants.IntakeConstants;
+import frc.robot.constants.ScoringConstants;
 import frc.robot.Generated.TunerConstants;
 import frc.robot.commands.*;
 import frc.robot.commands.ScoringCommand.ScoringMode;
@@ -31,7 +37,12 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-  // Replace with CommandPS4Controller or CommandJoystick if needed
+  public static ClimberConstants climberConstants = new ClimberConstants();
+  public static DriveConstants driveConstants = new DriveConstants();
+  public static ElevatorConstants elevatorConstants = new ElevatorConstants();
+  public static IDConstants idConstants = new IDConstants();
+  public static IntakeConstants intakeConstants = new IntakeConstants();
+  public static ScoringConstants scoringConstants = new ScoringConstants();
 
   public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
   public static ScoringSubsystem ScoringSubsystem = new ScoringSubsystem();
