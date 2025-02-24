@@ -6,6 +6,7 @@ public class IDConstants extends BBConstants {
 	public IDConstants() {
 		super("/home/lvuser/IDConstants.ini", true);
 		save();
+		writeToNetworkTable();
 	}
 
 	public static int algaeDeployMotorID = 12;

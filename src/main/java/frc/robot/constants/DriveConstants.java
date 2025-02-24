@@ -6,6 +6,7 @@ public class DriveConstants extends BBConstants {
 	public DriveConstants() {
 		super("/home/lvuser/DriveConstants.ini", true);
 		save();
+		writeToNetworkTable();
 	}
 
 	public static double TranslationkP = 20;

@@ -6,6 +6,7 @@ public class ScoringConstants extends BBConstants {
 	public ScoringConstants() {
 		super("/home/lvuser/ScoringConstants.ini", true);
 		save();
+		writeToNetworkTable();
 	}
 
 	public static double algaeScoringVoltage = -5;

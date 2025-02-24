@@ -6,6 +6,7 @@ public class ElevatorConstants extends BBConstants {
 	public ElevatorConstants() {
 		super("/home/lvuser/ElevatorConstants.ini", true);
 		save();
+		writeToNetworkTable();
 	}
 
 	public static double elevatorVoltage = 2;
