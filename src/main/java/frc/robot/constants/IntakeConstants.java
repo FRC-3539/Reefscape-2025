@@ -6,7 +6,6 @@ public class IntakeConstants extends BBConstants {
 	public IntakeConstants() {
 		super("/home/lvuser/IntakeConstants.ini", true);
 		save();
-		writeToNetworkTable();
 	}
 
 	public static double algaeIntakeVoltage = 5;

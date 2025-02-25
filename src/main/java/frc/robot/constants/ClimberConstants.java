@@ -6,7 +6,6 @@ public class ClimberConstants extends BBConstants {
 	public ClimberConstants() {
 		super("/home/lvuser/ClimberConstants.ini", true);
 		save();
-		writeToNetworkTable();
 	}
 
 	public static double climberVoltage = 2;

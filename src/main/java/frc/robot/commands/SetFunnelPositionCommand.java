@@ -66,7 +66,8 @@ public class SetFunnelPositionCommand extends Command {
   @Override
   public void execute() {
   
-    if(MathUtil.isNear(ScoringConstants.handOffPosition, ScoringSubsystem.getRotateAngle(), 5))
+    if(MathUtil.isNear(ScoringConstants.handOffPosition, ScoringSubsystem.getRotateAngle(), 5)
+     && MathUtil.isNear(IntakeConstants.handOffFunnelDeployAngle, IntakeSubsystem.getFunnelDeployAngle(), 5))
     {
       if(ScoringSubsystem.getCoralDistance() < 0.15)
       {
@@ -85,8 +86,7 @@ public class SetFunnelPositionCommand extends Command {
     else
     {
       IntakeSubsystem.setFunnelIntakeMotor(0);
-      ScoringSubsystem.scoringMotor(0);    
-      IntakeSubsystem.setCoralIntakeMotor(0);
+      ScoringSubsystem.scoringMotor(0);
 
     }
   
