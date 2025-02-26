@@ -172,7 +172,7 @@ public double getAlgaeDistance() {
         setRotatePosition = Math.max(setRotatePosition, scoringRestrictedMin);
       }
     }
-    if(getAlgaeDistance() < 0.25)
+    if(getAlgaeDistance() < 0.25 && ElevatorSubsystem.getElevatorPosition() < 15)
     {
       setRotatePosition = Math.max(setRotatePosition, 70);
 
