@@ -14,14 +14,17 @@ import frc.robot.constants.ScoringConstants;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class HandOffCommand extends SequentialCommandGroup {
-
   boolean auton;
-  public HandOffCommand(boolean auton) {
-   this.auton = auton;
+  IntakeMode mode;
+
+  public HandOffCommand(boolean auton, IntakeMode mode) {
+    this.auton = auton;
+    this.mode = mode;
+
     addCommands(
-            new ParallelCommandGroup(
-                new SetElevatorCommand(ElevatorConstants.handOffHeight, auton),
-                new SetScorersCommand(ScoringConstants.handOffPosition, auton),
-                new SetFunnelPositionCommand(IntakeMode.HANDOFF)));
+      new ParallelCommandGroup(
+        new SetElevatorCommand(ElevatorConstants.handOffHeight, auton),
+        new SetScorersCommand(ScoringConstants.handOffPosition, auton),
+        new SetFunnelPositionCommand(mode)));
   }
 }

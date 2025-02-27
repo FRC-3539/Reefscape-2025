@@ -33,32 +33,31 @@ public class SetFunnelPositionCommand extends Command {
         IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.groundFunnelDeployAngle);
         IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
         IntakeSubsystem.setFunnelIntakeMotor(0);
-
-      break;
+        break;
     
       case HUMAN :
         IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.humanFunnelDeployAngle);
         IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
         IntakeSubsystem.setFunnelIntakeMotor(0);
-
-      break;
+        break;
 
       case REVERSE :
         IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.groundFunnelDeployAngle);
         IntakeSubsystem.setCoralIntakeMotor(-IntakeConstants.coralIntakeVoltage);
         IntakeSubsystem.setFunnelIntakeMotor(-IntakeConstants.funnelIntakeVoltage);
+        break;
 
-      break;
       case HOME :
-      IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.homeFunnelDeployAngle);
-      IntakeSubsystem.setCoralIntakeMotor(0);
-      IntakeSubsystem.setFunnelIntakeMotor(0);
+        IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.homeFunnelDeployAngle);
+        IntakeSubsystem.setCoralIntakeMotor(0);
+        IntakeSubsystem.setFunnelIntakeMotor(0);
+        break;
 
-      break;
       case HANDOFF :
-      IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.handOffFunnelDeployAngle);
-      IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
-      IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
+        IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.handOffFunnelDeployAngle);
+        IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
+        IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
+        break;
     }
   }
 

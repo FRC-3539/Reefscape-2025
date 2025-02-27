@@ -106,8 +106,6 @@ public class RobotContainer {
 		SmartDashboard.putData(new DisableElevatorBreakModeCommand().ignoringDisable(true));
     SmartDashboard.putData(new DisableFunnelBreakModeCommand().ignoringDisable(true));
     SmartDashboard.putData(new DisableClimberBreakModeCommand().ignoringDisable(true));
-
-
 	}
 
   private void configureBindings() {
@@ -115,31 +113,34 @@ public class RobotContainer {
     ClimberSubsystem.setDefaultCommand(new ClimberCommand());
     driverController.start().whileTrue(new ZeroGyroCommand());
 
-    
-    //Algae Commands
-    operatorController.leftTrigger().whileTrue(new AlgaePositionCommand(AlgaeMode.GROUND, false));
-    operatorController.rightTrigger().whileTrue(new ScoringCommand(ScoringMode.ALGAE));
-    //operatorController.povDown().onTrue(new AlgaePositionCommand(AlgaeMode.PROCESSOR, false));
-    operatorController.povRight().onTrue(new AlgaePositionCommand(AlgaeMode.REEFLOW, false));
-    operatorController.povUp().onTrue(new AlgaePositionCommand(AlgaeMode.REEFHIGH, false));
-    operatorController.povDown().onTrue(new AlgaePositionCommand(AlgaeMode.NET, false));
+    // Intake commands
+    operatorController.axisGreaterThan(1, 0.5).whileTrue(
+      new HandOffCommand(false, IntakeMode.GROUND));
+    operatorController.axisLessThan(1, -0.5).whileTrue(
+      new HandOffCommand(false, IntakeMode.HUMAN));
 
-    operatorController.povLeft().onTrue(new HandOffCommand(false));
+    //Algae Commands
+    operatorController.povDown().onTrue(new AlgaePositionCommand(AlgaeMode.GROUND, false));
+    operatorController.povLeft().onTrue(new AlgaePositionCommand(AlgaeMode.REEFLOW, false));
+    operatorController.povRight().onTrue(new AlgaePositionCommand(AlgaeMode.REEFHIGH, false));
+    operatorController.povUp().onTrue(new AlgaePositionCommand(AlgaeMode.NET, false));
 
     //Coral Commands
-    operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE));
-    operatorController.axisGreaterThan(1, 0.5).whileTrue(
-      new SetFunnelPositionCommand(IntakeMode.HUMAN));
-    operatorController.axisLessThan(1, -0.5).whileTrue(
-      new SetFunnelPositionCommand(IntakeMode.GROUND));
-    operatorController.rightBumper().whileTrue(new ScoringCommand(ScoringMode.CORAL));
+    // operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE));
     operatorController.a().onTrue(new CoralPositionCommand(CoralMode.TROUGH, false));
-    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.LOW, false));
-    operatorController.y().onTrue(new CoralPositionCommand(CoralMode.MID, false));
-    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.HIGH, false));
+    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.LOW, false));
+    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.MID, false));
+    operatorController.y().onTrue(new CoralPositionCommand(CoralMode.HIGH, false));
    
+    // Scoring Commands
+    operatorController.leftTrigger().whileTrue(new ScoringCommand(ScoringMode.ALGAE));
+    operatorController.rightTrigger().whileTrue(new ScoringCommand(ScoringMode.CORAL));
+
     //Climbing Command
-    operatorController.start().onTrue(new HomePositionCommand());
+    // operatorController.start().onTrue(new HomePositionCommand());
+
+    // Other
+    operatorController.start().onTrue(new HandOffCommand(false, IntakeMode.HANDOFF));
     
   }
 

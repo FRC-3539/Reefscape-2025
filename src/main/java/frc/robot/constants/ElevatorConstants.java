@@ -9,7 +9,7 @@ public class ElevatorConstants extends BBConstants {
 	}
 
 	public static double elevatorVoltage = 2;
-	public static double elevatorInchesPerRotation = 0.2834;
+	public static double elevatorInchesPerRotation = 0.7872;
 	public static double troughHeight = 7;
 	public static double coralLowHeight = 22.75;
 	public static double coralMidHeight = 36.75;
@@ -23,8 +23,8 @@ public class ElevatorConstants extends BBConstants {
 	public static double elevatorkD = 0.0;
 	public static double elevatorkG = 0.0;
 	public static double elevatorkV = 0.0;
-	public static double elevatorAcceleration = 80;
-	public static double elevatorCruiseVelocity = 125;
+	public static double elevatorAcceleration = 50;
+	public static double elevatorCruiseVelocity = 50;
 	public static double elevatorSoftMin = 5;
 	public static double elevatorSoftMax = 80;
 	public static double elevatorHomePositionOffset = 22.75;
