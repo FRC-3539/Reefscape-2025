@@ -127,9 +127,9 @@ public class RobotContainer {
 
     //Coral Commands
     // operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE));
-    operatorController.a().onTrue(new CoralPositionCommand(CoralMode.TROUGH, false));
-    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.LOW, false));
-    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.MID, false));
+    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.TROUGH, false));
+    operatorController.a().onTrue(new CoralPositionCommand(CoralMode.LOW, false));
+    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.MID, false));
     operatorController.y().onTrue(new CoralPositionCommand(CoralMode.HIGH, false));
    
     // Scoring Commands
