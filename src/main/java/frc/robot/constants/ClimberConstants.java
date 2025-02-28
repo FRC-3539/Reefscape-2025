@@ -19,6 +19,6 @@ public class ClimberConstants extends BBConstants {
 	public static double climberkV = 0.0;
 	public static double climberAcceleration = 0.0;
 	public static double climberCruiseVelocity = 0.0;
-	public static double climberSoftMin = -79;
-	public static double climberSoftMax = 104;
+	public static double climberSoftMin = -120;
+	public static double climberSoftMax = 100;
 }
