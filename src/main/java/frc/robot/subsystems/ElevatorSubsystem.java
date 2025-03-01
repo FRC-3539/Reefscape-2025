@@ -39,12 +39,6 @@ public class ElevatorSubsystem extends SubsystemBase {
 				.withForwardSoftLimitThreshold((ElevatorConstants.elevatorSoftMax - ElevatorConstants.elevatorHomePositionOffset) / ElevatorConstants.elevatorInchesPerRotation).withReverseSoftLimitEnable(true)
 				.withReverseSoftLimitThreshold((ElevatorConstants.elevatorSoftMin - ElevatorConstants.elevatorHomePositionOffset) / ElevatorConstants.elevatorInchesPerRotation));
 
-    // elevatorMotor.getConfigurator().apply(
-    //   new HardwareLimitSwitchConfigs()
-    //     .withReverseLimitEnable(true)
-    //     .withReverseLimitAutosetPositionEnable(true)
-    //     .withReverseLimitAutosetPositionValue(0));
-
     elevatorMotor.getConfigurator()
 				.apply(new SlotConfigs().withKP(ElevatorConstants.elevatorkP).withKI(ElevatorConstants.elevatorkI)
 						.withKD(ElevatorConstants.elevatorkD).withKV(ElevatorConstants.elevatorkV)
@@ -83,6 +77,10 @@ public class ElevatorSubsystem extends SubsystemBase {
   public static void setEnforcedMaxHandOffHeight(boolean enforce)
   {
     enforcedMaxHandOffHeight = enforce;
+  }
+  public static void zeroElevatorMotor()
+  {
+    elevatorMotor.setPosition(0);
   }
   public void log()
   {

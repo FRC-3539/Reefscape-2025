@@ -82,6 +82,16 @@ public class ClimberSubsystem extends SubsystemBase {
       climberMotor.setNeutralMode(NeutralModeValue.Coast);
     }
   }
+  public static void zeroClimberMotor()
+  {
+    climberMotor.setPosition(0);
+  }
+  public static void enableClimberLimits(boolean enabled)
+  {
+    climberMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(enabled)
+        .withForwardSoftLimitThreshold(ClimberConstants.climberSoftMax).withReverseSoftLimitEnable(enabled)
+        .withReverseSoftLimitThreshold(ClimberConstants.climberSoftMin));
+  }
 
   public void log() {
      SmartDashboard.putNumber("/Climber/ClimberPosition", getClimberPosition());

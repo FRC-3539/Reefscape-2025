@@ -20,6 +20,7 @@ import com.ctre.phoenix6.hardware.CANrange;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 import edu.wpi.first.math.util.Units;
@@ -42,6 +43,8 @@ public class ScoringSubsystem extends SubsystemBase {
     scoringMotor.getConfigurator().apply(
       new TalonFXConfiguration().MotorOutput
         .withInverted(InvertedValue.CounterClockwise_Positive));
+    scoringMotor.setNeutralMode(NeutralModeValue.Brake);
+
 
     rotateMotor = new TalonFX(IDConstants.rotateMotorID, "rio");
     rotateMotor.getConfigurator().apply(
@@ -124,7 +127,13 @@ public static double getCoralDistance() {
 public double getAlgaeDistance() {
   return algaeRange.getDistance().getValueAsDouble();
 }
-
+public static void setScoringBreakMode(boolean enabled) {
+		if (enabled) {
+			scoringMotor.setNeutralMode(NeutralModeValue.Brake);
+		} else {
+		  scoringMotor.setNeutralMode(NeutralModeValue.Coast);
+		}
+	}
   public void log()
   {
     SmartDashboard.putNumber("/Scoring/RotateAngle", getRotateAngle());
