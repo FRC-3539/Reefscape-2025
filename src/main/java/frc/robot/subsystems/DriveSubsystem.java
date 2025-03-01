@@ -27,9 +27,12 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.constants.DriveConstants;
 import frc.robot.constants.IDConstants;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +50,7 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 	public Pigeon2 pigeon = new Pigeon2(IDConstants.pigeonID, "rio");
 
 	public enum AlignMode {
-		A, B, C, D, E, F, G, H, I, J, K, L, HUMANPLAYER1, HUMANPLAYER2, CLIMB1, CLIMB2, CLIMB3;
+		A, B, C, D, E, F, G, H, I, J, K, L, HUMANPLAYER1, HUMANPLAYER2, CLIMB1, CLIMB2, CLIMB3, CLOSEST;
 	}
 
 	public static Map<AlignMode, Pose2d> points = new HashMap<>();
@@ -73,23 +76,23 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 
 		configureAutoBuilder();
 
-		points.put(AlignMode.A, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.B, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.C, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.D, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.E, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.F, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.G, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.H, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.I, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.J, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.K, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.L, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.HUMANPLAYER1, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.HUMANPLAYER2, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.CLIMB1, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.CLIMB2, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.CLIMB3, new Pose2d(1.0, 1.0, Rotation2d.fromDegrees(0)));
+		points.put(AlignMode.A, new Pose2d(3.10, 4.19, Rotation2d.fromDegrees(0)));
+		points.put(AlignMode.B, new Pose2d(3.10, 3.86, Rotation2d.fromDegrees(0)));
+		points.put(AlignMode.C, new Pose2d(3.65, 2.90, Rotation2d.fromDegrees(60)));
+		points.put(AlignMode.D, new Pose2d(3.93, 2.74, Rotation2d.fromDegrees(60)));
+		points.put(AlignMode.E, new Pose2d(5.04, 2.74, Rotation2d.fromDegrees(120)));
+		points.put(AlignMode.F, new Pose2d(5.33, 2.90, Rotation2d.fromDegrees(120)));
+		points.put(AlignMode.G, new Pose2d(5.88, 3.86, Rotation2d.fromDegrees(180)));
+		points.put(AlignMode.H, new Pose2d(5.88, 4.19, Rotation2d.fromDegrees(180)));
+		points.put(AlignMode.I, new Pose2d(5.33, 5.15, Rotation2d.fromDegrees(-120)));
+		points.put(AlignMode.J, new Pose2d(5.04, 5.31, Rotation2d.fromDegrees(-120)));
+		points.put(AlignMode.K, new Pose2d(3.93, 5.31, Rotation2d.fromDegrees(-60)));
+		points.put(AlignMode.L, new Pose2d(3.65, 5.15, Rotation2d.fromDegrees(-60)));
+		points.put(AlignMode.HUMANPLAYER1, new Pose2d(1.75, 1.75, Rotation2d.fromDegrees(50)));
+		points.put(AlignMode.HUMANPLAYER2, new Pose2d(1.5, 6.75, Rotation2d.fromDegrees(-50)));
+		points.put(AlignMode.CLIMB1, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
+		points.put(AlignMode.CLIMB2, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
+		points.put(AlignMode.CLIMB3, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
 
 	}
 
@@ -146,36 +149,37 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 	}
 
 	public Command generateAlignCommand(AlignMode mode) {
-		List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(
-				getPose2d(),
-				points.get(mode));
+		Pose2d targetPoint;
+		if(mode == AlignMode.CLOSEST)
+		{
+			targetPoint = getPose2d().nearest(new ArrayList<Pose2d>(points.values()));
+			for (var entry : points.entrySet()) {
+				if (entry.getValue().equals(targetPoint)) 
+					mode = entry.getKey();
+			}
+		}
+		else
+		{
+			targetPoint = points.get(mode);
+		}
+		if(getPose2d().getTranslation().getDistance(targetPoint.getTranslation()) < 0.01)
+		{
+			return Commands.none();
+		}
 
-		PathConstraints constraints = new PathConstraints(3.0, 3.0, 2 * Math.PI, 4 * Math.PI); // The constraints for
+		PathConstraints constraints = new PathConstraints(.5, .5, 1 * Math.PI, 2 * Math.PI); // The constraints for
 																								// this path.
-		// PathConstraints constraints = PathConstraints.unlimitedConstraints(12.0); //
-		// You can also use unlimited constraints, only limited by motor torque and
-		// nominal battery voltage
-
-		// Create the path using the waypoints created above
-		PathPlannerPath path = new PathPlannerPath(
-				waypoints,
-				constraints,
-				null, // The ideal starting state, this is only relevant for pre-planned paths, so can
-						// be null for on-the-fly paths.
-				new GoalEndState(0.0, points.get(mode).getRotation()) // Goal end state. You can set a holonomic
-																		// rotation here. If using a differential
-																		// drivetrain, the rotation will have no effect.
-		);
-
-		// Prevent the path from being flipped if the coordinates are already correct
-		path.preventFlipping = true;
-
-		return AutoBuilder.followPath(path);
-
+		SmartDashboard.putString("/DriveTrain/TargetPoint", mode.name());
+		publishPose2d("TargetPoint",targetPoint);
+		publishPose2d("ModePoint", points.get(mode));
+		Command followPath = AutoBuilder.pathfindToPose(targetPoint,constraints);
+		followPath.addRequirements(this);
+		return followPath;
 	}
 
 	@Override
 	public void periodic() {
+		log();
 		SwerveRequest request = new SwerveRequest.Idle();
 		request = swerveRequest;
 

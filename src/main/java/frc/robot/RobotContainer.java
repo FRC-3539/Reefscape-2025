@@ -27,6 +27,7 @@ import frc.robot.commands.*;
 import frc.robot.commands.ScoringCommand.ScoringMode;
 import frc.robot.subsystems.*;
 //import frc.robot.constants.*;
+import frc.robot.subsystems.DriveSubsystem.AlignMode;
 
 
 /**
@@ -50,6 +51,7 @@ public class RobotContainer {
   public static ElevatorSubsystem ElevatorSubsystem = new ElevatorSubsystem();
   public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
   public static DriveSubsystem DriveSubsystem = TunerConstants.createDrivetrain();
+  public static VisionSubsystem VisionSubsystem = new VisionSubsystem();
   
 	public static CommandXboxController driverController = new CommandXboxController(1);
 	public static CommandXboxController operatorController = new CommandXboxController(0);
@@ -65,6 +67,7 @@ public class RobotContainer {
     configureBindings();
     putAutons();
     putCommands();
+    VisionSubsystem.start();
   
     //Scoring Commands
     NamedCommands.registerCommand("AlgaeScoringCommand", new ScoringCommand(ScoringMode.ALGAE));
@@ -115,7 +118,11 @@ public class RobotContainer {
   private void configureBindings() {
     DriveSubsystem.setDefaultCommand(new DriveCommand());
     ClimberSubsystem.setDefaultCommand(new ClimberCommand());
+
     driverController.start().whileTrue(new ZeroGyroCommand());
+    driverController.a().whileTrue(new AutoAlignCommand(AlignMode.A));
+    driverController.b().whileTrue(new AutoAlignCommand(AlignMode.CLOSEST));
+
 
     // Intake commands
     operatorController.axisGreaterThan(1, 0.5).whileTrue(

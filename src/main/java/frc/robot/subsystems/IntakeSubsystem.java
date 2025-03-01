@@ -37,7 +37,7 @@ import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 public class IntakeSubsystem extends SubsystemBase { 
   
-  private static TalonFX algaeDeployMotor,algaeIntakeMotor,funnelDeployMotor;
+  private static TalonFX funnelDeployMotor ; //, algaeDeployMotor,algaeIntakeMotor;
   private static TalonFXS funnelIntakeMotor, coralIntakeMotor;
  
   private static CANcoder funnelDeployCanCoder;
@@ -57,15 +57,15 @@ public class IntakeSubsystem extends SubsystemBase {
 
     funnelDeployCanCoder.setPosition(funnelDeployCanCoder.getAbsolutePosition().getValueAsDouble());
 
-    algaeDeployMotor = new TalonFX(IDConstants.algaeDeployMotorID, "Default Name");
-    algaeDeployMotor.getConfigurator().apply(
-      new TalonFXConfiguration().MotorOutput
-        .withInverted(InvertedValue.Clockwise_Positive));
+    // algaeDeployMotor = new TalonFX(IDConstants.algaeDeployMotorID, "Default Name");
+    // algaeDeployMotor.getConfigurator().apply(
+    //   new TalonFXConfiguration().MotorOutput
+    //     .withInverted(InvertedValue.Clockwise_Positive));
   
-    algaeIntakeMotor = new TalonFX(IDConstants.algaeIntakeMotorID, "rio");
-    algaeIntakeMotor.getConfigurator().apply(
-      new TalonFXConfiguration().MotorOutput
-        .withInverted(InvertedValue.CounterClockwise_Positive));
+    // algaeIntakeMotor = new TalonFX(IDConstants.algaeIntakeMotorID, "rio");
+    // algaeIntakeMotor.getConfigurator().apply(
+    //   new TalonFXConfiguration().MotorOutput
+    //     .withInverted(InvertedValue.CounterClockwise_Positive));
   
     funnelDeployMotor = new TalonFX(IDConstants.funnelDeployMotorID, "rio");
     funnelDeployMotor.getConfigurator().apply(
@@ -89,19 +89,19 @@ public class IntakeSubsystem extends SubsystemBase {
       new TalonFXSConfiguration().MotorOutput
           .withInverted(InvertedValue.Clockwise_Positive));
 
-    algaeDeployMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
-        .withForwardSoftLimitThreshold(IntakeConstants.algaeDeploySoftMax).withReverseSoftLimitEnable(true)
-        .withReverseSoftLimitThreshold(IntakeConstants.algaeDeploySoftMin));
+    // algaeDeployMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
+    //     .withForwardSoftLimitThreshold(IntakeConstants.algaeDeploySoftMax).withReverseSoftLimitEnable(true)
+    //     .withReverseSoftLimitThreshold(IntakeConstants.algaeDeploySoftMin));
 
-    algaeDeployMotor.getConfigurator()
-				.apply(new SlotConfigs().withKP(IntakeConstants.algaeDeploykP).withKI(IntakeConstants.algaeDeploykI)
-						.withKD(IntakeConstants.algaeDeploykD).withKV(IntakeConstants.algaeDeploykV)
-						.withKG(IntakeConstants.algaeDeploykG));
+    // algaeDeployMotor.getConfigurator()
+		// 		.apply(new SlotConfigs().withKP(IntakeConstants.algaeDeploykP).withKI(IntakeConstants.algaeDeploykI)
+		// 				.withKD(IntakeConstants.algaeDeploykD).withKV(IntakeConstants.algaeDeploykV)
+		// 				.withKG(IntakeConstants.algaeDeploykG));
     
-    algaeDeployMotor.getConfigurator()
-				.apply(new MotionMagicConfigs()
-        .withMotionMagicAcceleration(IntakeConstants.algaeDeployAcceleration)
-        .withMotionMagicCruiseVelocity(IntakeConstants.algaeDeployCruiseVelocity));
+    // algaeDeployMotor.getConfigurator()
+		// 		.apply(new MotionMagicConfigs()
+    //     .withMotionMagicAcceleration(IntakeConstants.algaeDeployAcceleration)
+    //     .withMotionMagicCruiseVelocity(IntakeConstants.algaeDeployCruiseVelocity));
 
     funnelDeployMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
 				.withForwardSoftLimitThreshold(degreesToFunnelDeployRotations(IntakeConstants.funnelDeploySoftMax)).withReverseSoftLimitEnable(true)
@@ -143,16 +143,16 @@ public class IntakeSubsystem extends SubsystemBase {
 		requestedFunnelDeployPos = getFunnelDeployAngle();
 	}
   
-  public static void setAlgaeIntakeMotor(double voltage) {
-     algaeIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
-  }
+  // public static void setAlgaeIntakeMotor(double voltage) {
+  //    algaeIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+  // }
 
-  public static void setAlgaeDeployMotor(double voltage) {
-     algaeDeployMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
-  }
-  public static double getAlgaeDeployPosition() {
-    return algaeDeployMotor.getPosition().getValueAsDouble();
-  }
+  // public static void setAlgaeDeployMotor(double voltage) {
+  //    algaeDeployMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+  // }
+  // public static double getAlgaeDeployPosition() {
+  //   return algaeDeployMotor.getPosition().getValueAsDouble();
+  // }
 
   public static void setCoralIntakeMotor(double voltage) {
     coralIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
@@ -179,7 +179,7 @@ public class IntakeSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("/Intake/FunnelAngle", getFunnelDeployAngle());
 		SmartDashboard.putNumber("/Intake/TargetFunnelAngle", requestedFunnelDeployPos);
     SmartDashboard.putString("/Intake/FunnelDistance", df.format(getFunnelDistance()));
-    SmartDashboard.putNumber("/Intake/AlgaeDeployPosition", getAlgaeDeployPosition());
+    //SmartDashboard.putNumber("/Intake/AlgaeDeployPosition", getAlgaeDeployPosition());
 
 
   }
