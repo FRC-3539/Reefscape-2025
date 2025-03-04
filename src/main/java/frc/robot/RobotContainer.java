@@ -10,12 +10,13 @@ import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.AlgaePositionCommand.AlgaeMode;
 import frc.robot.commands.CoralPositionCommand.CoralMode;
 import frc.robot.commands.SetFunnelPositionCommand.IntakeMode;
+import frc.robot.constants.AlignConstants.AlignMode;
+import frc.robot.constants.AlignConstants;
 import frc.robot.constants.ClimberConstants;
 import frc.robot.constants.DriveConstants;
 import frc.robot.constants.ElevatorConstants;
@@ -26,9 +27,6 @@ import frc.robot.Generated.TunerConstants;
 import frc.robot.commands.*;
 import frc.robot.commands.ScoringCommand.ScoringMode;
 import frc.robot.subsystems.*;
-//import frc.robot.constants.*;
-import frc.robot.subsystems.DriveSubsystem.AlignMode;
-
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -39,6 +37,7 @@ import frc.robot.subsystems.DriveSubsystem.AlignMode;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
+  public static AlignConstants alignConstants = new AlignConstants();
   public static ClimberConstants climberConstants = new ClimberConstants();
   public static DriveConstants driveConstants = new DriveConstants();
   public static ElevatorConstants elevatorConstants = new ElevatorConstants();

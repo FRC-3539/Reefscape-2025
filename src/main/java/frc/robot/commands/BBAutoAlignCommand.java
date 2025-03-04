@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveSubsystem.AlignMode;
+import frc.robot.constants.AlignConstants;
+import frc.robot.constants.AlignConstants.AlignMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ import org.frcteam3539.Byte_Swerve_Lib.control.TrajectoryConstraint;
 
 public class BBAutoAlignCommand extends Command {
 	/** Wrapper command to generate a trajectory to the nearest Stage Pose */
-AlignMode mode;
+	AlignMode mode;
 
 	public BBAutoAlignCommand(AlignMode mode) {
     this.mode = mode;
@@ -37,15 +38,15 @@ AlignMode mode;
     Pose2d targetPoint;
 		if(mode == AlignMode.CLOSEST)
 		{
-			targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(RobotContainer.DriveSubsystem.points.values()));
-			for (var entry : RobotContainer.DriveSubsystem.points.entrySet()) {
+			targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.points.values()));
+			for (var entry : AlignConstants.points.entrySet()) {
 				//if (entry.getValue().equals(targetPoint)) 
 					//mode = entry.getKey();
 			}
 		}
 		else
 		{
-			targetPoint = RobotContainer.DriveSubsystem.points.get(mode);
+			targetPoint = AlignConstants.points.get(mode);
 		}
 		Pose2d robotPose = RobotContainer.DriveSubsystem.getPose2d();
 

@@ -32,6 +32,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Robot;
+import frc.robot.constants.AlignConstants.AlignMode;
+import frc.robot.constants.AlignConstants;
 import frc.robot.constants.DriveConstants;
 import frc.robot.constants.IDConstants;
 
@@ -57,12 +59,6 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 
 	public Pigeon2 pigeon = new Pigeon2(IDConstants.pigeonID, "rio");
 
-	public enum AlignMode {
-		A, B, C, D, E, F, G, H, I, J, K, L, HUMANPLAYER1, HUMANPLAYER2, CLIMB1, CLIMB2, CLIMB3, CLOSEST;
-	}
-
-	public static Map<AlignMode, Pose2d> points = new HashMap<>();
-
 	private final HolonomicMotionProfiledTrajectoryFollower follower;
 
 	public DriveSubsystem(SwerveDrivetrainConstants driveTrainConstants,
@@ -85,24 +81,6 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 		maxRotationalVelocity = (maxVelocity / dtRadius);
 
 		configureAutoBuilder();
-
-		points.put(AlignMode.A, new Pose2d(3.10, 4.19, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.B, new Pose2d(3.10, 3.86, Rotation2d.fromDegrees(0)));
-		points.put(AlignMode.C, new Pose2d(3.65, 2.90, Rotation2d.fromDegrees(60)));
-		points.put(AlignMode.D, new Pose2d(3.93, 2.74, Rotation2d.fromDegrees(60)));
-		points.put(AlignMode.E, new Pose2d(5.04, 2.74, Rotation2d.fromDegrees(120)));
-		points.put(AlignMode.F, new Pose2d(5.33, 2.90, Rotation2d.fromDegrees(120)));
-		points.put(AlignMode.G, new Pose2d(5.88, 3.86, Rotation2d.fromDegrees(180)));
-		points.put(AlignMode.H, new Pose2d(5.88, 4.19, Rotation2d.fromDegrees(180)));
-		points.put(AlignMode.I, new Pose2d(5.33, 5.15, Rotation2d.fromDegrees(-120)));
-		points.put(AlignMode.J, new Pose2d(5.04, 5.31, Rotation2d.fromDegrees(-120)));
-		points.put(AlignMode.K, new Pose2d(3.93, 5.31, Rotation2d.fromDegrees(-60)));
-		points.put(AlignMode.L, new Pose2d(3.65, 5.15, Rotation2d.fromDegrees(-60)));
-		points.put(AlignMode.HUMANPLAYER1, new Pose2d(1.75, 1.75, Rotation2d.fromDegrees(50)));
-		points.put(AlignMode.HUMANPLAYER2, new Pose2d(1.5, 6.75, Rotation2d.fromDegrees(-50)));
-		points.put(AlignMode.CLIMB1, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
-		points.put(AlignMode.CLIMB2, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
-		points.put(AlignMode.CLIMB3, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
 
 		DrivetrainFeedforwardConstants FEEDFORWARD_CONSTANTS = new DrivetrainFeedforwardConstants(
 				DriveConstants.TranslationkV, DriveConstants.TranslationkA,
@@ -172,13 +150,13 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 	public Command generateAlignCommand(AlignMode mode) {
 		Pose2d targetPoint;
 		if (mode == AlignMode.CLOSEST) {
-			targetPoint = getPose2d().nearest(new ArrayList<Pose2d>(points.values()));
-			for (var entry : points.entrySet()) {
+			targetPoint = getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.points.values()));
+			for (var entry : AlignConstants.points.entrySet()) {
 				if (entry.getValue().equals(targetPoint))
 					mode = entry.getKey();
 			}
 		} else {
-			targetPoint = points.get(mode);
+			targetPoint = AlignConstants.points.get(mode);
 		}
 		if (getPose2d().getTranslation().getDistance(targetPoint.getTranslation()) < 0.01) {
 			return Commands.none();
@@ -188,7 +166,7 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 																								// this path.
 		SmartDashboard.putString("/DriveTrain/TargetPoint", mode.name());
 		publishPose2d("TargetPoint", targetPoint);
-		publishPose2d("ModePoint", points.get(mode));
+		publishPose2d("ModePoint", AlignConstants.points.get(mode));
 		Command followPath = AutoBuilder.pathfindToPose(targetPoint, constraints);
 		followPath.addRequirements(this);
 		return followPath;
