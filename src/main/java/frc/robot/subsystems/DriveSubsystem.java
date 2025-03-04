@@ -22,13 +22,16 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.constants.DriveConstants;
 import frc.robot.constants.IDConstants;
 
@@ -37,6 +40,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.frcteam3539.Byte_Swerve_Lib.control.HolonomicMotionProfiledTrajectoryFollower;
+import org.frcteam3539.Byte_Swerve_Lib.control.PidConstants;
+import org.frcteam3539.Byte_Swerve_Lib.util.DrivetrainFeedforwardConstants;
+import org.frcteam3539.Byte_Swerve_Lib.util.HolonomicFeedforward;
 
 public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder> implements Subsystem {
 	/** Creates a new DrivetrainSubsystem. */
@@ -54,6 +62,8 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 	}
 
 	public static Map<AlignMode, Pose2d> points = new HashMap<>();
+
+	private final HolonomicMotionProfiledTrajectoryFollower follower;
 
 	public DriveSubsystem(SwerveDrivetrainConstants driveTrainConstants,
 			SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>... modules) {
@@ -93,6 +103,17 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 		points.put(AlignMode.CLIMB1, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
 		points.put(AlignMode.CLIMB2, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
 		points.put(AlignMode.CLIMB3, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
+
+		DrivetrainFeedforwardConstants FEEDFORWARD_CONSTANTS = new DrivetrainFeedforwardConstants(
+				DriveConstants.TranslationkV, DriveConstants.TranslationkA,
+				DriveConstants.TranslationkS);
+
+		follower = new HolonomicMotionProfiledTrajectoryFollower(
+				new PidConstants(DriveConstants.TranslationkP, DriveConstants.TranslationkI,
+						DriveConstants.TranslationkD),
+				new PidConstants(DriveConstants.RotationkP, DriveConstants.RotationkI,
+						DriveConstants.RotationkD),
+				new HolonomicFeedforward(FEEDFORWARD_CONSTANTS));
 
 	}
 
@@ -150,31 +171,31 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 
 	public Command generateAlignCommand(AlignMode mode) {
 		Pose2d targetPoint;
-		if(mode == AlignMode.CLOSEST)
-		{
+		if (mode == AlignMode.CLOSEST) {
 			targetPoint = getPose2d().nearest(new ArrayList<Pose2d>(points.values()));
 			for (var entry : points.entrySet()) {
-				if (entry.getValue().equals(targetPoint)) 
+				if (entry.getValue().equals(targetPoint))
 					mode = entry.getKey();
 			}
-		}
-		else
-		{
+		} else {
 			targetPoint = points.get(mode);
 		}
-		if(getPose2d().getTranslation().getDistance(targetPoint.getTranslation()) < 0.01)
-		{
+		if (getPose2d().getTranslation().getDistance(targetPoint.getTranslation()) < 0.01) {
 			return Commands.none();
 		}
 
 		PathConstraints constraints = new PathConstraints(.5, .5, 1 * Math.PI, 2 * Math.PI); // The constraints for
 																								// this path.
 		SmartDashboard.putString("/DriveTrain/TargetPoint", mode.name());
-		publishPose2d("TargetPoint",targetPoint);
+		publishPose2d("TargetPoint", targetPoint);
 		publishPose2d("ModePoint", points.get(mode));
-		Command followPath = AutoBuilder.pathfindToPose(targetPoint,constraints);
+		Command followPath = AutoBuilder.pathfindToPose(targetPoint, constraints);
 		followPath.addRequirements(this);
 		return followPath;
+	}
+
+	public HolonomicMotionProfiledTrajectoryFollower getFollower() {
+		return follower;
 	}
 
 	@Override
@@ -182,6 +203,23 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 		log();
 		SwerveRequest request = new SwerveRequest.Idle();
 		request = swerveRequest;
+
+		var driveSignalOpt = follower.update(getPose2d(), Timer.getFPGATimestamp(), Robot.kDefaultPeriod);
+
+		if (follower.getLastState() != null) {
+			VisionSubsystem.publishPose2d("/DriveTrain/PoseRequested",
+					follower.getLastState().getPathState().getPose2d());
+		} else {
+			VisionSubsystem.publishPose2d("/DriveTrain/PoseRequested", new Pose2d());
+		}
+
+		if (driveSignalOpt.isPresent()) {
+			ChassisSpeeds speeds = driveSignalOpt.get();
+			request = new SwerveRequest.RobotCentric().withVelocityX(speeds.vxMetersPerSecond)
+					.withVelocityY(speeds.vyMetersPerSecond).withRotationalRate(speeds.omegaRadiansPerSecond);
+		} else {
+			request = swerveRequest;
+		}
 
 		this.setControl(request);
 		// This method will be called once per scheduler run

@@ -66,7 +66,7 @@ public class DriveCommand extends Command {
 		}
 		if(ElevatorSubsystem.getElevatorPosition() > 50)
 		{
-			speedMultiplier *= 0.5;
+			speedMultiplier *= 0.3;
 		}
 
 		if (RobotContainer.rightDriverBumper.getAsBoolean()) { // Robot Centric

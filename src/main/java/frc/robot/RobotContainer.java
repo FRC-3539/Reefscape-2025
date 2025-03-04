@@ -68,26 +68,6 @@ public class RobotContainer {
     putAutons();
     putCommands();
     VisionSubsystem.start();
-  
-    //Scoring Commands
-    NamedCommands.registerCommand("AlgaeScoringCommand", new ScoringCommand(ScoringMode.ALGAE));
-    NamedCommands.registerCommand("CoralScoringCommand", new ScoringCommand(ScoringMode.CORAL));
-
-    
-    //Setting positions to score Coral
-    NamedCommands.registerCommand("TroughCommand", new CoralPositionCommand(CoralMode.TROUGH, false));
-    NamedCommands.registerCommand("CoralLowCommand", new CoralPositionCommand(CoralMode.LOW, false));
-    NamedCommands.registerCommand("CoralMidCommand", new CoralPositionCommand(CoralMode.MID, false));
-    NamedCommands.registerCommand("CoralHighCommand", new CoralPositionCommand(CoralMode.HIGH, false));
-
-    //Setting positions to score Algae
-    NamedCommands.registerCommand("ProcessorCommand", new AlgaePositionCommand(AlgaeMode.PROCESSOR, false));
-    NamedCommands.registerCommand("AlgaeLowCommand", new AlgaePositionCommand(AlgaeMode.REEFLOW, false));
-    NamedCommands.registerCommand("AlgaeHighCommand", new AlgaePositionCommand(AlgaeMode.REEFHIGH, false));
-    NamedCommands.registerCommand("NetCommand", new AlgaePositionCommand(AlgaeMode.NET, false));
-
-    //Funnel Position Commands
-    NamedCommands.registerCommand("HumanPlayerIntakeCommand", new SetFunnelPositionCommand(IntakeMode.HUMAN));
 
   }
 
@@ -103,6 +83,28 @@ public class RobotContainer {
    */
   public void putAutons()
   {
+      
+    //Scoring Commands
+    NamedCommands.registerCommand("AlgaeScoringCommand", new ScoringCommand(ScoringMode.ALGAE));
+    NamedCommands.registerCommand("CoralScoringCommand", new ScoringCommand(ScoringMode.CORAL));
+
+    
+    //Setting positions to score Coral
+    NamedCommands.registerCommand("TroughCommand", new CoralPositionCommand(CoralMode.TROUGH, true));
+    NamedCommands.registerCommand("CoralLowCommand", new CoralPositionCommand(CoralMode.LOW, true));
+    NamedCommands.registerCommand("CoralMidCommand", new CoralPositionCommand(CoralMode.MID, true));
+    NamedCommands.registerCommand("CoralHighCommand", new CoralPositionCommand(CoralMode.HIGH, true));
+
+
+    //Setting positions to score Algae
+    NamedCommands.registerCommand("ProcessorCommand", new AlgaePositionCommand(AlgaeMode.PROCESSOR, true));
+    NamedCommands.registerCommand("AlgaeLowCommand", new AlgaePositionCommand(AlgaeMode.REEFLOW, true));
+    NamedCommands.registerCommand("AlgaeHighCommand", new AlgaePositionCommand(AlgaeMode.REEFHIGH, true));
+    NamedCommands.registerCommand("NetCommand", new AlgaePositionCommand(AlgaeMode.NET, true));
+
+    //Funnel Position Commands
+    NamedCommands.registerCommand("HumanPlayerIntakeCommand", new SetFunnelPositionCommand(IntakeMode.HUMAN));
+
     chooser = AutoBuilder.buildAutoChooser();
 		SmartDashboard.putData(chooser);
   }
@@ -120,8 +122,8 @@ public class RobotContainer {
     ClimberSubsystem.setDefaultCommand(new ClimberCommand());
 
     driverController.start().whileTrue(new ZeroGyroCommand());
-    driverController.a().whileTrue(new AutoAlignCommand(AlignMode.A));
-    driverController.b().whileTrue(new AutoAlignCommand(AlignMode.CLOSEST));
+    driverController.a().whileTrue(new BBAutoAlignCommand(AlignMode.A));
+    driverController.b().whileTrue(new BBAutoAlignCommand(AlignMode.CLOSEST));
 
 
     // Intake commands
@@ -138,9 +140,9 @@ public class RobotContainer {
 
     //Coral Commands
     // operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE));
-    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.TROUGH, false));
-    operatorController.a().onTrue(new CoralPositionCommand(CoralMode.LOW, false));
-    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.MID, false));
+    operatorController.a().onTrue(new CoralPositionCommand(CoralMode.TROUGH, false));
+    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.LOW, false));
+    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.MID, false));
     operatorController.y().onTrue(new CoralPositionCommand(CoralMode.HIGH, false));
    
     // Scoring Commands

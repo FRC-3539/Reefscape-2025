@@ -28,7 +28,7 @@ public class ScoringConstants extends BBConstants {
 	public static double troughPosition = 70;
 	public static double coralLowPosition = 40;
 	public static double coralMidPosition = 43;
-	public static double coralHighPosition = 15;
+	public static double coralHighPosition = 10;
 	public static double processorPosition = 80;
 	public static double netPosition = 90;
 	public static double algaeLowPosition = 50;

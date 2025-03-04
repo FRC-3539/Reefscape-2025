@@ -11,8 +11,8 @@ public class ElevatorConstants extends BBConstants {
 	public static double elevatorVoltage = 2;
 	public static double elevatorInchesPerRotation = 0.7872;
 	public static double troughHeight = 7;
-	public static double coralLowHeight = 20.75;
-	public static double coralMidHeight = 36.25;
+	public static double coralLowHeight = 22.25;
+	public static double coralMidHeight = 37.75;
 	public static double coralHighHeight = 74.75;
 	public static double netHeight = 79.75;
 	public static double processorHeight = 22.75;
