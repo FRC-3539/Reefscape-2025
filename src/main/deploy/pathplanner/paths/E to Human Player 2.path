@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.608323863636363,
-        "y": 7.245823863636363
+        "x": 5.04,
+        "y": 2.74
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.0328125,
-        "y": 6.178863636363635
+        "x": 4.434911782471858,
+        "y": 2.1446336693578276
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.075539772727272,
-        "y": 5.3811363636363625
+        "x": 1.823,
+        "y": 0.8537878787906947
       },
       "prevControl": {
-        "x": 6.082670454545455,
-        "y": 6.158920454545454
+        "x": 2.5446540404040396,
+        "y": 1.4229797979826153
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -119.66671520694648
+    "rotation": 55.0
   },
   "reversed": false,
-  "folder": "Top Start Paths",
+  "folder": "Reef To Human Player 2",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -178.80651057601798
+    "rotation": 119.99999999999999
   },
   "useDefaultConstraints": true
 }

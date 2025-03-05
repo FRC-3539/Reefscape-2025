@@ -102,7 +102,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("NetCommand", new AlgaePositionCommand(AlgaeMode.NET, true));
 
     //Funnel Position Commands
-    NamedCommands.registerCommand("HumanPlayerIntakeCommand", new SetFunnelPositionCommand(IntakeMode.HUMAN));
+    NamedCommands.registerCommand("HumanPlayerIntakeCommand", new HandOffCommand(true,IntakeMode.HUMAN));
 
     chooser = AutoBuilder.buildAutoChooser();
 		SmartDashboard.putData(chooser);

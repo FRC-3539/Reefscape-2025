@@ -28,80 +28,88 @@ public class ElevatorSubsystem extends SubsystemBase {
   private static double requestedElevatorPos = 0;
   private static boolean enforcedMinimumHeight, enforcedMaxHandOffHeight = false;
 
-  public  ElevatorSubsystem() {
+  public ElevatorSubsystem() {
     elevatorMotor = new TalonFX(IDConstants.elevatorMotorID, "Default Name");
     elevatorMotor.getConfigurator().apply(
-      new TalonFXConfiguration().MotorOutput
-        .withInverted(InvertedValue.CounterClockwise_Positive));
+        new TalonFXConfiguration().MotorOutput
+            .withInverted(InvertedValue.CounterClockwise_Positive));
     elevatorMotor.setNeutralMode(NeutralModeValue.Brake);
 
     elevatorMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
-				.withForwardSoftLimitThreshold((ElevatorConstants.elevatorSoftMax - ElevatorConstants.elevatorHomePositionOffset) / ElevatorConstants.elevatorInchesPerRotation).withReverseSoftLimitEnable(true)
-				.withReverseSoftLimitThreshold((ElevatorConstants.elevatorSoftMin - ElevatorConstants.elevatorHomePositionOffset) / ElevatorConstants.elevatorInchesPerRotation));
+        .withForwardSoftLimitThreshold(
+            (ElevatorConstants.elevatorSoftMax - ElevatorConstants.elevatorHomePositionOffset)
+                / ElevatorConstants.elevatorInchesPerRotation)
+        .withReverseSoftLimitEnable(true)
+        .withReverseSoftLimitThreshold(
+            (ElevatorConstants.elevatorSoftMin - ElevatorConstants.elevatorHomePositionOffset)
+                / ElevatorConstants.elevatorInchesPerRotation));
 
     elevatorMotor.getConfigurator()
-				.apply(new SlotConfigs().withKP(ElevatorConstants.elevatorkP).withKI(ElevatorConstants.elevatorkI)
-						.withKD(ElevatorConstants.elevatorkD).withKV(ElevatorConstants.elevatorkV)
-						.withKG(ElevatorConstants.elevatorkG).withGravityType(GravityTypeValue.Elevator_Static));
+        .apply(new SlotConfigs().withKP(ElevatorConstants.elevatorkP).withKI(ElevatorConstants.elevatorkI)
+            .withKD(ElevatorConstants.elevatorkD).withKV(ElevatorConstants.elevatorkV)
+            .withKG(ElevatorConstants.elevatorkG).withGravityType(GravityTypeValue.Elevator_Static));
     elevatorMotor.getConfigurator()
-				.apply(new MotionMagicConfigs()
-        .withMotionMagicAcceleration(ElevatorConstants.elevatorAcceleration)
-        .withMotionMagicCruiseVelocity(ElevatorConstants.elevatorCruiseVelocity));
+        .apply(new MotionMagicConfigs()
+            .withMotionMagicAcceleration(ElevatorConstants.elevatorAcceleration)
+            .withMotionMagicCruiseVelocity(ElevatorConstants.elevatorCruiseVelocity));
   }
 
   public static void setElevatorMotor(double voltage) {
     // elevatorMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
+
   public static double getElevatorPosition() {
-		return elevatorMotor.getPosition().getValueAsDouble() *
-     ElevatorConstants.elevatorInchesPerRotation + ElevatorConstants.elevatorHomePositionOffset;
-	}
+    return elevatorMotor.getPosition().getValueAsDouble() *
+        ElevatorConstants.elevatorInchesPerRotation + ElevatorConstants.elevatorHomePositionOffset;
+  }
+
   public static void setElevatorPosition(double request) {
-		requestedElevatorPos = request;
-	}
-  
-	public static void initializeElevatorPosition() {
-		requestedElevatorPos = getElevatorPosition();
-	}
+    requestedElevatorPos = request;
+  }
+
+  public static void initializeElevatorPosition() {
+    requestedElevatorPos = getElevatorPosition();
+  }
+
   public static void setElevatorBreakMode(boolean enabled) {
-		if (enabled) {
-			elevatorMotor.setNeutralMode(NeutralModeValue.Brake);
-		} else {
-			elevatorMotor.setNeutralMode(NeutralModeValue.Coast);
-		}
-	}
-  public static void setEnforcedMinimumHeight(boolean enforce)
-  {
+    if (enabled) {
+      elevatorMotor.setNeutralMode(NeutralModeValue.Brake);
+    } else {
+      elevatorMotor.setNeutralMode(NeutralModeValue.Coast);
+    }
+  }
+
+  public static void setEnforcedMinimumHeight(boolean enforce) {
     enforcedMinimumHeight = enforce;
   }
-  public static void setEnforcedMaxHandOffHeight(boolean enforce)
-  {
+
+  public static void setEnforcedMaxHandOffHeight(boolean enforce) {
     enforcedMaxHandOffHeight = enforce;
   }
-  public static void zeroElevatorMotor()
-  {
+
+  public static void zeroElevatorMotor() {
     elevatorMotor.setPosition(0);
   }
-  public void log()
-  {
+
+  public void log() {
     SmartDashboard.putNumber("/Elevator/ElevatorPosition", getElevatorPosition());
-		SmartDashboard.putNumber("/Elevator/TargetElevatorPosition", requestedElevatorPos);
+    SmartDashboard.putNumber("/Elevator/TargetElevatorPosition", requestedElevatorPos);
   }
+
   @Override
   public void periodic() {
     double setElevatorPosition = requestedElevatorPos;
 
-    if(enforcedMinimumHeight)
-    {
+    if (enforcedMinimumHeight) {
       setElevatorPosition = Math.max(setElevatorPosition, 21);
     }
-    if(enforcedMaxHandOffHeight)
-    {
+    if (enforcedMaxHandOffHeight) {
       setElevatorPosition = Math.min(setElevatorPosition, 35);
     }
 
     elevatorMotor.setControl(
-      new MotionMagicVoltage(((setElevatorPosition - ElevatorConstants.elevatorHomePositionOffset) / ElevatorConstants.elevatorInchesPerRotation)));
+        new MotionMagicVoltage(((setElevatorPosition - ElevatorConstants.elevatorHomePositionOffset)
+            / ElevatorConstants.elevatorInchesPerRotation)));
 
     log();
   }

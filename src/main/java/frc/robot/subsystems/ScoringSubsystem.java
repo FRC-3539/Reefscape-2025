@@ -121,12 +121,19 @@ public class ScoringSubsystem extends SubsystemBase {
     scoringMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
 
 }
+
 public static double getCoralDistance() {
   return coralRange.getDistance().getValueAsDouble();
 }
+
+public static boolean coralDetected() {
+  return getCoralDistance() < 0.15;
+}
+
 public double getAlgaeDistance() {
   return algaeRange.getDistance().getValueAsDouble();
 }
+
 public static void setScoringBreakMode(boolean enabled) {
 		if (enabled) {
 			scoringMotor.setNeutralMode(NeutralModeValue.Brake);

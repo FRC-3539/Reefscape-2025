@@ -40,12 +40,9 @@ public class SetScorersCommand extends Command {
 	@Override
 	public boolean isFinished() {
 		// System.out.println(height + " " +
-		if(!wait)
-		{
+		if (!wait) {
 			return true;
-		}
-		else
-		{
+		} else {
 			return MathUtil.isNear(angle, ScoringSubsystem.getRotateAngle(), 0.2);
 		}
 	}

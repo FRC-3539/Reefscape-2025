@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.906376262626263,
-        "y": 2.4902146464646453
+        "x": 7.598,
+        "y": 0.734375
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.2050505050505054,
-        "y": 1.79905303030303
+        "x": 7.219079545454545,
+        "y": 1.2229829545454547
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.727,
-        "y": 1.077
+        "x": 5.33,
+        "y": 2.878
       },
       "prevControl": {
-        "x": 3.2047146464646463,
-        "y": 1.7579974747474747
+        "x": 5.787386363636364,
+        "y": 2.400285353535355
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,22 +33,22 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
-    "maxAngularVelocity": 540.0,
-    "maxAngularAcceleration": 720.0,
+    "maxVelocity": 1.0,
+    "maxAcceleration": 1.0,
+    "maxAngularVelocity": 180.0,
+    "maxAngularAcceleration": 180.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 53.130102354156016
+    "rotation": 121.67546873810917
   },
   "reversed": false,
-  "folder": "To Human Player 1",
+  "folder": "Right Start Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 59.93141717813753
+    "rotation": 90.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

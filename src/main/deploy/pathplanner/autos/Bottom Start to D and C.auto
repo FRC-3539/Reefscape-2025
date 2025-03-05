@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Bottom to Reef D"
+            "pathName": "Right to Reef D"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "D to Human Player 1"
+            "pathName": "D to Human Player 2"
           }
         },
         {
@@ -31,7 +31,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Human Player 1 to C"
+            "pathName": "Human Player 2 to C"
           }
         }
       ]

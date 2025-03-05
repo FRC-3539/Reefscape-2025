@@ -49,7 +49,7 @@ public class SetElevatorCommand extends Command {
 		}
 		else
 		{
-			return MathUtil.isNear(height, ElevatorSubsystem.getElevatorPosition(), 0.2);
+			return MathUtil.isNear(height, ElevatorSubsystem.getElevatorPosition(), 1);
 		}
 		// System.out.println(height + " " +
 		// RobotContainer.shooterSubsystem.getElevatorPosition());

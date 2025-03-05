@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.195198863636364,
-        "y": 2.589090909090909
+        "x": 3.906376262626263,
+        "y": 2.4902146464646453
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.178096590909091,
-        "y": 1.9409375
+        "x": 3.2050505050505054,
+        "y": 1.79905303030303
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 1.077
       },
       "prevControl": {
-        "x": 3.4800852272727276,
-        "y": 1.611875
+        "x": 3.2047146464646463,
+        "y": 1.7579974747474747
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,10 +45,10 @@
     "rotation": 53.130102354156016
   },
   "reversed": false,
-  "folder": "To Human Player 1",
+  "folder": "Reef To Human Player 2",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 126.11934084947985
+    "rotation": 59.93141717813753
   },
   "useDefaultConstraints": true
 }
