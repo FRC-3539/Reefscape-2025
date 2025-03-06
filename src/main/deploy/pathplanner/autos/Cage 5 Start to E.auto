@@ -5,9 +5,16 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Right to Reef E"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Right to Reef E"
+                }
+              }
+            ]
           }
         }
       ]

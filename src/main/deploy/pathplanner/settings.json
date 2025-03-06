@@ -1,6 +1,6 @@
 {
-  "robotWidth": 0.9144,
-  "robotLength": 0.9144,
+  "robotWidth": 0.914,
+  "robotLength": 0.914,
   "holonomicMode": true,
   "pathFolders": [
     "Human Player 2 to Reef",
@@ -31,7 +31,7 @@
   "driveGearing": 5.89,
   "maxDriveSpeed": 4.6,
   "driveMotorType": "krakenX60",
-  "driveCurrentLimit": 60.0,
+  "driveCurrentLimit": 80.0,
   "wheelCOF": 1.2,
   "flModuleX": 0.3048,
   "flModuleY": 0.305,

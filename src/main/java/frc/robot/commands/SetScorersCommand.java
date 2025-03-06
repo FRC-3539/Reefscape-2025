@@ -43,7 +43,7 @@ public class SetScorersCommand extends Command {
 		if (!wait) {
 			return true;
 		} else {
-			return MathUtil.isNear(angle, ScoringSubsystem.getRotateAngle(), 0.2);
+			return MathUtil.isNear(angle, ScoringSubsystem.getRotateAngle(), 1);
 		}
 	}
 }

@@ -37,7 +37,7 @@ public class VisionSubsystem extends Thread {
 			new Rotation3d(Math.toRadians(-1), Math.toRadians(9), Math.toRadians(-15)));
 
 	public PhotonCamera rightCam;
-	Transform3d robotToRightCam = new Transform3d(new Translation3d(0.18414,-0.27305, 0.26353),
+	Transform3d robotToRightCam = new Transform3d(new Translation3d(0.18414, -0.27305, 0.26353),
 			new Rotation3d(Math.toRadians(3), Math.toRadians(10), Math.toRadians(15)));
 
 	PhotonPoseEstimator leftPhotonPoseEstimator;
@@ -76,7 +76,7 @@ public class VisionSubsystem extends Thread {
 
 	public Optional<EstimatedRobotPose> getEstimatedLeftGlobalPose() {
 		Optional<EstimatedRobotPose> visEst = Optional.empty();
-		for(var change:leftCam.getAllUnreadResults()){
+		for (var change : leftCam.getAllUnreadResults()) {
 			visEst = leftPhotonPoseEstimator.update(change);
 		}
 		return visEst;
@@ -84,7 +84,7 @@ public class VisionSubsystem extends Thread {
 
 	public Optional<EstimatedRobotPose> getEstimatedRightGlobalPose() {
 		Optional<EstimatedRobotPose> visEst = Optional.empty();
-		for(var change:rightCam.getAllUnreadResults()){
+		for (var change : rightCam.getAllUnreadResults()) {
 			visEst = rightPhotonPoseEstimator.update(change);
 		}
 		return visEst;
@@ -95,41 +95,44 @@ public class VisionSubsystem extends Thread {
 	}
 
 	public void setVisionWeights(double visionX, double visionY, double visionDeg) {
-		//RobotContainer.driveSubsystem
-				//.setVisionMeasurementStdDevs(VecBuilder.fill(visionX, visionY, Units.degreesToRadians(visionDeg)));
+		// RobotContainer.driveSubsystem
+		// .setVisionMeasurementStdDevs(VecBuilder.fill(visionX, visionY,
+		// Units.degreesToRadians(visionDeg)));
 	}
 
 	public static void publishPose2d(String key, Pose2d pose) {
-		SmartDashboard.putNumberArray(key, new double[]{pose.getTranslation().getX(), pose.getTranslation().getY(),
-				pose.getRotation().getRadians()});
+		SmartDashboard.putNumberArray(key, new double[] { pose.getTranslation().getX(), pose.getTranslation().getY(),
+				pose.getRotation().getRadians() });
 	}
 
 	Alliance lastAlliance = null;
+
 	public void addVisionMeasurement(Pose2d pose, double timestampSeconds, Matrix<N3, N1> weights) {
-		//RobotContainer.driveSubsystem.addVisionMeasurement(pose, timestampSeconds, weights);
+		// RobotContainer.driveSubsystem.addVisionMeasurement(pose, timestampSeconds,
+		// weights);
 	}
 
 	public void log() {
 		SmartDashboard.putBoolean("/Vision/Left/Connected", leftCam.isConnected());
 		SmartDashboard.putBoolean("/Vision/Right/Connected", rightCam.isConnected());
 
-
 	}
+
 	public Matrix<N3, N1> getVisionWeights(double distanceRatio, int numTargets) {
 		double targetMultiplier = 1;
 		double visionCutOffDistance = 4;
 		distanceRatio = 0.1466 * Math.pow(1.6903, distanceRatio);
 		if (numTargets == 1) {
 			if (distanceRatio > visionCutOffDistance) {
-				return new Matrix<N3, N1>(new SimpleMatrix(new double[]{99999, 99999, 99999}));
+				return new Matrix<N3, N1>(new SimpleMatrix(new double[] { 99999, 99999, 99999 }));
 			}
 			targetMultiplier = 3;
 		}
-		Matrix<N3, N1> weights = new Matrix<N3, N1>(new SimpleMatrix(new double[]{distanceRatio * targetMultiplier,
-				distanceRatio * targetMultiplier, 3 + 15 * distanceRatio * targetMultiplier}));
+		Matrix<N3, N1> weights = new Matrix<N3, N1>(new SimpleMatrix(new double[] { distanceRatio * targetMultiplier,
+				distanceRatio * targetMultiplier, 3 + 15 * distanceRatio * targetMultiplier }));
 		return weights;
 	}
-	
+
 	@Override
 	public void run() {
 		/* Run as fast as possible, our signals will control the timing */
@@ -209,9 +212,10 @@ public class VisionSubsystem extends Thread {
 					if (rightTimeStamp != rightLastTimeStamp) {
 						publishPose2d("/DriveTrain/RightCamPose", camPoseRight.estimatedPose.toPose2d());
 						SmartDashboard.putString("/Vision/RightWeights", weights.toString());
-						
+
 						RobotContainer.DriveSubsystem.addVisionMeasurement(
-								camPoseRight.estimatedPose.toPose2d(), Utils.fpgaToCurrentTime(rightTimeStamp), weights);
+								camPoseRight.estimatedPose.toPose2d(), Utils.fpgaToCurrentTime(rightTimeStamp),
+								weights);
 					}
 					rightLastTimeStamp = rightTimeStamp;
 				}

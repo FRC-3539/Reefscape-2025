@@ -21,7 +21,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.5
+                        "waitTime": 0.5
                       }
                     },
                     {
@@ -66,7 +66,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.5
+                        "waitTime": 0.2
                       }
                     },
                     {
@@ -79,9 +79,22 @@
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "HumanPlayerIntakeCommand"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "CoralMidCommand"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "HumanPlayerIntakeCommand"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -104,7 +117,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.5
+                        "waitTime": 0.5
                       }
                     },
                     {
