@@ -8,11 +8,11 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.434911782471858,
-        "y": 2.1446336693578276
+        "x": 3.906376262626263,
+        "y": 1.8498737373737366
       },
-      "isLocked": false,
-      "linkedName": null
+      "isLocked": true,
+      "linkedName": "ReefE"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 0.8537878787906947
       },
       "prevControl": {
-        "x": 2.5446540404040396,
-        "y": 1.4229797979826153
+        "x": 2.981439393939394,
+        "y": 1.3111742424242425
       },
       "nextControl": null,
       "isLocked": false,

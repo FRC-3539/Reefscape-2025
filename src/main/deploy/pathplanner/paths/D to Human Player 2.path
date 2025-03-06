@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.906376262626263,
-        "y": 2.4902146464646453
+        "x": 3.93,
+        "y": 2.74
       },
       "prevControl": null,
       "nextControl": {
         "x": 3.2050505050505054,
-        "y": 1.79905303030303
+        "y": 2.0531565656565665
       },
-      "isLocked": false,
-      "linkedName": null
+      "isLocked": true,
+      "linkedName": "ReefD"
     },
     {
       "anchor": {
-        "x": 2.727,
-        "y": 1.077
+        "x": 1.7210858585858588,
+        "y": 0.7216540404040405
       },
       "prevControl": {
-        "x": 3.2047146464646463,
-        "y": 1.7579974747474747
+        "x": 2.371590909090909,
+        "y": 1.3213383838383832
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "folder": "Reef To Human Player 2",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 59.93141717813753
+    "rotation": 59.99999999999999
   },
   "useDefaultConstraints": true
 }
