@@ -150,13 +150,13 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 	public Command generateAlignCommand(AlignMode mode) {
 		Pose2d targetPoint;
 		if (mode == AlignMode.CLOSEST) {
-			targetPoint = getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.points.values()));
-			for (var entry : AlignConstants.points.entrySet()) {
+			targetPoint = getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.coralPoints.values()));
+			for (var entry : AlignConstants.coralPoints.entrySet()) {
 				if (entry.getValue().equals(targetPoint))
 					mode = entry.getKey();
 			}
 		} else {
-			targetPoint = AlignConstants.points.get(mode);
+			targetPoint = AlignConstants.coralPoints.get(mode);
 		}
 		if (getPose2d().getTranslation().getDistance(targetPoint.getTranslation()) < 0.01) {
 			return Commands.none();
@@ -166,7 +166,7 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 																								// this path.
 		SmartDashboard.putString("/DriveTrain/TargetPoint", mode.name());
 		publishPose2d("TargetPoint", targetPoint);
-		publishPose2d("ModePoint", AlignConstants.points.get(mode));
+		publishPose2d("ModePoint", AlignConstants.coralPoints.get(mode));
 		Command followPath = AutoBuilder.pathfindToPose(targetPoint, constraints);
 		followPath.addRequirements(this);
 		return followPath;

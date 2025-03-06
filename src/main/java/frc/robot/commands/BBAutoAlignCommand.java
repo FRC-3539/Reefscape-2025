@@ -38,15 +38,15 @@ public class BBAutoAlignCommand extends Command {
     Pose2d targetPoint;
 		if(mode == AlignMode.CLOSEST)
 		{
-			targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.points.values()));
-			for (var entry : AlignConstants.points.entrySet()) {
+			targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.coralPoints.values()));
+			for (var entry : AlignConstants.coralPoints.entrySet()) {
 				//if (entry.getValue().equals(targetPoint)) 
 					//mode = entry.getKey();
 			}
 		}
 		else
 		{
-			targetPoint = AlignConstants.points.get(mode);
+			targetPoint = AlignConstants.coralPoints.get(mode);
 		}
 		Pose2d robotPose = RobotContainer.DriveSubsystem.getPose2d();
 

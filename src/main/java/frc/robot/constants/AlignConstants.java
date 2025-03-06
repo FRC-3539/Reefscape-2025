@@ -15,30 +15,39 @@ public class AlignConstants {
         A, B, C, D, E, F, G, H, I, J, K, L, HUMANPLAYER1, HUMANPLAYER2, CLIMB1, CLIMB2, CLIMB3, CLOSEST;
     };
 
-    public static Map<AlignMode, Pose2d> points = new HashMap<>();
+    public static Map<AlignMode, Pose2d> coralPoints = new HashMap<>();
+    public static Map<AlignMode, Pose2d> algaePoints = new HashMap<>();
     private final double INCHES_TO_METERS = 0.0254;
 
     public AlignConstants() {
         // Manual points
-        points.put(AlignMode.HUMANPLAYER1, new Pose2d(1.75, 1.75, Rotation2d.fromDegrees(50)));
-        points.put(AlignMode.HUMANPLAYER2, new Pose2d(1.5, 6.75, Rotation2d.fromDegrees(-50)));
-        points.put(AlignMode.CLIMB1, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
-        points.put(AlignMode.CLIMB2, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
-        points.put(AlignMode.CLIMB3, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
+        coralPoints.put(AlignMode.HUMANPLAYER1, new Pose2d(1.75, 1.75, Rotation2d.fromDegrees(50)));
+        coralPoints.put(AlignMode.HUMANPLAYER2, new Pose2d(1.5, 6.75, Rotation2d.fromDegrees(-50)));
+        coralPoints.put(AlignMode.CLIMB1, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
+        coralPoints.put(AlignMode.CLIMB2, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
+        coralPoints.put(AlignMode.CLIMB3, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
 
         // Calculated points
-        points.put(AlignMode.A, getOffsetPoint(3.6576, 4.0269, 0, -ALIGN_STRAFE));
-        points.put(AlignMode.B, getOffsetPoint(3.6576, 4.0269, 0, +ALIGN_STRAFE));
-        points.put(AlignMode.C, getOffsetPoint(4.0740, 3.3073, 60, -ALIGN_STRAFE));
-        points.put(AlignMode.D, getOffsetPoint(4.0740, 3.3073, 60, +ALIGN_STRAFE));
-        points.put(AlignMode.E, getOffsetPoint(4.9057, 3.3073, 120, -ALIGN_STRAFE));
-        points.put(AlignMode.F, getOffsetPoint(4.9057, 3.3073, 120, +ALIGN_STRAFE));
-        points.put(AlignMode.G, getOffsetPoint(5.3209, 4.0269, 180, -ALIGN_STRAFE));
-        points.put(AlignMode.H, getOffsetPoint(5.3209, 4.0269, 180, +ALIGN_STRAFE));
-        points.put(AlignMode.I, getOffsetPoint(4.9057, 4.7474, -120, -ALIGN_STRAFE));
-        points.put(AlignMode.J, getOffsetPoint(4.9057, 4.7474, -120, +ALIGN_STRAFE));
-        points.put(AlignMode.K, getOffsetPoint(4.0740, 4.7474, -60, -ALIGN_STRAFE));
-        points.put(AlignMode.L, getOffsetPoint(4.0740, 4.7474, -60, +ALIGN_STRAFE));
+        coralPoints.put(AlignMode.A, getOffsetPoint(3.6576, 4.0269, 0, -ALIGN_STRAFE));
+        coralPoints.put(AlignMode.B, getOffsetPoint(3.6576, 4.0269, 0, +ALIGN_STRAFE));
+        coralPoints.put(AlignMode.C, getOffsetPoint(4.0740, 3.3073, 60, -ALIGN_STRAFE));
+        coralPoints.put(AlignMode.D, getOffsetPoint(4.0740, 3.3073, 60, +ALIGN_STRAFE));
+        coralPoints.put(AlignMode.E, getOffsetPoint(4.9057, 3.3073, 120, -ALIGN_STRAFE));
+        coralPoints.put(AlignMode.F, getOffsetPoint(4.9057, 3.3073, 120, +ALIGN_STRAFE));
+        coralPoints.put(AlignMode.G, getOffsetPoint(5.3209, 4.0269, 180, -ALIGN_STRAFE));
+        coralPoints.put(AlignMode.H, getOffsetPoint(5.3209, 4.0269, 180, +ALIGN_STRAFE));
+        coralPoints.put(AlignMode.I, getOffsetPoint(4.9057, 4.7474, -120, -ALIGN_STRAFE));
+        coralPoints.put(AlignMode.J, getOffsetPoint(4.9057, 4.7474, -120, +ALIGN_STRAFE));
+        coralPoints.put(AlignMode.K, getOffsetPoint(4.0740, 4.7474, -60, -ALIGN_STRAFE));
+        coralPoints.put(AlignMode.L, getOffsetPoint(4.0740, 4.7474, -60, +ALIGN_STRAFE));
+
+        // Algae points
+        algaePoints.put(AlignMode.A, getOffsetPoint(3.6576, 4.0269, 0, 0));
+        algaePoints.put(AlignMode.B, getOffsetPoint(4.0740, 3.3073, 60, 0));
+        algaePoints.put(AlignMode.C, getOffsetPoint(4.9057, 3.3073, 120, 0));
+        algaePoints.put(AlignMode.D, getOffsetPoint(5.3209, 4.0269, 180, 0));
+        algaePoints.put(AlignMode.E, getOffsetPoint(4.9057, 4.7474, -120, 0));
+        algaePoints.put(AlignMode.F, getOffsetPoint(4.0740, 4.7474, -60, 0));
     }
 
     private Pose2d getOffsetPoint(double tagX, double tagY, int robotFaceDirection, double strafe) {
