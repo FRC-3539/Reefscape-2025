@@ -7,6 +7,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.constants.*;
+import frc.robot.subsystems.ScoringSubsystem;
+import frc.robot.subsystems.ScoringSubsystem.ScoringMode;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class CoralPositionCommand extends SequentialCommandGroup {
@@ -24,28 +26,28 @@ public class CoralPositionCommand extends SequentialCommandGroup {
         addCommands(
             new ParallelCommandGroup(
                 new SetElevatorCommand(ElevatorConstants.troughHeight, auton),
-                new SetScorersCommand(ScoringConstants.troughPosition, auton)));
+                new SetScorersCommand(ScoringConstants.troughPosition, auton, ScoringMode.CORAL)));
         break;
 
       case LOW:
         addCommands(
             new ParallelCommandGroup(
                 new SetElevatorCommand(ElevatorConstants.coralLowHeight, auton),
-                new SetScorersCommand(ScoringConstants.coralLowPosition, auton)));
+                new SetScorersCommand(ScoringConstants.coralLowPosition, auton, ScoringMode.CORAL)));
         break;
 
       case MID:
         addCommands(
             new ParallelCommandGroup(
                 new SetElevatorCommand(ElevatorConstants.coralMidHeight, auton),
-                new SetScorersCommand(ScoringConstants.coralMidPosition, auton)));
+                new SetScorersCommand(ScoringConstants.coralMidPosition, auton, ScoringMode.CORAL)));
         break;
 
       case HIGH:
         addCommands(
             new ParallelCommandGroup(
                 new SetElevatorCommand(ElevatorConstants.coralHighHeight, auton),
-                new SetScorersCommand(ScoringConstants.coralHighPosition, auton)));
+                new SetScorersCommand(ScoringConstants.coralHighPosition, auton, ScoringMode.CORAL)));
         break;
     }
   }

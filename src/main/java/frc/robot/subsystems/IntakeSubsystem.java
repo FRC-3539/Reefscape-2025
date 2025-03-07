@@ -68,9 +68,19 @@ public class IntakeSubsystem extends SubsystemBase {
     //     .withInverted(InvertedValue.CounterClockwise_Positive));
   
     funnelDeployMotor = new TalonFX(IDConstants.funnelDeployMotorID, "rio");
-    funnelDeployMotor.getConfigurator().apply(
-      new TalonFXConfiguration().MotorOutput
-        .withInverted(InvertedValue.Clockwise_Positive));
+    if(IntakeConstants.isInverted == 0)
+    {
+      funnelDeployMotor.getConfigurator().apply(
+        new TalonFXConfiguration().MotorOutput
+          .withInverted(InvertedValue.Clockwise_Positive));
+    }
+    else
+    {
+      funnelDeployMotor.getConfigurator().apply(
+        new TalonFXConfiguration().MotorOutput
+          .withInverted(InvertedValue.CounterClockwise_Positive));
+    }
+   
     funnelDeployMotor.setNeutralMode(NeutralModeValue.Brake);
 
   

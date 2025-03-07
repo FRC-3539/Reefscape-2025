@@ -37,6 +37,12 @@ public class ScoringSubsystem extends SubsystemBase {
   DecimalFormat df = new DecimalFormat("#.00000");
   private static double scoringRestrictedMin = 35;
 
+  public enum ScoringMode {
+    ALGAE, CORAL;
+  }
+
+  public static ScoringMode mode = ScoringMode.CORAL;
+
   public ScoringSubsystem() {
     scoringMotor = new TalonFX(IDConstants.scoringMotorID, "rio");
     scoringMotor.getConfigurator().apply(
@@ -139,6 +145,14 @@ public class ScoringSubsystem extends SubsystemBase {
     } else {
       scoringMotor.setNeutralMode(NeutralModeValue.Coast);
     }
+  }
+
+  public static ScoringMode getIntakeMode() {
+    return mode;
+  }
+
+  public static void setIntakeMode(ScoringMode newMode) {
+    mode = newMode;
   }
 
   public void log() {

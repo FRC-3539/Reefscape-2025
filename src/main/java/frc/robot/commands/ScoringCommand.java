@@ -10,35 +10,42 @@ import frc.robot.subsystems.ScoringSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ScoringCommand extends Command {
-  public enum ScoringMode {
-		ALGAE, CORAL;
-	}  
+  boolean intake;
 
-  ScoringMode mode;
-
-  public ScoringCommand(ScoringMode mode) {
+  public ScoringCommand(boolean intake) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.mode = mode;
+    this.intake = intake;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-      switch (mode) {
-			case  ALGAE:
-      ScoringSubsystem.scoringMotor(ScoringConstants.algaeScoringVoltage);
+    switch (ScoringSubsystem.getIntakeMode()) {
+      case ALGAE:
+        if (!intake) {
+          ScoringSubsystem.scoringMotor(ScoringConstants.algaeScoringVoltage);
 
-      break;
-      case  CORAL:
-      ScoringSubsystem.scoringMotor(ScoringConstants.coralScoringVoltage);
+        } else {
+          ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage);
+        }
 
-      break;
+        break;
+      case CORAL:
+        if (!intake) {
+          ScoringSubsystem.scoringMotor(ScoringConstants.coralScoringVoltage);
+
+        } else {
+          ScoringSubsystem.scoringMotor(-ScoringConstants.coralScoringVoltage);
+        }
+
+        break;
     }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+  }
 
   // Called once the command ends or is interrupted.
   @Override

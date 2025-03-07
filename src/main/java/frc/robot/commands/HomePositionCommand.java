@@ -7,13 +7,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.ScoringSubsystem.ScoringMode;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class HomePositionCommand extends SequentialCommandGroup {
   private Command[] commands = {new ParallelCommandGroup(
-    new SetElevatorCommand(0, true), new SetScorersCommand(0, true)
+    new SetElevatorCommand(0, true), new SetScorersCommand(0, true, ScoringMode.CORAL)
   )};  /** Creates a new HomePositionCommand. */
   public HomePositionCommand() {
     // Add your commands in the addCommands() call, e.g.

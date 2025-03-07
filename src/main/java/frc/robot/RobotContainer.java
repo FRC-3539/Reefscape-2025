@@ -25,8 +25,8 @@ import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.ScoringConstants;
 import frc.robot.Generated.TunerConstants;
 import frc.robot.commands.*;
-import frc.robot.commands.ScoringCommand.ScoringMode;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.ScoringSubsystem.ScoringMode;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -84,9 +84,7 @@ public class RobotContainer {
   {
       
     //Scoring Commands
-    NamedCommands.registerCommand("AlgaeScoringCommand", new ScoringCommand(ScoringMode.ALGAE));
-    NamedCommands.registerCommand("CoralScoringCommand", new ScoringCommand(ScoringMode.CORAL));
-
+    NamedCommands.registerCommand("ScoringCommand", new ScoringCommand(false));
     
     //Setting positions to score Coral
     NamedCommands.registerCommand("TroughCommand", new CoralPositionCommand(CoralMode.TROUGH, true));
@@ -145,8 +143,8 @@ public class RobotContainer {
     operatorController.y().onTrue(new CoralPositionCommand(CoralMode.HIGH, false));
    
     // Scoring Commands
-    operatorController.leftTrigger().whileTrue(new ScoringCommand(ScoringMode.ALGAE));
-    operatorController.rightTrigger().whileTrue(new ScoringCommand(ScoringMode.CORAL));
+    operatorController.leftTrigger().whileTrue(new ScoringCommand(true));
+    operatorController.rightTrigger().whileTrue(new ScoringCommand(false));
 
     //Climbing Command
     // operatorController.start().onTrue(new HomePositionCommand());

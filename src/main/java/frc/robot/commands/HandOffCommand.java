@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.SetFunnelPositionCommand.IntakeMode;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.ScoringConstants;
+import frc.robot.subsystems.ScoringSubsystem;
+import frc.robot.subsystems.ScoringSubsystem.ScoringMode;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,13 +20,14 @@ public class HandOffCommand extends SequentialCommandGroup {
   IntakeMode mode;
 
   public HandOffCommand(boolean auton, IntakeMode mode) {
+    ScoringSubsystem.setIntakeMode(ScoringSubsystem.ScoringMode.CORAL);
     this.auton = auton;
     this.mode = mode;
 
     addCommands(
       new ParallelCommandGroup(
         new SetElevatorCommand(ElevatorConstants.handOffHeight, auton),
-        new SetScorersCommand(ScoringConstants.handOffPosition, auton),
+        new SetScorersCommand(ScoringConstants.handOffPosition, auton, ScoringMode.CORAL),
         new SetFunnelPositionCommand(mode)));
   }
 }
