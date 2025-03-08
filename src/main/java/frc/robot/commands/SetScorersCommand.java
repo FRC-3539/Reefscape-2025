@@ -6,9 +6,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.SetFunnelPositionCommand.IntakeMode;
+import frc.robot.constants.EnumConstants.*;
 import frc.robot.subsystems.ScoringSubsystem;
-import frc.robot.subsystems.ScoringSubsystem.ScoringMode;
+import frc.robot.constants.EnumConstants.*;
+
 
 public class SetScorersCommand extends Command {
 	/** Creates a new SetElevatorCommand. */

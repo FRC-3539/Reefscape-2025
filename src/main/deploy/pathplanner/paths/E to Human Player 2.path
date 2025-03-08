@@ -16,15 +16,15 @@
     },
     {
       "anchor": {
-        "x": 1.5279671717171714,
-        "y": 0.9452651515151512
+        "x": 1.46,
+        "y": 1.2
       },
       "prevControl": {
-        "x": 2.6864065656565663,
-        "y": 1.402651515148699
+        "x": 2.5748737373737374,
+        "y": 1.4738005050505045
       },
       "nextControl": null,
-      "isLocked": false,
+      "isLocked": true,
       "linkedName": "Human Player 2"
     }
   ],
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 55.0
+    "rotation": 52.50000000000001
   },
   "reversed": false,
   "folder": "Reef To Human Player 2",

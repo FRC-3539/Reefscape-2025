@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.RobotContainer;
 import frc.robot.constants.AlignConstants;
-import frc.robot.constants.AlignConstants.AlignMode;
+import frc.robot.constants.EnumConstants.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +23,15 @@ import org.frcteam3539.Byte_Swerve_Lib.control.SimplePathBuilder;
 import org.frcteam3539.Byte_Swerve_Lib.control.Trajectory;
 import org.frcteam3539.Byte_Swerve_Lib.control.TrajectoryConstraint;
 
+
 public class BBAutoAlignCommand extends Command {
 	/** Wrapper command to generate a trajectory to the nearest Stage Pose */
 	AlignMode mode;
+  ScoringMode piece;
 
-	public BBAutoAlignCommand(AlignMode mode) {
+	public BBAutoAlignCommand(AlignMode mode, ScoringMode piece) {
     this.mode = mode;
+    this.piece = piece;
 	}
 
 	// Called when the command is initially scheduled.
@@ -38,11 +41,12 @@ public class BBAutoAlignCommand extends Command {
     Pose2d targetPoint;
 		if(mode == AlignMode.CLOSEST)
 		{
+      if(piece == ScoringMode.CORAL){
 			targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.coralPoints.values()));
-			for (var entry : AlignConstants.coralPoints.entrySet()) {
-				//if (entry.getValue().equals(targetPoint)) 
-					//mode = entry.getKey();
-			}
+      }
+      else {
+        targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.algaePoints.values()));  
+      }
 		}
 		else
 		{

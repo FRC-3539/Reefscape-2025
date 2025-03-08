@@ -12,10 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.AlgaePositionCommand.AlgaeMode;
-import frc.robot.commands.CoralPositionCommand.CoralMode;
-import frc.robot.commands.SetFunnelPositionCommand.IntakeMode;
-import frc.robot.constants.AlignConstants.AlignMode;
 import frc.robot.constants.AlignConstants;
 import frc.robot.constants.ClimberConstants;
 import frc.robot.constants.DriveConstants;
@@ -26,7 +22,7 @@ import frc.robot.constants.ScoringConstants;
 import frc.robot.Generated.TunerConstants;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import frc.robot.subsystems.ScoringSubsystem.ScoringMode;
+import frc.robot.constants.EnumConstants.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -119,8 +115,8 @@ public class RobotContainer {
     ClimberSubsystem.setDefaultCommand(new ClimberCommand());
 
     driverController.start().whileTrue(new ZeroGyroCommand());
-    driverController.a().whileTrue(new BBAutoAlignCommand(AlignMode.A));
-    driverController.b().whileTrue(new BBAutoAlignCommand(AlignMode.CLOSEST));
+    driverController.a().whileTrue(new BBAutoAlignCommand(AlignMode.CLOSEST, ScoringMode.ALGAE));
+    driverController.b().whileTrue(new BBAutoAlignCommand(AlignMode.CLOSEST, ScoringMode.CORAL));
 
 
     // Intake commands

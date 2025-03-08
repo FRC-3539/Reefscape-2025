@@ -8,15 +8,13 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.constants.*;
 import frc.robot.subsystems.ScoringSubsystem;
-import frc.robot.subsystems.ScoringSubsystem.ScoringMode;
+import frc.robot.constants.EnumConstants.*;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class CoralPositionCommand extends SequentialCommandGroup {
   boolean auton;
 
-  public enum CoralMode {
-    TROUGH, LOW, MID, HIGH;
-  }
+  
 
   public CoralPositionCommand(CoralMode mode, boolean auton) {
     this.auton = auton;

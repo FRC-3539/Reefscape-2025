@@ -22,6 +22,8 @@ import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
+import frc.robot.constants.EnumConstants.*;
+
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,12 +37,9 @@ public class ScoringSubsystem extends SubsystemBase {
   private static CANrange algaeRange, coralRange;
   private static double requestedRotatePos = 0;
   DecimalFormat df = new DecimalFormat("#.00000");
-  private static double scoringRestrictedMin = 35;
+  private static double scoringRestrictedMin = 30;
 
-  public enum ScoringMode {
-    ALGAE, CORAL;
-  }
-
+  
   public static ScoringMode mode = ScoringMode.CORAL;
 
   public ScoringSubsystem() {
@@ -195,7 +194,9 @@ public class ScoringSubsystem extends SubsystemBase {
         setRotatePosition = Math.max(setRotatePosition, scoringRestrictedMin);
       }
     }
-    if (getAlgaeDistance() < 0.25 && ElevatorSubsystem.getElevatorPosition() < 15) {
+
+    // Flip arm up if algae detected
+    if (getAlgaeDistance() < 0.15 && ElevatorSubsystem.getElevatorPosition() < 15) {
       setRotatePosition = Math.max(setRotatePosition, 70);
 
     }

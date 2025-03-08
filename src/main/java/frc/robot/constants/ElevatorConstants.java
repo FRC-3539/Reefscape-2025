@@ -16,8 +16,8 @@ public class ElevatorConstants extends BBConstants {
 	public static double coralHighHeight = 74.75;
 	public static double netHeight = 79.75;
 	public static double processorHeight = 22.75;
-	public static double algaeLowHeight = 33.5;
-	public static double algaeHighHeight = 49.0;
+	public static double algaeLowHeight = 30;
+	public static double algaeHighHeight = 48.0;
 	public static double elevatorkP = 10.0;
 	public static double elevatorkI = 0.0;
 	public static double elevatorkD = 0.0;
@@ -29,5 +29,5 @@ public class ElevatorConstants extends BBConstants {
 	public static double elevatorSoftMax = 80.0;
 	public static double elevatorHomePositionOffset = 22.75;
 	public static double handOffHeight = 22.75;
-	public static double groundHeight = 8.0;
+	public static double groundHeight = 7.0;
 }

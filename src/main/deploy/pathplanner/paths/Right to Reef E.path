@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.355934343434343,
-        "y": 2.0226641414141415
+        "x": 6.274621212121213,
+        "y": 2.215782828282828
       },
       "isLocked": true,
       "linkedName": "StartCage5"
@@ -20,8 +20,8 @@
         "y": 2.74
       },
       "prevControl": {
-        "x": 5.593623737373736,
-        "y": 2.3275883838383833
+        "x": 5.817234848484849,
+        "y": 2.358080808080808
       },
       "nextControl": null,
       "isLocked": true,
@@ -48,7 +48,7 @@
   "folder": "Right Start Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 90.0
+    "rotation": 119.99999999999999
   },
   "useDefaultConstraints": false
 }

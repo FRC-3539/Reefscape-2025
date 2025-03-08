@@ -10,12 +10,12 @@ import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.ScoringConstants;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ScoringSubsystem;
+import frc.robot.constants.EnumConstants.*;
+
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class SetFunnelPositionCommand extends Command {
-  public enum IntakeMode {
-    GROUND, HUMAN, REVERSE, HOME, HANDOFF;
-  }
+  
 
   IntakeMode mode;
 

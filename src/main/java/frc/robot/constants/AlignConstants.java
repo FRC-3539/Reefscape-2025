@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import frc.robot.constants.EnumConstants.*;
+
 
 public class AlignConstants {
     // Distance of robot center to reef face, in inches
@@ -11,9 +13,7 @@ public class AlignConstants {
     // Robot center offset shift along reef face, in inches
     private final double ALIGN_STRAFE = 6.5;
 
-    public static enum AlignMode {
-        A, B, C, D, E, F, G, H, I, J, K, L, HUMANPLAYER1, HUMANPLAYER2, CLIMB1, CLIMB2, CLIMB3, CLOSEST;
-    };
+    
 
     public static Map<AlignMode, Pose2d> coralPoints = new HashMap<>();
     public static Map<AlignMode, Pose2d> algaePoints = new HashMap<>();
@@ -21,8 +21,10 @@ public class AlignConstants {
 
     public AlignConstants() {
         // Manual points
-        coralPoints.put(AlignMode.HUMANPLAYER1, new Pose2d(1.75, 1.75, Rotation2d.fromDegrees(50)));
-        coralPoints.put(AlignMode.HUMANPLAYER2, new Pose2d(1.5, 6.75, Rotation2d.fromDegrees(-50)));
+        coralPoints.put(AlignMode.HUMANPLAYER1, new Pose2d(1.75, 6.75, Rotation2d.fromDegrees(-52.5)));
+        // Bumper 9.5" from human player wall
+        // Robot Frame 12.75" from human player wall
+        coralPoints.put(AlignMode.HUMANPLAYER2, new Pose2d(1.46, 1.20, Rotation2d.fromDegrees(52.5)));
         coralPoints.put(AlignMode.CLIMB1, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
         coralPoints.put(AlignMode.CLIMB2, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));
         coralPoints.put(AlignMode.CLIMB3, new Pose2d(8.5, 5.25, Rotation2d.fromDegrees(-90)));

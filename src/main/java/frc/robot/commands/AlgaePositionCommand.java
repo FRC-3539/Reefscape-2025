@@ -7,16 +7,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.constants.*;
+import frc.robot.constants.EnumConstants.*;
 import frc.robot.subsystems.ScoringSubsystem;
-import frc.robot.subsystems.ScoringSubsystem.ScoringMode;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class AlgaePositionCommand extends SequentialCommandGroup {
   boolean auton;
 
-  public enum AlgaeMode {
-    PROCESSOR, REEFLOW, REEFHIGH, NET, GROUND;
-  }
+  
 
   public AlgaePositionCommand(AlgaeMode mode, boolean auton) {
     this.auton = auton;
