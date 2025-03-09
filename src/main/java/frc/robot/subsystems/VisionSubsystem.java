@@ -33,8 +33,11 @@ public class VisionSubsystem extends Thread {
 	AprilTagFieldLayout aprilTagFieldLayout;
 
 	public PhotonCamera leftCam;
-	Transform3d robotToLeftCam = new Transform3d(new Translation3d(0.18414, 0.27305, 0.26353),
+	Transform3d robotToLeftCam = new Transform3d(new Translation3d(0.19049, 0.2921, 0.26353),
 			new Rotation3d(Math.toRadians(-1), Math.toRadians(9), Math.toRadians(-15)));
+	// Transform3d robotToLeftCam = new Transform3d(new Translation3d(0.18414,
+	// 0.27305, 0.26353),
+	// new Rotation3d(Math.toRadians(-1), Math.toRadians(9), Math.toRadians(-15)));
 
 	public PhotonCamera rightCam;
 	Transform3d robotToRightCam = new Transform3d(new Translation3d(0.18414, -0.27305, 0.26353),

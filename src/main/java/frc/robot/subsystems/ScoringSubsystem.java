@@ -6,10 +6,12 @@ package frc.robot.subsystems;
 
 import java.text.DecimalFormat;
 
+import com.ctre.phoenix6.configs.ClosedLoopGeneralConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.FovParamsConfigs;
 import com.ctre.phoenix6.configs.MagnetSensorConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.SlotConfigs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -23,7 +25,6 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 import frc.robot.constants.EnumConstants.*;
-
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -39,14 +40,19 @@ public class ScoringSubsystem extends SubsystemBase {
   DecimalFormat df = new DecimalFormat("#.00000");
   private static double scoringRestrictedMin = 30;
 
-  
   public static ScoringMode mode = ScoringMode.CORAL;
 
   public ScoringSubsystem() {
     scoringMotor = new TalonFX(IDConstants.scoringMotorID, "rio");
-    scoringMotor.getConfigurator().apply(
-        new TalonFXConfiguration().MotorOutput
-            .withInverted(InvertedValue.CounterClockwise_Positive));
+    if (ScoringConstants.invertScorer == 0) {
+      scoringMotor.getConfigurator().apply(
+          new TalonFXConfiguration().MotorOutput
+              .withInverted(InvertedValue.CounterClockwise_Positive));
+    } else {
+      scoringMotor.getConfigurator().apply(
+          new TalonFXConfiguration().MotorOutput
+              .withInverted(InvertedValue.Clockwise_Positive));
+    }
     scoringMotor.setNeutralMode(NeutralModeValue.Brake);
 
     rotateMotor = new TalonFX(IDConstants.rotateMotorID, "rio");
@@ -72,6 +78,8 @@ public class ScoringSubsystem extends SubsystemBase {
         .apply(new MotionMagicConfigs()
             .withMotionMagicAcceleration(ScoringConstants.rotateAcceleration)
             .withMotionMagicCruiseVelocity(ScoringConstants.rotateCruiseVelocity));
+
+    rotateMotor.setNeutralMode(NeutralModeValue.Brake);
 
     rotateCanCoder = new CANcoder(IDConstants.rotateCanCoderID, "rio");
 
@@ -105,8 +113,9 @@ public class ScoringSubsystem extends SubsystemBase {
   }
 
   public static double getRotateAngle() {
-    return Units.rotationsToDegrees(
-        rotateCanCoder.getAbsolutePosition().getValueAsDouble());
+    return Units.rotationsToDegrees(rotateMotor.getPosition().getValueAsDouble());
+    // return Units.rotationsToDegrees(
+    //     rotateCanCoder.getAbsolutePosition().getValueAsDouble());
   }
 
   public static void setRotateAngle(double angle) {
