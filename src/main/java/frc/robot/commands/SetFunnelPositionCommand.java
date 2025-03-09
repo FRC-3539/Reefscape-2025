@@ -43,7 +43,7 @@ public class SetFunnelPositionCommand extends Command {
         break;
 
       case REVERSE:
-        IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.groundFunnelDeployAngle);
+        IntakeSubsystem.setFunnelDeployAngle(0);
         IntakeSubsystem.setCoralIntakeMotor(-IntakeConstants.coralIntakeVoltage);
         IntakeSubsystem.setFunnelIntakeMotor(-IntakeConstants.funnelIntakeVoltage);
         break;

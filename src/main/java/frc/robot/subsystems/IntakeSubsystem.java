@@ -12,6 +12,7 @@ import frc.robot.constants.IDConstants;
 
 import java.text.DecimalFormat;
 
+import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.CommutationConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.FovParamsConfigs;
@@ -54,9 +55,9 @@ public class IntakeSubsystem extends SubsystemBase {
 				.apply(new MagnetSensorConfigs().withAbsoluteSensorDiscontinuityPoint(IntakeConstants.funnelDeployDiscontPoint)
 						.withSensorDirection(SensorDirectionValue.Clockwise_Positive)
 						.withMagnetOffset(IntakeConstants.funnelDeployOffset));
-
+    
     funnelDeployCanCoder.setPosition(funnelDeployCanCoder.getAbsolutePosition().getValueAsDouble());
-
+    
     // algaeDeployMotor = new TalonFX(IDConstants.algaeDeployMotorID, "Default Name");
     // algaeDeployMotor.getConfigurator().apply(
     //   new TalonFXConfiguration().MotorOutput
@@ -116,6 +117,7 @@ public class IntakeSubsystem extends SubsystemBase {
     funnelDeployMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
 				.withForwardSoftLimitThreshold(degreesToFunnelDeployRotations(IntakeConstants.funnelDeploySoftMax)).withReverseSoftLimitEnable(true)
 				.withReverseSoftLimitThreshold(degreesToFunnelDeployRotations(IntakeConstants.funnelDeploySoftMin)));
+
 
     funnelDeployMotor.getConfigurator()
 				.apply(new FeedbackConfigs().withFeedbackRemoteSensorID(IDConstants.funnelDeployCanCoderID)

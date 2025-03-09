@@ -9,7 +9,6 @@ public class IDConstants extends BBConstants {
 	}
 
 	public static int algaeDeployMotorID = 12;
-	public static int algaeIntakeMotorID = 13;
 	public static int algaeRangeID = 26;
 	public static int BLCanCoderID = 21;
 	public static int BLDriveID = 4;
@@ -35,4 +34,6 @@ public class IDConstants extends BBConstants {
 	public static int rotateCanCoderID = 25;
 	public static int rotateMotorID = 14;
 	public static int scoringMotorID = 15;
+	public static int Candle = 13;
+	public static String elevatorMotorCanBusName = "rio";
 }

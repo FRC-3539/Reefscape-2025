@@ -9,7 +9,7 @@ public class IntakeConstants extends BBConstants {
 	}
 
 	public static double algaeIntakeVoltage = 5.0;
-	public static double coralIntakeVoltage = 2;
+	public static double coralIntakeVoltage = 3.5;
 	public static double funnelIntakeVoltage = 5.0;
 	public static double funnelDeployVoltage = 2.0;
 	public static double funnelDeploykP = 64.0;
@@ -22,10 +22,10 @@ public class IntakeConstants extends BBConstants {
 	public static double funnelDeploySoftMin = -40.0;
 	public static double funnelDeploySoftMax = 105.0;
 	public static double funnelDeployMotorToMechanism = 64.44;
-	public static double funnelDeployOffset = 0.533305;
+	public static double funnelDeployOffset = -0.467041015625;
 	public static double homeFunnelDeployAngle = 100.0;
 	public static double humanFunnelDeployAngle = 80.0;
-	public static double groundFunnelDeployAngle = -41.0;
+	public static double groundFunnelDeployAngle = -43.0;
 	public static double algaeDeployVoltage = 5.0;
 	public static double algaeDeploykP = 0.0;
 	public static double algaeDeploykI = 0.0;
@@ -39,5 +39,5 @@ public class IntakeConstants extends BBConstants {
 	public static double funnelDeployDiscontPoint = 0.75;
 	public static double funnelDeployRestingRotations = 0.0;
 	public static double handOffFunnelDeployAngle = 80.0;
-	public static int isInverted = 0;
+	public static int isInverted = 1;
 }

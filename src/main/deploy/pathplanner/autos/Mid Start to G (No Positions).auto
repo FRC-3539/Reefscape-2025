@@ -5,22 +5,9 @@
     "data": {
       "commands": [
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": " Mid to Reef H"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "CoralHighCommand"
-                }
-              }
-            ]
+            "pathName": "Mid to Reef G"
           }
         },
         {
@@ -46,12 +33,6 @@
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "TroughCommand"
           }
         }
       ]

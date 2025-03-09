@@ -14,11 +14,11 @@ import frc.robot.constants.EnumConstants.*;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class AutoAlignCommand extends Command {
 
-  AlignMode mode;
+  AlignPoint mode;
   Command alignCommand;
 
   /** Creates a new AutoAlignCommand. */
-  public AutoAlignCommand(AlignMode targetPoint) {
+  public AutoAlignCommand(AlignPoint targetPoint) {
     mode = targetPoint;
 
   }

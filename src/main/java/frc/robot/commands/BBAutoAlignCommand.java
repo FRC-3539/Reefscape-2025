@@ -26,10 +26,10 @@ import org.frcteam3539.Byte_Swerve_Lib.control.TrajectoryConstraint;
 
 public class BBAutoAlignCommand extends Command {
 	/** Wrapper command to generate a trajectory to the nearest Stage Pose */
-	AlignMode mode;
+	AlignPoint mode;
   ScoringMode piece;
 
-	public BBAutoAlignCommand(AlignMode mode, ScoringMode piece) {
+	public BBAutoAlignCommand(AlignPoint mode, ScoringMode piece) {
     this.mode = mode;
     this.piece = piece;
 	}
@@ -39,13 +39,19 @@ public class BBAutoAlignCommand extends Command {
 
 	public void initialize() {
     Pose2d targetPoint;
-		if(mode == AlignMode.CLOSEST)
+		if(mode == AlignPoint.CLOSEST)
 		{
       if(piece == ScoringMode.CORAL){
 			targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.coralPoints.values()));
       }
-      else {
+      else if(piece == ScoringMode.ALGAE){
         targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.algaePoints.values()));  
+      }
+      else if(piece == ScoringMode.CLIMB){
+        targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.climbPoints.values()));  
+      }
+      else {
+        targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.humanPlayerPoints.values()));  
       }
 		}
 		else

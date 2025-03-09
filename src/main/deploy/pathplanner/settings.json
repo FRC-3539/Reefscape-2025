@@ -13,11 +13,10 @@
   ],
   "autoFolders": [
     " F Start",
+    "Cage 5 Start",
     "D Start",
-    "G Start",
-    "H Start",
-    "J Start",
-    "Cage 5 Start"
+    "Middle Start",
+    "J Start"
   ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,

@@ -9,7 +9,7 @@ public class EnumConstants {
         TROUGH, LOW, MID, HIGH;
     }
 
-    public static enum AlignMode {
+    public static enum AlignPoint {
         A, B, C, D, E, F, G, H, I, J, K, L, HUMANPLAYER1, HUMANPLAYER2, CLIMB1, CLIMB2, CLIMB3, CLOSEST;
     };
 
@@ -18,6 +18,6 @@ public class EnumConstants {
     }
 
     public enum ScoringMode {
-        ALGAE, CORAL;
+        ALGAE, CORAL, CLIMB, HUMANPLAYER;
     }
 }

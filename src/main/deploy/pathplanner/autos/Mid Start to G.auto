@@ -5,15 +5,59 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Mid to Reef G"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Mid to Reef G"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "CoralHighCommand"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 1.0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "CoralScoringCommand"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "TroughCommand"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "G Start",
+  "folder": "Middle Start",
   "choreoAuto": false
 }

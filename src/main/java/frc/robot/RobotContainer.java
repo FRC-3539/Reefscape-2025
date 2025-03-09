@@ -115,11 +115,13 @@ public class RobotContainer {
     ClimberSubsystem.setDefaultCommand(new ClimberCommand());
 
     driverController.start().whileTrue(new ZeroGyroCommand());
-    driverController.a().whileTrue(new BBAutoAlignCommand(AlignMode.CLOSEST, ScoringMode.ALGAE));
-    driverController.b().whileTrue(new BBAutoAlignCommand(AlignMode.CLOSEST, ScoringMode.CORAL));
+    driverController.a().whileTrue(new BBAutoAlignCommand(AlignPoint.CLOSEST, ScoringMode.ALGAE));
+    driverController.b().whileTrue(new BBAutoAlignCommand(AlignPoint.CLOSEST, ScoringMode.CORAL));
+    driverController.y().whileTrue(new BBAutoAlignCommand(AlignPoint.CLOSEST, ScoringMode.CLIMB));
+    driverController.x().whileTrue(new BBAutoAlignCommand(AlignPoint.CLOSEST, ScoringMode.HUMANPLAYER));
 
 
-    // Intake commands
+    // Intake commands\
     operatorController.axisGreaterThan(1, 0.5).whileTrue(
       new HandOffCommand(false, IntakeMode.GROUND));
     operatorController.axisLessThan(1, -0.5).whileTrue(
@@ -132,10 +134,10 @@ public class RobotContainer {
     operatorController.povUp().onTrue(new AlgaePositionCommand(AlgaeMode.NET, false));
 
     //Coral Commands
-    // operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE));
-    operatorController.a().onTrue(new CoralPositionCommand(CoralMode.TROUGH, false));
-    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.LOW, false));
-    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.MID, false));
+    operatorController.back().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE));
+    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.TROUGH, false));
+    operatorController.a().onTrue(new CoralPositionCommand(CoralMode.LOW, false));
+    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.MID, false));
     operatorController.y().onTrue(new CoralPositionCommand(CoralMode.HIGH, false));
    
     // Scoring Commands

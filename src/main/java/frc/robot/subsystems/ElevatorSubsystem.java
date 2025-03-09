@@ -29,7 +29,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   private static boolean enforcedMinimumHeight, enforcedMaxHandOffHeight = false;
 
   public ElevatorSubsystem() {
-    elevatorMotor = new TalonFX(IDConstants.elevatorMotorID, "Default Name");
+    elevatorMotor = new TalonFX(IDConstants.elevatorMotorID, IDConstants.elevatorMotorCanBusName);
     elevatorMotor.getConfigurator().apply(
         new TalonFXConfiguration().MotorOutput
             .withInverted(InvertedValue.CounterClockwise_Positive));

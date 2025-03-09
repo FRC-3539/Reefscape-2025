@@ -42,7 +42,7 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.constants.AlignConstants;
 import frc.robot.constants.DriveConstants;
-import frc.robot.constants.EnumConstants.AlignMode;
+import frc.robot.constants.EnumConstants.AlignPoint;
 import frc.robot.constants.IDConstants;
 
 public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder> implements Subsystem {
@@ -144,9 +144,9 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 				pose.getRotation().getRadians() });
 	}
 
-	public Command generateAlignCommand(AlignMode mode) {
+	public Command generateAlignCommand(AlignPoint mode) {
 		Pose2d targetPoint;
-		if (mode == AlignMode.CLOSEST) {
+		if (mode == AlignPoint.CLOSEST) {
 			targetPoint = getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.coralPoints.values()));
 			for (var entry : AlignConstants.coralPoints.entrySet()) {
 				if (entry.getValue().equals(targetPoint))
