@@ -9,7 +9,6 @@ public class ClimberConstants extends BBConstants {
 	}
 
 	public static double climberVoltage = 2.0;
-	public static double climberMotorToMechanism = 64.44;
 	public static double climberRestingRotations = 0.0;
 	public static double restClimberAngle = 0.0;
 	public static double climberkP = 0.0;
@@ -19,6 +18,6 @@ public class ClimberConstants extends BBConstants {
 	public static double climberkV = 0.0;
 	public static double climberAcceleration = 0.0;
 	public static double climberCruiseVelocity = 0.0;
-	public static double climberSoftMin = -120.0;
-	public static double climberSoftMax = 100.0;
+	public static double climberSoftMin = -240;
+	public static double climberSoftMax = 210;
 }

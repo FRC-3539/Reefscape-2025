@@ -55,9 +55,7 @@ public class IntakeSubsystem extends SubsystemBase {
 				.apply(new MagnetSensorConfigs().withAbsoluteSensorDiscontinuityPoint(IntakeConstants.funnelDeployDiscontPoint)
 						.withSensorDirection(SensorDirectionValue.Clockwise_Positive)
 						.withMagnetOffset(IntakeConstants.funnelDeployOffset));
-    
-    funnelDeployCanCoder.setPosition(funnelDeployCanCoder.getAbsolutePosition().getValueAsDouble());
-    
+        
     // algaeDeployMotor = new TalonFX(IDConstants.algaeDeployMotorID, "Default Name");
     // algaeDeployMotor.getConfigurator().apply(
     //   new TalonFXConfiguration().MotorOutput

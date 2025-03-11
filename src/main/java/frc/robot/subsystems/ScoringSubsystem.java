@@ -88,8 +88,6 @@ public class ScoringSubsystem extends SubsystemBase {
             .withSensorDirection(SensorDirectionValue.CounterClockwise_Positive)
             .withMagnetOffset(ScoringConstants.rotateOffset));
 
-    rotateCanCoder.setPosition(rotateCanCoder.getAbsolutePosition().getValue());
-
     coralRange = new CANrange(IDConstants.coralRangeID, "rio");
 
     coralRange.getConfigurator().apply(new FovParamsConfigs()
@@ -143,8 +141,12 @@ public class ScoringSubsystem extends SubsystemBase {
     return getCoralDistance() < 0.15;
   }
 
-  public double getAlgaeDistance() {
+  public static double getAlgaeDistance() {
     return algaeRange.getDistance().getValueAsDouble();
+  }
+
+  public static boolean algaeDetected() {
+    return getAlgaeDistance() < 0.15;
   }
 
   public static void setScoringBreakMode(boolean enabled) {
@@ -205,7 +207,7 @@ public class ScoringSubsystem extends SubsystemBase {
     }
 
     // Flip arm up if algae detected
-    if (getAlgaeDistance() < 0.15 && ElevatorSubsystem.getElevatorPosition() < 15) {
+    if (algaeDetected() && ElevatorSubsystem.getElevatorPosition() < 15) {
       setRotatePosition = Math.max(setRotatePosition, 70);
 
     }

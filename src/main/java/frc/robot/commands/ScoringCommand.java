@@ -26,8 +26,14 @@ public class ScoringCommand extends Command {
           ScoringSubsystem.scoringMotor(ScoringConstants.algaeScoringVoltage);
 
         } else {
-          ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage);
+          if (ScoringSubsystem.algaeDetected()) {
+            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage * 0.01); 
+          }
+          else {
+            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage); 
+          }
         }
+
 
         break;
       case CORAL:
@@ -45,6 +51,22 @@ public class ScoringCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    switch (ScoringSubsystem.getIntakeMode()) {
+      case ALGAE:
+        if (intake) {
+          if (ScoringSubsystem.algaeDetected()) {
+            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage * 0.1); 
+          }
+          else {
+            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage); 
+          }
+        }
+        
+
+        break;
+      case CORAL:
+        break;
+    }
   }
 
   // Called once the command ends or is interrupted.

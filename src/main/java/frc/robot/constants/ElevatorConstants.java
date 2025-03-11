@@ -28,6 +28,6 @@ public class ElevatorConstants extends BBConstants {
 	public static double elevatorSoftMin = 5.0;
 	public static double elevatorSoftMax = 79;
 	public static double elevatorHomePositionOffset = 22.5;
-	public static double handOffHeight = 22.75;
+	public static double handOffHeight = 21.75;
 	public static double groundHeight = 7.0;
 }

@@ -64,9 +64,8 @@ public class DriveCommand extends Command {
 			speedMultiplier = DriveConstants.turboSpeedMultiplier;
 			rotationSpeedMultiplier = DriveConstants.turboRotationSpeedMultiplier;
 		}
-		if(ElevatorSubsystem.getElevatorPosition() > 50)
-		{
-			speedMultiplier *= 0.3;
+		if (ElevatorSubsystem.getElevatorPosition() > 30) {
+			speedMultiplier *= 1 -((Math.max(0, ElevatorSubsystem.getElevatorPosition() - 30) * 0.7) / 50);
 		}
 
 		if (RobotContainer.rightDriverBumper.getAsBoolean()) { // Robot Centric
@@ -85,7 +84,7 @@ public class DriveCommand extends Command {
 					.withRotationalDeadband(rotationDeadband);
 		}
 
-			RobotContainer.DriveSubsystem.applyRequest(request);
+		RobotContainer.DriveSubsystem.applyRequest(request);
 	}
 
 	// Called once the command ends or is interrupted.
