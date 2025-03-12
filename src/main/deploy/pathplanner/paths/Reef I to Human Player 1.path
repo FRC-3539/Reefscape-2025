@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.26,
-        "y": 6.17
+        "x": 5.33,
+        "y": 5.15
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.416919191919192,
-        "y": 5.89520202020202
+        "x": 4.367556818181818,
+        "y": 6.807073863636362
       },
       "isLocked": true,
-      "linkedName": "StartCage2"
+      "linkedName": "ReefI"
     },
     {
       "anchor": {
-        "x": 5.075539772727272,
-        "y": 5.3811363636363625
+        "x": 1.73,
+        "y": 7.17
       },
       "prevControl": {
-        "x": 5.705429292929293,
-        "y": 5.641098484848485
+        "x": 2.7521590909090907,
+        "y": 6.986562499999999
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": null
+      "isLocked": true,
+      "linkedName": "Human Player 1"
     }
   ],
   "rotationTargets": [],
@@ -33,8 +33,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 2.5,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -119.99999999999999
+    "rotation": -52.50000000000001
   },
   "reversed": false,
-  "folder": "Left Start Paths",
+  "folder": "Reef To Human Player 1",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": -119.99999999999999
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

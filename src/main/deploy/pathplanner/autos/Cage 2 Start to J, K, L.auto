@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Cage 5 to Reef E"
+                  "pathName": "Cage 2 to Reef J"
                 }
               },
               {
@@ -59,7 +59,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "E to Human Player 2"
+                        "pathName": "Reef J to Human Player 1"
                       }
                     }
                   ]
@@ -94,7 +94,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Human Player 2 to D"
+                  "pathName": "Human Player 1 to K"
                 }
               },
               {
@@ -155,7 +155,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "D to Human Player 2"
+                        "pathName": "Reef K to Human Player 1"
                       }
                     }
                   ]
@@ -190,7 +190,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Human Player 2 to C"
+                  "pathName": "Human Player 1 to L"
                 }
               },
               {
@@ -244,6 +244,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Cage 5 Start",
+  "folder": "Cage 2 Start",
   "choreoAuto": false
 }
