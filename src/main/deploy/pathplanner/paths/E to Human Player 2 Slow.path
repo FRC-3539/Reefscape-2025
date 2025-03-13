@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 5.04,
+        "y": 2.74
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.906376262626263,
+        "y": 1.8498737373737366
+      },
+      "isLocked": true,
+      "linkedName": "ReefE"
+    },
+    {
+      "anchor": {
+        "x": 1.3860511363636363,
+        "y": 1.1432102272727263
+      },
+      "prevControl": {
+        "x": 2.5009248737373735,
+        "y": 1.4170107323232308
+      },
+      "nextControl": null,
+      "isLocked": true,
+      "linkedName": "Human Player 2"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 1.5,
+    "maxAcceleration": 1.5,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 360.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 52.50000000000001
+  },
+  "reversed": false,
+  "folder": "Reef To Human Player 2",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 119.99999999999999
+  },
+  "useDefaultConstraints": false
+}
