@@ -24,7 +24,7 @@ public class ScoringConstants extends BBConstants {
 	public static double rotateMotorToEncoder = 81;
 	public static double rotateSoftMin = -0.38;
 	public static double rotateSoftMax = 0.25;
-	public static double rotateOffset = 0.3994140625;
+	public static double rotateOffset = -0.23779296875;
 	public static double troughPosition = 70.0;
 	public static double coralLowPosition = 40.0;
 	public static double coralMidPosition = 43.0;

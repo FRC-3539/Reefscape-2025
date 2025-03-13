@@ -85,7 +85,7 @@ public class ScoringSubsystem extends SubsystemBase {
 
     rotateCanCoder.getConfigurator()
         .apply(new MagnetSensorConfigs().withAbsoluteSensorDiscontinuityPoint(ScoringConstants.rotateDiscontPoint)
-            .withSensorDirection(SensorDirectionValue.CounterClockwise_Positive)
+            .withSensorDirection(SensorDirectionValue.Clockwise_Positive)
             .withMagnetOffset(ScoringConstants.rotateOffset));
 
     coralRange = new CANrange(IDConstants.coralRangeID, "rio");
