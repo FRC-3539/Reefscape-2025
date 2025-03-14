@@ -9,6 +9,7 @@ import java.util.function.BooleanSupplier;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -57,7 +58,7 @@ public class RobotContainer {
 
   public static Trigger rightDriverTrigger = driverController.rightTrigger(0.5);
 	public static Trigger rightDriverBumper = driverController.rightBumper();
-  public static BooleanSupplier coralDetected = ()-> ScoringSubsystem.coralDetected();
+  public static BooleanSupplier coralDetected = ()-> ScoringSubsystem.coralDetected() && MathUtil.isNear(ScoringSubsystem.getRotateAngle(), ScoringConstants.handOffPosition, 10);
   public static Trigger coralTrigger = new Trigger(coralDetected);
 
   public static SendableChooser<Command> chooser = new SendableChooser<Command>();
@@ -157,6 +158,7 @@ public class RobotContainer {
 
     // Other
     operatorController.start().onTrue(new HandOffCommand(false, IntakeMode.HANDOFF));
+    operatorController.rightBumper().onTrue(new ClimbPositionCommand());
     
   }
 

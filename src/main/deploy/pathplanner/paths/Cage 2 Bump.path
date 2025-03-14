@@ -8,11 +8,11 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.260000000000002,
-        "y": 6.17
+        "x": 7.509751759653935,
+        "y": 6.181138157377362
       },
       "isLocked": false,
-      "linkedName": "StartCage2"
+      "linkedName": null
     },
     {
       "anchor": {
@@ -20,12 +20,12 @@
         "y": 6.17
       },
       "prevControl": {
-        "x": 7.0,
-        "y": 6.17
+        "x": 7.750182051471961,
+        "y": 6.179539003786653
       },
       "nextControl": null,
-      "isLocked": true,
-      "linkedName": "Cage2Bump"
+      "isLocked": false,
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -48,7 +48,7 @@
   "folder": "Start Left Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": -135.0
   },
   "useDefaultConstraints": false
 }

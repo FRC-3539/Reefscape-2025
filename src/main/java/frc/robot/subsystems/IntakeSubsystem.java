@@ -188,7 +188,7 @@ public class IntakeSubsystem extends SubsystemBase {
   {
     SmartDashboard.putNumber("/Intake/FunnelAngle", getFunnelDeployAngle());
 		SmartDashboard.putNumber("/Intake/TargetFunnelAngle", requestedFunnelDeployPos);
-    SmartDashboard.putString("/Intake/FunnelDistance", df.format(getFunnelDistance()));
+    SmartDashboard.putNumber("/Intake/FunnelDistance", getFunnelDistance());
     //SmartDashboard.putNumber("/Intake/AlgaeDeployPosition", getAlgaeDeployPosition());
 
 

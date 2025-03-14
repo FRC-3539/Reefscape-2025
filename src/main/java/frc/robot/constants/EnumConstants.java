@@ -14,7 +14,7 @@ public class EnumConstants {
     };
 
     public enum IntakeMode {
-        GROUND, HUMAN, REVERSE, HOME, HANDOFF;
+        GROUND, HUMAN, REVERSE, HOME, HANDOFF, CLIMB;
     }
 
     public enum ScoringMode {

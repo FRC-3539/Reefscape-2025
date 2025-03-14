@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
 import frc.robot.constants.AlignConstants;
 import frc.robot.constants.EnumConstants.*;
@@ -23,39 +25,36 @@ import org.frcteam3539.Byte_Swerve_Lib.control.SimplePathBuilder;
 import org.frcteam3539.Byte_Swerve_Lib.control.Trajectory;
 import org.frcteam3539.Byte_Swerve_Lib.control.TrajectoryConstraint;
 
-
 public class BBAutoAlignCommand extends Command {
 	/** Wrapper command to generate a trajectory to the nearest Stage Pose */
 	AlignPoint mode;
-  ScoringMode piece;
+	ScoringMode piece;
 
 	public BBAutoAlignCommand(AlignPoint mode, ScoringMode piece) {
-    this.mode = mode;
-    this.piece = piece;
+		this.mode = mode;
+		this.piece = piece;
 	}
 
 	// Called when the command is initially scheduled.
 	@Override
 
 	public void initialize() {
-    Pose2d targetPoint;
-		if(mode == AlignPoint.CLOSEST)
-		{
-      if(piece == ScoringMode.CORAL){
-			targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.coralPoints.values()));
-      }
-      else if(piece == ScoringMode.ALGAE){
-        targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.algaePoints.values()));  
-      }
-      else if(piece == ScoringMode.CLIMB){
-        targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.climbPoints.values()));  
-      }
-      else {
-        targetPoint = RobotContainer.DriveSubsystem.getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.humanPlayerPoints.values()));  
-      }
-		}
-		else
-		{
+		Pose2d targetPoint;
+		if (mode == AlignPoint.CLOSEST) {
+			if (piece == ScoringMode.CORAL) {
+				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
+						.nearest(new ArrayList<Pose2d>(AlignConstants.coralPoints.values()));
+			} else if (piece == ScoringMode.ALGAE) {
+				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
+						.nearest(new ArrayList<Pose2d>(AlignConstants.algaePoints.values()));
+			} else if (piece == ScoringMode.CLIMB) {
+				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
+						.nearest(new ArrayList<Pose2d>(AlignConstants.climbPoints.values()));
+			} else {
+				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
+						.nearest(new ArrayList<Pose2d>(AlignConstants.humanPlayerPoints.values()));
+			}
+		} else {
 			targetPoint = AlignConstants.coralPoints.get(mode);
 		}
 		Pose2d robotPose = RobotContainer.DriveSubsystem.getPose2d();
@@ -63,13 +62,14 @@ public class BBAutoAlignCommand extends Command {
 		// Generate trajectory command to nearest coordinate
 		RobotContainer.DriveSubsystem.getFollower()
 				.follow(new Trajectory(new SimplePathBuilder(robotPose).lineTo(targetPoint).build(),
-						new TrajectoryConstraint[]{(TrajectoryConstraint) new MaxAccelerationConstraint(1),
-								(TrajectoryConstraint) new MaxVelocityConstraint(1)},
+						new TrajectoryConstraint[] { (TrajectoryConstraint) new MaxAccelerationConstraint(1),
+								(TrajectoryConstraint) new MaxVelocityConstraint(1) },
 						.05));
 
-    SmartDashboard.putString("/DriveTrain/TargetPoint", mode.name());
-		//RobotContainer.DriveSubsystem.publishPose2d("TargetPoint", targetPoint);
-		//RobotContainer.DriveSubsystem.publishPose2d("ModePoint", RobotContainer.DriveSubsystem.points.get(mode));
+		SmartDashboard.putString("/DriveTrain/TargetPoint", mode.name());
+		// RobotContainer.DriveSubsystem.publishPose2d("TargetPoint", targetPoint);
+		// RobotContainer.DriveSubsystem.publishPose2d("ModePoint",
+		// RobotContainer.DriveSubsystem.points.get(mode));
 	}
 
 	// Indicate vision and start the trajectory command
@@ -84,6 +84,9 @@ public class BBAutoAlignCommand extends Command {
 	@Override
 	public void end(boolean interrupted) {
 		RobotContainer.DriveSubsystem.getFollower().cancel();
+		if (!interrupted) {
+			new ParallelDeadlineGroup(new WaitCommand(0.25), new RumbleCommand()).schedule();
+		}
 	}
 
 	// Returns true when the command should end.

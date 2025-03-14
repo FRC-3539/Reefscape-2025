@@ -57,6 +57,12 @@ public class SetFunnelPositionCommand extends Command {
         IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
         IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
         break;
+
+      case CLIMB:
+        IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.groundFunnelDeployAngle);
+        IntakeSubsystem.setCoralIntakeMotor(0);
+        IntakeSubsystem.setFunnelIntakeMotor(0);
+        break;
     }
   }
 

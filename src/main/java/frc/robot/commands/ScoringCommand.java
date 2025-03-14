@@ -55,7 +55,7 @@ public class ScoringCommand extends Command {
       case ALGAE:
         if (intake) {
           if (ScoringSubsystem.algaeDetected()) {
-            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage * 0.1); 
+            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage * 0.15); 
           }
           else {
             ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage); 

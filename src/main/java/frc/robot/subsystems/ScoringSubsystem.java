@@ -146,7 +146,7 @@ public class ScoringSubsystem extends SubsystemBase {
   }
 
   public static boolean algaeDetected() {
-    return getAlgaeDistance() < 0.15;
+    return getAlgaeDistance() < 0.07;
   }
 
   public static void setScoringBreakMode(boolean enabled) {
@@ -168,8 +168,8 @@ public class ScoringSubsystem extends SubsystemBase {
   public void log() {
     SmartDashboard.putNumber("/Scoring/RotateAngle", getRotateAngle());
     SmartDashboard.putNumber("/Scoring/TargetRotateAngle", requestedRotatePos);
-    SmartDashboard.putString("/Scoring/CoralDistance", df.format(getCoralDistance()));
-    SmartDashboard.putString("/Scoring/AlgaeDistance", df.format(getAlgaeDistance()));
+    SmartDashboard.putNumber("/Scoring/CoralDistance", (getCoralDistance()));
+    SmartDashboard.putNumber("/Scoring/AlgaeDistance", getAlgaeDistance());
 
   }
 
