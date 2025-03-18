@@ -12,12 +12,9 @@
     "Start Right Paths"
   ],
   "autoFolders": [
-    " F Start",
+    "Cage 2 Start",
     "Cage 5 Start",
-    "D Start",
-    "J Start",
-    "Middle Start",
-    "Cage 2 Start"
+    "Middle Start"
   ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,
