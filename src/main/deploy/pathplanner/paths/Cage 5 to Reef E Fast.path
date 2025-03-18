@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.041388888888891,
-        "y": 2.266969696969696
+        "x": 6.2367117117117115,
+        "y": 2.2300675675675667
       },
       "isLocked": false,
       "linkedName": null
@@ -20,11 +20,11 @@
         "y": 2.74
       },
       "prevControl": {
-        "x": 5.817234848484849,
-        "y": 2.358080808080808
+        "x": 5.60213963963964,
+        "y": 2.502027027027026
       },
       "nextControl": null,
-      "isLocked": true,
+      "isLocked": false,
       "linkedName": "ReefE"
     }
   ],
@@ -32,7 +32,7 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.4971878515185575,
+      "minWaypointRelativePos": 0.25655430711610494,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 2.5,
