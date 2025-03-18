@@ -9,9 +9,9 @@ public class ScoringConstants extends BBConstants {
 	}
 
 	public static double algaeScoringVoltage = -7.5;
-	public static double coralScoringVoltage = 12;
+	public static double coralScoringVoltage = 12.0;
 	public static double rotateVoltage = 2.0;
-	public static double rotatekP = 90;
+	public static double rotatekP = 90.0;
 	public static double rotatekI = 0.0;
 	public static double rotatekD = 0.0;
 	public static double rotatekG = 0.0;
@@ -21,7 +21,7 @@ public class ScoringConstants extends BBConstants {
 	public static double rotateMotorToInches = 0.0;
 	public static double restRotateAngle = -135.0;
 	public static double rotateRestingRotations = 0.0;
-	public static double rotateMotorToEncoder = 81;
+	public static double rotateMotorToEncoder = 81.0;
 	public static double rotateSoftMin = -0.38;
 	public static double rotateSoftMax = 0.25;
 	public static double rotateOffset = -0.23779296875;
@@ -31,10 +31,10 @@ public class ScoringConstants extends BBConstants {
 	public static double coralHighPosition = 10.0;
 	public static double processorPosition = 80.0;
 	public static double netPosition = 90.0;
-	public static double algaeLowPosition = 65;
-	public static double algaeHighPosition = 65;
+	public static double algaeLowPosition = 65.0;
+	public static double algaeHighPosition = 65.0;
 	public static double rotateDiscontPoint = 0.3;
-	public static double handOffPosition = -130;
+	public static double handOffPosition = -130.0;
 	public static double groundPosition = 40.0;
 	public static int invertScorer = 1;
 }

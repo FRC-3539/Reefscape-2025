@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Cage 5 to Reef E"
+                  "pathName": "Cage 5 to Reef E Fast"
                 }
               },
               {
@@ -24,19 +24,13 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.15
-          }
-        },
-        {
           "type": "deadline",
           "data": {
             "commands": [
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.35
+                  "waitTime": 0.25
                 }
               },
               {
@@ -59,7 +53,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "E to Human Player 2"
+                        "pathName": "E to Human Player 2 Faster"
                       }
                     }
                   ]
@@ -94,7 +88,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Human Player 2 to D"
+                  "pathName": "Human Player 2 to D Faster"
                 }
               },
               {
@@ -126,7 +120,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.35
+                  "waitTime": 0.3
                 }
               },
               {
@@ -149,7 +143,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "D to Human Player 2"
+                        "pathName": "D to Human Player 2 Faster"
                       }
                     }
                   ]
@@ -184,7 +178,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Human Player 2 to C"
+                  "pathName": "Human Player 2 to C Faster"
                 }
               },
               {
@@ -216,7 +210,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.35
+                  "waitTime": 0.3
                 }
               },
               {

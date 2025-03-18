@@ -62,7 +62,8 @@ public class BBAutoAlignCommand extends Command {
 		// Generate trajectory command to nearest coordinate
 		RobotContainer.DriveSubsystem.getFollower()
 				.follow(new Trajectory(new SimplePathBuilder(robotPose).lineTo(targetPoint).build(),
-						new TrajectoryConstraint[] { (TrajectoryConstraint) new MaxAccelerationConstraint(1),
+						new TrajectoryConstraint[] { (TrajectoryConstraint) new MaxAccelerationConstraint(0.75
+							),
 								(TrajectoryConstraint) new MaxVelocityConstraint(1) },
 						.05));
 

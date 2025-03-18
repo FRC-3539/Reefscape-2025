@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.26,
-        "y": 1.88
+        "x": 7.026767676767678,
+        "y": 1.9311868686868683
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.274621212121213,
-        "y": 2.215782828282828
+        "x": 6.041388888888891,
+        "y": 2.266969696969696
       },
-      "isLocked": true,
-      "linkedName": "StartCage5"
+      "isLocked": false,
+      "linkedName": null
     },
     {
       "anchor": {
@@ -29,12 +29,26 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.4971878515185575,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 2.5,
+        "maxAcceleration": 2.5,
+        "maxAngularVelocity": 720.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 2.5,
-    "maxAcceleration": 2.5,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 720.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -48,7 +62,7 @@
   "folder": "Start Right Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 135.0
+    "rotation": 119.99999999999999
   },
   "useDefaultConstraints": false
 }

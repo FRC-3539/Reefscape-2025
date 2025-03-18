@@ -19,13 +19,13 @@ public class IntakeConstants extends BBConstants {
 	public static double funnelDeploykV = 6.16;
 	public static double funnelDeployAcceleration = 4.0;
 	public static double funnelDeployCruiseVelocity = 0.8;
-	public static double funnelDeploySoftMin = -40;
+	public static double funnelDeploySoftMin = -40.0;
 	public static double funnelDeploySoftMax = 105.0;
 	public static double funnelDeployMotorToMechanism = 64.44;
 	public static double funnelDeployOffset = -0.123046875;
 	public static double homeFunnelDeployAngle = 100.0;
 	public static double humanFunnelDeployAngle = 80.0;
-	public static double groundFunnelDeployAngle = -40;
+	public static double groundFunnelDeployAngle = -40.0;
 	public static double algaeDeployVoltage = 5.0;
 	public static double algaeDeploykP = 0.0;
 	public static double algaeDeploykI = 0.0;

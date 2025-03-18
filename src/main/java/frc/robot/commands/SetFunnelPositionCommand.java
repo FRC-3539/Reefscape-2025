@@ -70,7 +70,7 @@ public class SetFunnelPositionCommand extends Command {
   @Override
   public void execute() {
 
-    if (mode == IntakeMode.REVERSE) {
+    if (mode == IntakeMode.REVERSE || mode == IntakeMode.CLIMB) {
       return;
     }
 
@@ -107,6 +107,11 @@ public class SetFunnelPositionCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return ScoringSubsystem.coralDetected();
+
+    if (mode == IntakeMode.CLIMB) {
+      return true;
+    }
+    return ScoringSubsystem.coralDetected()
+        && MathUtil.isNear(ScoringSubsystem.getRotateAngle(), ScoringConstants.handOffPosition, 10);
   }
 }

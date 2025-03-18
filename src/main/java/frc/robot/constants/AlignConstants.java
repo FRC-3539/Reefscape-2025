@@ -26,7 +26,7 @@ public class AlignConstants {
         humanPlayerPoints.put(AlignPoint.HUMANPLAYER1, new Pose2d(1.73, 7.17, Rotation2d.fromDegrees(-52.5)));
         // Bumper 9.5" from human player wall
         // Robot Frame 12.75" from human player wall
-        humanPlayerPoints.put(AlignPoint.HUMANPLAYER2, new Pose2d(1.46, 1.20, Rotation2d.fromDegrees(52.5)));
+        humanPlayerPoints.put(AlignPoint.HUMANPLAYER2, new Pose2d(1.43, 1.2, Rotation2d.fromDegrees(52.5)));
         climbPoints.put(AlignPoint.CLIMB1, new Pose2d(7.260,7.163, Rotation2d.fromDegrees(-90)));
         climbPoints.put(AlignPoint.CLIMB2, new Pose2d(7.260, 6.068, Rotation2d.fromDegrees(-90)));
         climbPoints.put(AlignPoint.CLIMB3, new Pose2d(7.260, 4.973, Rotation2d.fromDegrees(-90)));
