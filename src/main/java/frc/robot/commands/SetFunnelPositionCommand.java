@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.ScoringConstants;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.ScoringSubsystem;
 import frc.robot.constants.EnumConstants.*;
 
@@ -29,18 +30,21 @@ public class SetFunnelPositionCommand extends Command {
   public void initialize() {
     switch (mode) {
       case GROUND:
+        LedSubsystem.setIntaking(true);
         IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.groundFunnelDeployAngle);
         IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
         IntakeSubsystem.setFunnelIntakeMotor(0);
         break;
 
       case HUMAN:
+        LedSubsystem.setIntaking(true);
         IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.humanFunnelDeployAngle);
         IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
         IntakeSubsystem.setFunnelIntakeMotor(0);
         break;
 
       case REVERSE:
+        LedSubsystem.setIntaking(true);
         IntakeSubsystem.setFunnelDeployAngle(0);
         IntakeSubsystem.setCoralIntakeMotor(-IntakeConstants.coralIntakeVoltage);
         IntakeSubsystem.setFunnelIntakeMotor(-IntakeConstants.funnelIntakeVoltage);
@@ -101,7 +105,7 @@ public class SetFunnelPositionCommand extends Command {
     IntakeSubsystem.setCoralIntakeMotor(0);
     IntakeSubsystem.setFunnelIntakeMotor(0);
     ScoringSubsystem.scoringMotor(0);
-
+    LedSubsystem.setIntaking(false);
   }
 
   // Returns true when the command should end.

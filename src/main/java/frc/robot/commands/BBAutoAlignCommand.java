@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
 import frc.robot.constants.AlignConstants;
 import frc.robot.constants.EnumConstants.*;
+import frc.robot.subsystems.LedSubsystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class BBAutoAlignCommand extends Command {
 	@Override
 
 	public void initialize() {
+		LedSubsystem.setAligning(true);
 		Pose2d targetPoint;
 		if (mode == AlignPoint.CLOSEST) {
 			if (piece == ScoringMode.CORAL) {
@@ -84,6 +86,8 @@ public class BBAutoAlignCommand extends Command {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
+		LedSubsystem.setAligning(false);
+
 		RobotContainer.DriveSubsystem.getFollower().cancel();
 		if (!interrupted) {
 			new ParallelDeadlineGroup(new WaitCommand(0.25), new RumbleCommand()).schedule();

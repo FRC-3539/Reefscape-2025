@@ -34,19 +34,26 @@
                 }
               },
               {
-                "type": "named",
-                "data": {
-                  "name": "CoralHighCommand"
-                }
-              },
-              {
                 "type": "sequential",
                 "data": {
                   "commands": [
                     {
-                      "type": "wait",
+                      "type": "parallel",
                       "data": {
-                        "waitTime": 1.68
+                        "commands": [
+                          {
+                            "type": "wait",
+                            "data": {
+                              "waitTime": 1.68
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "CoralHighCommand"
+                            }
+                          }
+                        ]
                       }
                     },
                     {

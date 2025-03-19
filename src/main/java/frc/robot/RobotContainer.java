@@ -52,6 +52,7 @@ public class RobotContainer {
   public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
   public static DriveSubsystem DriveSubsystem = TunerConstants.createDrivetrain();
   public static VisionSubsystem VisionSubsystem = new VisionSubsystem();
+  public static LedSubsystem LEDSubsystem = new LedSubsystem(true);
   
 	public static CommandXboxController driverController = new CommandXboxController(1);
 	public static CommandXboxController operatorController = new CommandXboxController(0);

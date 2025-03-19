@@ -39,6 +39,8 @@ public class ScoringSubsystem extends SubsystemBase {
   private static double requestedRotatePos = 0;
   DecimalFormat df = new DecimalFormat("#.00000");
   private static double scoringRestrictedMin = 30;
+  public static int loopsWithCoral = 0, loopsWithAlgae = 0;
+
 
   public static ScoringMode mode = ScoringMode.CORAL;
 
@@ -183,6 +185,14 @@ public class ScoringSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    if (coralDetected()) loopsWithCoral++;
+    else loopsWithCoral = 0;
+    if (loopsWithCoral > 100000) loopsWithCoral = 100;
+
+    if (algaeDetected()) loopsWithAlgae++;
+    else loopsWithAlgae = 0;
+    if (loopsWithAlgae > 100000) loopsWithAlgae = 100;
+
     // Minimum elevator height needed for handoff
     if (getRotateAngle() < scoringRestrictedMin || requestedRotatePos < scoringRestrictedMin) {
       ElevatorSubsystem.setEnforcedMinimumHeight(true);
