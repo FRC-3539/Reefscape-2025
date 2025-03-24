@@ -25,7 +25,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   /** Creates a new ElevatorSubsystem. */
 
   private static TalonFX elevatorMotor;
-  private static double requestedElevatorPos = 0;
+  public static double requestedElevatorPos = 0;
   private static boolean enforcedMinimumHeight, enforcedMaxHandOffHeight = false;
 
   public ElevatorSubsystem() {

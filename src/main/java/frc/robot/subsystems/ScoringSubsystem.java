@@ -41,7 +41,6 @@ public class ScoringSubsystem extends SubsystemBase {
   private static double scoringRestrictedMin = 30;
   public static int loopsWithCoral = 0, loopsWithAlgae = 0;
 
-
   public static ScoringMode mode = ScoringMode.CORAL;
 
   public ScoringSubsystem() {
@@ -115,7 +114,7 @@ public class ScoringSubsystem extends SubsystemBase {
   public static double getRotateAngle() {
     return Units.rotationsToDegrees(rotateMotor.getPosition().getValueAsDouble());
     // return Units.rotationsToDegrees(
-    //     rotateCanCoder.getAbsolutePosition().getValueAsDouble());
+    // rotateCanCoder.getAbsolutePosition().getValueAsDouble());
   }
 
   public static void setRotateAngle(double angle) {
@@ -185,13 +184,19 @@ public class ScoringSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if (coralDetected()) loopsWithCoral++;
-    else loopsWithCoral = 0;
-    if (loopsWithCoral > 100000) loopsWithCoral = 100;
+    if (coralDetected())
+      loopsWithCoral++;
+    else
+      loopsWithCoral = 0;
+    if (loopsWithCoral > 100000)
+      loopsWithCoral = 100;
 
-    if (algaeDetected()) loopsWithAlgae++;
-    else loopsWithAlgae = 0;
-    if (loopsWithAlgae > 100000) loopsWithAlgae = 100;
+    if (algaeDetected())
+      loopsWithAlgae++;
+    else
+      loopsWithAlgae = 0;
+    if (loopsWithAlgae > 100000)
+      loopsWithAlgae = 100;
 
     // Minimum elevator height needed for handoff
     if (getRotateAngle() < scoringRestrictedMin || requestedRotatePos < scoringRestrictedMin) {
@@ -217,7 +222,8 @@ public class ScoringSubsystem extends SubsystemBase {
     }
 
     // Flip arm up if algae detected
-    if (algaeDetected() && ElevatorSubsystem.getElevatorPosition() < 15) {
+    if (algaeDetected()
+        && (ElevatorSubsystem.getElevatorPosition() < 15 || (ElevatorSubsystem.requestedElevatorPos < 15))) {
       setRotatePosition = Math.max(setRotatePosition, 70);
 
     }

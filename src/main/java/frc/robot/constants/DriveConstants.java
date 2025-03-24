@@ -8,7 +8,7 @@ public class DriveConstants extends BBConstants {
 		save();
 	}
 
-	public static double TranslationkP = 5;
+	public static double TranslationkP = 5.0;
 	public static double TranslationkI = 0.0;
 	public static double TranslationkD = 0.0;
 	public static double RotationkP = 10.0;
@@ -23,7 +23,7 @@ public class DriveConstants extends BBConstants {
 	public static double BRSteerOffset = 0.0;
 	public static double speedMultiplier = 0.7;
 	public static double rotationSpeedMultiplier = 0.35;
-	public static double turboSpeedMultiplier = 1.0;
-	public static double turboRotationSpeedMultiplier = 0.55;
+	public static double turboSpeedMultiplier = 0.25;
+	public static double turboRotationSpeedMultiplier = 0.2;
 	public static double AlignkP = 2.0;
 }

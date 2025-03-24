@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.26,
-        "y": 1.88
+        "x": 7.3014,
+        "y": 1.909
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.274621212121213,
-        "y": 2.215782828282828
+        "x": 6.316021212121213,
+        "y": 2.244782828282828
       },
       "isLocked": true,
       "linkedName": "StartCage5"
@@ -35,8 +35,8 @@
   "globalConstraints": {
     "maxVelocity": 2.5,
     "maxAcceleration": 2.5,
-    "maxAngularVelocity": 720.0,
-    "maxAngularAcceleration": 720.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 540.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },

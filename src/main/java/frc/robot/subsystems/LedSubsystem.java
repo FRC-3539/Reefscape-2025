@@ -180,23 +180,15 @@ public class LedSubsystem extends SubsystemBase {
 		if (ClimberSubsystem.getClimberPosition() < -25) {
 			double climbingPercent = ClimberSubsystem.getClimberPosition()/-250.0;
 			if (climbingPercent > 0.72) climbingPercent = 1;
+
+			int numRainbow = (int)(climbingPercent * LedConstants.numLights);
 			
 			candle.setLEDs(0, 0,
-				0, 0, 0, LedConstants.numLights);
-			candle.animate(new RainbowAnimation(LedConstants.maxBrightness, 1, (int)(climbingPercent * LedConstants.numLights)));
+				0, 0, numRainbow + 1, LedConstants.numLights);
+			candle.animate(new RainbowAnimation(LedConstants.maxBrightness, 0.6, numRainbow ));
 			return;
 		}
-		if (intaking) {
-			if (ScoringSubsystem.mode == ScoringMode.ALGAE) {
-
-				setLEDs(LEDState.INTAKING_ALGAE);
-				return;
-
-			} else {
-				setLEDs(LEDState.INTAKING_CORAL);
-				return;
-			}
-		}
+		
 		if (aligning) {
 			setLEDs(LEDState.AUTO);
 			return;
@@ -219,6 +211,17 @@ public class LedSubsystem extends SubsystemBase {
 			setLEDs(LEDState.CORAL_DETECTED);
 			return;
 		} 
+		if (intaking) {
+			if (ScoringSubsystem.mode == ScoringMode.ALGAE) {
+
+				setLEDs(LEDState.INTAKING_ALGAE);
+				return;
+
+			} else {
+				setLEDs(LEDState.INTAKING_CORAL);
+				return;
+			}
+		}
 		
 
 		setLEDs(LEDState.CONNECTED);
