@@ -168,6 +168,11 @@ public class LedSubsystem extends SubsystemBase {
 
 	@Override
 	public void periodic() {
+		if(DriverStation.isEStopped())
+		{
+			setLEDs(LEDState.ERROR);
+			return;
+		}
 		if (DriverStation.isAutonomous() && !VisionSubsystem.leftCam.isConnected()
 				&& !VisionSubsystem.rightCam.isConnected()) {
 			setLEDs(LEDState.ERROR);

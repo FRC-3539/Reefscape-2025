@@ -66,7 +66,7 @@ public class BBAutoAlignCommand extends Command {
 				.follow(new Trajectory(new SimplePathBuilder(robotPose).lineTo(targetPoint).build(),
 						new TrajectoryConstraint[] { (TrajectoryConstraint) new MaxAccelerationConstraint(1.25
 							),
-								(TrajectoryConstraint) new MaxVelocityConstraint(1.5) },
+								(TrajectoryConstraint) new MaxVelocityConstraint(2.0) },
 						.05));
 
 		SmartDashboard.putString("/DriveTrain/TargetPoint", mode.name());

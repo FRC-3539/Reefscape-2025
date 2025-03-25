@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
@@ -18,17 +19,21 @@ public class RumbleCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.operatorController.setRumble( RumbleType.kBothRumble, 1);
+    if (DriverStation.isAutonomous()) {
+      return;
+    }
+    RobotContainer.operatorController.setRumble(RumbleType.kBothRumble, 1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+  }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.operatorController.setRumble( RumbleType.kBothRumble, 0);
+    RobotContainer.operatorController.setRumble(RumbleType.kBothRumble, 0);
 
   }
 

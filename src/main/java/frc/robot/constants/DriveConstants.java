@@ -11,7 +11,7 @@ public class DriveConstants extends BBConstants {
 	public static double TranslationkP = 5.0;
 	public static double TranslationkI = 0.0;
 	public static double TranslationkD = 0.0;
-	public static double RotationkP = 10.0;
+	public static double RotationkP = 15;
 	public static double RotationkI = 0.0;
 	public static double RotationkD = 0.0;
 	public static double TranslationkV = 1.0;

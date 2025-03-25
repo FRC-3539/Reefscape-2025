@@ -45,7 +45,7 @@ public class SetFunnelPositionCommand extends Command {
 
       case REVERSE:
         LedSubsystem.setIntaking(true);
-        IntakeSubsystem.setFunnelDeployAngle(0);
+        IntakeSubsystem.setFunnelDeployAngle(18.5);
         IntakeSubsystem.setCoralIntakeMotor(-IntakeConstants.coralIntakeVoltage);
         IntakeSubsystem.setFunnelIntakeMotor(-IntakeConstants.funnelIntakeVoltage);
         break;

@@ -231,7 +231,7 @@
       ]
     }
   },
-  "resetOdom": false,
+  "resetOdom": true,
   "folder": "Cage 5 Start",
   "choreoAuto": false
 }
