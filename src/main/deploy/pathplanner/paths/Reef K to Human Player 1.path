@@ -11,8 +11,8 @@
         "x": 2.6460227272727277,
         "y": 6.6371843434343445
       },
-      "isLocked": false,
-      "linkedName": "ReefK"
+      "isLocked": true,
+      "linkedName": null
     },
     {
       "anchor": {
@@ -24,8 +24,8 @@
         "y": 6.657512626262626
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": "Human Player 1"
+      "isLocked": true,
+      "linkedName": null
     }
   ],
   "rotationTargets": [],

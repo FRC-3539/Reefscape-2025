@@ -8,11 +8,11 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.121107954545455,
-        "y": 2.1503409090909087
+        "x": 3.094525016490267,
+        "y": 2.0405587387528845
       },
       "isLocked": true,
-      "linkedName": "ReefD"
+      "linkedName": null
     },
     {
       "anchor": {
@@ -20,12 +20,12 @@
         "y": 0.88
       },
       "prevControl": {
-        "x": 2.617471590909091,
-        "y": 1.3785795454545449
+        "x": 2.4853832438570356,
+        "y": 1.566718599313941
       },
       "nextControl": null,
       "isLocked": true,
-      "linkedName": "Human Player 2"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],

@@ -12,7 +12,7 @@
         "y": 5.879715909090908
       },
       "isLocked": true,
-      "linkedName": "StartCage2"
+      "linkedName": null
     },
     {
       "anchor": {
@@ -25,7 +25,7 @@
       },
       "nextControl": null,
       "isLocked": true,
-      "linkedName": "ReefJ"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],

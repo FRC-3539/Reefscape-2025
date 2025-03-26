@@ -8,11 +8,11 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.4033124999999997,
-        "y": 1.3650170454545454
+        "x": 2.3339861478672805,
+        "y": 1.3789622836525592
       },
-      "isLocked": false,
-      "linkedName": "Human Player 2"
+      "isLocked": true,
+      "linkedName": null
     },
     {
       "anchor": {
@@ -20,11 +20,11 @@
         "y": 2.74
       },
       "prevControl": {
-        "x": 3.3915340909090914,
-        "y": 1.7827272727272736
+        "x": 3.091870451490373,
+        "y": 2.027660215768314
       },
       "nextControl": null,
-      "isLocked": false,
+      "isLocked": true,
       "linkedName": null
     }
   ],
