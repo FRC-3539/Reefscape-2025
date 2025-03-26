@@ -105,6 +105,9 @@ public class RobotContainer {
 
     //Funnel Position Commands
     NamedCommands.registerCommand("HumanPlayerIntakeCommand", new HandOffCommand(true,IntakeMode.HUMAN));
+    NamedCommands.registerCommand("FunnelRangeCommand", new FunnelRangeCommand());
+
+    
 
     chooser = AutoBuilder.buildAutoChooser();
 		SmartDashboard.putData(chooser);

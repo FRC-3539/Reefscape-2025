@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.1560196133025316,
-        "y": 2.5535264243691276
+        "x": 3.314069648634566,
+        "y": 2.5573599425046023
       },
       "isLocked": false,
       "linkedName": "ReefC"
     },
     {
       "anchor": {
-        "x": 1.73,
-        "y": 0.88
+        "x": 1.74,
+        "y": 0.94
       },
       "prevControl": {
-        "x": 2.3200071045294455,
-        "y": 1.3003953915334567
+        "x": 2.4510400872993157,
+        "y": 1.6376440126521499
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Human Player 2"
+      "linkedName": "Fast Human Player 2"
     }
   ],
   "rotationTargets": [],

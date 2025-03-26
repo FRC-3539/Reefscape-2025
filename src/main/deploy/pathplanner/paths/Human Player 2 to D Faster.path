@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.73,
-        "y": 0.88
+        "x": 1.74,
+        "y": 0.94
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.4033124999999997,
-        "y": 1.3650170454545454
+        "x": 2.4133125,
+        "y": 1.4250170454545454
       },
       "isLocked": false,
-      "linkedName": "Human Player 2"
+      "linkedName": "Fast Human Player 2"
     },
     {
       "anchor": {
@@ -47,7 +47,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.5,
+    "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -64,5 +64,5 @@
     "velocity": 0,
     "rotation": 52.50000000000001
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

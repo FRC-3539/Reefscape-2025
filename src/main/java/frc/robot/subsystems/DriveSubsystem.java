@@ -69,7 +69,7 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 		for (int i = 0; i < modules.length; i++) {
 			moduleLocations[i] = new Translation2d(modules[i].LocationX, modules[i].LocationY);
 			this.getModule(i).getDriveMotor().getConfigurator()
-					.apply(new CurrentLimitsConfigs().withSupplyCurrentLimit(40)
+					.apply(new CurrentLimitsConfigs().withSupplyCurrentLimit(60)
 							.withSupplyCurrentLimitEnable(true)
 							.withStatorCurrentLimit(modules[i].SlipCurrent).withStatorCurrentLimitEnable(true));
 		}

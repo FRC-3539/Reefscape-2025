@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 1.73,
-        "y": 0.88
+        "x": 1.74,
+        "y": 0.94
       },
       "prevControl": {
-        "x": 2.6902139639639637,
-        "y": 1.4449324324324313
+        "x": 2.7002139639639635,
+        "y": 1.5049324324324314
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Human Player 2"
+      "linkedName": "Fast Human Player 2"
     }
   ],
   "rotationTargets": [],
