@@ -10,7 +10,7 @@ public class EnumConstants {
     }
 
     public static enum AlignPoint {
-        A, B, C, D, E, F, G, H, I, J, K, L, HUMANPLAYER1, HUMANPLAYER2, CLIMB1, CLIMB2, CLIMB3, CLOSEST;
+        A, B, C, D, E, F, G, H, I, J, K, L, HUMANPLAYER1, HUMANPLAYER2, CLIMB1, CLIMB2, CLIMB3, CORALLEFT, CORALRIGHT, ALGAE;
     };
 
     public enum IntakeMode {

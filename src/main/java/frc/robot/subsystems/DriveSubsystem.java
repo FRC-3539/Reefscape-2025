@@ -53,6 +53,7 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 
 	public double maxVelocity = 0.0;
 	public double maxRotationalVelocity = 0.0;
+	public double velocityX, velocityY = 0.0;
 
 	public Pigeon2 pigeon = new Pigeon2(IDConstants.pigeonID, "rio");
 
@@ -146,14 +147,14 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 
 	public Command generateAlignCommand(AlignPoint mode) {
 		Pose2d targetPoint;
-		if (mode == AlignPoint.CLOSEST) {
-			targetPoint = getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.coralPoints.values()));
-			for (var entry : AlignConstants.coralPoints.entrySet()) {
+		if (mode == AlignPoint.CORALLEFT) {
+			targetPoint = getPose2d().nearest(new ArrayList<Pose2d>(AlignConstants.coralPointsLeft.values()));
+			for (var entry : AlignConstants.coralPointsLeft.entrySet()) {
 				if (entry.getValue().equals(targetPoint))
 					mode = entry.getKey();
 			}
 		} else {
-			targetPoint = AlignConstants.coralPoints.get(mode);
+			targetPoint = AlignConstants.coralPointsLeft.get(mode);
 		}
 		if (getPose2d().getTranslation().getDistance(targetPoint.getTranslation()) < 0.01) {
 			return Commands.none();
@@ -163,7 +164,7 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 																								// this path.
 		SmartDashboard.putString("/DriveTrain/TargetPoint", mode.name());
 		publishPose2d("TargetPoint", targetPoint);
-		publishPose2d("ModePoint", AlignConstants.coralPoints.get(mode));
+		publishPose2d("ModePoint", AlignConstants.coralPointsLeft.get(mode));
 		Command followPath = AutoBuilder.pathfindToPose(targetPoint, constraints);
 		followPath.addRequirements(this);
 		return followPath;
@@ -175,6 +176,18 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 
 	@Override
 	public void periodic() {
+
+		velocityX = ChassisSpeeds.fromRobotRelativeSpeeds(this.getState().Speeds, 
+		this.getPose2d().getRotation()).vxMetersPerSecond;
+
+		velocityY = ChassisSpeeds.fromRobotRelativeSpeeds(this.getState().Speeds, 
+		this.getPose2d().getRotation()).vyMetersPerSecond;
+
+		double robotVelocity = Math.sqrt(Math.pow(velocityX, 2) + Math.pow(velocityY, 2));
+
+		SmartDashboard.putNumber("/DriveTrain/RobotVelocity", robotVelocity);
+
+
 		log();
 		SwerveRequest request = new SwerveRequest.Idle();
 		request = swerveRequest;

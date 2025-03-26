@@ -15,7 +15,8 @@ public class AlignConstants {
 
     
 
-    public static Map<AlignPoint, Pose2d> coralPoints = new HashMap<>();
+    public static Map<AlignPoint, Pose2d> coralPointsLeft = new HashMap<>();
+    public static Map<AlignPoint, Pose2d> coralPointsRight = new HashMap<>();
     public static Map<AlignPoint, Pose2d> algaePoints = new HashMap<>();
     public static Map<AlignPoint, Pose2d> climbPoints = new HashMap<>();
     public static Map<AlignPoint, Pose2d> humanPlayerPoints = new HashMap<>();
@@ -32,18 +33,18 @@ public class AlignConstants {
         climbPoints.put(AlignPoint.CLIMB3, new Pose2d(7.260, 4.973, Rotation2d.fromDegrees(-90)));
 
         // Calculated points
-        coralPoints.put(AlignPoint.A, getOffsetPoint(3.6576, 4.0269, 0, -ALIGN_STRAFE));
-        coralPoints.put(AlignPoint.B, getOffsetPoint(3.6576, 4.0269, 0, +ALIGN_STRAFE));
-        coralPoints.put(AlignPoint.C, getOffsetPoint(4.0740, 3.3073, 60, -ALIGN_STRAFE));
-        coralPoints.put(AlignPoint.D, getOffsetPoint(4.0740, 3.3073, 60, +ALIGN_STRAFE));
-        coralPoints.put(AlignPoint.E, getOffsetPoint(4.9057, 3.3073, 120, -ALIGN_STRAFE));
-        coralPoints.put(AlignPoint.F, getOffsetPoint(4.9057, 3.3073, 120, +ALIGN_STRAFE));
-        coralPoints.put(AlignPoint.G, getOffsetPoint(5.3209, 4.0269, 180, -ALIGN_STRAFE));
-        coralPoints.put(AlignPoint.H, getOffsetPoint(5.3209, 4.0269, 180, +ALIGN_STRAFE));
-        coralPoints.put(AlignPoint.I, getOffsetPoint(4.9057, 4.7474, -120, -ALIGN_STRAFE));
-        coralPoints.put(AlignPoint.J, getOffsetPoint(4.9057, 4.7474, -120, +ALIGN_STRAFE));
-        coralPoints.put(AlignPoint.K, getOffsetPoint(4.0740, 4.7474, -60, -ALIGN_STRAFE));
-        coralPoints.put(AlignPoint.L, getOffsetPoint(4.0740, 4.7474, -60, +ALIGN_STRAFE));
+        coralPointsLeft.put(AlignPoint.A, getOffsetPoint(3.6576, 4.0269, 0, -ALIGN_STRAFE));
+        coralPointsRight.put(AlignPoint.B, getOffsetPoint(3.6576, 4.0269, 0, +ALIGN_STRAFE));
+        coralPointsLeft.put(AlignPoint.C, getOffsetPoint(4.0740, 3.3073, 60, -ALIGN_STRAFE));
+        coralPointsRight.put(AlignPoint.D, getOffsetPoint(4.0740, 3.3073, 60, +ALIGN_STRAFE));
+        coralPointsLeft.put(AlignPoint.E, getOffsetPoint(4.9057, 3.3073, 120, -ALIGN_STRAFE));
+        coralPointsRight.put(AlignPoint.F, getOffsetPoint(4.9057, 3.3073, 120, +ALIGN_STRAFE));
+        coralPointsLeft.put(AlignPoint.G, getOffsetPoint(5.3209, 4.0269, 180, -ALIGN_STRAFE));
+        coralPointsRight.put(AlignPoint.H, getOffsetPoint(5.3209, 4.0269, 180, +ALIGN_STRAFE));
+        coralPointsLeft.put(AlignPoint.I, getOffsetPoint(4.9057, 4.7474, -120, -ALIGN_STRAFE));
+        coralPointsRight.put(AlignPoint.J, getOffsetPoint(4.9057, 4.7474, -120, +ALIGN_STRAFE));
+        coralPointsLeft.put(AlignPoint.K, getOffsetPoint(4.0740, 4.7474, -60, -ALIGN_STRAFE));
+        coralPointsRight.put(AlignPoint.L, getOffsetPoint(4.0740, 4.7474, -60, +ALIGN_STRAFE));
 
         // Algae points
         algaePoints.put(AlignPoint.A, getOffsetPoint(3.6576, 4.0269, 0, 0));

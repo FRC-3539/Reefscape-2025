@@ -42,11 +42,14 @@ public class BBAutoAlignCommand extends Command {
 	public void initialize() {
 		LedSubsystem.setAligning(true);
 		Pose2d targetPoint;
-		if (mode == AlignPoint.CLOSEST) {
-			if (piece == ScoringMode.CORAL) {
+			if (mode == AlignPoint.CORALLEFT) {
 				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
-						.nearest(new ArrayList<Pose2d>(AlignConstants.coralPoints.values()));
-			} else if (piece == ScoringMode.ALGAE) {
+						.nearest(new ArrayList<Pose2d>(AlignConstants.coralPointsLeft.values()));
+			} 
+			else if (mode == AlignPoint.CORALRIGHT) {
+				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
+						.nearest(new ArrayList<Pose2d>(AlignConstants.coralPointsRight.values()));
+			} else if (mode == AlignPoint.ALGAE) {
 				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
 						.nearest(new ArrayList<Pose2d>(AlignConstants.algaePoints.values()));
 			} else if (piece == ScoringMode.CLIMB) {
@@ -56,9 +59,7 @@ public class BBAutoAlignCommand extends Command {
 				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
 						.nearest(new ArrayList<Pose2d>(AlignConstants.humanPlayerPoints.values()));
 			}
-		} else {
-			targetPoint = AlignConstants.coralPoints.get(mode);
-		}
+
 		Pose2d robotPose = RobotContainer.DriveSubsystem.getPose2d();
 
 		// Generate trajectory command to nearest coordinate

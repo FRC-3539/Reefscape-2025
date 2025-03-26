@@ -29,7 +29,7 @@ public class ScoringCommand extends Command {
 
         } else {
           if (ScoringSubsystem.algaeDetected()) {
-            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage * 0.01); 
+            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage * 0.00625); 
           }
           else {
             ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage); 
