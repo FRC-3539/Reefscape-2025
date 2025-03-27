@@ -68,6 +68,12 @@ public class ScoringCommand extends Command {
 
         break;
       case CORAL:
+      if (!intake) {
+        ScoringSubsystem.scoringMotor(ScoringConstants.coralScoringVoltage * RobotContainer.operatorController.getRightTriggerAxis());
+
+      } else {
+        ScoringSubsystem.scoringMotor(-ScoringConstants.coralScoringVoltage);
+      }
         break;
     }
   }
