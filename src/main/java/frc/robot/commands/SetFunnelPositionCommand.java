@@ -46,7 +46,7 @@ public class SetFunnelPositionCommand extends Command {
       case REVERSE:
         LedSubsystem.setIntaking(true);
         IntakeSubsystem.setFunnelDeployAngle(18.5);
-        IntakeSubsystem.setCoralIntakeMotor(-IntakeConstants.coralIntakeVoltage);
+        //IntakeSubsystem.setCoralIntakeMotor(-IntakeConstants.coralIntakeVoltage);
         IntakeSubsystem.setFunnelIntakeMotor(-IntakeConstants.funnelIntakeVoltage);
         break;
 
@@ -74,7 +74,19 @@ public class SetFunnelPositionCommand extends Command {
   @Override
   public void execute() {
 
-    if (mode == IntakeMode.REVERSE || mode == IntakeMode.CLIMB) {
+    if (mode == IntakeMode.CLIMB) {
+      return;
+    }
+    if(mode == IntakeMode.REVERSE)
+    {
+      if(MathUtil.isNear(18.5, IntakeSubsystem.getFunnelDeployAngle(), 3.5))
+      {
+        IntakeSubsystem.setCoralIntakeMotor(-IntakeConstants.coralIntakeVoltage);
+      }
+      else
+      {
+        IntakeSubsystem.setCoralIntakeMotor(0);
+      }
       return;
     }
 

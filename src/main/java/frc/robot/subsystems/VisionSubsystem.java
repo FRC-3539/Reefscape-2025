@@ -122,7 +122,7 @@ public class VisionSubsystem extends Thread {
 	}
 
 	public Matrix<N3, N1> getVisionWeights(double distanceRatio, int numTargets) {
-		double targetMultiplier = 0.25;
+		double targetMultiplier = 0.75;
 		double visionCutOffDistance = 4;
 		distanceRatio = 0.1466 * Math.pow(1.6903, distanceRatio);
 		if (numTargets == 1) {

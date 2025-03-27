@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.constants.ScoringConstants;
 import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.ScoringSubsystem;
@@ -40,7 +41,7 @@ public class ScoringCommand extends Command {
         break;
       case CORAL:
         if (!intake) {
-          ScoringSubsystem.scoringMotor(ScoringConstants.coralScoringVoltage);
+          ScoringSubsystem.scoringMotor(ScoringConstants.coralScoringVoltage * RobotContainer.operatorController.getRightTriggerAxis());
 
         } else {
           ScoringSubsystem.scoringMotor(-ScoringConstants.coralScoringVoltage);
