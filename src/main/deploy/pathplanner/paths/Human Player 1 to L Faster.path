@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.73,
-        "y": 7.17
+        "x": 1.76,
+        "y": 7.09
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.52143129612835,
-        "y": 6.30488107546435
+        "x": 2.9788261681026977,
+        "y": 5.836283612626618
       },
-      "isLocked": true,
-      "linkedName": null
+      "isLocked": false,
+      "linkedName": "Human Player 1 (Fast)"
     },
     {
       "anchor": {
@@ -20,22 +20,36 @@
         "y": 5.15
       },
       "prevControl": {
-        "x": 2.8295772017327714,
-        "y": 6.044085955083964
+        "x": 2.857776038557377,
+        "y": 6.001418815253682
       },
       "nextControl": null,
-      "isLocked": true,
+      "isLocked": false,
       "linkedName": "ReefL"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.2715355805243446,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 3.0,
+        "maxAcceleration": 2.75,
+        "maxAngularVelocity": 720.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.5,
-    "maxAcceleration": 2.5,
-    "maxAngularVelocity": 540.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.9,
+    "maxAngularVelocity": 720.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false

@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ScoringConstants;
@@ -41,7 +42,7 @@ public class ScoringCommand extends Command {
         break;
       case CORAL:
         if (!intake) {
-          ScoringSubsystem.scoringMotor(ScoringConstants.coralScoringVoltage * RobotContainer.operatorController.getRightTriggerAxis());
+          ScoringSubsystem.scoringMotor(ScoringConstants.coralScoringVoltage);
 
         } else {
           ScoringSubsystem.scoringMotor(-ScoringConstants.coralScoringVoltage);
@@ -54,6 +55,8 @@ public class ScoringCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (DriverStation.isAutonomous()) return;
+
     switch (ScoringSubsystem.getIntakeMode()) {
       case ALGAE:
         if (intake) {
@@ -68,12 +71,11 @@ public class ScoringCommand extends Command {
 
         break;
       case CORAL:
-      if (!intake) {
-        ScoringSubsystem.scoringMotor(ScoringConstants.coralScoringVoltage * RobotContainer.operatorController.getRightTriggerAxis());
-
-      } else {
-        ScoringSubsystem.scoringMotor(-ScoringConstants.coralScoringVoltage);
-      }
+        if (!intake) {
+          ScoringSubsystem.scoringMotor(ScoringConstants.coralScoringVoltage * RobotContainer.operatorController.getRightTriggerAxis());
+        } else {
+          ScoringSubsystem.scoringMotor(-ScoringConstants.coralScoringVoltage);
+        }
         break;
     }
   }
