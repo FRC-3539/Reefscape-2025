@@ -7,7 +7,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.ScoringConstants;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.ScoringSubsystem;
 
@@ -31,13 +33,11 @@ public class ScoringCommand extends Command {
 
         } else {
           if (ScoringSubsystem.algaeDetected()) {
-            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage * 0.00625); 
-          }
-          else {
-            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage); 
+            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage * 0.00625);
+          } else {
+            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage);
           }
         }
-
 
         break;
       case CORAL:
@@ -55,24 +55,30 @@ public class ScoringCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (DriverStation.isAutonomous()) return;
+    if (DriverStation.isAutonomous())
+      return;
 
     switch (ScoringSubsystem.getIntakeMode()) {
       case ALGAE:
         if (intake) {
           if (ScoringSubsystem.algaeDetected()) {
-            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage * 0.15); 
+            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage * 0.25);
+          } else {
+            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage);
           }
-          else {
-            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage); 
+        } else {
+          if (ElevatorSubsystem.getElevatorPosition() < ElevatorConstants.algaeLowHeight) {
+            ScoringSubsystem.scoringMotor(ScoringConstants.algaeScoringVoltage * 0.5);
+          } else {
+            ScoringSubsystem.scoringMotor(ScoringConstants.algaeScoringVoltage);
           }
         }
-        
 
         break;
       case CORAL:
         if (!intake) {
-          ScoringSubsystem.scoringMotor(ScoringConstants.coralScoringVoltage * RobotContainer.operatorController.getRightTriggerAxis());
+          ScoringSubsystem.scoringMotor(
+              ScoringConstants.coralScoringVoltage * RobotContainer.operatorController.getRightTriggerAxis());
         } else {
           ScoringSubsystem.scoringMotor(-ScoringConstants.coralScoringVoltage);
         }

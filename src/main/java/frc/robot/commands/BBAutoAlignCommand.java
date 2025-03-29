@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
 import frc.robot.constants.AlignConstants;
 import frc.robot.constants.EnumConstants.*;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LedSubsystem;
 
 import java.util.ArrayList;
@@ -41,34 +42,42 @@ public class BBAutoAlignCommand extends Command {
 
 	public void initialize() {
 		LedSubsystem.setAligning(true);
-		Pose2d targetPoint;
-			if (mode == AlignPoint.CORALLEFT) {
-				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
-						.nearest(new ArrayList<Pose2d>(AlignConstants.coralPointsLeft.values()));
-			} 
-			else if (mode == AlignPoint.CORALRIGHT) {
-				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
-						.nearest(new ArrayList<Pose2d>(AlignConstants.coralPointsRight.values()));
-			} else if (mode == AlignPoint.ALGAE) {
-				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
-						.nearest(new ArrayList<Pose2d>(AlignConstants.algaePoints.values()));
-			} else if (piece == ScoringMode.CLIMB) {
-				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
-						.nearest(new ArrayList<Pose2d>(AlignConstants.climbPoints.values()));
-			} else {
-				targetPoint = RobotContainer.DriveSubsystem.getPose2d()
-						.nearest(new ArrayList<Pose2d>(AlignConstants.humanPlayerPoints.values()));
-			}
+		Pose2d targetPoint, straightAlgae = new Pose2d();
+		if (mode == AlignPoint.CORALLEFT) {
+			targetPoint = RobotContainer.DriveSubsystem.getPose2d()
+					.nearest(new ArrayList<Pose2d>(AlignConstants.coralPointsLeft.values()));
+		} else if (mode == AlignPoint.CORALRIGHT) {
+			targetPoint = RobotContainer.DriveSubsystem.getPose2d()
+					.nearest(new ArrayList<Pose2d>(AlignConstants.coralPointsRight.values()));
+		} else if (mode == AlignPoint.ALGAE) {
+			targetPoint = RobotContainer.DriveSubsystem.getPose2d()
+					.nearest(new ArrayList<Pose2d>(AlignConstants.algaePoints.values()));
+			straightAlgae = targetPoint
+					.nearest(new ArrayList<Pose2d>(AlignConstants.straightPoints.values()));
+		} else if (piece == ScoringMode.CLIMB) {
+			targetPoint = RobotContainer.DriveSubsystem.getPose2d()
+					.nearest(new ArrayList<Pose2d>(AlignConstants.climbPoints.values()));
+		} else {
+			targetPoint = RobotContainer.DriveSubsystem.getPose2d()
+					.nearest(new ArrayList<Pose2d>(AlignConstants.humanPlayerPoints.values()));
+		}
 
 		Pose2d robotPose = RobotContainer.DriveSubsystem.getPose2d();
 
 		// Generate trajectory command to nearest coordinate
-		RobotContainer.DriveSubsystem.getFollower()
-				.follow(new Trajectory(new SimplePathBuilder(robotPose).lineTo(targetPoint).build(),
-						new TrajectoryConstraint[] { (TrajectoryConstraint) new MaxAccelerationConstraint(1.25
-							),
-								(TrajectoryConstraint) new MaxVelocityConstraint(2.0) },
-						.05));
+		if (mode == AlignPoint.ALGAE) {
+			RobotContainer.DriveSubsystem.getFollower()
+					.follow(new Trajectory(new SimplePathBuilder(robotPose).lineTo(targetPoint).lineTo(straightAlgae).build(),
+							new TrajectoryConstraint[] { (TrajectoryConstraint) new MaxAccelerationConstraint(1.25),
+									(TrajectoryConstraint) new MaxVelocityConstraint(2.0) },
+							.05));
+		} else {
+			RobotContainer.DriveSubsystem.getFollower()
+					.follow(new Trajectory(new SimplePathBuilder(robotPose).lineTo(targetPoint).build(),
+							new TrajectoryConstraint[] { (TrajectoryConstraint) new MaxAccelerationConstraint(1.25),
+									(TrajectoryConstraint) new MaxVelocityConstraint(2.0) },
+							.05));
+		}
 
 		SmartDashboard.putString("/DriveTrain/TargetPoint", mode.name());
 		// RobotContainer.DriveSubsystem.publishPose2d("TargetPoint", targetPoint);

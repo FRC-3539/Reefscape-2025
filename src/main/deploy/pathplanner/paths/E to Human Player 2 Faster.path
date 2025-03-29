@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.04,
-        "y": 2.74
+        "x": 5.071,
+        "y": 2.762
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.3595220876299,
-        "y": 2.3070817600576445
+        "x": 4.3905220876299,
+        "y": 2.3290817600576443
       },
       "isLocked": false,
-      "linkedName": "ReefE"
+      "linkedName": "ReefE (Fast)"
     },
     {
       "anchor": {

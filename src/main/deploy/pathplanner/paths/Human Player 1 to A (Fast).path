@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.76,
-        "y": 7.09
+        "x": 1.758,
+        "y": 7.11
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5196388798454086,
-        "y": 5.812040383157163
+        "x": 2.517638879845409,
+        "y": 5.832040383157164
       },
       "isLocked": false,
       "linkedName": "Human Player 1 (Fast)"

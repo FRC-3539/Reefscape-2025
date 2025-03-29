@@ -23,7 +23,7 @@ public class ElevatorConstants extends BBConstants {
 	public static double elevatorkD = 0.0;
 	public static double elevatorkG = 0.0;
 	public static double elevatorkV = 0.0;
-	public static double elevatorAcceleration = 80;
+	public static double elevatorAcceleration = 80.0;
 	public static double elevatorCruiseVelocity = 90.0; // max 100
 	public static double elevatorSoftMin = 5.0;
 	public static double elevatorSoftMax = 79.0;

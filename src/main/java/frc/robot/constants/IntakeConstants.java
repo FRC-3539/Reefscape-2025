@@ -10,7 +10,7 @@ public class IntakeConstants extends BBConstants {
 
 	public static double algaeIntakeVoltage = 5.0;
 	public static double coralIntakeVoltage = 3.5;
-	public static double funnelIntakeVoltage = 9;
+	public static double funnelIntakeVoltage = 9.0;
 	public static double funnelDeployVoltage = 2.0;
 	public static double funnelDeploykP = 64.0;
 	public static double funnelDeploykI = 0.0;

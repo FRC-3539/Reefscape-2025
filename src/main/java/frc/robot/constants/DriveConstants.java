@@ -8,7 +8,7 @@ public class DriveConstants extends BBConstants {
 		save();
 	}
 
-	public static double TranslationkP = 6;
+	public static double TranslationkP = 6.0;
 	public static double TranslationkI = 0.0;
 	public static double TranslationkD = 0.0;
 	public static double RotationkP = 15.0;
