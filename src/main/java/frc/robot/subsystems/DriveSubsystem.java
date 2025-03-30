@@ -32,9 +32,9 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -53,11 +53,13 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 
 	public double maxVelocity = 0.0;
 	public double maxRotationalVelocity = 0.0;
-	public double velocityX, velocityY = 0.0;
+	public double velocityX, velocityY, velocityR = 0.0;
 
 	public Pigeon2 pigeon = new Pigeon2(IDConstants.pigeonID, "rio");
 
 	private final HolonomicMotionProfiledTrajectoryFollower follower;
+
+	Field2d field = new Field2d();
 
 	public DriveSubsystem(SwerveDrivetrainConstants driveTrainConstants,
 			SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>... modules) {
@@ -90,6 +92,8 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 				new PidConstants(DriveConstants.RotationkP, DriveConstants.RotationkI,
 						DriveConstants.RotationkD),
 				new HolonomicFeedforward(FEEDFORWARD_CONSTANTS));
+
+		SmartDashboard.putData("Field", field);
 
 	}
 
@@ -177,11 +181,20 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 	@Override
 	public void periodic() {
 
+		if(Robot.isSimulation()) {
+			updateSimState(0.020, RobotController.getBatteryVoltage());
+		}
+
+		field.setRobotPose(getPose2d());
+
 		velocityX = ChassisSpeeds.fromRobotRelativeSpeeds(this.getState().Speeds, 
 		this.getPose2d().getRotation()).vxMetersPerSecond;
 
 		velocityY = ChassisSpeeds.fromRobotRelativeSpeeds(this.getState().Speeds, 
 		this.getPose2d().getRotation()).vyMetersPerSecond;
+
+		velocityR = ChassisSpeeds.fromRobotRelativeSpeeds(this.getState().Speeds, 
+		this.getPose2d().getRotation()).omegaRadiansPerSecond;
 
 		double robotVelocity = Math.sqrt(Math.pow(velocityX, 2) + Math.pow(velocityY, 2));
 

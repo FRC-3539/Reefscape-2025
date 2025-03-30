@@ -52,8 +52,8 @@ public class BBAutoAlignCommand extends Command {
 		} else if (mode == AlignPoint.ALGAE) {
 			targetPoint = RobotContainer.DriveSubsystem.getPose2d()
 					.nearest(new ArrayList<Pose2d>(AlignConstants.algaePoints.values()));
-			straightAlgae = targetPoint
-					.nearest(new ArrayList<Pose2d>(AlignConstants.straightPoints.values()));
+			// straightAlgae = targetPoint
+			// 		.nearest(new ArrayList<Pose2d>(AlignConstants.straightPoints.values()));
 		} else if (piece == ScoringMode.CLIMB) {
 			targetPoint = RobotContainer.DriveSubsystem.getPose2d()
 					.nearest(new ArrayList<Pose2d>(AlignConstants.climbPoints.values()));

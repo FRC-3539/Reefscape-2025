@@ -128,14 +128,14 @@ public class RobotContainer {
     ClimberSubsystem.setDefaultCommand(new ClimberCommand());
 
     driverController.start().whileTrue(new ZeroGyroCommand());
-    // driverController.a().whileTrue(new PIDAutoAlignCommand(AlignPoint.ALGAE, ScoringMode.ALGAE));
-    // driverController.b().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALLEFT, ScoringMode.CORAL));
-    // driverController.y().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALLEFT, ScoringMode.CLIMB));
-    // driverController.x().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALLEFT, ScoringMode.HUMANPLAYER));
-    driverController.a().whileTrue(new BBAutoAlignCommand(AlignPoint.ALGAE, ScoringMode.ALGAE));
-    driverController.b().whileTrue(new BBAutoAlignCommand(AlignPoint.CORALRIGHT, ScoringMode.CORAL));
-    driverController.x().whileTrue(new BBAutoAlignCommand(AlignPoint.CORALLEFT, ScoringMode.CORAL));
-    driverController.y().whileTrue(new BBAutoAlignCommand(AlignPoint.HUMANPLAYER2, ScoringMode.HUMANPLAYER));
+    driverController.a().whileTrue(new PIDAutoAlignCommand(AlignPoint.ALGAE, ScoringMode.ALGAE));
+    driverController.b().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALRIGHT, ScoringMode.CORAL));
+    driverController.y().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALLEFT, ScoringMode.CLIMB));
+    driverController.x().whileTrue(new PIDAutoAlignCommand(AlignPoint.HUMANPLAYER2, ScoringMode.HUMANPLAYER));
+    // driverController.a().whileTrue(new BBAutoAlignCommand(AlignPoint.ALGAE, ScoringMode.ALGAE));
+    // driverController.b().whileTrue(new BBAutoAlignCommand(AlignPoint.CORALRIGHT, ScoringMode.CORAL));
+    // driverController.x().whileTrue(new BBAutoAlignCommand(AlignPoint.CORALLEFT, ScoringMode.CORAL));
+    // driverController.y().whileTrue(new BBAutoAlignCommand(AlignPoint.HUMANPLAYER2, ScoringMode.HUMANPLAYER));
 
 
     // Intake commands\
