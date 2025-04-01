@@ -53,13 +53,22 @@ public class BBAutoAlignCommand extends Command {
 			targetPoint = RobotContainer.DriveSubsystem.getPose2d()
 					.nearest(new ArrayList<Pose2d>(AlignConstants.algaePoints.values()));
 			// straightAlgae = targetPoint
-			// 		.nearest(new ArrayList<Pose2d>(AlignConstants.straightPoints.values()));
+			// .nearest(new ArrayList<Pose2d>(AlignConstants.straightPoints.values()));
 		} else if (piece == ScoringMode.CLIMB) {
 			targetPoint = RobotContainer.DriveSubsystem.getPose2d()
 					.nearest(new ArrayList<Pose2d>(AlignConstants.climbPoints.values()));
+		} else if (piece == ScoringMode.CORAL) {
+			if (AlignConstants.coralPointsLeft.containsKey(mode)) {
+				targetPoint = AlignConstants.coralPointsLeft.get(mode);
+			} else {
+				targetPoint = AlignConstants.coralPointsRight.get(mode);
+			}
 		} else {
-			targetPoint = RobotContainer.DriveSubsystem.getPose2d()
-					.nearest(new ArrayList<Pose2d>(AlignConstants.humanPlayerPoints.values()));
+
+			targetPoint = AlignConstants.humanPlayerPoints.get(mode);
+
+			// targetPoint = RobotContainer.DriveSubsystem.getPose2d()
+			// .nearest(new ArrayList<Pose2d>(AlignConstants.humanPlayerPoints.values()));
 		}
 
 		Pose2d robotPose = RobotContainer.DriveSubsystem.getPose2d();
@@ -67,15 +76,16 @@ public class BBAutoAlignCommand extends Command {
 		// Generate trajectory command to nearest coordinate
 		if (mode == AlignPoint.ALGAE) {
 			RobotContainer.DriveSubsystem.getFollower()
-					.follow(new Trajectory(new SimplePathBuilder(robotPose).lineTo(targetPoint).lineTo(straightAlgae).build(),
+					.follow(new Trajectory(
+							new SimplePathBuilder(robotPose).lineTo(targetPoint).lineTo(straightAlgae).build(),
 							new TrajectoryConstraint[] { (TrajectoryConstraint) new MaxAccelerationConstraint(1.25),
 									(TrajectoryConstraint) new MaxVelocityConstraint(2.0) },
 							.05));
 		} else {
 			RobotContainer.DriveSubsystem.getFollower()
 					.follow(new Trajectory(new SimplePathBuilder(robotPose).lineTo(targetPoint).build(),
-							new TrajectoryConstraint[] { (TrajectoryConstraint) new MaxAccelerationConstraint(1.25),
-									(TrajectoryConstraint) new MaxVelocityConstraint(2.0) },
+							new TrajectoryConstraint[] { (TrajectoryConstraint) new MaxAccelerationConstraint(2),
+									(TrajectoryConstraint) new MaxVelocityConstraint(3.5) },
 							.05));
 		}
 

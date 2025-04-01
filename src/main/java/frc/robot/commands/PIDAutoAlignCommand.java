@@ -29,10 +29,10 @@ import frc.robot.subsystems.LedSubsystem;
 public class PIDAutoAlignCommand extends Command {
   /** Creates a new PIDAutoAlignCommand. */
 
-  double translateAccelMax = 5;
-  double thetaAccelMax = 5;
-  double thetaAccelElevatorUp = 2;
-  double translateAccelElevatorUp = 2;
+  double translateAccelMax = 2;
+  double thetaAccelMax = 2;
+  double thetaAccelElevatorUp = 1;
+  double translateAccelElevatorUp = 1;
 
   ProfiledPIDController xController = new ProfiledPIDController(DriveConstants.TranslationkP,
       DriveConstants.TranslationkI, DriveConstants.TranslationkD, new Constraints(4.5, translateAccelMax));
@@ -42,6 +42,7 @@ public class PIDAutoAlignCommand extends Command {
 
   ProfiledPIDController thetaController = new ProfiledPIDController(DriveConstants.RotationkP,
       DriveConstants.RotationkI, DriveConstants.RotationkD, new Constraints(4.5, thetaAccelMax));
+
 
   AlignPoint mode;
   ScoringMode piece;
@@ -92,7 +93,7 @@ public class PIDAutoAlignCommand extends Command {
     double deceleratedY = robotPose.getY() + RobotContainer.DriveSubsystem.velocityY * translateAccel;
     double deceleratedTheta = robotPose.getRotation().getRadians() + RobotContainer.DriveSubsystem.velocityR * thetaAccel;
 
-    robotPose = new Pose2d(deceleratedX, deceleratedY, robotPose.getRotation().plus(new Rotation2d(deceleratedTheta)));
+    // robotPose = new Pose2d(deceleratedX, deceleratedY, robotPose.getRotation().plus(new Rotation2d(deceleratedTheta)));
 
     // Log or use the deceleratedPose as needed
 

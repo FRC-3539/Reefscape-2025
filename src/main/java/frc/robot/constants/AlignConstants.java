@@ -18,6 +18,7 @@ public class AlignConstants {
     public static Map<AlignPoint, Pose2d> coralPointsLeft = new HashMap<>();
     public static Map<AlignPoint, Pose2d> coralPointsRight = new HashMap<>();
     public static Map<AlignPoint, Pose2d> algaePoints = new HashMap<>();
+    public static Map<AlignPoint, Pose2d> straightPoints = new HashMap<>();
     public static Map<AlignPoint, Pose2d> climbPoints = new HashMap<>();
     public static Map<AlignPoint, Pose2d> humanPlayerPoints = new HashMap<>();
     private final double INCHES_TO_METERS = 0.0254;
@@ -27,7 +28,7 @@ public class AlignConstants {
         humanPlayerPoints.put(AlignPoint.HUMANPLAYER1, new Pose2d(1.73, 7.17, Rotation2d.fromDegrees(-52.5)));
         // Bumper 9.5" from human player wall
         // Robot Frame 12.75" from human player wall
-        humanPlayerPoints.put(AlignPoint.HUMANPLAYER2, new Pose2d(1.43, 1.2, Rotation2d.fromDegrees(52.5)));
+        humanPlayerPoints.put(AlignPoint.HUMANPLAYER2, new Pose2d(1.73, 0.88, Rotation2d.fromDegrees(52.5)));
         climbPoints.put(AlignPoint.CLIMB1, new Pose2d(7.260,7.163, Rotation2d.fromDegrees(-90)));
         climbPoints.put(AlignPoint.CLIMB2, new Pose2d(7.260, 6.068, Rotation2d.fromDegrees(-90)));
         climbPoints.put(AlignPoint.CLIMB3, new Pose2d(7.260, 4.973, Rotation2d.fromDegrees(-90)));
@@ -53,6 +54,13 @@ public class AlignConstants {
         algaePoints.put(AlignPoint.D, getOffsetPoint(5.3209, 4.0269, 180, 0));
         algaePoints.put(AlignPoint.E, getOffsetPoint(4.9057, 4.7474, -120, 0));
         algaePoints.put(AlignPoint.F, getOffsetPoint(4.0740, 4.7474, -60, 0));
+
+        straightPoints.put(AlignPoint.A, getOffsetPoint(3.6576, 4.0269, 0, 0));
+        straightPoints.put(AlignPoint.B, getOffsetPoint(4.0740, 3.3073, 60, 0));
+        straightPoints.put(AlignPoint.C, getOffsetPoint(4.9057, 3.3073, 120, 0));
+        straightPoints.put(AlignPoint.D, getOffsetPoint(5.3209, 4.0269, 180, 0));
+        straightPoints.put(AlignPoint.E, getOffsetPoint(4.9057, 4.7474, -120, 0));
+        straightPoints.put(AlignPoint.F, getOffsetPoint(4.0740, 4.7474, -60, 0));
     }
 
     private Pose2d getOffsetPoint(double tagX, double tagY, int robotFaceDirection, double strafe) {
