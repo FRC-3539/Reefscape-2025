@@ -42,7 +42,7 @@ public class IntakeSubsystem extends SubsystemBase {
   private static TalonFXS funnelIntakeMotor, coralIntakeMotor;
  
   private static CANcoder funnelDeployCanCoder;
-  private static CANrange funnelRange;
+  private static CANrange funnelRange, humanPlayerRange;
   private static double requestedFunnelDeployPos = 0;
   DecimalFormat df = new DecimalFormat("#.00000");
 
@@ -139,6 +139,15 @@ public class IntakeSubsystem extends SubsystemBase {
 		.withFOVRangeX(6.75)
 		.withFOVRangeY(6.75)
 		);
+
+    humanPlayerRange = new CANrange(IDConstants.funnelRangeID, "rio");
+
+		humanPlayerRange.getConfigurator().apply(new FovParamsConfigs()
+		.withFOVCenterX(0)
+		.withFOVCenterY(0)
+		.withFOVRangeX(6.75)
+		.withFOVRangeY(6.75)
+		);
   }
     public static double getFunnelDeployAngle() {
 		return Units.rotationsToDegrees(
@@ -177,6 +186,9 @@ public class IntakeSubsystem extends SubsystemBase {
   public static double getFunnelDistance() {
 		return funnelRange.getDistance().getValueAsDouble();
 	}
+  public static double getHumanPlayerDistance() {
+		return humanPlayerRange.getDistance().getValueAsDouble();
+	}
    public static void setFunnelBreakMode(boolean enabled) {
 		if (enabled) {
 			funnelDeployMotor.setNeutralMode(NeutralModeValue.Brake);
@@ -189,6 +201,8 @@ public class IntakeSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("/Intake/FunnelAngle", getFunnelDeployAngle());
 		SmartDashboard.putNumber("/Intake/TargetFunnelAngle", requestedFunnelDeployPos);
     SmartDashboard.putNumber("/Intake/FunnelDistance", getFunnelDistance());
+    SmartDashboard.putNumber("/Intake/HumanPlayerDistance", getHumanPlayerDistance());
+
     //SmartDashboard.putNumber("/Intake/AlgaeDeployPosition", getAlgaeDeployPosition());
 
 
