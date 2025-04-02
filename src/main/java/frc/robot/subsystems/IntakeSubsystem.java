@@ -35,176 +35,182 @@ import com.ctre.phoenix6.signals.MotorArrangementValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
+public class IntakeSubsystem extends SubsystemBase {
 
-public class IntakeSubsystem extends SubsystemBase { 
-  
-  private static TalonFX funnelDeployMotor ; //, algaeDeployMotor,algaeIntakeMotor;
+  private static TalonFX funnelDeployMotor; // , algaeDeployMotor,algaeIntakeMotor;
   private static TalonFXS funnelIntakeMotor, coralIntakeMotor;
- 
+
   private static CANcoder funnelDeployCanCoder;
   private static CANrange funnelRange, humanPlayerRange;
   private static double requestedFunnelDeployPos = 0;
   DecimalFormat df = new DecimalFormat("#.00000");
-
 
   public IntakeSubsystem() {
 
     funnelDeployCanCoder = new CANcoder(IDConstants.funnelDeployCanCoderID, "rio");
 
     funnelDeployCanCoder.getConfigurator()
-				.apply(new MagnetSensorConfigs().withAbsoluteSensorDiscontinuityPoint(IntakeConstants.funnelDeployDiscontPoint)
-						.withSensorDirection(SensorDirectionValue.Clockwise_Positive)
-						.withMagnetOffset(IntakeConstants.funnelDeployOffset));
-        
-    // algaeDeployMotor = new TalonFX(IDConstants.algaeDeployMotorID, "Default Name");
+        .apply(new MagnetSensorConfigs().withAbsoluteSensorDiscontinuityPoint(IntakeConstants.funnelDeployDiscontPoint)
+            .withSensorDirection(SensorDirectionValue.Clockwise_Positive)
+            .withMagnetOffset(IntakeConstants.funnelDeployOffset));
+
+    // algaeDeployMotor = new TalonFX(IDConstants.algaeDeployMotorID, "Default
+    // Name");
     // algaeDeployMotor.getConfigurator().apply(
-    //   new TalonFXConfiguration().MotorOutput
-    //     .withInverted(InvertedValue.Clockwise_Positive));
-  
+    // new TalonFXConfiguration().MotorOutput
+    // .withInverted(InvertedValue.Clockwise_Positive));
+
     // algaeIntakeMotor = new TalonFX(IDConstants.algaeIntakeMotorID, "rio");
     // algaeIntakeMotor.getConfigurator().apply(
-    //   new TalonFXConfiguration().MotorOutput
-    //     .withInverted(InvertedValue.CounterClockwise_Positive));
-  
+    // new TalonFXConfiguration().MotorOutput
+    // .withInverted(InvertedValue.CounterClockwise_Positive));
+
     funnelDeployMotor = new TalonFX(IDConstants.funnelDeployMotorID, "rio");
-    if(IntakeConstants.isInverted == 0)
-    {
+    if (IntakeConstants.isInverted == 0) {
       funnelDeployMotor.getConfigurator().apply(
-        new TalonFXConfiguration().MotorOutput
-          .withInverted(InvertedValue.Clockwise_Positive));
-    }
-    else
-    {
+          new TalonFXConfiguration().MotorOutput
+              .withInverted(InvertedValue.Clockwise_Positive));
+    } else {
       funnelDeployMotor.getConfigurator().apply(
-        new TalonFXConfiguration().MotorOutput
-          .withInverted(InvertedValue.CounterClockwise_Positive));
+          new TalonFXConfiguration().MotorOutput
+              .withInverted(InvertedValue.CounterClockwise_Positive));
     }
-   
+
     funnelDeployMotor.setNeutralMode(NeutralModeValue.Brake);
 
-  
     coralIntakeMotor = new TalonFXS(IDConstants.coralIntakeMotorID, "rio");
-    coralIntakeMotor.getConfigurator().apply(new TalonFXSConfiguration().withCommutation(new CommutationConfigs().withMotorArrangement(MotorArrangementValue.Minion_JST)));
+    coralIntakeMotor.getConfigurator().apply(new TalonFXSConfiguration()
+        .withCommutation(new CommutationConfigs().withMotorArrangement(MotorArrangementValue.Minion_JST)));
     coralIntakeMotor.getConfigurator().apply(
-      new TalonFXSConfiguration().MotorOutput
-        .withInverted(InvertedValue.Clockwise_Positive));
-
+        new TalonFXSConfiguration().MotorOutput
+            .withInverted(InvertedValue.Clockwise_Positive));
 
     funnelIntakeMotor = new TalonFXS(IDConstants.funnelIntakeMotorID, "rio");
     funnelIntakeMotor.getConfigurator().apply(new TalonFXSConfiguration()
-    .withCommutation(new CommutationConfigs()
-    .withMotorArrangement(MotorArrangementValue.Minion_JST)));
+        .withCommutation(new CommutationConfigs()
+            .withMotorArrangement(MotorArrangementValue.Minion_JST)));
     funnelIntakeMotor.getConfigurator().apply(
-      new TalonFXSConfiguration().MotorOutput
-          .withInverted(InvertedValue.Clockwise_Positive));
+        new TalonFXSConfiguration().MotorOutput
+            .withInverted(InvertedValue.Clockwise_Positive));
 
-    // algaeDeployMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
-    //     .withForwardSoftLimitThreshold(IntakeConstants.algaeDeploySoftMax).withReverseSoftLimitEnable(true)
-    //     .withReverseSoftLimitThreshold(IntakeConstants.algaeDeploySoftMin));
+    // algaeDeployMotor.getConfigurator().apply(new
+    // SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
+    // .withForwardSoftLimitThreshold(IntakeConstants.algaeDeploySoftMax).withReverseSoftLimitEnable(true)
+    // .withReverseSoftLimitThreshold(IntakeConstants.algaeDeploySoftMin));
 
     // algaeDeployMotor.getConfigurator()
-		// 		.apply(new SlotConfigs().withKP(IntakeConstants.algaeDeploykP).withKI(IntakeConstants.algaeDeploykI)
-		// 				.withKD(IntakeConstants.algaeDeploykD).withKV(IntakeConstants.algaeDeploykV)
-		// 				.withKG(IntakeConstants.algaeDeploykG));
-    
+    // .apply(new
+    // SlotConfigs().withKP(IntakeConstants.algaeDeploykP).withKI(IntakeConstants.algaeDeploykI)
+    // .withKD(IntakeConstants.algaeDeploykD).withKV(IntakeConstants.algaeDeploykV)
+    // .withKG(IntakeConstants.algaeDeploykG));
+
     // algaeDeployMotor.getConfigurator()
-		// 		.apply(new MotionMagicConfigs()
-    //     .withMotionMagicAcceleration(IntakeConstants.algaeDeployAcceleration)
-    //     .withMotionMagicCruiseVelocity(IntakeConstants.algaeDeployCruiseVelocity));
+    // .apply(new MotionMagicConfigs()
+    // .withMotionMagicAcceleration(IntakeConstants.algaeDeployAcceleration)
+    // .withMotionMagicCruiseVelocity(IntakeConstants.algaeDeployCruiseVelocity));
 
     funnelDeployMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
-				.withForwardSoftLimitThreshold(degreesToFunnelDeployRotations(IntakeConstants.funnelDeploySoftMax)).withReverseSoftLimitEnable(true)
-				.withReverseSoftLimitThreshold(degreesToFunnelDeployRotations(IntakeConstants.funnelDeploySoftMin)));
-
-
-    funnelDeployMotor.getConfigurator()
-				.apply(new FeedbackConfigs().withFeedbackRemoteSensorID(IDConstants.funnelDeployCanCoderID)
-						.withRotorToSensorRatio(IntakeConstants.funnelDeployMotorToMechanism).withSensorToMechanismRatio(1)
-						.withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder));
+        .withForwardSoftLimitThreshold(degreesToFunnelDeployRotations(IntakeConstants.funnelDeploySoftMax))
+        .withReverseSoftLimitEnable(true)
+        .withReverseSoftLimitThreshold(degreesToFunnelDeployRotations(IntakeConstants.funnelDeploySoftMin)));
 
     funnelDeployMotor.getConfigurator()
-				.apply(new SlotConfigs().withKP(IntakeConstants.funnelDeploykP).withKI(IntakeConstants.funnelDeploykI)
-						.withKD(IntakeConstants.funnelDeploykD).withKV(IntakeConstants.funnelDeploykV)
-						.withKG(IntakeConstants.funnelDeploykG).withGravityType(GravityTypeValue.Arm_Cosine));
-            
+        .apply(new FeedbackConfigs().withFeedbackRemoteSensorID(IDConstants.funnelDeployCanCoderID)
+            .withRotorToSensorRatio(IntakeConstants.funnelDeployMotorToMechanism).withSensorToMechanismRatio(1)
+            .withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder));
+
     funnelDeployMotor.getConfigurator()
-            .apply(new MotionMagicConfigs()
+        .apply(new SlotConfigs().withKP(IntakeConstants.funnelDeploykP).withKI(IntakeConstants.funnelDeploykI)
+            .withKD(IntakeConstants.funnelDeploykD).withKV(IntakeConstants.funnelDeploykV)
+            .withKG(IntakeConstants.funnelDeploykG).withGravityType(GravityTypeValue.Arm_Cosine));
+
+    funnelDeployMotor.getConfigurator()
+        .apply(new MotionMagicConfigs()
             .withMotionMagicAcceleration(IntakeConstants.funnelDeployAcceleration)
             .withMotionMagicCruiseVelocity(IntakeConstants.funnelDeployCruiseVelocity));
     funnelRange = new CANrange(IDConstants.funnelRangeID, "rio");
 
-		funnelRange.getConfigurator().apply(new FovParamsConfigs()
-		.withFOVCenterX(0)
-		.withFOVCenterY(0)
-		.withFOVRangeX(6.75)
-		.withFOVRangeY(6.75)
-		);
+    funnelRange.getConfigurator().apply(new FovParamsConfigs()
+        .withFOVCenterX(0)
+        .withFOVCenterY(0)
+        .withFOVRangeX(6.75)
+        .withFOVRangeY(6.75));
 
     humanPlayerRange = new CANrange(IDConstants.humanPlayerRangeID, "rio");
 
-		humanPlayerRange.getConfigurator().apply(new FovParamsConfigs()
-		.withFOVCenterX(0)
-		.withFOVCenterY(0)
-		.withFOVRangeX(6.75)
-		.withFOVRangeY(6.75)
-		);
+    humanPlayerRange.getConfigurator().apply(new FovParamsConfigs()
+        .withFOVCenterX(0)
+        .withFOVCenterY(0)
+        .withFOVRangeX(6.75)
+        .withFOVRangeY(6.75));
   }
-    public static double getFunnelDeployAngle() {
-		return Units.rotationsToDegrees(
-				funnelDeployCanCoder.getAbsolutePosition().getValueAsDouble());
+
+  public static double getFunnelDeployAngle() {
+    return Units.rotationsToDegrees(
+        funnelDeployCanCoder.getAbsolutePosition().getValueAsDouble());
   }
 
   public static void setFunnelDeployAngle(double angle) {
-		requestedFunnelDeployPos = angle;
-	}
+    requestedFunnelDeployPos = angle;
+  }
 
   public static void initializFunnelDeployAngle() {
-		requestedFunnelDeployPos = getFunnelDeployAngle();
-	}
-  
+    requestedFunnelDeployPos = getFunnelDeployAngle();
+  }
+
   // public static void setAlgaeIntakeMotor(double voltage) {
-  //    algaeIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+  // algaeIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   // }
 
   // public static void setAlgaeDeployMotor(double voltage) {
-  //    algaeDeployMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+  // algaeDeployMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   // }
   // public static double getAlgaeDeployPosition() {
-  //   return algaeDeployMotor.getPosition().getValueAsDouble();
+  // return algaeDeployMotor.getPosition().getValueAsDouble();
   // }
 
   public static void setCoralIntakeMotor(double voltage) {
     coralIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
+
   public static void setFunnelIntakeMotor(double voltage) {
-     funnelIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+    funnelIntakeMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
 
   public static double degreesToFunnelDeployRotations(double degrees) {
-		return Units.degreesToRotations(degrees);
-	}
+    return Units.degreesToRotations(degrees);
+  }
+
   public static double getFunnelDistance() {
-		return funnelRange.getDistance().getValueAsDouble();
-	}
+    return funnelRange.getDistance().getValueAsDouble();
+  }
+
   public static double getHumanPlayerDistance() {
-		return humanPlayerRange.getDistance().getValueAsDouble();
-	}
-   public static void setFunnelBreakMode(boolean enabled) {
-		if (enabled) {
-			funnelDeployMotor.setNeutralMode(NeutralModeValue.Brake);
-		} else {
-			funnelDeployMotor.setNeutralMode(NeutralModeValue.Coast);
-		}
-	}
-  public void log()
-  {
+    return humanPlayerRange.getDistance().getValueAsDouble();
+  }
+
+  public static void setFunnelBreakMode(boolean enabled) {
+    if (enabled) {
+      funnelDeployMotor.setNeutralMode(NeutralModeValue.Brake);
+    } else {
+      funnelDeployMotor.setNeutralMode(NeutralModeValue.Coast);
+    }
+
+  }
+
+  public static double getAutonFunnelAngle() {
+    return 90 + (0.5 - IntakeSubsystem.getHumanPlayerDistance()) * 100;
+  }
+
+  public void log() {
     SmartDashboard.putNumber("/Intake/FunnelAngle", getFunnelDeployAngle());
-		SmartDashboard.putNumber("/Intake/TargetFunnelAngle", requestedFunnelDeployPos);
+    SmartDashboard.putNumber("/Intake/TargetFunnelAngle", requestedFunnelDeployPos);
     SmartDashboard.putNumber("/Intake/FunnelDistance", getFunnelDistance());
     SmartDashboard.putNumber("/Intake/HumanPlayerDistance", getHumanPlayerDistance());
+    SmartDashboard.putNumber("/Intake/AutonFunnelAngle", getAutonFunnelAngle());
 
-    //SmartDashboard.putNumber("/Intake/AlgaeDeployPosition", getAlgaeDeployPosition());
-
+    // SmartDashboard.putNumber("/Intake/AlgaeDeployPosition",
+    // getAlgaeDeployPosition());
 
   }
 
@@ -212,6 +218,6 @@ public class IntakeSubsystem extends SubsystemBase {
   public void periodic() {
     log();
     // This method will be called once per scheduler run
-     funnelDeployMotor.setControl(new MotionMagicVoltage(degreesToFunnelDeployRotations(requestedFunnelDeployPos)));
+    funnelDeployMotor.setControl(new MotionMagicVoltage(degreesToFunnelDeployRotations(requestedFunnelDeployPos)));
   }
 }

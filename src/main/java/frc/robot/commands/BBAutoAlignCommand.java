@@ -52,8 +52,8 @@ public class BBAutoAlignCommand extends Command {
 		} else if (mode == AlignPoint.ALGAE) {
 			targetPoint = RobotContainer.DriveSubsystem.getPose2d()
 					.nearest(new ArrayList<Pose2d>(AlignConstants.algaePoints.values()));
-			// straightAlgae = targetPoint
-			// .nearest(new ArrayList<Pose2d>(AlignConstants.straightPoints.values()));
+			 straightAlgae = targetPoint
+			 .nearest(new ArrayList<Pose2d>(AlignConstants.straightPoints.values()));
 		} else if (piece == ScoringMode.CLIMB) {
 			targetPoint = RobotContainer.DriveSubsystem.getPose2d()
 					.nearest(new ArrayList<Pose2d>(AlignConstants.climbPoints.values()));
@@ -84,7 +84,7 @@ public class BBAutoAlignCommand extends Command {
 		} else {
 			RobotContainer.DriveSubsystem.getFollower()
 					.follow(new Trajectory(new SimplePathBuilder(robotPose).lineTo(targetPoint).build(),
-							new TrajectoryConstraint[] { (TrajectoryConstraint) new MaxAccelerationConstraint(2),
+							new TrajectoryConstraint[] { (TrajectoryConstraint) new MaxAccelerationConstraint(1.75),
 									(TrajectoryConstraint) new MaxVelocityConstraint(3.5) },
 							.05));
 		}

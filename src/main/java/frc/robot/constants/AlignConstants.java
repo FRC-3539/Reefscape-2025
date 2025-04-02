@@ -13,6 +13,8 @@ public class AlignConstants {
     // Robot center offset shift along reef face, in inches
     private final double ALIGN_STRAFE = 6.5;
 
+    private final double ALGAE_STRAIGHT_DISTANCE = 15;
+
     
 
     public static Map<AlignPoint, Pose2d> coralPointsLeft = new HashMap<>();
@@ -34,37 +36,37 @@ public class AlignConstants {
         climbPoints.put(AlignPoint.CLIMB3, new Pose2d(7.260, 4.973, Rotation2d.fromDegrees(-90)));
 
         // Calculated points
-        coralPointsLeft.put(AlignPoint.A, getOffsetPoint(3.6576, 4.0269, 0, -ALIGN_STRAFE));
-        coralPointsRight.put(AlignPoint.B, getOffsetPoint(3.6576, 4.0269, 0, +ALIGN_STRAFE));
-        coralPointsLeft.put(AlignPoint.C, getOffsetPoint(4.0740, 3.3073, 60, -ALIGN_STRAFE));
-        coralPointsRight.put(AlignPoint.D, getOffsetPoint(4.0740, 3.3073, 60, +ALIGN_STRAFE));
-        coralPointsLeft.put(AlignPoint.E, getOffsetPoint(4.9057, 3.3073, 120, -ALIGN_STRAFE));
-        coralPointsRight.put(AlignPoint.F, getOffsetPoint(4.9057, 3.3073, 120, +ALIGN_STRAFE));
-        coralPointsLeft.put(AlignPoint.G, getOffsetPoint(5.3209, 4.0269, 180, -ALIGN_STRAFE));
-        coralPointsRight.put(AlignPoint.H, getOffsetPoint(5.3209, 4.0269, 180, +ALIGN_STRAFE));
-        coralPointsLeft.put(AlignPoint.I, getOffsetPoint(4.9057, 4.7474, -120, -ALIGN_STRAFE));
-        coralPointsRight.put(AlignPoint.J, getOffsetPoint(4.9057, 4.7474, -120, +ALIGN_STRAFE));
-        coralPointsLeft.put(AlignPoint.K, getOffsetPoint(4.0740, 4.7474, -60, -ALIGN_STRAFE));
-        coralPointsRight.put(AlignPoint.L, getOffsetPoint(4.0740, 4.7474, -60, +ALIGN_STRAFE));
+        coralPointsLeft.put(AlignPoint.A, getOffsetPoint(3.6576, 4.0269, 0, -ALIGN_STRAFE, ALIGN_DISTANCE));
+        coralPointsRight.put(AlignPoint.B, getOffsetPoint(3.6576, 4.0269, 0, +ALIGN_STRAFE, ALIGN_DISTANCE));
+        coralPointsLeft.put(AlignPoint.C, getOffsetPoint(4.0740, 3.3073, 60, -ALIGN_STRAFE, ALIGN_DISTANCE));
+        coralPointsRight.put(AlignPoint.D, getOffsetPoint(4.0740, 3.3073, 60, +ALIGN_STRAFE, ALIGN_DISTANCE));
+        coralPointsLeft.put(AlignPoint.E, getOffsetPoint(4.9057, 3.3073, 120, -ALIGN_STRAFE, ALIGN_DISTANCE));
+        coralPointsRight.put(AlignPoint.F, getOffsetPoint(4.9057, 3.3073, 120, +ALIGN_STRAFE, ALIGN_DISTANCE));
+        coralPointsLeft.put(AlignPoint.G, getOffsetPoint(5.3209, 4.0269, 180, -ALIGN_STRAFE, ALIGN_DISTANCE));
+        coralPointsRight.put(AlignPoint.H, getOffsetPoint(5.3209, 4.0269, 180, +ALIGN_STRAFE, ALIGN_DISTANCE));
+        coralPointsLeft.put(AlignPoint.I, getOffsetPoint(4.9057, 4.7474, -120, -ALIGN_STRAFE, ALIGN_DISTANCE));
+        coralPointsRight.put(AlignPoint.J, getOffsetPoint(4.9057, 4.7474, -120, +ALIGN_STRAFE, ALIGN_DISTANCE));
+        coralPointsLeft.put(AlignPoint.K, getOffsetPoint(4.0740, 4.7474, -60, -ALIGN_STRAFE, ALIGN_DISTANCE));
+        coralPointsRight.put(AlignPoint.L, getOffsetPoint(4.0740, 4.7474, -60, +ALIGN_STRAFE, ALIGN_DISTANCE));
 
         // Algae points
-        algaePoints.put(AlignPoint.A, getOffsetPoint(3.6576, 4.0269, 0, 0));
-        algaePoints.put(AlignPoint.B, getOffsetPoint(4.0740, 3.3073, 60, 0));
-        algaePoints.put(AlignPoint.C, getOffsetPoint(4.9057, 3.3073, 120, 0));
-        algaePoints.put(AlignPoint.D, getOffsetPoint(5.3209, 4.0269, 180, 0));
-        algaePoints.put(AlignPoint.E, getOffsetPoint(4.9057, 4.7474, -120, 0));
-        algaePoints.put(AlignPoint.F, getOffsetPoint(4.0740, 4.7474, -60, 0));
+        algaePoints.put(AlignPoint.A, getOffsetPoint(3.6576, 4.0269, 0, 0, ALIGN_DISTANCE));
+        algaePoints.put(AlignPoint.B, getOffsetPoint(4.0740, 3.3073, 60, 0, ALIGN_DISTANCE));
+        algaePoints.put(AlignPoint.C, getOffsetPoint(4.9057, 3.3073, 120, 0, ALIGN_DISTANCE));
+        algaePoints.put(AlignPoint.D, getOffsetPoint(5.3209, 4.0269, 180, 0, ALIGN_DISTANCE));
+        algaePoints.put(AlignPoint.E, getOffsetPoint(4.9057, 4.7474, -120, 0, ALIGN_DISTANCE));
+        algaePoints.put(AlignPoint.F, getOffsetPoint(4.0740, 4.7474, -60, 0, ALIGN_DISTANCE));
 
-        straightPoints.put(AlignPoint.A, getOffsetPoint(3.6576, 4.0269, 0, 0));
-        straightPoints.put(AlignPoint.B, getOffsetPoint(4.0740, 3.3073, 60, 0));
-        straightPoints.put(AlignPoint.C, getOffsetPoint(4.9057, 3.3073, 120, 0));
-        straightPoints.put(AlignPoint.D, getOffsetPoint(5.3209, 4.0269, 180, 0));
-        straightPoints.put(AlignPoint.E, getOffsetPoint(4.9057, 4.7474, -120, 0));
-        straightPoints.put(AlignPoint.F, getOffsetPoint(4.0740, 4.7474, -60, 0));
+        straightPoints.put(AlignPoint.A, getOffsetPoint(3.6576, 4.0269, 0, 0, ALGAE_STRAIGHT_DISTANCE));
+        straightPoints.put(AlignPoint.B, getOffsetPoint(4.0740, 3.3073, 60, 0, ALGAE_STRAIGHT_DISTANCE));
+        straightPoints.put(AlignPoint.C, getOffsetPoint(4.9057, 3.3073, 120, 0, ALGAE_STRAIGHT_DISTANCE));
+        straightPoints.put(AlignPoint.D, getOffsetPoint(5.3209, 4.0269, 180, 0, ALGAE_STRAIGHT_DISTANCE));
+        straightPoints.put(AlignPoint.E, getOffsetPoint(4.9057, 4.7474, -120, 0, ALGAE_STRAIGHT_DISTANCE));
+        straightPoints.put(AlignPoint.F, getOffsetPoint(4.0740, 4.7474, -60, 0, ALGAE_STRAIGHT_DISTANCE));
     }
 
-    private Pose2d getOffsetPoint(double tagX, double tagY, int robotFaceDirection, double strafe) {
-        double tagToPointDistance = Math.sqrt(Math.pow(ALIGN_DISTANCE, 2) + Math.pow(strafe, 2)) * INCHES_TO_METERS;
+    private Pose2d getOffsetPoint(double tagX, double tagY, int robotFaceDirection, double strafe, double distance) {
+        double tagToPointDistance = Math.sqrt(Math.pow(distance, 2) + Math.pow(strafe, 2)) * INCHES_TO_METERS;
         double pointOffsetAngle = Math.asin(strafe * INCHES_TO_METERS / tagToPointDistance);
         double reefFaceOutwardDirection = Math.toRadians(robotFaceDirection + 180) + pointOffsetAngle;
         return new Pose2d(

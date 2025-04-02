@@ -137,7 +137,7 @@ public class RobotContainer {
     ClimberSubsystem.setDefaultCommand(new ClimberCommand());
 
     driverController.start().whileTrue(new ZeroGyroCommand());
-    driverController.a().whileTrue(new PIDAutoAlignCommand(AlignPoint.ALGAE, ScoringMode.ALGAE));
+    driverController.a().whileTrue(new BBAutoAlignCommand(AlignPoint.ALGAE, ScoringMode.ALGAE));
     driverController.b().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALRIGHT, ScoringMode.CORAL));
     driverController.x().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALLEFT, ScoringMode.CLIMB));
     driverController.y().whileTrue(new PIDAutoAlignCommand(AlignPoint.HUMANPLAYER2, ScoringMode.HUMANPLAYER));
