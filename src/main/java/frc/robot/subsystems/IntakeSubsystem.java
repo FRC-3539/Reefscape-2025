@@ -140,7 +140,7 @@ public class IntakeSubsystem extends SubsystemBase {
 		.withFOVRangeY(6.75)
 		);
 
-    humanPlayerRange = new CANrange(IDConstants.funnelRangeID, "rio");
+    humanPlayerRange = new CANrange(IDConstants.humanPlayerRangeID, "rio");
 
 		humanPlayerRange.getConfigurator().apply(new FovParamsConfigs()
 		.withFOVCenterX(0)

@@ -27,6 +27,6 @@ public class HandOffCommand extends SequentialCommandGroup {
       new ParallelCommandGroup(
         new SetElevatorCommand(ElevatorConstants.handOffHeight, auton),
         new SetScorersCommand(ScoringConstants.handOffPosition, auton, ScoringMode.CORAL),
-        new SetFunnelPositionCommand(mode)));
+        new SetFunnelPositionCommand(mode, auton)));
   }
 }

@@ -17,12 +17,13 @@ import frc.robot.constants.EnumConstants.*;
 public class SetFunnelPositionCommand extends Command {
 
   IntakeMode mode;
+  boolean auton;
 
   /** Creates a new SetFunnelPositionCommand. */
-  public SetFunnelPositionCommand(IntakeMode mode) {
+  public SetFunnelPositionCommand(IntakeMode mode, boolean auton) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.mode = mode;
-
+    this.auton = auton;
   }
 
   // Called when the command is initially scheduled.
@@ -91,7 +92,7 @@ public class SetFunnelPositionCommand extends Command {
     }
 
     if (MathUtil.isNear(ScoringConstants.handOffPosition, ScoringSubsystem.getRotateAngle(), 5)
-        && MathUtil.isNear(IntakeConstants.handOffFunnelDeployAngle, IntakeSubsystem.getFunnelDeployAngle(), 5)) {
+        && (MathUtil.isNear(IntakeConstants.handOffFunnelDeployAngle, IntakeSubsystem.getFunnelDeployAngle(), 5)) || auton) {
       if (ScoringSubsystem.coralDetected()) {
         IntakeSubsystem.setFunnelIntakeMotor(0);
         ScoringSubsystem.scoringMotor(0);

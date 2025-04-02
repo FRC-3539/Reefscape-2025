@@ -115,6 +115,7 @@ public class RobotContainer {
     // Funnel Position Commands
     NamedCommands.registerCommand("HumanPlayerIntakeCommand", new HandOffCommand(true, IntakeMode.HUMAN));
     NamedCommands.registerCommand("FunnelRangeCommand", new FunnelRangeCommand());
+    NamedCommands.registerCommand("AdjustFunnelAngleCommand", new AdjustFunnelAngleCommand().withTimeout(10));
 
     chooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData(chooser);
@@ -140,6 +141,7 @@ public class RobotContainer {
     driverController.b().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALRIGHT, ScoringMode.CORAL));
     driverController.x().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALLEFT, ScoringMode.CLIMB));
     driverController.y().whileTrue(new PIDAutoAlignCommand(AlignPoint.HUMANPLAYER2, ScoringMode.HUMANPLAYER));
+    driverController.povDown().whileTrue(new AdjustFunnelAngleCommand());
     // driverController.a().whileTrue(new BBAutoAlignCommand(AlignPoint.ALGAE,
     // ScoringMode.ALGAE));
     // driverController.b().whileTrue(new BBAutoAlignCommand(AlignPoint.CORALRIGHT,
@@ -155,8 +157,8 @@ public class RobotContainer {
     operatorController.axisLessThan(1, -0.5).whileTrue(
         new HandOffCommand(false, IntakeMode.HUMAN));
     
-    operatorController.rightBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.HUMAN));
-    operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.GROUND));
+    operatorController.rightBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.HUMAN, false));
+    operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.GROUND, false));
 
     // Algae Commands
     operatorController.povDown().onTrue(new AlgaePositionCommand(AlgaeMode.GROUND, false));
@@ -165,7 +167,7 @@ public class RobotContainer {
     operatorController.povUp().onTrue(new AlgaePositionCommand(AlgaeMode.NET, false));
 
     // Coral Commands
-    operatorController.back().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE));
+    operatorController.back().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE, false));
     operatorController.b().onTrue(new CoralPositionCommand(CoralMode.TROUGH, false));
     operatorController.a().onTrue(new CoralPositionCommand(CoralMode.LOW, false));
     operatorController.x().onTrue(new CoralPositionCommand(CoralMode.MID, false));

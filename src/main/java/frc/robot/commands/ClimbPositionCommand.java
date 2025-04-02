@@ -21,7 +21,7 @@ public class ClimbPositionCommand extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         new ParallelCommandGroup(
-            new SetFunnelPositionCommand(IntakeMode.CLIMB),
+            new SetFunnelPositionCommand(IntakeMode.CLIMB, false),
             new SetElevatorCommand(ElevatorConstants.coralLowHeight, false),
             new SetScorersCommand(ScoringConstants.coralLowPosition, false, ScoringMode.CORAL)));
   }

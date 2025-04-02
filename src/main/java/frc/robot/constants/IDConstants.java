@@ -38,4 +38,5 @@ public class IDConstants extends BBConstants {
 	public static String elevatorMotorCanBusName = "rio";
 	public static int CANdleID = 13;
 	public static String CandleCanName = "Default Name";
+	public static int humanPlayerRangeID = 27;
 }

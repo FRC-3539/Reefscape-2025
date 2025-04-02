@@ -84,6 +84,12 @@
                             "data": {
                               "name": "HumanPlayerIntakeCommand"
                             }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "AdjustFunnelAngleCommand"
+                            }
                           }
                         ]
                       }
