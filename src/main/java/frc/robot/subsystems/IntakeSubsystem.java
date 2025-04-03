@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.filter.LinearFilter;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -44,6 +45,8 @@ public class IntakeSubsystem extends SubsystemBase {
   private static CANrange funnelRange, humanPlayerRange;
   private static double requestedFunnelDeployPos = 0;
   DecimalFormat df = new DecimalFormat("#.00000");
+  LinearFilter filter = LinearFilter.movingAverage(5);
+
 
   public IntakeSubsystem() {
 
@@ -207,7 +210,7 @@ public class IntakeSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("/Intake/TargetFunnelAngle", requestedFunnelDeployPos);
     SmartDashboard.putNumber("/Intake/FunnelDistance", getFunnelDistance());
     SmartDashboard.putNumber("/Intake/HumanPlayerDistance", getHumanPlayerDistance());
-    SmartDashboard.putNumber("/Intake/AutonFunnelAngle", getAutonFunnelAngle());
+    SmartDashboard.putNumber("/Intake/AutonFunnelAngle", filter.lastValue());
 
     // SmartDashboard.putNumber("/Intake/AlgaeDeployPosition",
     // getAlgaeDeployPosition());
@@ -216,6 +219,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    double value = filter.calculate(getAutonFunnelAngle());
     log();
     // This method will be called once per scheduler run
     funnelDeployMotor.setControl(new MotionMagicVoltage(degreesToFunnelDeployRotations(requestedFunnelDeployPos)));
