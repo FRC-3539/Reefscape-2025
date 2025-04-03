@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.76,
-        "y": 0.96
+        "x": 1.79,
+        "y": 0.99
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.6973295454545463,
-        "y": 1.6280965909090912
+        "x": 2.7273295454545465,
+        "y": 1.6580965909090912
       },
       "isLocked": false,
       "linkedName": "Fast Human Player 2"
@@ -36,7 +36,7 @@
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 3.0,
-        "maxAcceleration": 2.75,
+        "maxAcceleration": 2.6,
         "maxAngularVelocity": 720.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,

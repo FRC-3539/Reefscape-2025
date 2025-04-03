@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.76,
-        "y": 0.96
+        "x": 1.79,
+        "y": 0.99
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.239752252252252,
-        "y": 1.7424999999999988
+        "x": 2.2697522522522524,
+        "y": 1.7724999999999989
       },
       "isLocked": false,
       "linkedName": "Fast Human Player 2"

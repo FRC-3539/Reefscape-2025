@@ -25,11 +25,11 @@ public class AdjustFunnelAngleCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(IntakeSubsystem.getHumanPlayerDistance() > 0.75)
+    if(IntakeSubsystem.getHumanPlayerDistance() > 1)
     {
       return;
     }
-    IntakeSubsystem.setFunnelDeployAngle(MathUtil.clamp(IntakeSubsystem.getAutonFunnelAngle(), 75, 90));
+    IntakeSubsystem.setFunnelDeployAngle(MathUtil.clamp(IntakeSubsystem.getAutonFunnelAngle(),70, 90));
 
   }
 

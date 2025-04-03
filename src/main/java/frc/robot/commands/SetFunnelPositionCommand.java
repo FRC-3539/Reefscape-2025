@@ -99,7 +99,7 @@ public class SetFunnelPositionCommand extends Command {
         IntakeSubsystem.setCoralIntakeMotor(0);
       } else {
         IntakeSubsystem.setFunnelIntakeMotor(IntakeConstants.funnelIntakeVoltage);
-        ScoringSubsystem.scoringMotor(ScoringConstants.algaeScoringVoltage);
+        ScoringSubsystem.scoringMotor(-12);
         IntakeSubsystem.setCoralIntakeMotor(IntakeConstants.coralIntakeVoltage);
       }
 
