@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.frcteam3539.Byte_Swerve_Lib.control.HolonomicMotionProfiledTrajectoryFollower;
 import org.frcteam3539.Byte_Swerve_Lib.control.PidConstants;
@@ -16,6 +17,7 @@ import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
+import com.ctre.phoenix6.hardware.ParentDevice;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.swerve.SwerveDrivetrain;
@@ -31,6 +33,8 @@ import com.pathplanner.lib.path.PathConstraints;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.Alert;
+import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
@@ -60,6 +64,18 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 	private final HolonomicMotionProfiledTrajectoryFollower follower;
 
 	Field2d field = new Field2d();
+
+	
+  public static HashMap<ParentDevice, Alert> connectedDriveAlerts = new HashMap<>();
+  public static HashMap<ParentDevice, Alert> wasDisconnectedDriveAlerts = new HashMap<>();
+
+
+  private void createAlert(ParentDevice device, String deviceName) {
+    Alert isAlert = new Alert("Drive Subsystem", deviceName + ": is disconnected", AlertType.kError);
+    connectedDriveAlerts.put(device, isAlert);
+    Alert wasAlert = new Alert("Drive Subsystem", deviceName + ": was disconnected", AlertType.kError);
+    wasDisconnectedDriveAlerts.put(device, wasAlert);
+}
 
 	public DriveSubsystem(SwerveDrivetrainConstants driveTrainConstants,
 			SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>... modules) {
@@ -94,6 +110,16 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 				new HolonomicFeedforward(FEEDFORWARD_CONSTANTS));
 
 		SmartDashboard.putData("Field", field);
+
+		createAlert(this.getModule(0).getSteerMotor(), "FrontLeftSteer");
+		createAlert(this.getModule(0).getDriveMotor(), "FrontLeftDrive");
+		createAlert(this.getModule(1).getSteerMotor(), "FrontRightSteer");
+		createAlert(this.getModule(1).getDriveMotor(), "FrontRightDrive");
+		createAlert(this.getModule(2).getSteerMotor(), "BackLeftSteer");
+		createAlert(this.getModule(2).getDriveMotor(), "BackLeftDrive");
+		createAlert(this.getModule(3).getSteerMotor(), "BackRightSteer");
+		createAlert(this.getModule(3).getDriveMotor(), "BackRightDrive");
+
 
 	}
 
@@ -181,25 +207,40 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 	@Override
 	public void periodic() {
 
-		if(Robot.isSimulation()) {
+		
+		for (ParentDevice device : connectedDriveAlerts.keySet()) {
+			Alert isAlert = connectedDriveAlerts.get(device);
+			Alert wasAlert = wasDisconnectedDriveAlerts.get(device);
+	  
+			if (!device.isConnected()) {
+			  isAlert.set(true);
+			  wasAlert.set(false);
+	  
+			} else if(isAlert.get()) {
+			  isAlert.set(false);
+			  wasAlert.set(true);
+	  
+			}
+		  }
+
+		if (Robot.isSimulation()) {
 			updateSimState(0.020, RobotController.getBatteryVoltage());
 		}
 
 		field.setRobotPose(getPose2d());
 
-		velocityX = ChassisSpeeds.fromRobotRelativeSpeeds(this.getState().Speeds, 
-		this.getPose2d().getRotation()).vxMetersPerSecond;
+		velocityX = ChassisSpeeds.fromRobotRelativeSpeeds(this.getState().Speeds,
+				this.getPose2d().getRotation()).vxMetersPerSecond;
 
-		velocityY = ChassisSpeeds.fromRobotRelativeSpeeds(this.getState().Speeds, 
-		this.getPose2d().getRotation()).vyMetersPerSecond;
+		velocityY = ChassisSpeeds.fromRobotRelativeSpeeds(this.getState().Speeds,
+				this.getPose2d().getRotation()).vyMetersPerSecond;
 
-		velocityR = ChassisSpeeds.fromRobotRelativeSpeeds(this.getState().Speeds, 
-		this.getPose2d().getRotation()).omegaRadiansPerSecond;
+		velocityR = ChassisSpeeds.fromRobotRelativeSpeeds(this.getState().Speeds,
+				this.getPose2d().getRotation()).omegaRadiansPerSecond;
 
 		double robotVelocity = Math.sqrt(Math.pow(velocityX, 2) + Math.pow(velocityY, 2));
 
 		SmartDashboard.putNumber("/DriveTrain/RobotVelocity", robotVelocity);
-
 
 		log();
 		SwerveRequest request = new SwerveRequest.Idle();

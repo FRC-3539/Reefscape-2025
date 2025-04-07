@@ -6,12 +6,15 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.math.filter.LinearFilter;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.Alert;
+import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.IDConstants;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.CommutationConfigs;
@@ -27,6 +30,7 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.CANrange;
+import com.ctre.phoenix6.hardware.ParentDevice;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.hardware.TalonFXS;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
@@ -46,6 +50,17 @@ public class IntakeSubsystem extends SubsystemBase {
   private static double requestedFunnelDeployPos = 0;
   DecimalFormat df = new DecimalFormat("#.00000");
   LinearFilter filter = LinearFilter.movingAverage(5);
+
+  public static HashMap<ParentDevice, Alert> connectedIntakeAlerts = new HashMap<>();
+  public static HashMap<ParentDevice, Alert> wasDisconnectedIntakeAlerts = new HashMap<>();
+
+
+  private void createAlert(ParentDevice device, String deviceName) {
+    Alert isAlert = new Alert("Intake Subsystem", deviceName + ": is disconnected", AlertType.kError);
+    connectedIntakeAlerts.put(device, isAlert);
+    Alert wasAlert = new Alert("Intake Subsystem", deviceName + ": has disconnected", AlertType.kError);
+    wasDisconnectedIntakeAlerts.put(device, wasAlert);
+  }
 
 
   public IntakeSubsystem() {
@@ -146,6 +161,13 @@ public class IntakeSubsystem extends SubsystemBase {
         .withFOVCenterY(0)
         .withFOVRangeX(6.75)
         .withFOVRangeY(6.75));
+
+    createAlert(funnelDeployCanCoder, "funnelDeployCanConder");
+    createAlert(funnelDeployMotor, "funnelDeployMotor");
+    createAlert(coralIntakeMotor, "coralIntakeMotor");
+    createAlert(funnelIntakeMotor, "funnelIntakeMotor");
+    createAlert(funnelRange, "funnelRange");
+    createAlert(humanPlayerRange, "humanPlayerRange");
   }
 
   public static double getFunnelDeployAngle() {
@@ -219,6 +241,20 @@ public class IntakeSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    for (ParentDevice device : connectedIntakeAlerts.keySet()) {
+      Alert isAlert = connectedIntakeAlerts.get(device);
+      Alert wasAlert = wasDisconnectedIntakeAlerts.get(device);
+
+      if (!device.isConnected()) {
+        isAlert.set(true);
+        wasAlert.set(false);
+
+      } else if(isAlert.get()) {
+        isAlert.set(false);
+        wasAlert.set(true);
+
+      }
+    }
     double value = filter.calculate(getAutonFunnelAngle());
     log();
     // This method will be called once per scheduler run

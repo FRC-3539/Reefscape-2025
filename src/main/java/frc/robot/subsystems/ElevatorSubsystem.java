@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.HashMap;
+
 import com.ctre.phoenix6.configs.HardwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.SlotConfigs;
@@ -11,11 +13,14 @@ import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
+import com.ctre.phoenix6.hardware.ParentDevice;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.wpilibj.Alert;
+import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ElevatorConstants;
@@ -27,6 +32,17 @@ public class ElevatorSubsystem extends SubsystemBase {
   private static TalonFX elevatorMotor;
   public static double requestedElevatorPos = 0;
   private static boolean enforcedMinimumHeight, enforcedMaxHandOffHeight = false;
+
+  public static HashMap<ParentDevice, Alert> connectedElevatorAlerts = new HashMap<>();
+  public static HashMap<ParentDevice, Alert> wasDisconnectedElevatorAlerts = new HashMap<>();
+
+
+  private void createAlert(ParentDevice device, String deviceName) {
+    Alert isAlert = new Alert("Elevator Subsystem", deviceName + ": is disconnected", AlertType.kError);
+    connectedElevatorAlerts.put(device, isAlert);
+    Alert wasAlert = new Alert("Elevator Subsystem", deviceName + ": has disconnected", AlertType.kError);
+    wasDisconnectedElevatorAlerts.put(device, wasAlert);
+  }
 
   public ElevatorSubsystem() {
     elevatorMotor = new TalonFX(IDConstants.elevatorMotorID, IDConstants.elevatorMotorCanBusName);
@@ -52,6 +68,8 @@ public class ElevatorSubsystem extends SubsystemBase {
         .apply(new MotionMagicConfigs()
             .withMotionMagicAcceleration(ElevatorConstants.elevatorAcceleration)
             .withMotionMagicCruiseVelocity(ElevatorConstants.elevatorCruiseVelocity));
+
+            createAlert(elevatorMotor, "elevatorMotor");
   }
 
   public static void setElevatorMotor(double voltage) {
@@ -98,6 +116,22 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+
+    for (ParentDevice device : connectedElevatorAlerts.keySet()) {
+      Alert isAlert = connectedElevatorAlerts.get(device);
+      Alert wasAlert = wasDisconnectedElevatorAlerts.get(device);
+
+      if (!device.isConnected()) {
+        isAlert.set(true);
+        wasAlert.set(false);
+
+      } else if(isAlert.get()) {
+        isAlert.set(false);
+        wasAlert.set(true);
+
+      }
+    }
+
     double setElevatorPosition = requestedElevatorPos;
 
     if (enforcedMinimumHeight) {

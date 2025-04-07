@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 import com.ctre.phoenix6.configs.ClosedLoopGeneralConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
@@ -19,6 +20,7 @@ import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.CANrange;
+import com.ctre.phoenix6.hardware.ParentDevice;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
@@ -27,6 +29,8 @@ import com.ctre.phoenix6.signals.SensorDirectionValue;
 import frc.robot.constants.EnumConstants.*;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.Alert;
+import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ScoringConstants;
@@ -42,6 +46,16 @@ public class ScoringSubsystem extends SubsystemBase {
   public static int loopsWithCoral = 0, loopsWithAlgae = 0;
 
   public static ScoringMode mode = ScoringMode.CORAL;
+  public static HashMap<ParentDevice, Alert> connectedScoringAlerts = new HashMap<>();
+  public static HashMap<ParentDevice, Alert> wasDisconnectedScoringAlerts = new HashMap<>();
+
+
+  private void createAlert(ParentDevice device, String deviceName) {
+    Alert isAlert = new Alert("Scoring Subsystem", deviceName + ": is disconnected", AlertType.kError);
+    connectedScoringAlerts.put(device, isAlert);
+    Alert wasAlert = new Alert("Scoring Subsystem", deviceName + ": has disconnected", AlertType.kError);
+    wasDisconnectedScoringAlerts.put(device, wasAlert);
+  }
 
   public ScoringSubsystem() {
     scoringMotor = new TalonFX(IDConstants.scoringMotorID, "rio");
@@ -104,6 +118,12 @@ public class ScoringSubsystem extends SubsystemBase {
         .withFOVCenterY(0)
         .withFOVRangeX(6.75)
         .withFOVRangeY(6.75));
+
+    createAlert(rotateMotor, "rotateMotor");
+    createAlert(rotateCanCoder, "rotateCanCoder");
+    createAlert(scoringMotor, "scoringMotor");
+    createAlert(algaeRange, "algaeRange");
+    createAlert(coralRange, "coralRange");
   }
 
   public static void setRotateMotor(double voltage) {
@@ -184,6 +204,22 @@ public class ScoringSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+
+    for (ParentDevice device : connectedScoringAlerts.keySet()) {
+      Alert isAlert = connectedScoringAlerts.get(device);
+      Alert wasAlert = wasDisconnectedScoringAlerts.get(device);
+
+      if (!device.isConnected()) {
+        isAlert.set(true);
+        wasAlert.set(false);
+
+      } else if(isAlert.get()) {
+        isAlert.set(false);
+        wasAlert.set(true);
+
+      }
+    }
+
     if (coralDetected())
       loopsWithCoral++;
     else
