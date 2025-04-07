@@ -13,7 +13,7 @@ public class AlignConstants {
     // Robot center offset shift along reef face, in inches
     private final double ALIGN_STRAFE = 6.5;
 
-    private final double ALGAE_STRAIGHT_DISTANCE = 12;
+    private final double ALGAE_STRAIGHT_DISTANCE = 10;
 
     
 

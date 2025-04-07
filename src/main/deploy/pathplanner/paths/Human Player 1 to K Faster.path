@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 3.93,
-        "y": 5.31
+        "x": 3.886,
+        "y": 5.335
       },
       "prevControl": {
-        "x": 3.1510227272727276,
-        "y": 5.89965909090909
+        "x": 3.2307954545465054,
+        "y": 5.929573863635024
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "ReefK"
+      "linkedName": "ReefK (Fast)"
     }
   ],
   "rotationTargets": [],

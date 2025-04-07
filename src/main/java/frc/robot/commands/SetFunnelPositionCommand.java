@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.ScoringConstants;
@@ -18,17 +19,21 @@ public class SetFunnelPositionCommand extends Command {
 
   IntakeMode mode;
   boolean auton;
+  Timer timer;
 
   /** Creates a new SetFunnelPositionCommand. */
   public SetFunnelPositionCommand(IntakeMode mode, boolean auton) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.mode = mode;
     this.auton = auton;
+    this.timer = new Timer();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timer.reset();
+    timer.start();
     switch (mode) {
       case GROUND:
         LedSubsystem.setIntaking(true);
@@ -74,6 +79,11 @@ public class SetFunnelPositionCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(timer.hasElapsed(0.6))
+    {
+      timer.reset();
+      timer.start();
+    }
 
     if (mode == IntakeMode.CLIMB) {
       return;
@@ -93,7 +103,7 @@ public class SetFunnelPositionCommand extends Command {
 
     if (MathUtil.isNear(ScoringConstants.handOffPosition, ScoringSubsystem.getRotateAngle(), 5)
         && (MathUtil.isNear(IntakeConstants.handOffFunnelDeployAngle, IntakeSubsystem.getFunnelDeployAngle(), 5)) || auton) {
-      if (ScoringSubsystem.coralDetected()) {
+      if (ScoringSubsystem.coralDetected() || timer.hasElapsed(0.5)) {
         IntakeSubsystem.setFunnelIntakeMotor(0);
         ScoringSubsystem.scoringMotor(0);
         IntakeSubsystem.setCoralIntakeMotor(0);
@@ -115,6 +125,7 @@ public class SetFunnelPositionCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     // IntakeSubsystem.setFunnelDeployAngle(IntakeConstants.homeFunnelDeployAngle);
+    timer.stop();
     IntakeSubsystem.setCoralIntakeMotor(0);
     IntakeSubsystem.setFunnelIntakeMotor(0);
     ScoringSubsystem.scoringMotor(0);

@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.79,
-        "y": 0.99
+        "x": 1.85,
+        "y": 0.91
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.727329545454546,
-        "y": 1.658096590909091
+        "x": 2.787329545454546,
+        "y": 1.5780965909090912
       },
       "isLocked": false,
       "linkedName": "Fast Human Player 2"
     },
     {
       "anchor": {
-        "x": 3.6,
-        "y": 2.85
+        "x": 3.615,
+        "y": 2.865
       },
       "prevControl": {
-        "x": 3.2363636363636363,
-        "y": 2.5011994949494945
+        "x": 3.2513636363636365,
+        "y": 2.5161994949494946
       },
       "nextControl": null,
       "isLocked": false,
