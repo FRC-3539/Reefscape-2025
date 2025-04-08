@@ -5,16 +5,18 @@
   "pathFolders": [
     "Human Player 1 to Reef",
     "Human Player 2 to Reef",
-    "Start Left Paths",
-    "Start Middle Paths",
+    "Barge Paths",
     "Reef To Human Player 1",
     "Reef To Human Player 2",
+    "Start Left Paths",
+    "Start Middle Paths",
     "Start Right Paths"
   ],
   "autoFolders": [
     "Cage 2 Start",
     "Cage 5 Start",
-    "Middle Start"
+    "Middle Start",
+    "Weird Autos"
   ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,

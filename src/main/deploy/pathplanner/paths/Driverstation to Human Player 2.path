@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.26,
-        "y": 4.025
+        "x": 0.552209595956413,
+        "y": 3.0695707070707634
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.630366161616162,
-        "y": 3.95385101010101
+        "x": 0.5928661616161615,
+        "y": 2.0938131313131305
       },
       "isLocked": false,
-      "linkedName": "StartMiddle"
+      "linkedName": "Driverstation"
     },
     {
       "anchor": {
-        "x": 5.88,
-        "y": 3.86
+        "x": 0.9079545454545453,
+        "y": 1.3518308080808072
       },
       "prevControl": {
-        "x": 6.355934343434343,
-        "y": 3.9233585858585855
+        "x": 0.5420454545454544,
+        "y": 1.9921717171717173
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "ReefG"
+      "linkedName": "Weird HP2"
     }
   ],
   "rotationTargets": [],
@@ -33,22 +33,22 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 2.0,
-    "maxAcceleration": 2.0,
-    "maxAngularVelocity": 360.0,
-    "maxAngularAcceleration": 360.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 52.50000000000001
   },
   "reversed": false,
-  "folder": "Start Middle Paths",
+  "folder": "Reef To Human Player 2",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 0.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

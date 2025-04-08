@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.26,
-        "y": 4.025
+        "x": 7.402840909090909,
+        "y": 5.691919191919192
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.630366161616162,
-        "y": 3.95385101010101
+        "x": 7.738257575757576,
+        "y": 5.7020833333333325
       },
       "isLocked": false,
-      "linkedName": "StartMiddle"
+      "linkedName": "Net Line Up"
     },
     {
       "anchor": {
-        "x": 5.88,
-        "y": 3.86
+        "x": 7.9110479797979805,
+        "y": 5.691919191919192
       },
       "prevControl": {
-        "x": 6.355934343434343,
-        "y": 3.9233585858585855
+        "x": 8.161047979797981,
+        "y": 5.691919191919192
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "ReefG"
+      "linkedName": "Net"
     }
   ],
   "rotationTargets": [],
@@ -35,20 +35,20 @@
   "globalConstraints": {
     "maxVelocity": 2.0,
     "maxAcceleration": 2.0,
-    "maxAngularVelocity": 360.0,
-    "maxAngularAcceleration": 360.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 0.0
   },
   "reversed": false,
-  "folder": "Start Middle Paths",
+  "folder": "Barge Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": false
 }
