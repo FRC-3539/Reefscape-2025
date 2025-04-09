@@ -99,6 +99,8 @@ public class RobotContainer {
 
     // Scoring Commands
     NamedCommands.registerCommand("ScoringCommand", new ScoringCommand(false));
+    NamedCommands.registerCommand("IntakeCommand", new ScoringCommand(true));
+
 
     // Setting positions to score Coral
     NamedCommands.registerCommand("TroughCommand", new CoralPositionCommand(CoralMode.TROUGH, true));
@@ -107,7 +109,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("CoralHighCommand", new CoralPositionCommand(CoralMode.HIGH, true));
 
     // Setting positions to score Algae
-    NamedCommands.registerCommand("ProcessorCommand", new AlgaePositionCommand(AlgaeMode.PROCESSOR, true));
+    NamedCommands.registerCommand("GroundCommand", new AlgaePositionCommand(AlgaeMode.GROUND, true));
     NamedCommands.registerCommand("AlgaeLowCommand", new AlgaePositionCommand(AlgaeMode.REEFLOW, true));
     NamedCommands.registerCommand("AlgaeHighCommand", new AlgaePositionCommand(AlgaeMode.REEFHIGH, true));
     NamedCommands.registerCommand("NetCommand", new AlgaePositionCommand(AlgaeMode.NET, true));

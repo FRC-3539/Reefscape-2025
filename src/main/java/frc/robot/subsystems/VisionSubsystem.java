@@ -11,12 +11,15 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
+import edu.wpi.first.wpilibj.Alert;
+import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotContainer;
 
+import java.util.HashMap;
 import java.util.Optional;
 import org.ejml.simple.SimpleMatrix;
 import org.photonvision.EstimatedRobotPose;
@@ -26,6 +29,7 @@ import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
 import com.ctre.phoenix6.Utils;
+import com.ctre.phoenix6.hardware.ParentDevice;
 
 public class VisionSubsystem extends Thread {
 
@@ -54,6 +58,16 @@ public class VisionSubsystem extends Thread {
 
 	double visionRatio = 10;
 
+	public static HashMap<PhotonCamera, Alert> connectedVisionAlerts = new HashMap<>();
+	public static HashMap<PhotonCamera, Alert> wasDisconnectedVisionAlerts = new HashMap<>();
+
+	public static void createAlert(PhotonCamera device, String deviceName) {
+		Alert isAlert = new Alert("Vision Subsystem", deviceName + ": is disconnected", AlertType.kError);
+		connectedVisionAlerts.put(device, isAlert);
+		Alert wasAlert = new Alert("Vision Subsystem", deviceName + ": was disconnected", AlertType.kError);
+		wasDisconnectedVisionAlerts.put(device, wasAlert);
+	}
+
 	public VisionSubsystem() {
 		super();
 		try {
@@ -73,6 +87,9 @@ public class VisionSubsystem extends Thread {
 				PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToRightCam);
 
 		setVisionWeights(.2, .2, 10);
+
+		createAlert(leftCam, "leftCam");
+		createAlert(rightCam, "rightCam");
 	}
 
 	// Vision Methods

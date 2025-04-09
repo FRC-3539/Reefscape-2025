@@ -40,7 +40,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   private void createAlert(ParentDevice device, String deviceName) {
     Alert isAlert = new Alert("Elevator Subsystem", deviceName + ": is disconnected", AlertType.kError);
     connectedElevatorAlerts.put(device, isAlert);
-    Alert wasAlert = new Alert("Elevator Subsystem", deviceName + ": has disconnected", AlertType.kError);
+    Alert wasAlert = new Alert("Elevator Subsystem", deviceName + ": was disconnected", AlertType.kError);
     wasDisconnectedElevatorAlerts.put(device, wasAlert);
   }
 

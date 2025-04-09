@@ -70,6 +70,12 @@ public class AlignConstants {
         straightPoints.put(AlignPoint.D, getOffsetPoint(5.3209, 4.0269, 180, 0, ALGAE_STRAIGHT_DISTANCE));
         straightPoints.put(AlignPoint.E, getOffsetPoint(4.9057, 4.7474, -120, 0, ALGAE_STRAIGHT_DISTANCE));
         straightPoints.put(AlignPoint.F, getOffsetPoint(4.0740, 4.7474, -60, 0, ALGAE_STRAIGHT_DISTANCE));
+        straightPoints.put(AlignPoint.OTHERA, getOffsetPoint( 13.890498, 4.0269, 180, 0,ALGAE_STRAIGHT_DISTANCE));
+        straightPoints.put(AlignPoint.OTHERB, getOffsetPoint(13.474446, 3.3073, 120, 0, ALGAE_STRAIGHT_DISTANCE));
+        straightPoints.put(AlignPoint.OTHERC, getOffsetPoint(12.643358, 3.3073, 60, 0, ALGAE_STRAIGHT_DISTANCE));
+        straightPoints.put(AlignPoint.OTHERD, getOffsetPoint(12.2273059, 4.0269, 0, 0, ALGAE_STRAIGHT_DISTANCE));
+        straightPoints.put(AlignPoint.OTHERE, getOffsetPoint(12.643358, 4.7474, -60, 0, ALGAE_STRAIGHT_DISTANCE));
+        straightPoints.put(AlignPoint.OTHERF, getOffsetPoint(13.474446, 4.7474, -120, 0, ALGAE_STRAIGHT_DISTANCE));
     }
 
     private Pose2d getOffsetPoint(double tagX, double tagY, int robotFaceDirection, double strafe, double distance) {

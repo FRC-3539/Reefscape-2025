@@ -4,8 +4,13 @@
 
 package frc.robot;
 
+import org.photonvision.PhotonCamera;
+import org.photonvision.estimation.VisionEstimation;
+
+import com.ctre.phoenix6.hardware.ParentDevice;
 import com.pathplanner.lib.commands.FollowPathCommand;
 
+import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -16,6 +21,7 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.ScoringSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -56,6 +62,21 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     RobotContainer.VisionSubsystem.log();
     SmartDashboard.putBoolean("/DriverStation/Enabled", isEnabled());
+
+    for (PhotonCamera device : VisionSubsystem.connectedVisionAlerts.keySet()) {
+      Alert isAlert = VisionSubsystem.connectedVisionAlerts.get(device);
+      Alert wasAlert = VisionSubsystem.wasDisconnectedVisionAlerts.get(device);
+
+      if (!device.isConnected()) {
+        isAlert.set(true);
+        wasAlert.set(false);
+
+      } else if(isAlert.get()) {
+        isAlert.set(false);
+        wasAlert.set(true);
+
+      }
+    }
     // DriverStation.;
   }
 

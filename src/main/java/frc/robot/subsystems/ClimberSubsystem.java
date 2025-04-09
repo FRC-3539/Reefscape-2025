@@ -37,9 +37,9 @@ public class ClimberSubsystem extends SubsystemBase {
   public static HashMap<ParentDevice, Alert> wasDisconnectedClimberAlerts = new HashMap<>();
 
   private void createAlert(ParentDevice device, String deviceName) {
-    Alert isAlert = new Alert("Scoring Subsystem", deviceName + ": is disconnected", AlertType.kError);
+    Alert isAlert = new Alert("Climber Subsystem", deviceName + ": is disconnected", AlertType.kError);
     connectedClimberAlerts.put(device, isAlert);
-    Alert wasAlert = new Alert("Scoring Subsystem", deviceName + ": has disconnected", AlertType.kError);
+    Alert wasAlert = new Alert("Climber Subsystem", deviceName + ": was disconnected", AlertType.kError);
     wasDisconnectedClimberAlerts.put(device, wasAlert);
   }
 

@@ -54,14 +54,12 @@ public class IntakeSubsystem extends SubsystemBase {
   public static HashMap<ParentDevice, Alert> connectedIntakeAlerts = new HashMap<>();
   public static HashMap<ParentDevice, Alert> wasDisconnectedIntakeAlerts = new HashMap<>();
 
-
   private void createAlert(ParentDevice device, String deviceName) {
     Alert isAlert = new Alert("Intake Subsystem", deviceName + ": is disconnected", AlertType.kError);
     connectedIntakeAlerts.put(device, isAlert);
-    Alert wasAlert = new Alert("Intake Subsystem", deviceName + ": has disconnected", AlertType.kError);
+    Alert wasAlert = new Alert("Intake Subsystem", deviceName + ": was disconnected", AlertType.kError);
     wasDisconnectedIntakeAlerts.put(device, wasAlert);
   }
-
 
   public IntakeSubsystem() {
 
@@ -249,7 +247,7 @@ public class IntakeSubsystem extends SubsystemBase {
         isAlert.set(true);
         wasAlert.set(false);
 
-      } else if(isAlert.get()) {
+      } else if (isAlert.get()) {
         isAlert.set(false);
         wasAlert.set(true);
 
