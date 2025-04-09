@@ -3,9 +3,10 @@
   "robotLength": 0.914,
   "holonomicMode": true,
   "pathFolders": [
+    "Barge Paths",
     "Human Player 1 to Reef",
     "Human Player 2 to Reef",
-    "Barge Paths",
+    "Weird Paths ",
     "Reef To Human Player 1",
     "Reef To Human Player 2",
     "Start Left Paths",

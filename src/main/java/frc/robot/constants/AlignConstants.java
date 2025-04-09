@@ -56,6 +56,13 @@ public class AlignConstants {
         algaePoints.put(AlignPoint.D, getOffsetPoint(5.3209, 4.0269, 180, 0, ALIGN_DISTANCE));
         algaePoints.put(AlignPoint.E, getOffsetPoint(4.9057, 4.7474, -120, 0, ALIGN_DISTANCE));
         algaePoints.put(AlignPoint.F, getOffsetPoint(4.0740, 4.7474, -60, 0, ALIGN_DISTANCE));
+        algaePoints.put(AlignPoint.OTHERA, getOffsetPoint( 13.890498, 4.0269, 180, 0, ALIGN_DISTANCE));
+        algaePoints.put(AlignPoint.OTHERB, getOffsetPoint(13.474446, 3.3073, 120, 0, ALIGN_DISTANCE));
+        algaePoints.put(AlignPoint.OTHERC, getOffsetPoint(12.643358, 3.3073, 60, 0, ALIGN_DISTANCE));
+        algaePoints.put(AlignPoint.OTHERD, getOffsetPoint(12.2273059, 4.0269, 0, 0, ALIGN_DISTANCE));
+        algaePoints.put(AlignPoint.OTHERE, getOffsetPoint(12.643358, 4.7474, -60, 0, ALIGN_DISTANCE));
+        algaePoints.put(AlignPoint.OTHERF, getOffsetPoint(13.474446, 4.7474, -120, 0, ALIGN_DISTANCE));
+
 
         straightPoints.put(AlignPoint.A, getOffsetPoint(3.6576, 4.0269, 0, 0, ALGAE_STRAIGHT_DISTANCE));
         straightPoints.put(AlignPoint.B, getOffsetPoint(4.0740, 3.3073, 60, 0, ALGAE_STRAIGHT_DISTANCE));

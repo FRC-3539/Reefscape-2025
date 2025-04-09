@@ -53,7 +53,7 @@ public class ScoringSubsystem extends SubsystemBase {
   private void createAlert(ParentDevice device, String deviceName) {
     Alert isAlert = new Alert("Scoring Subsystem", deviceName + ": is disconnected", AlertType.kError);
     connectedScoringAlerts.put(device, isAlert);
-    Alert wasAlert = new Alert("Scoring Subsystem", deviceName + ": has disconnected", AlertType.kError);
+    Alert wasAlert = new Alert("Scoring Subsystem", deviceName + ": was disconnected", AlertType.kError);
     wasDisconnectedScoringAlerts.put(device, wasAlert);
   }
 
@@ -191,6 +191,7 @@ public class ScoringSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("/Scoring/TargetRotateAngle", requestedRotatePos);
     SmartDashboard.putNumber("/Scoring/CoralDistance", (getCoralDistance()));
     SmartDashboard.putNumber("/Scoring/AlgaeDistance", getAlgaeDistance());
+    SmartDashboard.putString("Scoring/ScoringMode", mode.toString());
 
   }
 
