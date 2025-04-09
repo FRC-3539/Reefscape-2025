@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import frc.robot.constants.EnumConstants.*;
 
 
@@ -15,7 +16,7 @@ public class AlignConstants {
 
     private final double ALGAE_STRAIGHT_DISTANCE = 10;
 
-    
+    private final double LOLLIPOP_ALIGN_DISTANCE = 15;
 
     public static Map<AlignPoint, Pose2d> coralPointsLeft = new HashMap<>();
     public static Map<AlignPoint, Pose2d> coralPointsRight = new HashMap<>();
@@ -80,6 +81,25 @@ public class AlignConstants {
             tagX + Math.cos(reefFaceOutwardDirection) * tagToPointDistance,
             tagY + Math.sin(reefFaceOutwardDirection) * tagToPointDistance,
             Rotation2d.fromDegrees(robotFaceDirection));
+    }
+
+    /*
+     *  Lollipop 1: 1.2192, 5.8557
+     *  Lollipop 2: 1.2192, 4.0269
+     *  Lollipop 3: 1.2192, 2.1981
+     */
+    public Pose2d getLollipopAlignPoint(AlignPoint mode, Pose2d robotPose) {
+        Translation2d targetLollipop;
+        if (mode == AlignPoint.LOLLIPOP1) targetLollipop = new Translation2d(1.2192, 5.8557);
+        else if (mode == AlignPoint.LOLLIPOP2) targetLollipop = new Translation2d(1.2192, 4.0269);
+        else targetLollipop = new Translation2d(1.2192, 2.1981);
+
+        double distanceToLollipop = robotPose.getTranslation().getDistance(targetLollipop);
+        return new Pose2d(
+            targetLollipop.getX() + (LOLLIPOP_ALIGN_DISTANCE / distanceToLollipop) * (robotPose.getX() - targetLollipop.getX()),
+            targetLollipop.getY() + (LOLLIPOP_ALIGN_DISTANCE / distanceToLollipop) * (robotPose.getY() - targetLollipop.getY()),
+            Rotation2d.fromRadians(Math.atan2(targetLollipop.getY() - robotPose.getY(), targetLollipop.getX() - robotPose.getX()))
+        );
     }
 }
 
