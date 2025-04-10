@@ -37,4 +37,6 @@ public class ScoringConstants extends BBConstants {
 	public static double handOffPosition = -130.0;
 	public static double groundPosition = 40.0;
 	public static int invertScorer = 1;
+	public static double algaeIntakeVoltage = -12.0;
+	public static double algaeHoldingVoltage = -2.0;
 }

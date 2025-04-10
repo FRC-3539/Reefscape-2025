@@ -11,10 +11,10 @@ public class EnumConstants {
 
     public static enum AlignPoint {
         A, B, C, D, E, F, G, H, I, J, K, L, OTHERA, OTHERB, OTHERC, OTHERD, OTHERE, OTHERF,
-        HUMANPLAYER1, HUMANPLAYER2, 
-        CLIMB1, CLIMB2, CLIMB3, 
-        CORALLEFT, CORALRIGHT, 
-        ALGAE, LOLLIPOP1, LOLLIPOP2, LOLLIPOP3;
+        HUMANPLAYER1, HUMANPLAYER2,
+        CLIMB1, CLIMB2, CLIMB3,
+        CORALLEFT, CORALRIGHT,
+        ALGAE, LOLLIPOP1, LOLLIPOP2, LOLLIPOP3, BARGE;
     };
 
     public enum IntakeMode {

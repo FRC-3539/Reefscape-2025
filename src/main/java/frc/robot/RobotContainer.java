@@ -142,8 +142,13 @@ public class RobotContainer {
     driverController.a().whileTrue(new BBAutoAlignCommand(AlignPoint.ALGAE, ScoringMode.ALGAE));
     driverController.b().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALRIGHT, ScoringMode.CORAL));
     driverController.x().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALLEFT, ScoringMode.CLIMB));
-    driverController.y().whileTrue(new PIDAutoAlignCommand(AlignPoint.HUMANPLAYER2, ScoringMode.HUMANPLAYER));
-    driverController.povDown().whileTrue(new AdjustFunnelAngleCommand());
+    //driverController.y().whileTrue(new PIDAutoAlignCommand(AlignPoint.HUMANPLAYER2, ScoringMode.HUMANPLAYER));
+    driverController.y().whileTrue(new BBAutoAlignCommand(AlignPoint.BARGE, ScoringMode.ALGAE));
+    driverController.povLeft().whileTrue(new BBAutoAlignCommand(AlignPoint.LOLLIPOP1, ScoringMode.ALGAE));
+    driverController.povDown().whileTrue(new BBAutoAlignCommand(AlignPoint.LOLLIPOP2, ScoringMode.ALGAE));
+    driverController.povRight().whileTrue(new BBAutoAlignCommand(AlignPoint.LOLLIPOP3, ScoringMode.ALGAE));
+
+    //driverController.povDown().whileTrue(new AdjustFunnelAngleCommand());
     // driverController.a().whileTrue(new BBAutoAlignCommand(AlignPoint.ALGAE,
     // ScoringMode.ALGAE));
     // driverController.b().whileTrue(new BBAutoAlignCommand(AlignPoint.CORALRIGHT,

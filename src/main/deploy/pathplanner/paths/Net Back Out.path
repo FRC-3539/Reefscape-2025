@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.9110479797979805,
-        "y": 5.691919191919192
+        "x": 7.75,
+        "y": 4.7828409090909085
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.33169191919192,
-        "y": 5.6715909090909085
+        "x": 6.920539772727272,
+        "y": 4.822727272727272
       },
       "isLocked": false,
       "linkedName": "Net"
     },
     {
       "anchor": {
-        "x": 6.701515151515151,
-        "y": 5.691919191919192
+        "x": 5.1054545454545455,
+        "y": 5.062045454545454
       },
       "prevControl": {
-        "x": 7.484154040404041,
-        "y": 5.681755050505051
+        "x": 5.703750000000001,
+        "y": 6.039261363636363
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Algae IJ"
     }
   ],
   "rotationTargets": [],
@@ -33,16 +33,16 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 2.5,
+    "maxAcceleration": 2.0,
     "maxAngularVelocity": 540.0,
-    "maxAngularAcceleration": 720.0,
+    "maxAngularAcceleration": 360.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -119.99999999999999
   },
   "reversed": false,
   "folder": "Barge Paths",
@@ -50,5 +50,5 @@
     "velocity": 0,
     "rotation": 0.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

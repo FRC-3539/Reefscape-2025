@@ -55,16 +55,14 @@ public class ScoringCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (DriverStation.isAutonomous())
-      return;
 
     switch (ScoringSubsystem.getIntakeMode()) {
       case ALGAE:
         if (intake) {
           if (ScoringSubsystem.algaeDetected()) {
-            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage * 0.25);
+            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeHoldingVoltage);
           } else {
-            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeScoringVoltage);
+            ScoringSubsystem.scoringMotor(-ScoringConstants.algaeIntakeVoltage);
           }
         } else {
           if (ElevatorSubsystem.getElevatorPosition() < ElevatorConstants.algaeLowHeight) {
@@ -76,6 +74,9 @@ public class ScoringCommand extends Command {
 
         break;
       case CORAL:
+        if (DriverStation.isAutonomous())
+          return;
+
         if (!intake) {
           ScoringSubsystem.scoringMotor(
               ScoringConstants.coralScoringVoltage * RobotContainer.operatorController.getRightTriggerAxis());
