@@ -20,6 +20,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.ClimberCommand;
@@ -31,6 +32,9 @@ import frc.robot.constants.IntakeConstants;
 public class ClimberSubsystem extends SubsystemBase {
   /** Creates a new ClimberSubsystem. */
   private static TalonFX climberMotor;
+  private static Servo climbServo;
+  private static double climbServoPosition = 0.5;
+  private static double requestClimberVoltage;
   // private static CANcoder climberCanCoder;
 
   public static HashMap<ParentDevice, Alert> connectedClimberAlerts = new HashMap<>();
@@ -49,7 +53,7 @@ public class ClimberSubsystem extends SubsystemBase {
     climberMotor = new TalonFX(IDConstants.climberMotorID, "rio");
     climberMotor.getConfigurator().apply(
         new TalonFXConfiguration().MotorOutput
-            .withInverted(InvertedValue.CounterClockwise_Positive));
+            .withInverted(InvertedValue.Clockwise_Positive));
 
     climberMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
         .withForwardSoftLimitThreshold(ClimberConstants.climberSoftMax).withReverseSoftLimitEnable(true)
@@ -66,12 +70,13 @@ public class ClimberSubsystem extends SubsystemBase {
             .withMotionMagicCruiseVelocity(ClimberConstants.climberCruiseVelocity));
 
     climberMotor.setNeutralMode(NeutralModeValue.Brake);
+    climbServo = new Servo(IDConstants.ClimbServoChannel);
 
     createAlert(climberMotor, "climberMotor");
   }
 
   public static void setClimberMotor(double voltage) {
-    climberMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+    requestClimberVoltage = voltage;
   }
 
   // public static double getClimberAngle() {
@@ -110,12 +115,29 @@ public class ClimberSubsystem extends SubsystemBase {
         .withReverseSoftLimitThreshold(ClimberConstants.climberSoftMin));
   }
 
+  public static void setClimbServoPosition(double position) {
+    climbServoPosition = position;
+  }
+
   public void log() {
     SmartDashboard.putNumber("/Climber/ClimberPosition", getClimberPosition());
+
   }
 
   @Override
   public void periodic() {
+    if (climbServoPosition != 0.5 && requestClimberVoltage > 0) {
+      requestClimberVoltage = 0;
+    }
+    if (getClimberPosition() < ClimberConstants.climberSoftMin * 0.35) {
+      climbServoPosition = 0;
+    }
+    else
+    {
+      climbServoPosition = 0.5;
+    }
+    climberMotor.setControl(new VoltageOut(requestClimberVoltage).withEnableFOC(true));
+    climbServo.set(climbServoPosition);
     for (ParentDevice device : connectedClimberAlerts.keySet()) {
       Alert isAlert = connectedClimberAlerts.get(device);
       Alert wasAlert = wasDisconnectedClimberAlerts.get(device);
@@ -124,7 +146,7 @@ public class ClimberSubsystem extends SubsystemBase {
         isAlert.set(true);
         wasAlert.set(false);
 
-      } else if(isAlert.get()) {
+      } else if (isAlert.get()) {
         isAlert.set(false);
         wasAlert.set(true);
 

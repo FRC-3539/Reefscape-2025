@@ -182,8 +182,8 @@ public class LedSubsystem extends SubsystemBase {
 			setLEDs(LEDState.ERROR);
 			return;
 		}
-		if (ClimberSubsystem.getClimberPosition() < -25) {
-			double climbingPercent = ClimberSubsystem.getClimberPosition()/-250.0;
+		if (ClimberSubsystem.getClimberPosition() < -5) {
+			double climbingPercent = ClimberSubsystem.getClimberPosition()/-50.0;
 			if (climbingPercent > 0.72) climbingPercent = 1;
 
 			int numRainbow = (int)(climbingPercent * LedConstants.numLights);

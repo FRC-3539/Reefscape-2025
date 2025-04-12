@@ -8,7 +8,7 @@ public class ClimberConstants extends BBConstants {
 		save();
 	}
 
-	public static double climberVoltage = 2.0;
+	public static double climberVoltage = 12;
 	public static double climberRestingRotations = 0.0;
 	public static double restClimberAngle = 0.0;
 	public static double climberkP = 0.0;

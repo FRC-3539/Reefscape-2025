@@ -158,7 +158,7 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "deadline",
           "data": {
             "commands": [
               {
@@ -181,6 +181,12 @@
                       "type": "named",
                       "data": {
                         "name": "AlgaeHighCommand"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "IntakeCommand"
                       }
                     }
                   ]
@@ -270,7 +276,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.2
+                        "waitTime": 0.3
                       }
                     },
                     {
