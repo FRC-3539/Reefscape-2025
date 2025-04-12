@@ -27,7 +27,7 @@ public class ZeroClimberCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    ClimberSubsystem.enableClimberLimits(false);
+    ClimberSubsystem.enableClimberLimits(true);
     ClimberSubsystem.zeroClimberMotor();
   }
 

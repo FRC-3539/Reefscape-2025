@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import java.util.HashMap;
 
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.HardwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.SlotConfigs;
@@ -36,7 +37,6 @@ public class ElevatorSubsystem extends SubsystemBase {
   public static HashMap<ParentDevice, Alert> connectedElevatorAlerts = new HashMap<>();
   public static HashMap<ParentDevice, Alert> wasDisconnectedElevatorAlerts = new HashMap<>();
 
-
   private void createAlert(ParentDevice device, String deviceName) {
     Alert isAlert = new Alert("Elevator Subsystem", deviceName + ": is disconnected", AlertType.kError);
     connectedElevatorAlerts.put(device, isAlert);
@@ -50,6 +50,10 @@ public class ElevatorSubsystem extends SubsystemBase {
         new TalonFXConfiguration().MotorOutput
             .withInverted(InvertedValue.CounterClockwise_Positive));
     elevatorMotor.setNeutralMode(NeutralModeValue.Brake);
+
+    elevatorMotor.getConfigurator()
+        .apply(new CurrentLimitsConfigs().withStatorCurrentLimitEnable(false).withSupplyCurrentLimitEnable(true)
+            .withSupplyCurrentLimit(90).withSupplyCurrentLowerLimit(60).withSupplyCurrentLowerTime(2));
 
     elevatorMotor.getConfigurator().apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
         .withForwardSoftLimitThreshold(
@@ -69,7 +73,7 @@ public class ElevatorSubsystem extends SubsystemBase {
             .withMotionMagicAcceleration(ElevatorConstants.elevatorAcceleration)
             .withMotionMagicCruiseVelocity(ElevatorConstants.elevatorCruiseVelocity));
 
-            createAlert(elevatorMotor, "elevatorMotor");
+    createAlert(elevatorMotor, "elevatorMotor");
   }
 
   public static void setElevatorMotor(double voltage) {
@@ -125,7 +129,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         isAlert.set(true);
         wasAlert.set(false);
 
-      } else if(isAlert.get()) {
+      } else if (isAlert.get()) {
         isAlert.set(false);
         wasAlert.set(true);
 
