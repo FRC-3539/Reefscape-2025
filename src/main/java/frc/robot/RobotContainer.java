@@ -115,8 +115,10 @@ public class RobotContainer {
     NamedCommands.registerCommand("NetCommand", new AlgaePositionCommand(AlgaeMode.NET, true));
 
     // Funnel Position Commands
-    NamedCommands.registerCommand("HumanPlayerIntakeCommand", new HandOffCommand(true, IntakeMode.HUMAN));
-    NamedCommands.registerCommand("FunnelRangeCommand", new FunnelRangeCommand());
+    NamedCommands.registerCommand("HumanPlayerIntakeCommand", new HandOffCommand(true, IntakeMode.HUMAN).withTimeout(5));
+    NamedCommands.registerCommand("2SecHumanPlayerIntakeCommand", new HandOffCommand(true, IntakeMode.HUMAN).withTimeout(2));
+
+    NamedCommands.registerCommand("FunnelRangeCommand", new FunnelRangeCommand().withTimeout(5));
     NamedCommands.registerCommand("AdjustFunnelAngleCommand", new AdjustFunnelAngleCommand().withTimeout(10));
 
     chooser = AutoBuilder.buildAutoChooser();

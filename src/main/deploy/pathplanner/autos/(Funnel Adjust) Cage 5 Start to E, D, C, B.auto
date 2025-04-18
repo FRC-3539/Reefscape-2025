@@ -130,7 +130,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "HumanPlayerIntakeCommand"
+                        "name": "2SecHumanPlayerIntakeCommand"
                       }
                     },
                     {
@@ -246,7 +246,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "HumanPlayerIntakeCommand"
+                        "name": "2SecHumanPlayerIntakeCommand"
                       }
                     },
                     {
@@ -355,7 +355,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "HumanPlayerIntakeCommand"
+                        "name": "2SecHumanPlayerIntakeCommand"
                       }
                     },
                     {
