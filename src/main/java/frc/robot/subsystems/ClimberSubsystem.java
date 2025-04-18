@@ -126,15 +126,15 @@ public class ClimberSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if (climbServoPosition != 0.5 && requestClimberVoltage > 0) {
+    if (climbServoPosition != ClimberConstants.disengagedServo  && requestClimberVoltage > 0) {
       requestClimberVoltage = 0;
     }
     if (getClimberPosition() < ClimberConstants.climberSoftMin * 0.35) {
-      climbServoPosition = 0;
+      climbServoPosition = ClimberConstants.engagedServo;
     }
     else
     {
-      climbServoPosition = 0.5;
+      climbServoPosition = ClimberConstants.disengagedServo;
     }
     climberMotor.setControl(new VoltageOut(requestClimberVoltage).withEnableFOC(true));
     climbServo.set(climbServoPosition);

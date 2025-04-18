@@ -29,7 +29,7 @@ public class AdjustFunnelAngleCommand extends Command {
     {
       return;
     }
-    IntakeSubsystem.setFunnelDeployAngle(MathUtil.clamp(IntakeSubsystem.getAutonFunnelAngle(),70, 90));
+    IntakeSubsystem.setFunnelDeployAngle(MathUtil.clamp(IntakeSubsystem.filter.lastValue() - 1,70, 90));
 
   }
 

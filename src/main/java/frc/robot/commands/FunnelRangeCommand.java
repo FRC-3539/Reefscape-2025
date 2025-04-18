@@ -29,6 +29,6 @@ public class FunnelRangeCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return IntakeSubsystem.getFunnelDistance() < 0.025;
+    return IntakeSubsystem.funnelFilter.lastValue() < 0.025;
   }
 }

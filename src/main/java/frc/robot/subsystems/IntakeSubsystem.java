@@ -49,7 +49,8 @@ public class IntakeSubsystem extends SubsystemBase {
   private static CANrange funnelRange, humanPlayerRange;
   private static double requestedFunnelDeployPos = 0;
   DecimalFormat df = new DecimalFormat("#.00000");
-  LinearFilter filter = LinearFilter.movingAverage(5);
+  public static LinearFilter filter = LinearFilter.movingAverage(5);
+  public static LinearFilter funnelFilter = LinearFilter.movingAverage(4);
 
   public static HashMap<ParentDevice, Alert> connectedIntakeAlerts = new HashMap<>();
   public static HashMap<ParentDevice, Alert> wasDisconnectedIntakeAlerts = new HashMap<>();
@@ -228,7 +229,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public void log() {
     SmartDashboard.putNumber("/Intake/FunnelAngle", getFunnelDeployAngle());
     SmartDashboard.putNumber("/Intake/TargetFunnelAngle", requestedFunnelDeployPos);
-    SmartDashboard.putNumber("/Intake/FunnelDistance", getFunnelDistance());
+    SmartDashboard.putNumber("/Intake/FunnelDistance", funnelFilter.lastValue());
     SmartDashboard.putNumber("/Intake/HumanPlayerDistance", getHumanPlayerDistance());
     SmartDashboard.putNumber("/Intake/AutonFunnelAngle", filter.lastValue());
 
@@ -254,6 +255,7 @@ public class IntakeSubsystem extends SubsystemBase {
       }
     }
     double value = filter.calculate(getAutonFunnelAngle());
+    double funnelValue = funnelFilter.calculate(getFunnelDistance());
     log();
     // This method will be called once per scheduler run
     funnelDeployMotor.setControl(new MotionMagicVoltage(degreesToFunnelDeployRotations(requestedFunnelDeployPos)));
