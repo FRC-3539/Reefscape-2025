@@ -193,6 +193,12 @@
                             "data": {
                               "name": "HumanPlayerIntakeCommand"
                             }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "AdjustFunnelAngleCommand"
+                            }
                           }
                         ]
                       }
@@ -288,6 +294,12 @@
                             "type": "named",
                             "data": {
                               "name": "HumanPlayerIntakeCommand"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "AdjustFunnelAngleCommand"
                             }
                           }
                         ]
