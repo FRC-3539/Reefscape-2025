@@ -265,7 +265,15 @@ public class DriveSubsystem extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder>
 
 		this.setControl(request);
 		// This method will be called once per scheduler run
-		SmartDashboard.putNumber("/DriveTrain/BatteryVoltage", RobotController.getBatteryVoltage());
+		if (Robot.isSimulation()) {
+			double randomOffset = (Math.random() - 0.5) * 0.2; // Random offset between -0.1 and 0.1
+			double simulatedVoltage = RobotController.getBatteryVoltage() + randomOffset;
+			SmartDashboard.putNumber("/DriveTrain/BatteryVoltage", simulatedVoltage);
+		}
+		else
+		{
+			SmartDashboard.putNumber("/DriveTrain/BatteryVoltage", RobotController.getBatteryVoltage());
+		}
 
 	}
 }
