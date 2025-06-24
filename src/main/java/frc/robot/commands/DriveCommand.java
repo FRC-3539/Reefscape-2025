@@ -59,30 +59,30 @@ public class DriveCommand extends Command {
 		double speedMultiplier = DriveConstants.speedMultiplier;
 		double rotationSpeedMultiplier = DriveConstants.rotationSpeedMultiplier;
 
-		if (RobotContainer.rightDriverTrigger.getAsBoolean()) // Turbo
-		{
-			speedMultiplier = DriveConstants.turboSpeedMultiplier;
-			rotationSpeedMultiplier = DriveConstants.turboRotationSpeedMultiplier;
-		}
-		if (ElevatorSubsystem.getElevatorPosition() > 30) {
-			speedMultiplier *= 1 -((Math.max(0, ElevatorSubsystem.getElevatorPosition() - 30) * 0.7) / 50);
-		}
+		// if (RobotContainer.rightDriverTrigger.getAsBoolean()) // Turbo
+		// {
+		// 	speedMultiplier = DriveConstants.turboSpeedMultiplier;
+		// 	rotationSpeedMultiplier = DriveConstants.turboRotationSpeedMultiplier;
+		// }
+		// if (ElevatorSubsystem.getElevatorPosition() > 30) {
+		// 	speedMultiplier *= 1 -((Math.max(0, ElevatorSubsystem.getElevatorPosition() - 30) * 0.7) / 50);
+		// }
 
-		if (RobotContainer.rightDriverBumper.getAsBoolean()) { // Robot Centric
-			request = driveRobotCentric
-					.withVelocityX(-RobotContainer.driverController.getLeftY() * maxVelocity * speedMultiplier)
-					.withVelocityY(-RobotContainer.driverController.getLeftX() * maxVelocity * speedMultiplier)
-					.withRotationalRate(-RobotContainer.driverController.getRightX() * maxRotationalVelocity
-							* rotationSpeedMultiplier)
-					.withRotationalDeadband(rotationDeadband);
-		} else {
+		// if (RobotContainer.rightDriverBumper.getAsBoolean()) { // Robot Centric
+		// 	request = driveRobotCentric
+		// 			.withVelocityX(-RobotContainer.driverController.getLeftY() * maxVelocity * speedMultiplier)
+		// 			.withVelocityY(-RobotContainer.driverController.getLeftX() * maxVelocity * speedMultiplier)
+		// 			.withRotationalRate(-RobotContainer.driverController.getRightX() * maxRotationalVelocity
+		// 					* rotationSpeedMultiplier)
+		// 			.withRotationalDeadband(rotationDeadband);
+		// } else {
 			request = driveFieldCentric
 					.withVelocityX(-RobotContainer.driverController.getLeftY() * maxVelocity * speedMultiplier)
 					.withVelocityY(-RobotContainer.driverController.getLeftX() * maxVelocity * speedMultiplier)
 					.withRotationalRate(-RobotContainer.driverController.getRightX() * maxRotationalVelocity
 							* rotationSpeedMultiplier)
 					.withRotationalDeadband(rotationDeadband);
-		}
+		// }
 
 		RobotContainer.DriveSubsystem.applyRequest(request);
 	}

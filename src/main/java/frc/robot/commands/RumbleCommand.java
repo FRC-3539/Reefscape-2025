@@ -34,7 +34,6 @@ public class RumbleCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.operatorController.setRumble(RumbleType.kBothRumble, 0);
-
   }
 
   // Returns true when the command should end.

@@ -61,13 +61,6 @@ public class RobotContainer {
 
   public static CommandXboxController driverController = new CommandXboxController(1);
   public static CommandXboxController operatorController = new CommandXboxController(0);
-  public static CommandGenericHID buttonBox = new CommandGenericHID(3);
-
-  public static Trigger rightDriverTrigger = driverController.rightTrigger(0.5);
-  public static Trigger rightDriverBumper = driverController.rightBumper();
-  public static BooleanSupplier coralDetected = () -> ScoringSubsystem.coralDetected()
-      && MathUtil.isNear(ScoringSubsystem.getRotateAngle(), ScoringConstants.handOffPosition, 10);
-  public static Trigger coralTrigger = new Trigger(coralDetected);
 
   public static SendableChooser<Command> chooser = new SendableChooser<Command>();
 
@@ -96,116 +89,27 @@ public class RobotContainer {
    * 
    */
   public void putAutons() {
-
-    // Scoring Commands
-    NamedCommands.registerCommand("ScoringCommand", new ScoringCommand(false));
-    NamedCommands.registerCommand("IntakeCommand", new ScoringCommand(true));
-
-
-    // Setting positions to score Coral
-    NamedCommands.registerCommand("TroughCommand", new CoralPositionCommand(CoralMode.TROUGH, true));
-    NamedCommands.registerCommand("CoralLowCommand", new CoralPositionCommand(CoralMode.LOW, true));
-    NamedCommands.registerCommand("CoralMidCommand", new CoralPositionCommand(CoralMode.MID, true));
-    NamedCommands.registerCommand("CoralHighCommand", new CoralPositionCommand(CoralMode.HIGH, true));
-
-    // Setting positions to score Algae
-    NamedCommands.registerCommand("GroundCommand", new AlgaePositionCommand(AlgaeMode.GROUND, true));
-    NamedCommands.registerCommand("AlgaeLowCommand", new AlgaePositionCommand(AlgaeMode.REEFLOW, true));
-    NamedCommands.registerCommand("AlgaeHighCommand", new AlgaePositionCommand(AlgaeMode.REEFHIGH, true));
-    NamedCommands.registerCommand("NetCommand", new AlgaePositionCommand(AlgaeMode.NET, true));
-
-    // Funnel Position Commands
-    NamedCommands.registerCommand("HumanPlayerIntakeCommand", new HandOffCommand(true, IntakeMode.HUMAN).withTimeout(5));
-    NamedCommands.registerCommand("2SecHumanPlayerIntakeCommand", new HandOffCommand(true, IntakeMode.HUMAN).withTimeout(2));
-
-    NamedCommands.registerCommand("FunnelRangeCommand", new FunnelRangeCommand().withTimeout(5));
-    NamedCommands.registerCommand("AdjustFunnelAngleCommand", new AdjustFunnelAngleCommand().withTimeout(10));
-
     chooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData(chooser);
   }
 
   public void putCommands() {
-    SmartDashboard.putData(new DisableElevatorBreakModeCommand().ignoringDisable(true));
-    SmartDashboard.putData(new DisableFunnelBreakModeCommand().ignoringDisable(true));
-    SmartDashboard.putData(new DisableClimberBreakModeCommand().ignoringDisable(true));
-    SmartDashboard.putData(new DisableScoringBreakModeCommand().ignoringDisable(true));
-    SmartDashboard.putData(new ZeroElevatorCommand().ignoringDisable(true));
-    SmartDashboard.putData(new ZeroClimberCommand());
+    
   }
 
   private void configureBindings() {
-    coralTrigger.onTrue(new ParallelDeadlineGroup(new WaitCommand(0.5), new RumbleCommand()));
-
     DriveSubsystem.setDefaultCommand(new DriveCommand());
-    ClimberSubsystem.setDefaultCommand(new ClimberCommand());
-
     driverController.start().whileTrue(new ZeroGyroCommand());
-    driverController.a().whileTrue(new BBAutoAlignCommand(AlignPoint.ALGAE, ScoringMode.ALGAE));
-    driverController.b().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALRIGHT, ScoringMode.CORAL));
-    driverController.x().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALLEFT, ScoringMode.CLIMB));
-    //driverController.y().whileTrue(new PIDAutoAlignCommand(AlignPoint.HUMANPLAYER2, ScoringMode.HUMANPLAYER));
-    driverController.y().whileTrue(new BBAutoAlignCommand(AlignPoint.BARGE, ScoringMode.ALGAE));
-    driverController.povLeft().whileTrue(new BBAutoAlignCommand(AlignPoint.LOLLIPOP1, ScoringMode.ALGAE));
-    driverController.povDown().whileTrue(new BBAutoAlignCommand(AlignPoint.LOLLIPOP2, ScoringMode.ALGAE));
-    driverController.povRight().whileTrue(new BBAutoAlignCommand(AlignPoint.LOLLIPOP3, ScoringMode.ALGAE));
 
-    //driverController.povDown().whileTrue(new AdjustFunnelAngleCommand());
-    // driverController.a().whileTrue(new BBAutoAlignCommand(AlignPoint.ALGAE,
-    // ScoringMode.ALGAE));
-    // driverController.b().whileTrue(new BBAutoAlignCommand(AlignPoint.CORALRIGHT,
-    // ScoringMode.CORAL));
-    // driverController.x().whileTrue(new BBAutoAlignCommand(AlignPoint.CORALLEFT,
-    // ScoringMode.CORAL));
-    // driverController.y().whileTrue(new
-    // BBAutoAlignCommand(AlignPoint.HUMANPLAYER2, ScoringMode.HUMANPLAYER));
-
-    // Intake commands\
-    operatorController.axisGreaterThan(1, 0.5).whileTrue(
-        new HandOffCommand(false, IntakeMode.GROUND));
-    operatorController.axisLessThan(1, -0.5).whileTrue(
-        new HandOffCommand(false, IntakeMode.HUMAN));
-    
-    operatorController.rightBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.HUMAN, false));
-    operatorController.leftBumper().whileTrue(new SetFunnelPositionCommand(IntakeMode.GROUND, false));
+    // Intake commands
 
     // Algae Commands
-    operatorController.povDown().onTrue(new AlgaePositionCommand(AlgaeMode.GROUND, false));
-    operatorController.povLeft().onTrue(new AlgaePositionCommand(AlgaeMode.REEFLOW, false));
-    operatorController.povRight().onTrue(new AlgaePositionCommand(AlgaeMode.REEFHIGH, false));
-    operatorController.povUp().onTrue(new AlgaePositionCommand(AlgaeMode.NET, false));
 
     // Coral Commands
-    operatorController.back().whileTrue(new SetFunnelPositionCommand(IntakeMode.REVERSE, false));
-    operatorController.b().onTrue(new CoralPositionCommand(CoralMode.TROUGH, false));
-    operatorController.a().onTrue(new CoralPositionCommand(CoralMode.LOW, false));
-    operatorController.x().onTrue(new CoralPositionCommand(CoralMode.MID, false));
-    operatorController.y().onTrue(new CoralPositionCommand(CoralMode.HIGH, false));
 
     // Scoring Commands
-    operatorController.leftTrigger().whileTrue(new ScoringCommand(true));
-    operatorController.rightTrigger().whileTrue(new ScoringCommand(false));
-
-    // Climbing Command
-    // operatorController.start().onTrue(new HomePositionCommand());
 
     // Other
-    operatorController.start().onTrue(new ClimbPositionCommand());
-
-    buttonBox.button(14).whileTrue(new BBAutoAlignCommand(AlignPoint.A, ScoringMode.CORAL));
-    buttonBox.button(15).whileTrue(new BBAutoAlignCommand(AlignPoint.B, ScoringMode.CORAL));
-    buttonBox.button(16).whileTrue(new BBAutoAlignCommand(AlignPoint.C, ScoringMode.CORAL));
-    buttonBox.button(12).whileTrue(new BBAutoAlignCommand(AlignPoint.D, ScoringMode.CORAL));
-    buttonBox.button(8).whileTrue(new BBAutoAlignCommand(AlignPoint.E, ScoringMode.CORAL));
-    buttonBox.button(4).whileTrue(new BBAutoAlignCommand(AlignPoint.F, ScoringMode.CORAL));
-    buttonBox.button(3).whileTrue(new BBAutoAlignCommand(AlignPoint.G, ScoringMode.CORAL));
-    buttonBox.button(2).whileTrue(new BBAutoAlignCommand(AlignPoint.H, ScoringMode.CORAL));
-    buttonBox.button(1).whileTrue(new BBAutoAlignCommand(AlignPoint.I, ScoringMode.CORAL));
-    buttonBox.button(5).whileTrue(new BBAutoAlignCommand(AlignPoint.J, ScoringMode.CORAL));
-    buttonBox.button(9).whileTrue(new BBAutoAlignCommand(AlignPoint.K, ScoringMode.CORAL));
-    buttonBox.button(13).whileTrue(new BBAutoAlignCommand(AlignPoint.L, ScoringMode.CORAL));
-    buttonBox.button(10).whileTrue(new BBAutoAlignCommand(AlignPoint.HUMANPLAYER1, ScoringMode.HUMANPLAYER));
-    buttonBox.button(11).whileTrue(new BBAutoAlignCommand(AlignPoint.HUMANPLAYER2, ScoringMode.HUMANPLAYER));
 
   }
 

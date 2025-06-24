@@ -63,21 +63,20 @@ public class Robot extends TimedRobot {
     RobotContainer.VisionSubsystem.log();
     SmartDashboard.putBoolean("/DriverStation/Enabled", isEnabled());
 
-    for (PhotonCamera device : VisionSubsystem.connectedVisionAlerts.keySet()) {
-      Alert isAlert = VisionSubsystem.connectedVisionAlerts.get(device);
-      Alert wasAlert = VisionSubsystem.wasDisconnectedVisionAlerts.get(device);
+    // for (PhotonCamera device : VisionSubsystem.connectedVisionAlerts.keySet()) {
+    //   Alert isAlert = VisionSubsystem.connectedVisionAlerts.get(device);
+    //   Alert wasAlert = VisionSubsystem.wasDisconnectedVisionAlerts.get(device);
 
-      if (!device.isConnected()) {
-        isAlert.set(true);
-        wasAlert.set(false);
+    //   if (!device.isConnected()) {
+    //     isAlert.set(true);
+    //     wasAlert.set(false);
 
-      } else if(isAlert.get()) {
-        isAlert.set(false);
-        wasAlert.set(true);
+    //   } else if(isAlert.get()) {
+    //     isAlert.set(false);
+    //     wasAlert.set(true);
 
-      }
-    }
-    // DriverStation.;
+    //   }
+    // }
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -86,9 +85,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    ScoringSubsystem.setRotateAngle(ScoringSubsystem.getRotateAngle());
-    ElevatorSubsystem.setElevatorPosition(ElevatorSubsystem.getElevatorPosition());
-    IntakeSubsystem.setFunnelDeployAngle(IntakeSubsystem.getFunnelDeployAngle());
+    // ScoringSubsystem.setRotateAngle(ScoringSubsystem.getRotateAngle());
+    // ElevatorSubsystem.setElevatorPosition(ElevatorSubsystem.getElevatorPosition());
+    // IntakeSubsystem.setFunnelDeployAngle(IntakeSubsystem.getFunnelDeployAngle());
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */

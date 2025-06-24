@@ -173,61 +173,25 @@ public class LedSubsystem extends SubsystemBase {
 			setLEDs(LEDState.ERROR);
 			return;
 		}
-		if (DriverStation.isAutonomous() && !VisionSubsystem.leftCam.isConnected()
-				&& !VisionSubsystem.rightCam.isConnected()) {
-			setLEDs(LEDState.ERROR);
-			return;
-		}
 		if (aligning && !VisionSubsystem.leftCam.isConnected() && !VisionSubsystem.rightCam.isConnected()) {
 			setLEDs(LEDState.ERROR);
 			return;
 		}
-		if (ClimberSubsystem.getClimberPosition() < -5) {
-			double climbingPercent = ClimberSubsystem.getClimberPosition()/-50.0;
-			if (climbingPercent > 0.72) climbingPercent = 1;
-
-			int numRainbow = (int)(climbingPercent * LedConstants.numLights);
-			
-			candle.setLEDs(0, 0,
-				0, 0, numRainbow + 1, LedConstants.numLights);
-			candle.animate(new RainbowAnimation(LedConstants.maxBrightness, 0.6, numRainbow ));
-			return;
-		}
-		
 		if (aligning) {
 			setLEDs(LEDState.AUTO);
 			return;
 		}
-		// if (ClimberSubsystem.doneClimbing()) {
-		// 	setLEDs(LEDState.CLIMBING);
-		// 	return;
+		// if (intaking) {
+		// 	if (ScoringSubsystem.mode == ScoringMode.ALGAE) {
+
+		// 		setLEDs(LEDState.INTAKING_ALGAE);
+		// 		return;
+
+		// 	} else {
+		// 		setLEDs(LEDState.INTAKING_CORAL);
+		// 		return;
+		// 	}
 		// }
-		if (reverseClimbing) {
-			setLEDs(LEDState.REVERSE_CLIMBING);
-			return;
-		}
-		// This method will be called once per scheduler run
-		// setLEDs(LEDState.READY);
-		if (ScoringSubsystem.loopsWithAlgae > 10) {
-			setLEDs(LEDState.ALGAE_DETECTED);
-			return;
-		}
-		if (ScoringSubsystem.loopsWithCoral > 10) {
-			setLEDs(LEDState.CORAL_DETECTED);
-			return;
-		} 
-		if (intaking) {
-			if (ScoringSubsystem.mode == ScoringMode.ALGAE) {
-
-				setLEDs(LEDState.INTAKING_ALGAE);
-				return;
-
-			} else {
-				setLEDs(LEDState.INTAKING_CORAL);
-				return;
-			}
-		}
-		
 
 		setLEDs(LEDState.CONNECTED);
 	}
