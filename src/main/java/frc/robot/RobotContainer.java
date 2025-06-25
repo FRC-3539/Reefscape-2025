@@ -102,6 +102,8 @@ public class RobotContainer {
     driverController.start().whileTrue(new ZeroGyroCommand());
 
     // Intake commands
+    operatorController.a().whileTrue(new IntakeCommand());
+    operatorController.rightTrigger(.2).whileTrue(new ShootCommand());
 
     // Algae Commands
 
