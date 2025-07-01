@@ -9,21 +9,26 @@ import com.ctre.phoenix6.hardware.TalonFXS;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeSubsystem extends SubsystemBase {
-
+  // Declare system parts here
   private static TalonFXS outerFunnelMotor, innerFunnelMotor;
 
   public IntakeSubsystem() {
+    // Initialize system parts here
     outerFunnelMotor = new TalonFXS(8, "rio");
     innerFunnelMotor = new TalonFXS(10, "rio");
   }
 
+  // Setters / getters
   public static void setOuterFunnelMotor(double voltage) {
     outerFunnelMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
   public static void setInnerFunnelMotor(double voltage) {
     innerFunnelMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
+
+
   public void log() { }
+
 
   @Override
   public void periodic() {

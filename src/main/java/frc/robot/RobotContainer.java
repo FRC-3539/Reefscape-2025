@@ -104,7 +104,7 @@ public class RobotContainer {
     // Intake commands
     operatorController.a().whileTrue(new IntakeCommand());
     operatorController.rightTrigger(.2).whileTrue(new ShootCommand());
-
+    operatorController.leftTrigger(0.2).whileTrue(new ReverseShoot());
     // Algae Commands
 
     // Coral Commands
