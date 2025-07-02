@@ -105,6 +105,9 @@ public class RobotContainer {
     operatorController.a().whileTrue(new IntakeCommand());
     operatorController.rightTrigger(.2).whileTrue(new ShootCommand());
     operatorController.leftTrigger(0.2).whileTrue(new ReverseShoot());
+    operatorController.b().onTrue(new ElevatorL2Command());
+    operatorController.y().onTrue(new SetElevatorCommand(50));
+    operatorController.x().onTrue(new SetElevatorCommand(15));
     // Algae Commands
 
     // Coral Commands
