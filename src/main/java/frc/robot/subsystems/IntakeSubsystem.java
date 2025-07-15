@@ -10,22 +10,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeSubsystem extends SubsystemBase {
   // Declare system parts here
-  private static TalonFXS outerFunnelMotor, innerFunnelMotor;
+  private static TalonFXS outerfunnelmoter, innerfunnelmotor;
 
   public IntakeSubsystem() {
     // Initialize system parts here
-    outerFunnelMotor = new TalonFXS(8, "rio");
-    innerFunnelMotor = new TalonFXS(10, "rio");
+    outerfunnelmoter=new TalonFXS(8,"rio");
+    innerfunnelmotor=new TalonFXS(10,"rio");
   }
 
   // Setters / getters
-  public static void setOuterFunnelMotor(double voltage) {
-    outerFunnelMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
-  }
-  public static void setInnerFunnelMotor(double voltage) {
-    innerFunnelMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
-  }
+public static void setouterfunnelmoter(double voltage){
+  outerfunnelmoter.setControl(new VoltageOut(voltage).withEnableFOC(true));
 
+}
+public static void setinnerfunnelmotor(double voltage){
+  innerfunnelmotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
+}
 
   public void log() { }
 
