@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import java.lang.annotation.Target;
 import java.util.function.BooleanSupplier;
 
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -107,6 +108,12 @@ public class RobotContainer {
     operatorController.b().onTrue(new ElevatorL2Command());
     operatorController.y().onTrue(new SetElevatorCommand(50));
     operatorController.x().onTrue(new SetElevatorCommand(15));
+    operatorController.povUp().onTrue(new RotateArmCommand(-30));
+    operatorController.povDown().onTrue(new RotateArmCommand(20));
+    operatorController.povLeft().onTrue(new RotateFunnelCommand(-20));
+    operatorController.povRight().onTrue(new RotateFunnelCommand(50));
+
+  
 
     operatorController.a().whileTrue(new IntakeCommand());
     // Algae Commands
