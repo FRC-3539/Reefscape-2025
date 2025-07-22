@@ -85,7 +85,7 @@ public class LedSubsystem extends SubsystemBase {
 
 			case SHOOTING :
 				candle.animate(new ColorFlowAnimation(LedConstants.Orange.getRed(), LedConstants.Orange.getGreen(),
-						LedConstants.Orange.getBlue(), 0, LedConstants.flashSpeed, LedConstants.numLights, null));
+						LedConstants.Orange.getBlue(), 0, LedConstants.flashSpeed, LedConstants.numLights, Direction.Backward));
 				break;
 
 			case PREPARED :
@@ -193,6 +193,6 @@ public class LedSubsystem extends SubsystemBase {
 		// 	}
 		// }
 
-		setLEDs(LEDState.CONNECTED);
+		// setLEDs(LEDState.CONNECTED);
 	}
 }
