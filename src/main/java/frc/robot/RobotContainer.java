@@ -90,6 +90,10 @@ public class RobotContainer {
    * 
    */
   public void putAutons() {
+    NamedCommands.registerCommand("ClimbingLedCommand", new ClimbingLedCommand());
+    NamedCommands.registerCommand("CoralDetectedLedCommand", new CoralDetectedLedCommand());
+    NamedCommands.registerCommand("IntakingLEDCommand", new IntakingLEDCommand());
+
     chooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData(chooser);
   }
