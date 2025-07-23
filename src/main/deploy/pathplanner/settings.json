@@ -6,17 +6,19 @@
     "Barge Paths",
     "Human Player 1 to Reef",
     "Human Player 2 to Reef",
-    "Weird Paths ",
+    "Summer Paths",
     "Reef To Human Player 1",
     "Reef To Human Player 2",
     "Start Left Paths",
     "Start Middle Paths",
-    "Start Right Paths"
+    "Start Right Paths",
+    "Weird Paths "
   ],
   "autoFolders": [
     "Cage 2 Start",
     "Cage 5 Start",
     "Middle Start",
+    "Summer Autos",
     "Weird Autos"
   ],
   "defaultMaxVel": 3.0,

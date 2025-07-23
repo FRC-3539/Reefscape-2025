@@ -1,0 +1,70 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.493560606060606,
+        "y": 0.8232954545454538
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.1683080808080804,
+        "y": 2.154797979797979
+      },
+      "isLocked": false,
+      "linkedName": "Jackson's end"
+    },
+    {
+      "anchor": {
+        "x": 2.3614267676767677,
+        "y": 3.9233585858585855
+      },
+      "prevControl": {
+        "x": 2.0663537012824387,
+        "y": 2.9678838946769495
+      },
+      "nextControl": {
+        "x": 2.788320707070707,
+        "y": 5.305681818181815
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.662436868686869,
+        "y": 6.25094696969697
+      },
+      "prevControl": {
+        "x": 3.266035353535354,
+        "y": 5.468308080808081
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Dylan's end"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 1.0,
+    "maxAcceleration": 1.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "reversed": false,
+  "folder": "Summer Paths",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": false
+}
