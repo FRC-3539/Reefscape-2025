@@ -71,12 +71,18 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   // Setters / getters
-  public static void setouterfunnelmoter(double voltage) {
+  public static void setouterfunnelmotor(double voltage) {
     outerfunnelmoter.setControl(new VoltageOut(voltage).withEnableFOC(true));}
+
+
 public static void setFunnelDeployAngle(double angle) { requestFunnelPos = angle;
 
   }
 
+  public static double getFunnelAngle(){return Units.rotationsToDegrees(funnelDeployCanCoder.getAbsolutePosition().getValueAsDouble());
+
+
+  }
   public static void setinnerfunnelmotor(double voltage) {
     innerfunnelmotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }

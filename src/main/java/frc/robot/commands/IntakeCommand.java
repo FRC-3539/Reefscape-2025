@@ -17,7 +17,7 @@ public class IntakeCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    IntakeSubsystem.setouterfunnelmoter(4);
+    IntakeSubsystem.setouterfunnelmotor(4);
     IntakeSubsystem.setinnerfunnelmotor(4);
   }
 
@@ -28,7 +28,7 @@ public class IntakeCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    IntakeSubsystem.setouterfunnelmoter(0);
+    IntakeSubsystem.setouterfunnelmotor(0);
     IntakeSubsystem.setinnerfunnelmotor(0);
   }
 

@@ -5,21 +5,73 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "deadline",
           "data": {
-            "pathName": "Tyler's Path"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Tyler's Path"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "CoralDetectedLedCommand"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "path",
+          "type": "deadline",
           "data": {
-            "pathName": "jackson's path"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "jackson's path"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IntakingLEDCommand"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Dylan's Path"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Dylan's Path"
+                }
+              },
+              {
+                "type": "deadline",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 5.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ClimbingLedCommand"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         {

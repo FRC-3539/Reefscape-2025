@@ -73,6 +73,7 @@ public class ScoringSubsystem extends SubsystemBase {
 
   public static void setRotateAngle(double angle) { requestRotatePos = angle;}
 
+  public static double getRotateAngle(){return Units.rotationsToDegrees(rotateCanCoder.getAbsolutePosition().getValueAsDouble());}
   public static double getCoralDistance() {
     return coralRange.getDistance().getValueAsDouble();
   }

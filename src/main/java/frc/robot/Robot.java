@@ -85,9 +85,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    // ScoringSubsystem.setRotateAngle(ScoringSubsystem.getRotateAngle());
-    // ElevatorSubsystem.setElevatorPosition(ElevatorSubsystem.getElevatorPosition());
-    // IntakeSubsystem.setFunnelDeployAngle(IntakeSubsystem.getFunnelDeployAngle());
+    IntakeSubsystem.setFunnelDeployAngle(IntakeSubsystem.getFunnelAngle());
+    ScoringSubsystem.setRotateAngle(ScoringSubsystem.getRotateAngle());
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
