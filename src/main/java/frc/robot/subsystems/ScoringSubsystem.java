@@ -55,11 +55,12 @@ public class ScoringSubsystem extends SubsystemBase {
 
     rotateMotor.getConfigurator()
         .apply(new MotionMagicConfigs().withMotionMagicAcceleration(ScoringConstants.rotateAcceleration)
-            .withMotionMagicCruiseVelocity(ScoringConstants.rotateCruiseVelocity));
+            .withMotionMagicCruiseVelocity(ScoringConstants.rotateCruiseVelocity/2.0));
     rotateMotor.getConfigurator()
     .apply(new FeedbackConfigs().withFeedbackRemoteSensorID(IDConstants.rotateCanCoderID)
     .withRotorToSensorRatio(ScoringConstants.rotateMotorToEncoder).withSensorToMechanismRatio(1)
     .withFeedbackSensorSource(FeedbackSensorSourceValue.FusedCANcoder));
+    shootingMotor.setNeutralMode(NeutralModeValue.Brake);
 
     rotateCanCoder = new CANcoder(IDConstants.rotateCanCoderID, "rio");
 

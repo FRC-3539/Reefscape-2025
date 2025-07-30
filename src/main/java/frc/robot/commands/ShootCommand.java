@@ -22,7 +22,7 @@ public class ShootCommand extends Command {
   @Override
   public void initialize(
   ) {
-     ScoringSubsystem.setShootingMotor(4);
+     ScoringSubsystem.setShootingMotor(8);
      LedSubsystem.setLEDs(LEDState.SHOOTING);
   }
 

@@ -93,7 +93,13 @@ public class RobotContainer {
     NamedCommands.registerCommand("ClimbingLedCommand", new ClimbingLedCommand());
     NamedCommands.registerCommand("CoralDetectedLedCommand", new CoralDetectedLedCommand());
     NamedCommands.registerCommand("IntakingLEDCommand", new IntakingLEDCommand());
-
+    NamedCommands.registerCommand("ElevatorL2Command", new SetElevatorCommand(22.25));
+    NamedCommands.registerCommand("ScoreL2Command", new RotateArmCommand(40));
+    NamedCommands.registerCommand("ShootCommand", new ShootCommand());
+    NamedCommands.registerCommand("HPFunnelPosition", new RotateFunnelCommand(75));
+    NamedCommands.registerCommand("IntakeHPCoral", new IntakeCommand());
+    NamedCommands.registerCommand("RotateArmHP", new RotateArmCommand(-130));
+    NamedCommands.registerCommand("ScorerIntake", new ReverseShoot());
     chooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData(chooser);
   }
@@ -137,6 +143,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return chooser.getSelected();
-    
+
   }
 }
