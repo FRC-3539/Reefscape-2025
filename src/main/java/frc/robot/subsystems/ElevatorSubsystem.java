@@ -41,9 +41,37 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void log() {
   }
 
+  public static double getElevatorPosition() {
+    return elevatorMotor.getPosition().getValueAsDouble() *
+        ElevatorConstants.elevatorInchesPerRotation + ElevatorConstants.elevatorHomePositionOffset;
+  }
+
+  public static void setEnforcedMinimumHeight(boolean enforce) {
+    enforcedMinimumHeight = enforce;
+  }
+
+  public static void setEnforcedMaxHandOffHeight(boolean enforce) {
+    enforcedMaxHandOffHeight = enforce;
+  }
+
+  private static boolean enforcedMinimumHeight, enforcedMaxHandOffHeight = false;
+
   @Override
   public void periodic() {
-   elevatorMotor.setControl(new MotionMagicVoltage((requestedElevatorPos - ElevatorConstants.elevatorHomePositionOffset)/ ElevatorConstants.elevatorInchesPerRotation));
+    double setElevatorPosition = requestedElevatorPos;
+
+    if (enforcedMinimumHeight) {
+      setElevatorPosition = Math.max(setElevatorPosition, 21);
+    }
+    if (enforcedMaxHandOffHeight) {
+      setElevatorPosition = Math.min(setElevatorPosition, 35);
+    }
+    // if(ScoringSubsystem.algaeDetected())
+    // {
+    //   setElevatorPosition = Math.max(setElevatorPosition, 7);
+    // }
+
+   elevatorMotor.setControl(new MotionMagicVoltage((setElevatorPosition - ElevatorConstants.elevatorHomePositionOffset)/ ElevatorConstants.elevatorInchesPerRotation));
     log();
   }
 }

@@ -86,11 +86,49 @@ public class ScoringSubsystem extends SubsystemBase {
   public void log() {
   }
 
+
+  private static double scoringRestrictedMin = 30;
+
   @Override
   public void periodic() {
     log();
   
-  rotateMotor.setControl(new MotionMagicVoltage(Units.degreesToRotations(requestRotatePos)));
+// Minimum elevator height needed for handoff
+if (getRotateAngle() < scoringRestrictedMin || requestRotatePos < scoringRestrictedMin) {
+  ElevatorSubsystem.setEnforcedMinimumHeight(true);
+} else {
+  ElevatorSubsystem.setEnforcedMinimumHeight(false);
+}
+
+// Maximum elevator height needed for handoff
+if (getRotateAngle() < -70 || requestRotatePos < -70) {
+  ElevatorSubsystem.setEnforcedMaxHandOffHeight(true);
+} else {
+  ElevatorSubsystem.setEnforcedMaxHandOffHeight(false);
+}
+
+double setRotatePosition = requestRotatePos;
+
+// Prevent movement while elevator is under the handoff minimum
+if (ElevatorSubsystem.getElevatorPosition() < 20) {
+  if (getRotateAngle() > -80) {
+    setRotatePosition = Math.max(setRotatePosition, scoringRestrictedMin);
+  }
+}
+
+// Flip arm up if algae detected
+// if (algaeDetected()
+//     && (ElevatorSubsystem.getElevatorPosition() < 15 || (ElevatorSubsystem.requestedElevatorPos < 15))) {
+//   setRotatePosition = Math.max(setRotatePosition, 70);
+
+// }
+
+// Prevent movement while elevator is over the handoff maximum
+if (ElevatorSubsystem.getElevatorPosition() > 35) {
+  setRotatePosition = Math.max(setRotatePosition, -50);
+}
+    
+  rotateMotor.setControl(new MotionMagicVoltage(Units.degreesToRotations(setRotatePosition)));
 
   }
 }
