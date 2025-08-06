@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.075539772727272,
-        "y": 5.34125
+        "x": 3.936868686868687,
+        "y": 5.305681818181817
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.188068181818181,
-        "y": 6.188835227272727
+        "x": 3.006079797979798,
+        "y": 6.015410101010101
       },
       "isLocked": false,
-      "linkedName": "Basic End"
+      "linkedName": "ReefK"
     },
     {
       "anchor": {
-        "x": 1.1766477272727274,
-        "y": 6.827017045454545
+        "x": 1.73,
+        "y": 7.17
       },
       "prevControl": {
-        "x": 2.821960227272727,
-        "y": 6.458068181818181
+        "x": 2.4553156565656566,
+        "y": 6.587231691919193
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "HP End"
+      "linkedName": "Human Player 1"
     }
   ],
   "rotationTargets": [],
@@ -35,20 +35,20 @@
   "globalConstraints": {
     "maxVelocity": 2.0,
     "maxAcceleration": 2.0,
-    "maxAngularVelocity": 360.0,
-    "maxAngularAcceleration": 360.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -53.673174047879776
+    "rotation": -52.50000000000001
   },
   "reversed": false,
   "folder": "Summer Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -120.579226872489
+    "rotation": -59.99999999999999
   },
   "useDefaultConstraints": false
 }

@@ -94,7 +94,9 @@ public class RobotContainer {
     NamedCommands.registerCommand("CoralDetectedLedCommand", new CoralDetectedLedCommand());
     NamedCommands.registerCommand("IntakingLEDCommand", new IntakingLEDCommand());
     NamedCommands.registerCommand("ElevatorL2Command", new SetElevatorCommand(22.25));
+    NamedCommands.registerCommand("ElevatorL4Command", new SetElevatorCommand(74.75));
     NamedCommands.registerCommand("ScoreL2Command", new RotateArmCommand(40));
+    NamedCommands.registerCommand("ScoreL4Command", new RotateArmCommand(10));
     NamedCommands.registerCommand("ShootCommand", new ShootCommand());
     NamedCommands.registerCommand("HPFunnelPosition", new RotateFunnelCommand(75));
     NamedCommands.registerCommand("IntakeHPCoral", new IntakeCommand());
@@ -121,7 +123,7 @@ public class RobotContainer {
     operatorController.povUp().onTrue(new RotateArmCommand(-30));
     operatorController.povDown().onTrue(new RotateArmCommand(20));
     operatorController.povLeft().onTrue(new RotateFunnelCommand(-20));
-    operatorController.povRight().onTrue(new RotateFunnelCommand(50));
+    operatorController.povRight().onTrue(new RotateFunnelCommand(80));
 
   
 
