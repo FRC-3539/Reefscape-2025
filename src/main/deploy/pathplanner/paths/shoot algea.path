@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 6.671022727272727,
+        "y": 4.248611111111112
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.420833333333333,
+        "y": 4.929608585858586
+      },
+      "isLocked": false,
+      "linkedName": "toward barge"
+    },
+    {
+      "anchor": {
+        "x": 7.525,
+        "y": 7.267361111111111
+      },
+      "prevControl": {
+        "x": 6.376452020202021,
+        "y": 7.3181818181818175
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 1.5,
+    "maxAcceleration": 1.5,
+    "maxAngularVelocity": 180.0,
+    "maxAngularAcceleration": 180.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "reversed": false,
+  "folder": "Summer Paths",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": false
+}
