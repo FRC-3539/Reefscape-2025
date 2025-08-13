@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 5.6342803030303035,
+        "y": 4.04
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.04084595959596,
+        "y": 4.18229797979798
+      },
+      "isLocked": false,
+      "linkedName": "get algae"
+    },
+    {
+      "anchor": {
+        "x": 6.671022727272727,
+        "y": 4.248611111111112
+      },
+      "prevControl": {
+        "x": 6.427083333333334,
+        "y": 4.157133838383839
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "toward barge"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 1.5,
+    "maxAcceleration": 1.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "reversed": false,
+  "folder": "Summer Paths",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": false
+}

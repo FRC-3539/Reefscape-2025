@@ -13,8 +13,15 @@ import frc.robot.subsystems.LedSubsystem.LEDState;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ShootCommand extends Command {
+  private boolean algae;
   /** Creates a new ShootCommand. */
   public ShootCommand() {
+    this.algae = false;
+    // Use addRequirements() here to declare subsystem dependencies.
+  }
+
+  public ShootCommand(boolean algae) {
+    this.algae = algae;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -28,7 +35,11 @@ public class ShootCommand extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if (!algae) return;
+    if (ScoringSubsystem.getAlgaeDistance() < 0.07) ScoringSubsystem.setShootingMotor(2);
+    else ScoringSubsystem.setShootingMotor(8);
+  }
 
   // Called once the command ends or is interrupted.
   @Override

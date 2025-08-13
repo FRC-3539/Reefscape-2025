@@ -41,6 +41,7 @@ public class ScoringSubsystem extends SubsystemBase {
   public ScoringSubsystem() {
     shootingMotor = new TalonFX(15, "rio");
     coralRange = new CANrange(18, "rio");
+    algaeRange = new CANrange(26, "rio");
     rotateMotor = new TalonFX(14, "rio");
     rotateMotor.getConfigurator()
         .apply(new SoftwareLimitSwitchConfigs().withForwardSoftLimitEnable(true)
@@ -78,7 +79,9 @@ public class ScoringSubsystem extends SubsystemBase {
   public static double getCoralDistance() {
     return coralRange.getDistance().getValueAsDouble();
   }
-
+  public static double getAlgaeDistance() {
+    return algaeRange.getDistance().getValueAsDouble();
+  }
   public static void setShootingMotor(double voltage) {
     shootingMotor.setControl(new VoltageOut(voltage).withEnableFOC(true));
   }
