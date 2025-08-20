@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
@@ -124,17 +125,60 @@ public class RobotContainer {
     // Intake commands
     operatorController.rightTrigger(.2).whileTrue(new ShootCommand());
     operatorController.leftTrigger(0.2).whileTrue(new ReverseShoot());
-    operatorController.b().onTrue(new ElevatorL2Command());
-    operatorController.y().onTrue(new SetElevatorCommand(50));
-    operatorController.x().onTrue(new SetElevatorCommand(15));
-    operatorController.povUp().onTrue(new RotateArmCommand(-30));
-    operatorController.povDown().onTrue(new RotateArmCommand(20));
-    operatorController.povLeft().onTrue(new RotateFunnelCommand(-20));
-    operatorController.povRight().onTrue(new RotateFunnelCommand(80));
-
+    // operatorController.b().onTrue(new ElevatorL2Command());
+    operatorController.a().onTrue(new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.troughHeight),
+      new RotateArmCommand(ScoringConstants.troughPosition)
+    ));
+    operatorController.x().onTrue(new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.coralLowHeight),
+      new RotateArmCommand(ScoringConstants.coralLowPosition)
+    ));
+    operatorController.b().onTrue(new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.coralMidHeight),
+      new RotateArmCommand(ScoringConstants.coralMidPosition)
+    ));
+    operatorController.y().onTrue(new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.coralHighHeight),
+      new RotateArmCommand(ScoringConstants.coralHighPosition)
+    ));
+    operatorController.povUp().onTrue(new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.netHeight),
+      new RotateArmCommand(ScoringConstants.netPosition)
+    ));
+    operatorController.povUp().onTrue(new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.netHeight),
+      new RotateArmCommand(ScoringConstants.netPosition)
+    ));
+    operatorController.povRight().onTrue(new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.algaeHighHeight),
+      new RotateArmCommand(ScoringConstants.algaeHighPosition)
+    ));
+    operatorController.povLeft().onTrue(new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.algaeLowHeight),
+      new RotateArmCommand(ScoringConstants.algaeLowPosition)
+    ));
+    operatorController.povDown().onTrue(new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.groundHeight),
+      new RotateArmCommand(ScoringConstants.groundPosition)
+    ));
+    operatorController.axisLessThan(1,-.5).whileTrue(new ParallelCommandGroup(
+      new RotateFunnelCommand(IntakeConstants.humanFunnelDeployAngle),
+      new SetElevatorCommand(ElevatorConstants.handOffHeight),
+      new RotateArmCommand(ScoringConstants.handOffPosition),
+      new IntakeCommand(),
+      new ReverseShoot()
+    ));
+    operatorController.axisGreaterThan(1,.5).whileTrue(new ParallelCommandGroup(
+      new RotateFunnelCommand(IntakeConstants.groundFunnelDeployAngle),
+      new SetElevatorCommand(ElevatorConstants.handOffHeight),
+      new RotateArmCommand(ScoringConstants.handOffPosition),
+      new IntakeCommand(),
+      new ReverseShoot()
+    ));
   
 
-    operatorController.a().whileTrue(new IntakeCommand());
+  
     // Algae Commands
 
     // Coral Commands
