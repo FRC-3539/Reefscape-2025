@@ -90,21 +90,15 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
+                "type": "named",
                 "data": {
-                  "waitTime": 2.0
+                  "name": "ScorerIntake"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "IntakeHPCoral"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ScorerIntake"
                 }
               }
             ]
@@ -216,21 +210,15 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
+                "type": "named",
                 "data": {
-                  "waitTime": 2.0
+                  "name": "ScorerIntake"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "IntakeHPCoral"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ScorerIntake"
                 }
               }
             ]

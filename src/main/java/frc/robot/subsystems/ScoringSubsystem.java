@@ -88,8 +88,11 @@ public class ScoringSubsystem extends SubsystemBase {
 
   public void log() {
   }
+  //get Requested Arm Position
+  public static double getRequestedArmPosition() {
+  return requestRotatePos;
 
-
+  }
   private static double scoringRestrictedMin = 30;
 
   @Override
