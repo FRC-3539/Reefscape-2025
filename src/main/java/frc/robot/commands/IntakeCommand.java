@@ -4,8 +4,10 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ScoringSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class IntakeCommand extends Command {
@@ -17,13 +19,23 @@ public class IntakeCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    IntakeSubsystem.setouterfunnelmotor(4);
-    IntakeSubsystem.setinnerfunnelmotor(4);
+    IntakeSubsystem.setouterfunnelmotor(8);
+    IntakeSubsystem.setinnerfunnelmotor(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if (MathUtil.isNear(ScoringSubsystem.getRotateAngle(),ScoringSubsystem.getRequestedArmPosition(),3))
+    {
+      IntakeSubsystem.setinnerfunnelmotor(8);
+
+    } else
+      IntakeSubsystem.setinnerfunnelmotor(0);
+
+    
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override

@@ -148,9 +148,9 @@ public class RobotContainer {
       new SetElevatorCommand(ElevatorConstants.netHeight),
       new RotateArmCommand(ScoringConstants.netPosition)
     ));
-    operatorController.povUp().onTrue(new ParallelCommandGroup(
-      new SetElevatorCommand(ElevatorConstants.netHeight),
-      new RotateArmCommand(ScoringConstants.netPosition)
+    operatorController.povDown().onTrue(new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.groundHeight),
+      new RotateArmCommand(ScoringConstants.groundPosition)
     ));
     operatorController.povRight().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.algaeHighHeight),
@@ -159,10 +159,6 @@ public class RobotContainer {
     operatorController.povLeft().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.algaeLowHeight),
       new RotateArmCommand(ScoringConstants.algaeLowPosition)
-    ));
-    operatorController.povDown().onTrue(new ParallelCommandGroup(
-      new SetElevatorCommand(ElevatorConstants.groundHeight),
-      new RotateArmCommand(ScoringConstants.groundPosition)
     ));
     operatorController.axisLessThan(1,-.5).whileTrue(new ParallelCommandGroup(
       new RotateFunnelCommand(IntakeConstants.humanFunnelDeployAngle),

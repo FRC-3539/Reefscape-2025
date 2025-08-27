@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.075539772727272,
-        "y": 5.34125
+        "x": 1.8125631313131314,
+        "y": 0.9554292929292921
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.9288068181818185,
-        "y": 6.05421875
+        "x": 2.2813636363636363,
+        "y": 1.4679166666666663
       },
       "isLocked": false,
-      "linkedName": "Basic End"
+      "linkedName": "Human Player 2"
     },
     {
       "anchor": {
-        "x": 1.1766477272727274,
-        "y": 6.827017045454545
+        "x": 3.615,
+        "y": 2.865
       },
       "prevControl": {
-        "x": 2.732215909090909,
-        "y": 6.333423295454545
+        "x": 3.4388257575757577,
+        "y": 2.561363636363636
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "HP End"
+      "linkedName": "ReefC"
     }
   ],
   "rotationTargets": [],
@@ -33,22 +33,22 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 2.5,
-    "maxAngularVelocity": 360.0,
-    "maxAngularAcceleration": 360.0,
+    "maxVelocity": 2.75,
+    "maxAcceleration": 2.25,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -53.673174047879776
+    "rotation": 59.99999999999999
   },
   "reversed": false,
   "folder": "Summer Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -120.579226872489
+    "rotation": 52.50000000000001
   },
   "useDefaultConstraints": false
 }

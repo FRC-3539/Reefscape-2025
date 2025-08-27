@@ -54,7 +54,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "HP Station"
+                  "pathName": "Left HP Station"
                 }
               },
               {
@@ -90,21 +90,15 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
+                "type": "named",
                 "data": {
-                  "waitTime": 2.0
+                  "name": "ScorerIntake"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "IntakeHPCoral"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ScorerIntake"
                 }
               }
             ]
@@ -180,7 +174,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "HP Station 2"
+                  "pathName": "Left HP Station 2"
                 }
               },
               {
@@ -216,21 +210,15 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
+                "type": "named",
                 "data": {
-                  "waitTime": 2.0
+                  "name": "ScorerIntake"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "IntakeHPCoral"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ScorerIntake"
                 }
               }
             ]

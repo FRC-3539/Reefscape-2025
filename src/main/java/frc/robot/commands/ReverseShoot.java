@@ -25,7 +25,7 @@ public class ReverseShoot extends Command {
   @Override
   public void initialize() {
     if (algae) ScoringSubsystem.setShootingMotor(-8);
-    else ScoringSubsystem.setShootingMotor(-4);
+    else ScoringSubsystem.setShootingMotor(-8);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

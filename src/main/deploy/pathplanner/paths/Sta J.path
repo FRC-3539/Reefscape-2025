@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.890369318181818,
-        "y": 5.34125
+        "x": 6.870426136363636,
+        "y": 5.989403409090909
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.48153409090909,
-        "y": 5.376150568181817
+        "x": 6.521420454545455,
+        "y": 5.809914772727272
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 5.34125
       },
       "prevControl": {
-        "x": 5.534232954545455,
-        "y": 5.366178977272727
+        "x": 5.514289772727272,
+        "y": 5.510767045454545
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 2.75,
-    "maxAcceleration": 2.25,
+    "maxAcceleration": 2.0,
     "maxAngularVelocity": 180.0,
     "maxAngularAcceleration": 180.0,
     "nominalVoltage": 12.0,
@@ -48,7 +48,7 @@
   "folder": "Summer Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -117.47443162627724
+    "rotation": -148.6269948598916
   },
   "useDefaultConstraints": false
 }
