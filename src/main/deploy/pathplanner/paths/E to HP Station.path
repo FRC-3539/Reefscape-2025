@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.93,
+        "x": 5.04,
         "y": 2.74
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.121107954545455,
-        "y": 2.1503409090909087
+        "x": 4.932954545454546,
+        "y": 2.1039772727272723
       },
-      "isLocked": true,
-      "linkedName": "ReefD"
+      "isLocked": false,
+      "linkedName": "ReefE"
     },
     {
       "anchor": {
@@ -20,11 +20,11 @@
         "y": 0.9554292929292921
       },
       "prevControl": {
-        "x": 2.7000347222222225,
-        "y": 1.454008838383837
+        "x": 2.8810479797979807,
+        "y": 1.4272601010100994
       },
       "nextControl": null,
-      "isLocked": true,
+      "isLocked": false,
       "linkedName": "Human Player 2"
     }
   ],
@@ -33,8 +33,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 1.5,
-    "maxAcceleration": 1.5,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 360.0,
     "nominalVoltage": 12.0,
@@ -45,10 +45,10 @@
     "rotation": 52.50000000000001
   },
   "reversed": false,
-  "folder": "Reef To Human Player 2",
+  "folder": "Summer Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 59.99999999999999
+    "rotation": 119.99999999999999
   },
   "useDefaultConstraints": false
 }
