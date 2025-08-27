@@ -1,0 +1,93 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.646780303030304,
+        "y": 4.0554924242424235
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 7.55846590909091,
+        "y": 5.02215909090909
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.837670454545455,
+        "y": 5.361193181818181
+      },
+      "prevControl": {
+        "x": 7.579468609195561,
+        "y": 5.00857174149012
+      },
+      "nextControl": {
+        "x": 8.12449494949495,
+        "y": 5.75290404040404
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 12.484911616161616,
+        "y": 4.970265151515151
+      },
+      "prevControl": {
+        "x": 12.200315656565657,
+        "y": 5.844381313131313
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": " go to steal algae"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "AlgeaGrabAngle",
+      "waypointRelativePos": 1.4662236987818391,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "AlgeaGrabAngle"
+        }
+      }
+    },
+    {
+      "name": "ElevatorHighAlgeaCommand",
+      "waypointRelativePos": 1.4721088435374288,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "ElevatorHighAlgeaCommand"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 1.5,
+    "maxAcceleration": 1.5,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -54.3720927085791
+  },
+  "reversed": false,
+  "folder": "Summer Paths",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 1.0384237086000203
+  },
+  "useDefaultConstraints": false
+}

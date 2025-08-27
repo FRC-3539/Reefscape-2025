@@ -104,6 +104,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("RotateArmHP", new RotateArmCommand(-130));
     NamedCommands.registerCommand("ScorerIntake", new ReverseShoot());
     NamedCommands.registerCommand("ElevatorAlgeaCommand", new SetElevatorCommand(29));
+    NamedCommands.registerCommand("ElevatorHighAlgeaCommand", new SetElevatorCommand(45));
+
     NamedCommands.registerCommand("AlgeaGrabAngle", new RotateArmCommand(65));
     NamedCommands.registerCommand("ElevatorAlgeaNetCommand", new SetElevatorCommand(79));
     NamedCommands.registerCommand("AlgeaNetAngle", new RotateArmCommand(90));

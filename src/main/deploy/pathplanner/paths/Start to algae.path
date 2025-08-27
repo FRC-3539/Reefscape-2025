@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 5.6342803030303035,
-        "y": 4.03
+        "x": 5.63,
+        "y": 4.04
       },
       "prevControl": {
-        "x": 6.091666666666667,
-        "y": 4.019835858585859
+        "x": 6.087386363636363,
+        "y": 4.029835858585859
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "get algae"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
