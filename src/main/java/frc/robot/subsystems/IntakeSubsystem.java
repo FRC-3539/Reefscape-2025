@@ -26,11 +26,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.IDConstants;
 import frc.robot.constants.IntakeConstants;
 import frc.robot.constants.ScoringConstants;
+import frc.robot.constants.EnumConstants.ScoringMode;
 
 public class IntakeSubsystem extends SubsystemBase {
   // Declare system parts here
   private static TalonFXS outerfunnelmoter, innerfunnelmotor;
   private static TalonFX funnelDeployMotor;
+  private static ScoringMode mode = ScoringMode.CORAL;
 
   private static CANcoder funnelDeployCanCoder;
   private static double requestFunnelPos =0;
@@ -73,6 +75,12 @@ public class IntakeSubsystem extends SubsystemBase {
   // Setters / getters
   public static void setouterfunnelmotor(double voltage) {
     outerfunnelmoter.setControl(new VoltageOut(voltage).withEnableFOC(true));}
+  public static void setMode(ScoringMode Mode){
+    mode = Mode;
+  }
+  public static ScoringMode getMode(){
+    return mode;
+  }
 
 
 public static void setFunnelDeployAngle(double angle) { requestFunnelPos = angle;

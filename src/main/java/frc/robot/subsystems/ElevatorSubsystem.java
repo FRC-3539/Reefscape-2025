@@ -70,10 +70,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     if (enforcedMaxHandOffHeight) {
       setElevatorPosition = Math.min(setElevatorPosition, 35);
     }
-    // if(ScoringSubsystem.algaeDetected())
-    // {
-    //   setElevatorPosition = Math.max(setElevatorPosition, 7);
-    // }
+    if(ScoringSubsystem.getAlgaeDistance() < 0.07)
+    {
+      setElevatorPosition = Math.max(setElevatorPosition, 7);
+    }
 
    elevatorMotor.setControl(new MotionMagicVoltage((setElevatorPosition - ElevatorConstants.elevatorHomePositionOffset)/ ElevatorConstants.elevatorInchesPerRotation));
     log();

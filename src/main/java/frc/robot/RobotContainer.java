@@ -96,22 +96,22 @@ public class RobotContainer {
     NamedCommands.registerCommand("IntakingLEDCommand", new IntakingLEDCommand());
     NamedCommands.registerCommand("ElevatorL2Command", new SetElevatorCommand(22.25));
     NamedCommands.registerCommand("ElevatorL4Command", new SetElevatorCommand(74.75));
-    NamedCommands.registerCommand("ScoreL2Command", new RotateArmCommand(40));
-    NamedCommands.registerCommand("ScoreL4Command", new RotateArmCommand(10));
+    NamedCommands.registerCommand("ScoreL2Command", new RotateArmCommand(40, ScoringMode.CORAL));
+    NamedCommands.registerCommand("ScoreL4Command", new RotateArmCommand(10, ScoringMode.CORAL));
     NamedCommands.registerCommand("ShootCommand", new ShootCommand());
     NamedCommands.registerCommand("HPFunnelPosition", new RotateFunnelCommand(75));
     NamedCommands.registerCommand("IntakeHPCoral", new IntakeCommand());
-    NamedCommands.registerCommand("RotateArmHP", new RotateArmCommand(-130));
+    NamedCommands.registerCommand("RotateArmHP", new RotateArmCommand(-130, ScoringMode.CORAL));
     NamedCommands.registerCommand("ScorerIntake", new ReverseShoot());
     NamedCommands.registerCommand("ElevatorAlgeaCommand", new SetElevatorCommand(29));
     NamedCommands.registerCommand("ElevatorHighAlgeaCommand", new SetElevatorCommand(45));
 
-    NamedCommands.registerCommand("AlgeaGrabAngle", new RotateArmCommand(65));
+    NamedCommands.registerCommand("AlgeaGrabAngle", new RotateArmCommand(65, ScoringMode.ALGAE));
     NamedCommands.registerCommand("ElevatorAlgeaNetCommand", new SetElevatorCommand(79));
-    NamedCommands.registerCommand("AlgeaNetAngle", new RotateArmCommand(90));
+    NamedCommands.registerCommand("AlgeaNetAngle", new RotateArmCommand(90, ScoringMode.ALGAE));
     
-    NamedCommands.registerCommand("IntakeAlgae", new ShootCommand(true));
-    NamedCommands.registerCommand("ShootAlgae", new ReverseShoot(true));
+    NamedCommands.registerCommand("IntakeAlgae", new ReverseShoot());
+    NamedCommands.registerCommand("ShootAlgae", new ShootCommand());
     chooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData(chooser);
   }
@@ -130,52 +130,54 @@ public class RobotContainer {
     // operatorController.b().onTrue(new ElevatorL2Command());
     operatorController.a().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.troughHeight),
-      new RotateArmCommand(ScoringConstants.troughPosition)
+      new RotateArmCommand(ScoringConstants.troughPosition, ScoringMode.CORAL)
+
     ));
     operatorController.x().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.coralLowHeight),
-      new RotateArmCommand(ScoringConstants.coralLowPosition)
+      new RotateArmCommand(ScoringConstants.coralLowPosition, ScoringMode.CORAL)
     ));
     operatorController.b().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.coralMidHeight),
-      new RotateArmCommand(ScoringConstants.coralMidPosition)
+      new RotateArmCommand(ScoringConstants.coralMidPosition, ScoringMode.CORAL)
     ));
     operatorController.y().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.coralHighHeight),
-      new RotateArmCommand(ScoringConstants.coralHighPosition)
+      new RotateArmCommand(ScoringConstants.coralHighPosition, ScoringMode.CORAL)
     ));
     operatorController.povUp().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.netHeight),
-      new RotateArmCommand(ScoringConstants.netPosition)
+      new RotateArmCommand(ScoringConstants.netPosition, ScoringMode.ALGAE)
     ));
     operatorController.povDown().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.groundHeight),
-      new RotateArmCommand(ScoringConstants.groundPosition)
+      new RotateArmCommand(ScoringConstants.groundPosition, ScoringMode.ALGAE)
     ));
     operatorController.povRight().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.algaeHighHeight),
-      new RotateArmCommand(ScoringConstants.algaeHighPosition)
+      new RotateArmCommand(ScoringConstants.algaeHighPosition, ScoringMode.ALGAE)
     ));
     operatorController.povLeft().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.algaeLowHeight),
-      new RotateArmCommand(ScoringConstants.algaeLowPosition)
+      new RotateArmCommand(ScoringConstants.algaeLowPosition, ScoringMode.ALGAE)
     ));
     operatorController.axisLessThan(1,-.5).whileTrue(new ParallelCommandGroup(
       new RotateFunnelCommand(IntakeConstants.humanFunnelDeployAngle),
       new SetElevatorCommand(ElevatorConstants.handOffHeight),
-      new RotateArmCommand(ScoringConstants.handOffPosition),
+      new RotateArmCommand(ScoringConstants.handOffPosition, ScoringMode.CORAL),
       new IntakeCommand(),
       new ReverseShoot()
     ));
     operatorController.axisGreaterThan(1,.5).whileTrue(new ParallelCommandGroup(
       new RotateFunnelCommand(IntakeConstants.groundFunnelDeployAngle),
       new SetElevatorCommand(ElevatorConstants.handOffHeight),
-      new RotateArmCommand(ScoringConstants.handOffPosition),
+      new RotateArmCommand(ScoringConstants.handOffPosition, ScoringMode.CORAL),
       new IntakeCommand(),
       new ReverseShoot()
     ));
-  
-
+    driverController.x().whileTrue(new BBAutoAlignCommand( AlignPoint.CORALLEFT, null));
+    driverController.a().whileTrue(new BBAutoAlignCommand( AlignPoint.ALGAE, null));
+    driverController.b().whileTrue(new BBAutoAlignCommand( AlignPoint.CORALRIGHT, null));
   
     // Algae Commands
 

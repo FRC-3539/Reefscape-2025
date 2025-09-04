@@ -5,16 +5,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.constants.EnumConstants.ScoringMode;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ScoringSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class RotateArmCommand extends Command {
   /** Creates a new RotateArmCommand. */
   public double target;
+  public ScoringMode mode;
 
-  public RotateArmCommand(double target ) {
+  public RotateArmCommand(double target, ScoringMode mode) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.target = target;
+    this.mode = mode;
 
   }
 
@@ -22,6 +26,7 @@ public class RotateArmCommand extends Command {
   @Override
   public void initialize() {
     ScoringSubsystem.setRotateAngle(target);
+    IntakeSubsystem.setMode(mode);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

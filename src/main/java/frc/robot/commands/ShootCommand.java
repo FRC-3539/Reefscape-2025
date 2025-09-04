@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.ScoringConstants;
+import frc.robot.constants.EnumConstants.ScoringMode;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.ScoringSubsystem;
@@ -29,7 +30,9 @@ public class ShootCommand extends Command {
   @Override
   public void initialize(
   ) {
-     ScoringSubsystem.setShootingMotor(8);
+    //  
+    if (IntakeSubsystem.getMode() == ScoringMode.CORAL) ScoringSubsystem.setShootingMotor(8);
+    else ScoringSubsystem.setShootingMotor(-8);
      LedSubsystem.setLEDs(LEDState.SHOOTING);
   }
 
