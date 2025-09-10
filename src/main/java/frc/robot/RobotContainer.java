@@ -186,7 +186,12 @@ public class RobotContainer {
     // Scoring Commands
 
     // Other
-
+    ClimberSubsystem.setDefaultCommand(new ClimberCommand());
+    operatorController.start().onTrue(new ParallelCommandGroup(
+      new RotateFunnelCommand(IntakeConstants.groundFunnelDeployAngle),
+      new SetElevatorCommand(ElevatorConstants.coralLowHeight),
+      new RotateArmCommand(ScoringConstants.coralLowPosition, ScoringMode.CORAL)
+    ));
   }
 
   /**
