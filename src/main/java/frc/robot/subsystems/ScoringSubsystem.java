@@ -56,7 +56,7 @@ public class ScoringSubsystem extends SubsystemBase {
 
     rotateMotor.getConfigurator()
         .apply(new MotionMagicConfigs().withMotionMagicAcceleration(ScoringConstants.rotateAcceleration)
-            .withMotionMagicCruiseVelocity(ScoringConstants.rotateCruiseVelocity/2.0));
+            .withMotionMagicCruiseVelocity(ScoringConstants.rotateCruiseVelocity));
     rotateMotor.getConfigurator()
     .apply(new FeedbackConfigs().withFeedbackRemoteSensorID(IDConstants.rotateCanCoderID)
     .withRotorToSensorRatio(ScoringConstants.rotateMotorToEncoder).withSensorToMechanismRatio(1)
