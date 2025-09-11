@@ -193,6 +193,6 @@ public class LedSubsystem extends SubsystemBase {
 		// 	}
 		// }
 
-		// setLEDs(LEDState.CONNECTED);
+		setLEDs(LEDState.CONNECTED);
 	}
 }

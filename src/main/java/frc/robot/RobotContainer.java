@@ -117,7 +117,7 @@ public class RobotContainer {
   }
 
   public void putCommands() {
-    
+    SmartDashboard.putData(new DisableClimberBreakModeCommand().ignoringDisable(true));
   }
 
   private void configureBindings() {
