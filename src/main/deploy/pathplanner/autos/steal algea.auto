@@ -78,6 +78,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "Summer Autos",
   "choreoAuto": false
 }
