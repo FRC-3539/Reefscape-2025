@@ -67,6 +67,7 @@ public class RobotContainer {
   public static SendableChooser<Command> chooser = new SendableChooser<Command>();
 
   public static Trigger rightDriverBumper = driverController.rightBumper();
+  public static Trigger leftDriverBumper = driverController.leftBumper();
 
   public RobotContainer() {
     // Configure the trigger bindings

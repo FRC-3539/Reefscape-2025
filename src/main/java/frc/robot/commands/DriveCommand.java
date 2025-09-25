@@ -68,7 +68,7 @@ public class DriveCommand extends Command {
 			speedMultiplier *= 1 -((Math.max(0, ElevatorSubsystem.getElevatorPosition() - 30) * 0.7) / 50);
 		}
 
-		if (RobotContainer.rightDriverBumper.getAsBoolean()) { // Robot Centric
+		if (RobotContainer.leftDriverBumper.getAsBoolean()) { // Robot Centric
 			request = driveRobotCentric
 					.withVelocityX(-RobotContainer.driverController.getLeftY() * maxVelocity * speedMultiplier)
 					.withVelocityY(-RobotContainer.driverController.getLeftX() * maxVelocity * speedMultiplier)
