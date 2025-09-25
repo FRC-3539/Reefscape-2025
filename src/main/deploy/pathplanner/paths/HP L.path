@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.73,
-        "y": 7.17
+        "x": 1.661,
+        "y": 7.267
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3817550505050504,
-        "y": 6.586363636363636
+        "x": 2.3127550505050505,
+        "y": 6.683363636363636
       },
       "isLocked": false,
-      "linkedName": "Human Player 1"
+      "linkedName": "HP End"
     },
     {
       "anchor": {
@@ -48,7 +48,7 @@
   "folder": "Summer Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -52.50000000000001
+    "rotation": -53.673174047879776
   },
   "useDefaultConstraints": false
 }

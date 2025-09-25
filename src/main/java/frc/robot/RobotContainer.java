@@ -66,6 +66,8 @@ public class RobotContainer {
 
   public static SendableChooser<Command> chooser = new SendableChooser<Command>();
 
+  public static Trigger rightDriverBumper = driverController.rightBumper();
+
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
@@ -128,16 +130,16 @@ public class RobotContainer {
     operatorController.rightTrigger(.2).whileTrue(new ShootCommand());
     operatorController.leftTrigger(0.2).whileTrue(new ReverseShoot());
     // operatorController.b().onTrue(new ElevatorL2Command());
-    operatorController.a().onTrue(new ParallelCommandGroup(
+    operatorController.b().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.troughHeight),
       new RotateArmCommand(ScoringConstants.troughPosition, ScoringMode.CORAL)
 
     ));
-    operatorController.x().onTrue(new ParallelCommandGroup(
+    operatorController.a().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.coralLowHeight),
       new RotateArmCommand(ScoringConstants.coralLowPosition, ScoringMode.CORAL)
     ));
-    operatorController.b().onTrue(new ParallelCommandGroup(
+    operatorController.x().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.coralMidHeight),
       new RotateArmCommand(ScoringConstants.coralMidPosition, ScoringMode.CORAL)
     ));
