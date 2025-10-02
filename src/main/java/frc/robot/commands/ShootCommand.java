@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.constants.ScoringConstants;
@@ -42,6 +43,7 @@ public class ShootCommand extends Command {
   @Override
   public void execute() {
     if (IntakeSubsystem.getMode() == ScoringMode.ALGAE) return;
+    if (DriverStation.isAutonomous()) return ;
     double multiplier = RobotContainer.operatorController.getRightTriggerAxis();
     ScoringSubsystem.setShootingMotor(8*multiplier);
   }
