@@ -25,6 +25,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.IDConstants;
@@ -70,6 +71,9 @@ public class ScoringSubsystem extends SubsystemBase {
     .withSensorDirection(SensorDirectionValue.Clockwise_Positive)
     .withMagnetOffset(ScoringConstants.rotateOffset));
 
+
+    shootingMotor.clearStickyFault_DeviceTemp();
+    shootingMotor.clearStickyFault_ProcTemp();
   }
 
 
@@ -87,6 +91,15 @@ public class ScoringSubsystem extends SubsystemBase {
   }
 
   public void log() {
+    SmartDashboard.putNumber("/Scoring/ScoringMotor_DeviceTemp", 
+    shootingMotor.getDeviceTemp().getValue().baseUnitMagnitude());
+    SmartDashboard.putNumber("/Scoring/ScoringMotor_ProcessorTemp",
+    shootingMotor.getProcessorTemp().getValue().baseUnitMagnitude());
+
+    SmartDashboard.putBoolean("/Scoring/ScoringMotor_StickyMotor_DeviceTemp",
+  shootingMotor.getStickyFault_DeviceTemp().getValue());
+  SmartDashboard.putBoolean("/Scoring/ScoringMotor_StickyProcessorTemp",
+    shootingMotor.getStickyFault_ProcTemp().getValue());
   }
   //get Requested Arm Position
   public static double getRequestedArmPosition() {
@@ -98,7 +111,7 @@ public class ScoringSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     log();
-  
+    
 // Minimum elevator height needed for handoff
 if (getRotateAngle() < scoringRestrictedMin || requestRotatePos < scoringRestrictedMin) {
   ElevatorSubsystem.setEnforcedMinimumHeight(true);

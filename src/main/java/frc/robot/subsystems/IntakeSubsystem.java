@@ -103,5 +103,6 @@ public static void setFunnelDeployAngle(double angle) { requestFunnelPos = angle
     // This method will be called once per scheduler run
     log();
     funnelDeployMotor.setControl(new MotionMagicVoltage(Units.degreesToRotations(requestFunnelPos)));
+    
   }
 }
