@@ -36,6 +36,7 @@ public class ReverseShoot extends Command {
     if (IntakeSubsystem.getMode() == ScoringMode.CORAL) return;
     if (ScoringSubsystem.getAlgaeDistance() < 0.07) ScoringSubsystem.setShootingMotor(2.5);
     else ScoringSubsystem.setShootingMotor(8);
+    
   }
 
   // Called once the command ends or is interrupted.

@@ -38,6 +38,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public static void setElevatorPosition(double request) {requestedElevatorPos = request;}
+  public static double getRequestedElevatorPosition() {return requestedElevatorPos;}
 
   public void log() {
     SmartDashboard.putNumber("currentElevator", getElevatorPosition());

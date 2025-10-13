@@ -4,7 +4,9 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.constants.ScoringConstants;
 import frc.robot.constants.EnumConstants.ScoringMode;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -32,6 +34,7 @@ public class ShootCommand extends Command {
   ) {
     //  
     if (IntakeSubsystem.getMode() == ScoringMode.CORAL) ScoringSubsystem.setShootingMotor(8);
+
     else ScoringSubsystem.setShootingMotor(-8);
      LedSubsystem.setLEDs(LEDState.SHOOTING);
   }
@@ -39,9 +42,10 @@ public class ShootCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!algae) return;
-    if (ScoringSubsystem.getAlgaeDistance() < 0.07) ScoringSubsystem.setShootingMotor(2);
-    else ScoringSubsystem.setShootingMotor(8);
+    if (IntakeSubsystem.getMode() == ScoringMode.ALGAE) return;
+    if (DriverStation.isAutonomous()) return ;
+    double multiplier = RobotContainer.operatorController.getRightTriggerAxis();
+    ScoringSubsystem.setShootingMotor(8*multiplier);
   }
 
   // Called once the command ends or is interrupted.

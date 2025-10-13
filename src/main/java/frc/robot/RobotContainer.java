@@ -68,7 +68,7 @@ public class RobotContainer {
 
   public static Trigger rightDriverBumper = driverController.rightBumper();
   public static Trigger leftDriverBumper = driverController.leftBumper();
-
+  
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
@@ -171,6 +171,10 @@ public class RobotContainer {
       new IntakeCommand(),
       new ReverseShoot()
     ));
+    operatorController.back().whileTrue(new ParallelCommandGroup(
+      new RotateFunnelCommand(20),
+      new SpitOutCommand()
+    ));
     operatorController.axisGreaterThan(1,.5).whileTrue(new ParallelCommandGroup(
       new RotateFunnelCommand(IntakeConstants.groundFunnelDeployAngle),
       new SetElevatorCommand(ElevatorConstants.handOffHeight),
@@ -178,9 +182,9 @@ public class RobotContainer {
       new IntakeCommand(),
       new ReverseShoot()
     ));
-    driverController.x().whileTrue(new BBAutoAlignCommand( AlignPoint.CORALLEFT, null));
-    driverController.a().whileTrue(new BBAutoAlignCommand( AlignPoint.ALGAE, null));
-    driverController.b().whileTrue(new BBAutoAlignCommand( AlignPoint.CORALRIGHT, null));
+    driverController.x().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALLEFT, null));
+    driverController.a().whileTrue(new BBAutoAlignCommand(AlignPoint.ALGAE, null));
+    driverController.b().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALRIGHT, null));
   
     // Algae Commands
 
