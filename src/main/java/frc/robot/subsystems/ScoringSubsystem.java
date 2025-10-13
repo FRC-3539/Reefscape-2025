@@ -92,9 +92,9 @@ public class ScoringSubsystem extends SubsystemBase {
 
   public void log() {
     SmartDashboard.putNumber("/Scoring/ScoringMotor_DeviceTemp", 
-    shootingMotor.getDeviceTemp().getValue().baseUnitMagnitude());
+    shootingMotor.getDeviceTemp().getValue().magnitude());
     SmartDashboard.putNumber("/Scoring/ScoringMotor_ProcessorTemp",
-    shootingMotor.getProcessorTemp().getValue().baseUnitMagnitude());
+    shootingMotor.getProcessorTemp().getValue().magnitude());
 
     SmartDashboard.putBoolean("/Scoring/ScoringMotor_StickyMotor_DeviceTemp",
   shootingMotor.getStickyFault_DeviceTemp().getValue());
