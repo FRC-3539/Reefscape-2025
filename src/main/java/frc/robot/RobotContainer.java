@@ -172,7 +172,7 @@ public class RobotContainer {
       new ReverseShoot()
     ));
     operatorController.back().whileTrue(new ParallelCommandGroup(
-      new RotateFunnelCommand(20),
+      new RotateFunnelCommand(15),
       new SpitOutCommand()
     ));
     operatorController.axisGreaterThan(1,.5).whileTrue(new ParallelCommandGroup(
