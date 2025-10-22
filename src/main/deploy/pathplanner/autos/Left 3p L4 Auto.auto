@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Sta J"
+            "pathName": "Start to J"
           }
         },
         {
@@ -54,7 +54,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left HP Station"
+                  "pathName": "J to HP"
                 }
               },
               {
@@ -111,7 +111,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "HP K"
+                  "pathName": "HP to K"
                 }
               },
               {
@@ -174,7 +174,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left HP Station 2"
+                  "pathName": "K to HP"
                 }
               },
               {
@@ -231,7 +231,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "HP L"
+                  "pathName": "HP to L"
                 }
               },
               {

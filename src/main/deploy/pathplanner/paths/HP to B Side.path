@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.53205303030303,
-        "y": 1.5144570707070704
+        "x": 2.223801369863014,
+        "y": 1.6509417808219178
       },
       "isLocked": false,
       "linkedName": "Human Player 2"
     },
     {
       "anchor": {
-        "x": 3.93,
-        "y": 2.74
+        "x": 3.25,
+        "y": 3.49
       },
       "prevControl": {
-        "x": 3.398169191919192,
-        "y": 2.2361111111111107
+        "x": 2.7346746575342467,
+        "y": 2.6276113013698623
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "ReefD"
+      "linkedName": "ReefBSide"
     }
   ],
   "rotationTargets": [],
@@ -35,14 +35,14 @@
   "globalConstraints": {
     "maxVelocity": 2.75,
     "maxAcceleration": 2.25,
-    "maxAngularVelocity": 360.0,
-    "maxAngularAcceleration": 360.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 59.99999999999999
+    "rotation": 37.5
   },
   "reversed": false,
   "folder": "Right Paths",

@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Sta E"
+            "pathName": "Start to E"
           }
         },
         {
@@ -54,7 +54,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "E to HP Station"
+                  "pathName": "E to HP"
                 }
               },
               {

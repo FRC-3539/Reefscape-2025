@@ -1,0 +1,43 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "L to HP"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HP to A Side"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "A Side to HP"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HP to A Front"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "A Front to HP"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Secret",
+  "choreoAuto": false
+}
