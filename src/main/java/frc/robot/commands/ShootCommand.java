@@ -43,7 +43,7 @@ public class ShootCommand extends Command {
   @Override
   public void execute() {
     if (IntakeSubsystem.getMode() == ScoringMode.ALGAE) return;
-    if (DriverStation.isAutonomous()) return ;
+    if (DriverStation.isAutonomous() || RobotContainer.leftScriptCommand.isScheduled()) return;
     double multiplier = RobotContainer.operatorController.getRightTriggerAxis();
     ScoringSubsystem.setShootingMotor(8*multiplier);
   }

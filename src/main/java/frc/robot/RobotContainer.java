@@ -9,6 +9,7 @@ import java.util.function.BooleanSupplier;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -68,14 +69,17 @@ public class RobotContainer {
 
   public static Trigger rightDriverBumper = driverController.rightBumper();
   public static Trigger leftDriverBumper = driverController.leftBumper();
-  
+
+  public static Command leftScriptCommand;
+  public static boolean runScriptOnTeleopStart = false;
+
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
     putAutons();
     putCommands();
     VisionSubsystem.start();
-
+    leftScriptCommand = new LeftScriptCommand();
   }
 
   /**
@@ -98,21 +102,21 @@ public class RobotContainer {
     NamedCommands.registerCommand("CoralDetectedLedCommand", new CoralDetectedLedCommand());
     NamedCommands.registerCommand("IntakingLEDCommand", new IntakingLEDCommand());
     NamedCommands.registerCommand("ElevatorL2Command", new SetElevatorCommand(22.25));
+    NamedCommands.registerCommand("ElevatorL3Command", new SetElevatorCommand(37.25));
     NamedCommands.registerCommand("ElevatorL4Command", new SetElevatorCommand(74.75));
     NamedCommands.registerCommand("ScoreL2Command", new RotateArmCommand(40, ScoringMode.CORAL));
     NamedCommands.registerCommand("ScoreL4Command", new RotateArmCommand(10, ScoringMode.CORAL));
     NamedCommands.registerCommand("ShootCommand", new ShootCommand());
-    NamedCommands.registerCommand("HPFunnelPosition", new RotateFunnelCommand(75));
+    NamedCommands.registerCommand("HPFunnelPosition", new RotateFunnelCommand(IntakeConstants.humanFunnelDeployAngle));
     NamedCommands.registerCommand("IntakeHPCoral", new IntakeCommand());
     NamedCommands.registerCommand("RotateArmHP", new RotateArmCommand(-130, ScoringMode.CORAL));
+    NamedCommands.registerCommand("ScoreL3Command", new RotateArmCommand(43, ScoringMode.CORAL));
     NamedCommands.registerCommand("ScorerIntake", new ReverseShoot());
     NamedCommands.registerCommand("ElevatorAlgeaCommand", new SetElevatorCommand(29));
     NamedCommands.registerCommand("ElevatorHighAlgeaCommand", new SetElevatorCommand(45));
-
     NamedCommands.registerCommand("AlgeaGrabAngle", new RotateArmCommand(65, ScoringMode.ALGAE));
     NamedCommands.registerCommand("ElevatorAlgeaNetCommand", new SetElevatorCommand(79));
     NamedCommands.registerCommand("AlgeaNetAngle", new RotateArmCommand(90, ScoringMode.ALGAE));
-    
     NamedCommands.registerCommand("IntakeAlgae", new ReverseShoot());
     NamedCommands.registerCommand("ShootAlgae", new ShootCommand());
     chooser = AutoBuilder.buildAutoChooser();
@@ -121,6 +125,7 @@ public class RobotContainer {
 
   public void putCommands() {
     SmartDashboard.putData(new DisableClimberBreakModeCommand().ignoringDisable(true));
+    SmartDashboard.putData(new EnableLeftScriptCommand().ignoringDisable(true));
   }
 
   private void configureBindings() {
@@ -134,7 +139,6 @@ public class RobotContainer {
     operatorController.b().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.troughHeight),
       new RotateArmCommand(ScoringConstants.troughPosition, ScoringMode.CORAL)
-
     ));
     operatorController.a().onTrue(new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.coralLowHeight),

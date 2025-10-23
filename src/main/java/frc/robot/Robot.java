@@ -9,6 +9,7 @@ import org.photonvision.estimation.VisionEstimation;
 
 import com.ctre.phoenix6.hardware.ParentDevice;
 import com.pathplanner.lib.commands.FollowPathCommand;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -114,6 +115,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    if (RobotContainer.runScriptOnTeleopStart) RobotContainer.leftScriptCommand.schedule();
   }
 
   /** This function is called periodically during operator control. */
