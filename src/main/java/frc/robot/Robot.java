@@ -20,9 +20,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.ScoringSubsystem;
-import frc.robot.subsystems.VisionSubsystem;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -33,6 +31,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private final RobotContainer m_robotContainer;
+  private boolean teleopRan = false;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -89,6 +88,10 @@ public class Robot extends TimedRobot {
     IntakeSubsystem.setFunnelDeployAngle(IntakeSubsystem.getFunnelAngle());
     ScoringSubsystem.setRotateAngle(ScoringSubsystem.getRotateAngle());
     ElevatorSubsystem.setElevatorPosition(ElevatorSubsystem.getElevatorPosition());
+    if (teleopRan) {
+      RobotContainer.enableLeftScriptCommand.cancel();
+      teleopRan = false;
+    }
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
@@ -115,7 +118,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    if (RobotContainer.runScriptOnTeleopStart) RobotContainer.leftScriptCommand.schedule();
+    teleopRan = true;
+    // if (RobotContainer.runScriptOnTeleopStart) RobotContainer.leftScriptCommand.schedule();
   }
 
   /** This function is called periodically during operator control. */

@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
@@ -35,6 +36,8 @@ public class EnableLeftScriptCommand extends Command {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		return false;
+		return RobotContainer.leftScriptCommand.isFinished()
+			|| !MathUtil.isNear(0, RobotContainer.driverController.getLeftTriggerAxis(), 0.1)
+      		|| !MathUtil.isNear(0, RobotContainer.driverController.getRightTriggerAxis(), 0.1);
 	}
 }

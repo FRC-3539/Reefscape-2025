@@ -43,8 +43,8 @@ public class IntakeCommand extends Command {
     
 
     }
-    if (MathUtil.isNear(ScoringSubsystem.getRotateAngle(),ScoringSubsystem.getRequestedArmPosition(),3)
-      && MathUtil.isNear(IntakeSubsystem.getFunnelAngle(),IntakeConstants.humanFunnelDeployAngle,3))
+    if (MathUtil.isNear(ScoringSubsystem.getRotateAngle(),ScoringSubsystem.getRequestedArmPosition(),4)
+      && MathUtil.isNear(IntakeSubsystem.getFunnelAngle(),IntakeConstants.humanFunnelDeployAngle,10))
     {
       IntakeSubsystem.setinnerfunnelmotor(8);
 

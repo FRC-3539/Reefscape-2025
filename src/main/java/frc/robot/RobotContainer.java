@@ -71,6 +71,7 @@ public class RobotContainer {
   public static Trigger leftDriverBumper = driverController.leftBumper();
 
   public static Command leftScriptCommand;
+  public static Command enableLeftScriptCommand;
   public static boolean runScriptOnTeleopStart = false;
 
   public RobotContainer() {
@@ -125,7 +126,9 @@ public class RobotContainer {
 
   public void putCommands() {
     SmartDashboard.putData(new DisableClimberBreakModeCommand().ignoringDisable(true));
-    SmartDashboard.putData(new EnableLeftScriptCommand().ignoringDisable(true));
+
+    enableLeftScriptCommand = new EnableLeftScriptCommand().ignoringDisable(true);
+    SmartDashboard.putData(enableLeftScriptCommand);
   }
 
   private void configureBindings() {

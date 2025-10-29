@@ -37,7 +37,8 @@ public class LeftScriptCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !MathUtil.isNear(0, RobotContainer.driverController.getLeftTriggerAxis(), 0.1)
+    return script.isFinished()
+      || !MathUtil.isNear(0, RobotContainer.driverController.getLeftTriggerAxis(), 0.1)
       || !MathUtil.isNear(0, RobotContainer.driverController.getRightTriggerAxis(), 0.1);
   }
 }
