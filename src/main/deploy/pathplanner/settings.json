@@ -4,11 +4,13 @@
   "holonomicMode": true,
   "pathFolders": [
     "Left Paths",
+    "Test Paths",
     "Right Paths",
     "Summer Paths"
   ],
   "autoFolders": [
-    "Secret",
+    "Test",
+    "ScriptedTeleop",
     "Summer Autos"
   ],
   "defaultMaxVel": 3.0,

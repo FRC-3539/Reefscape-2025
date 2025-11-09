@@ -1,0 +1,73 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TestDriveAX"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AwaitInput"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TestShootAX"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AwaitInput"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TestAHP"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AwaitInput"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TestDriveKX"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AwaitInput"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TestShootKX"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AwaitInput"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Test",
+  "choreoAuto": false
+}

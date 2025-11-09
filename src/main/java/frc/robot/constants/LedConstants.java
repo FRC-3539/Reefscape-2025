@@ -16,6 +16,7 @@ public class LedConstants {
 	public static Color Orange = new Color(255, 40, 0);
 	public static Color Blue = new Color(0, 0, 255);
 	public static Color Yellow = new Color(255, 160, 0);
+	public static Color Red = new Color(255, 0, 0);
 	public static Color Algae = new Color(30,255,65);
 	public static Color Coral = new Color(255,255,255);
 }

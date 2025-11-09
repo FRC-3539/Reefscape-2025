@@ -1,0 +1,66 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.1,
+        "y": 4.19
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.529100318471338,
+        "y": 4.982145700636942
+      },
+      "isLocked": false,
+      "linkedName": "ReefAFront"
+    },
+    {
+      "anchor": {
+        "x": 1.661,
+        "y": 7.267
+      },
+      "prevControl": {
+        "x": 1.9422372611464969,
+        "y": 6.183817675159235
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "HP End"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "ExpectLeftBumper",
+      "waypointRelativePos": 0.5,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "ExpectLeftBumper"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 2.75,
+    "maxAcceleration": 2.25,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -53.673174047879776
+  },
+  "reversed": false,
+  "folder": "Test Paths",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": false
+}
