@@ -229,19 +229,23 @@ public class RobotContainer {
     // TEST
     testController.a().onTrue(new ProcessInputCommand("a", new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.troughHeight),
-      new RotateArmCommand(ScoringConstants.troughPosition, ScoringMode.CORAL)
+      new RotateArmCommand(ScoringConstants.troughPosition, ScoringMode.CORAL),
+      new WaitCommand(0.5)
     )));
     testController.x().onTrue(new ProcessInputCommand("x", new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.coralLowHeight),
-      new RotateArmCommand(ScoringConstants.coralLowPosition, ScoringMode.CORAL)
+      new RotateArmCommand(ScoringConstants.coralLowPosition, ScoringMode.CORAL),
+      new WaitCommand(0.5)
     )));
     testController.b().onTrue(new ProcessInputCommand("b", new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.coralMidHeight),
-      new RotateArmCommand(ScoringConstants.coralMidPosition, ScoringMode.CORAL)
+      new RotateArmCommand(ScoringConstants.coralMidPosition, ScoringMode.CORAL),
+      new WaitCommand(0.5)
     )));
     testController.y().onTrue(new ProcessInputCommand("y", new ParallelCommandGroup(
       new SetElevatorCommand(ElevatorConstants.coralHighHeight),
-      new RotateArmCommand(ScoringConstants.coralHighPosition, ScoringMode.CORAL)
+      new RotateArmCommand(ScoringConstants.coralHighPosition, ScoringMode.CORAL),
+      new WaitCommand(0.5)
     )));
     testController.leftBumper().onTrue(new ProcessInputCommand("leftBumper", new ParallelDeadlineGroup(
       new ReverseShoot(),

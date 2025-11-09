@@ -34,7 +34,7 @@
   "eventMarkers": [
     {
       "name": "ExpectX",
-      "waypointRelativePos": 0.1,
+      "waypointRelativePos": 0.49523809523810197,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",

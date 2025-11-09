@@ -21,7 +21,7 @@ public class ProcessInputCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (OperatorTestController.processInput(button)) successAction.schedule();
+    OperatorTestController.processInput(button, successAction);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,6 +35,6 @@ public class ProcessInputCommand extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return successAction.isFinished();
   }
 }
