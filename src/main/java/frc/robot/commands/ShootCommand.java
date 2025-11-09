@@ -12,19 +12,13 @@ import frc.robot.constants.EnumConstants.ScoringMode;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.ScoringSubsystem;
+import frc.robot.test.OperatorTestController;
 import frc.robot.subsystems.LedSubsystem.LEDState;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ShootCommand extends Command {
-  private boolean algae;
   /** Creates a new ShootCommand. */
   public ShootCommand() {
-    this.algae = false;
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
-
-  public ShootCommand(boolean algae) {
-    this.algae = algae;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -36,7 +30,8 @@ public class ShootCommand extends Command {
     if (IntakeSubsystem.getMode() == ScoringMode.CORAL) ScoringSubsystem.setShootingMotor(8);
 
     else ScoringSubsystem.setShootingMotor(-8);
-     LedSubsystem.setLEDs(LEDState.SHOOTING);
+    
+    if (!OperatorTestController.testActive()) LedSubsystem.setLEDs(LEDState.SHOOTING);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -52,7 +47,7 @@ public class ShootCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     ScoringSubsystem.setShootingMotor(0);
-    LedSubsystem.setLEDs(LEDState.ON);
+    if (!OperatorTestController.testActive()) LedSubsystem.setLEDs(LEDState.ON);
   }
 
   // Returns true when the command should end.

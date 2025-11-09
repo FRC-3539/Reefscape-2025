@@ -158,6 +158,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Secret",
+  "folder": "ScriptedTeleop",
   "choreoAuto": false
 }

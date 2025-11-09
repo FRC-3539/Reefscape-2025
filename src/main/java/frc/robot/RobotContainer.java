@@ -15,6 +15,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
@@ -32,6 +33,11 @@ import frc.robot.constants.ScoringConstants;
 import frc.robot.Generated.TunerConstants;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.LedSubsystem.LEDState;
+import frc.robot.test.AwaitInputCommand;
+import frc.robot.test.ExpectInputCommand;
+import frc.robot.test.ProcessInputCommand;
+import frc.robot.test.RunOperatorTestCommand;
 import frc.robot.constants.EnumConstants.*;
 
 /**
@@ -64,6 +70,7 @@ public class RobotContainer {
 
   public static CommandXboxController driverController = new CommandXboxController(1);
   public static CommandXboxController operatorController = new CommandXboxController(0);
+  public static CommandXboxController testController = new CommandXboxController(2);
 
   public static SendableChooser<Command> chooser = new SendableChooser<Command>();
 
@@ -119,6 +126,15 @@ public class RobotContainer {
     NamedCommands.registerCommand("AlgeaNetAngle", new RotateArmCommand(90, ScoringMode.ALGAE));
     NamedCommands.registerCommand("IntakeAlgae", new ReverseShoot());
     NamedCommands.registerCommand("ShootAlgae", new ShootCommand());
+    
+    NamedCommands.registerCommand("ExpectA", new ExpectInputCommand("a", LEDState.GREEN));
+    NamedCommands.registerCommand("ExpectX", new ExpectInputCommand("x", LEDState.BLUE));
+    NamedCommands.registerCommand("ExpectB", new ExpectInputCommand("b", LEDState.RED));
+    NamedCommands.registerCommand("ExpectY", new ExpectInputCommand("y", LEDState.YELLOW));
+    NamedCommands.registerCommand("ExpectLeftBumper", new ExpectInputCommand("leftBumper", LEDState.INTAKING_CORAL));
+    NamedCommands.registerCommand("ExpectRightBumper", new ExpectInputCommand("rightBumper", LEDState.CORAL_DETECTED));
+    NamedCommands.registerCommand("AwaitInput", new AwaitInputCommand());
+
     chooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData(chooser);
   }
@@ -126,6 +142,8 @@ public class RobotContainer {
   public void putCommands() {
     SmartDashboard.putData(new DisableClimberBreakModeCommand().ignoringDisable(true));
     SmartDashboard.putData(new EnableLeftScriptCommand().ignoringDisable(true));
+
+    SmartDashboard.putData(new RunOperatorTestCommand());
   }
 
   private void configureBindings() {
@@ -189,6 +207,7 @@ public class RobotContainer {
     driverController.x().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALLEFT, null));
     driverController.a().whileTrue(new BBAutoAlignCommand(AlignPoint.ALGAE, null));
     driverController.b().whileTrue(new PIDAutoAlignCommand(AlignPoint.CORALRIGHT, null));
+
   
     // Algae Commands
 
@@ -203,6 +222,32 @@ public class RobotContainer {
       new SetElevatorCommand(ElevatorConstants.coralLowHeight),
       new RotateArmCommand(ScoringConstants.coralLowPosition, ScoringMode.CORAL)
     ));
+
+    // TEST
+    testController.a().onTrue(new ProcessInputCommand("a", new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.troughHeight),
+      new RotateArmCommand(ScoringConstants.troughPosition, ScoringMode.CORAL)
+    )));
+    testController.x().onTrue(new ProcessInputCommand("x", new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.coralLowHeight),
+      new RotateArmCommand(ScoringConstants.coralLowPosition, ScoringMode.CORAL)
+    )));
+    testController.b().onTrue(new ProcessInputCommand("b", new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.coralMidHeight),
+      new RotateArmCommand(ScoringConstants.coralMidPosition, ScoringMode.CORAL)
+    )));
+    testController.y().onTrue(new ProcessInputCommand("y", new ParallelCommandGroup(
+      new SetElevatorCommand(ElevatorConstants.coralHighHeight),
+      new RotateArmCommand(ScoringConstants.coralHighPosition, ScoringMode.CORAL)
+    )));
+    testController.leftBumper().onTrue(new ProcessInputCommand("leftBumper", new ParallelDeadlineGroup(
+      new ReverseShoot(),
+      new RotateFunnelCommand(IntakeConstants.humanFunnelDeployAngle),
+      new SetElevatorCommand(ElevatorConstants.handOffHeight),
+      new RotateArmCommand(ScoringConstants.handOffPosition, ScoringMode.CORAL),
+      new IntakeCommand()
+    ).withTimeout(10)));
+    testController.rightBumper().onTrue(new ProcessInputCommand("rightBumper", new ShootCommand().withTimeout(1)));
   }
 
   /**

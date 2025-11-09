@@ -15,10 +15,12 @@ import com.ctre.phoenix.led.LarsonAnimation.BounceMode;
 import com.ctre.phoenix.led.StrobeAnimation;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.IDConstants;
 import frc.robot.constants.LedConstants;
 import frc.robot.constants.EnumConstants.ScoringMode;
+import frc.robot.test.OperatorTestController;
 
 public class LedSubsystem extends SubsystemBase {
 
@@ -42,10 +44,15 @@ public class LedSubsystem extends SubsystemBase {
 	public enum LEDState {
 		ON, OFF, CONNECTED, READY, INTAKING, INTAKING_EMPTY,
 		SHOOTING, PREPARED, CLIMBING, REVERSE_CLIMBING, AUTO, ERROR, FRONT, BACK,
-		INTAKING_CORAL, INTAKING_ALGAE, ALGAE_DETECTED, CORAL_DETECTED
+		INTAKING_CORAL, INTAKING_ALGAE, ALGAE_DETECTED, CORAL_DETECTED,
+		RED, GREEN, BLUE, YELLOW
 	}
 
 	public static LEDState state;
+
+	public static void setLEDS(Color color) {
+		candle.setLEDs((int)color.red, (int)color.green, (int)color.blue);
+	}
 
 	public static void setLEDs(LEDState state) {
 		if (!enabled)
@@ -67,6 +74,30 @@ public class LedSubsystem extends SubsystemBase {
 				candle.animate(null);
 				candle.setLEDs(LedConstants.Green.getRed(), LedConstants.Green.getGreen(),
 						LedConstants.Green.getBlue());
+				break;
+				
+			case RED :
+				candle.animate(null);
+				candle.setLEDs(LedConstants.Red.getRed(), LedConstants.Red.getGreen(),
+						LedConstants.Red.getBlue());
+				break;
+				
+			case GREEN :
+				candle.animate(null);
+				candle.setLEDs(LedConstants.Green.getRed(), LedConstants.Green.getGreen(),
+						LedConstants.Green.getBlue());
+				break;
+				
+			case BLUE :
+				candle.animate(null);
+				candle.setLEDs(LedConstants.Blue.getRed(), LedConstants.Blue.getGreen(),
+						LedConstants.Blue.getBlue());
+				break;
+				
+			case YELLOW :
+				candle.animate(null);
+				candle.setLEDs(LedConstants.Yellow.getRed(), LedConstants.Yellow.getGreen(),
+						LedConstants.Yellow.getBlue());
 				break;
 
 			case READY :
@@ -193,6 +224,6 @@ public class LedSubsystem extends SubsystemBase {
 		// 	}
 		// }
 
-		setLEDs(LEDState.CONNECTED);
+		if (!OperatorTestController.testActive()) setLEDs(LEDState.CONNECTED);
 	}
 }
