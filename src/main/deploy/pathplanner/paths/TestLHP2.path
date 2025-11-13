@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.1,
-        "y": 4.19
+        "x": 3.63,
+        "y": 5.17
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.529100318471338,
-        "y": 4.982145700636942
+        "x": 1.2643368320610686,
+        "y": 5.222352099236641
       },
       "isLocked": false,
-      "linkedName": "ReefAFront"
+      "linkedName": "ReefL"
     },
     {
       "anchor": {
-        "x": 1.461,
-        "y": 7.137
+        "x": 1.338,
+        "y": 1.0
       },
       "prevControl": {
-        "x": 1.742237261146497,
-        "y": 6.053817675159234
+        "x": 1.4569179389312978,
+        "y": 1.8898616412213733
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "HP Test"
+      "linkedName": "HP2 Test"
     }
   ],
   "rotationTargets": [],
@@ -54,13 +54,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -53.673174047879776
+    "rotation": 52.50000000000001
   },
   "reversed": false,
   "folder": "Test Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -59.99999999999999
   },
   "useDefaultConstraints": false
 }

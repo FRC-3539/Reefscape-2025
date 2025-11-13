@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.1,
-        "y": 4.19
+        "x": 0.6363549618320612,
+        "y": 4.0249999999999995
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.529100318471338,
-        "y": 4.982145700636942
+        "x": 1.5992604961832064,
+        "y": 4.820443702290076
       },
       "isLocked": false,
-      "linkedName": "ReefAFront"
+      "linkedName": null
     },
     {
       "anchor": {
@@ -21,7 +21,7 @@
       },
       "prevControl": {
         "x": 1.742237261146497,
-        "y": 6.053817675159234
+        "y": 6.05381767515923
       },
       "nextControl": null,
       "isLocked": false,

@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.1,
-        "y": 4.19
+        "x": 3.63,
+        "y": 5.17
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.529100318471338,
-        "y": 4.982145700636942
+        "x": 2.8665330306885655,
+        "y": 5.932352532963221
       },
       "isLocked": false,
-      "linkedName": "ReefAFront"
+      "linkedName": "ReefL"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 7.137
       },
       "prevControl": {
-        "x": 1.742237261146497,
-        "y": 6.053817675159234
+        "x": 2.285854007633588,
+        "y": 6.478315839694656
       },
       "nextControl": null,
       "isLocked": false,
@@ -60,7 +60,7 @@
   "folder": "Test Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -59.99999999999999
   },
   "useDefaultConstraints": false
 }

@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "TestDriveAX"
+            "pathName": "TestStartHP"
           }
         },
         {
@@ -17,51 +17,218 @@
           }
         },
         {
-          "type": "path",
+          "type": "sequential",
           "data": {
-            "pathName": "TestShootAX"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestDriveAX"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestShootA"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestAHP"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "AwaitInput"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestDriveKX"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestShootK"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestKHP"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "path",
+          "type": "sequential",
           "data": {
-            "pathName": "TestAHP"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestDriveLB"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestShootL"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestLHP"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "AwaitInput"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestDriveKB"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestShootK"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestKHP"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "path",
+          "type": "sequential",
           "data": {
-            "pathName": "TestDriveKX"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AwaitInput"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "TestShootKX"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AwaitInput"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestDriveLX"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestShootL"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TestLHP2"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AwaitInput"
+                }
+              }
+            ]
           }
         }
       ]

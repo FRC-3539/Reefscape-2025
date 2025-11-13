@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.5255630630630626,
-        "y": 4.0249999999999995
+        "x": 1.461,
+        "y": 7.137
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.568074324324324,
-        "y": 4.106587837837837
+        "x": 1.4569179389312978,
+        "y": 6.009422709923664
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "HP Test"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 4.19
       },
       "prevControl": {
-        "x": 1.549099099099099,
-        "y": 4.133783783783783
+        "x": 1.7332299618320612,
+        "y": 4.502266221374045
       },
       "nextControl": null,
       "isLocked": false,
@@ -60,7 +60,7 @@
   "folder": "Test Paths",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -53.673174047879776
   },
   "useDefaultConstraints": true
 }

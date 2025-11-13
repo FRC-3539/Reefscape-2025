@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.661,
-        "y": 7.267
+        "x": 1.461,
+        "y": 7.137
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.501801801801802,
-        "y": 6.916835585585585
+        "x": 2.301801801801802,
+        "y": 6.786835585585584
       },
       "isLocked": false,
-      "linkedName": "HP End"
+      "linkedName": "HP Test"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 5.9
       },
       "prevControl": {
-        "x": 3.0003941441441446,
-        "y": 6.699268018018017
+        "x": 2.72962786259542,
+        "y": 6.5620467557251905
       },
       "nextControl": null,
       "isLocked": false,
