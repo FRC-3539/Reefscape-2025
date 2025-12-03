@@ -10,7 +10,6 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -19,17 +18,21 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.constants.AlignConstants;
-import frc.robot.constants.ClimberConstants;
-import frc.robot.constants.DriveConstants;
-import frc.robot.constants.ElevatorConstants;
-import frc.robot.constants.IDConstants;
-import frc.robot.constants.IntakeConstants;
-import frc.robot.constants.ScoringConstants;
-import frc.robot.Generated.TunerConstants;
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
-import frc.robot.constants.EnumConstants.*;
+import frc.robot.score.*;
+import frc.robot.intake.*;
+import frc.robot.vision.*;
+import frc.robot.elevator.*;
+import frc.robot.drive.*;
+import frc.robot.climb.*;
+import frc.robot.climb.ClimberConstants;
+import frc.robot.climb.ZeroClimberCommand;
+import frc.robot.vision.AlignConstants;
+import frc.robot.drive.TunerConstants;
+import frc.robot.intake.HandOffCommand;
+import frc.robot.intake.RumbleCommand;
+import frc.robot.misc.IDConstants;
+import frc.robot.misc.LedSubsystem;
+import frc.robot.misc.EnumConstants.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -51,13 +54,13 @@ public class RobotContainer {
   public static IntakeConstants intakeConstants = new IntakeConstants();
   public static ScoringConstants scoringConstants = new ScoringConstants();
 
-  public static IntakeSubsystem IntakeSubsystem = new IntakeSubsystem();
-  public static ScoringSubsystem ScoringSubsystem = new ScoringSubsystem();
-  public static ElevatorSubsystem ElevatorSubsystem = new ElevatorSubsystem();
-  public static ClimberSubsystem ClimberSubsystem = new ClimberSubsystem();
-  public static DriveSubsystem DriveSubsystem = TunerConstants.createDrivetrain();
-  public static VisionSubsystem VisionSubsystem = new VisionSubsystem();
-  public static LedSubsystem LEDSubsystem = new LedSubsystem(true);
+  public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  public static ScoringSubsystem scoringSubsystem = new ScoringSubsystem();
+  public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+  public static ClimberSubsystem climberSubsystem = new ClimberSubsystem();
+  public static DriveSubsystem driveSubsystem = TunerConstants.createDrivetrain();
+  public static VisionSubsystem visionSubsystem = new VisionSubsystem();
+  public static LedSubsystem ledSubsystem = new LedSubsystem(true);
 
   public static CommandXboxController driverController = new CommandXboxController(1);
   public static CommandXboxController operatorController = new CommandXboxController(0);
@@ -76,7 +79,7 @@ public class RobotContainer {
     configureBindings();
     putAutons();
     putCommands();
-    VisionSubsystem.start();
+    visionSubsystem.start();
 
   }
 
@@ -137,8 +140,8 @@ public class RobotContainer {
   private void configureBindings() {
     coralTrigger.onTrue(new ParallelDeadlineGroup(new WaitCommand(0.5), new RumbleCommand()));
 
-    DriveSubsystem.setDefaultCommand(new DriveCommand());
-    ClimberSubsystem.setDefaultCommand(new ClimberCommand());
+    driveSubsystem.setDefaultCommand(new DriveCommand());
+    climberSubsystem.setDefaultCommand(new ClimberCommand());
 
     driverController.start().whileTrue(new ZeroGyroCommand());
     driverController.a().whileTrue(new BBAutoAlignCommand(AlignPoint.ALGAE, ScoringMode.ALGAE));

@@ -5,23 +5,17 @@
 package frc.robot;
 
 import org.photonvision.PhotonCamera;
-import org.photonvision.estimation.VisionEstimation;
-
-import com.ctre.phoenix6.hardware.ParentDevice;
 import com.pathplanner.lib.commands.FollowPathCommand;
 
 import edu.wpi.first.wpilibj.Alert;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.LedSubsystem;
-import frc.robot.subsystems.ScoringSubsystem;
-import frc.robot.subsystems.VisionSubsystem;
+import frc.robot.score.*;
+import frc.robot.intake.*;
+import frc.robot.vision.*;
+import frc.robot.elevator.*;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -60,7 +54,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    RobotContainer.VisionSubsystem.log();
+    RobotContainer.visionSubsystem.log();
     SmartDashboard.putBoolean("/DriverStation/Enabled", isEnabled());
 
     for (PhotonCamera device : VisionSubsystem.connectedVisionAlerts.keySet()) {
