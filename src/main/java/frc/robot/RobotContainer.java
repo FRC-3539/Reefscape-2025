@@ -100,6 +100,7 @@ public class RobotContainer {
     // Scoring Commands
     NamedCommands.registerCommand("ScoringCommand", new ScoringCommand(false));
     NamedCommands.registerCommand("IntakeCommand", new ScoringCommand(true));
+    NamedCommands.registerCommand("ScoringCommandWithRetry", new ScoringCommandWithRetry());
 
 
     // Setting positions to score Coral
@@ -117,6 +118,7 @@ public class RobotContainer {
     // Funnel Position Commands
     NamedCommands.registerCommand("HumanPlayerIntakeCommand", new HandOffCommand(true, IntakeMode.HUMAN).withTimeout(5));
     NamedCommands.registerCommand("2SecHumanPlayerIntakeCommand", new HandOffCommand(true, IntakeMode.HUMAN).withTimeout(2));
+    NamedCommands.registerCommand("HumanPlayerIntakeCommandWithRetry", new HumanPlayerIntakeCommandWithRetry());
 
     NamedCommands.registerCommand("FunnelRangeCommand", new FunnelRangeCommand().withTimeout(5));
     NamedCommands.registerCommand("AdjustFunnelAngleCommand", new AdjustFunnelAngleCommand().withTimeout(10));
@@ -215,6 +217,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    ScoringSubsystem.lastIntakeConfirmedCoral = true;
     return chooser.getSelected();
   }
 }

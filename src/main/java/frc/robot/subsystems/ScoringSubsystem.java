@@ -44,6 +44,11 @@ public class ScoringSubsystem extends SubsystemBase {
   DecimalFormat df = new DecimalFormat("#.00000");
   private static double scoringRestrictedMin = 30;
   public static int loopsWithCoral = 0, loopsWithAlgae = 0;
+  // Set by HumanPlayerIntakeCommandWithRetry, read by ScoringCommandWithRetry -- whether the most
+  // recent intake attempt actually confirmed a coral. Reset once per auto run in
+  // RobotContainer.getAutonomousCommand(). Defaults true so a preload (no preceding intake step)
+  // isn't wrongly skipped.
+  public static boolean lastIntakeConfirmedCoral = true;
 
   public static ScoringMode mode = ScoringMode.CORAL;
   public static HashMap<ParentDevice, Alert> connectedScoringAlerts = new HashMap<>();

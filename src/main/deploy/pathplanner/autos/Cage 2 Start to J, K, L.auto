@@ -30,22 +30,9 @@
           }
         },
         {
-          "type": "deadline",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.35
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ScoringCommand"
-                }
-              }
-            ]
+            "name": "ScoringCommandWithRetry"
           }
         },
         {
@@ -78,7 +65,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "HumanPlayerIntakeCommand"
+                        "name": "HumanPlayerIntakeCommandWithRetry"
                       }
                     }
                   ]
@@ -120,22 +107,9 @@
           }
         },
         {
-          "type": "deadline",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.35
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ScoringCommand"
-                }
-              }
-            ]
+            "name": "ScoringCommandWithRetry"
           }
         },
         {
@@ -168,7 +142,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "HumanPlayerIntakeCommand"
+                        "name": "HumanPlayerIntakeCommandWithRetry"
                       }
                     }
                   ]
@@ -210,22 +184,9 @@
           }
         },
         {
-          "type": "deadline",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.35
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ScoringCommand"
-                }
-              }
-            ]
+            "name": "ScoringCommandWithRetry"
           }
         },
         {
